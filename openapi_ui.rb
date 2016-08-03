@@ -65,11 +65,13 @@ post "/upload" do
   end
 
   if apitokens.length == 5
-    session[:baseurl] = apitokens[:baseurl]
-    session[:accesstoken] = apitokens[:accesstoken]
-    session[:clienttoken] = apitokens[:clienttoken]
-    session[:secret] = apitokens[:secret]
-    session[:apiclienttype] = apitokens[:apiclienttype]
+    session[api_client_type] = {
+      :baseurl => apitokens[:baseurl],
+      :accesstoken => apitokens[:accesstoken],
+      :clienttoken => apitokens[:clienttoken],
+      :secret => apitokens[:secret],
+      :apiclienttype => apitokens[:apiclienttype]
+    }
     return apitokens.to_json.to_s
   else
     return { :result => "Parse Error" }.to_json.to_s
@@ -102,12 +104,25 @@ post "/run" do
   end
 end
 
-get "/gettoken" do
-  tokens = Hash.new
-  tokens[:baseurl] = session[:baseurl]
-  tokens[:accesstoken] = session[:accesstoken]
-  tokens[:clienttoken] = session[:clienttoken]
-  tokens[:secret] = session[:secret]
-  tokens[:apiclienttype] = session[:apiclienttype]
+get "/gettoken/:tokentype" do
+  api_token_type = params['tokentype']
+  tokens = session[api_token_type]
   return tokens.to_json.to_s
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
