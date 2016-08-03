@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang = "en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OPENAPI TEST</title>
+    <link href="css/blog.css" rel="stylesheet">
+    <link href="css/sticky-footer.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" crossorigin="anonymous">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script>
+     function tokenFunction() {
+       var url = "/gettoken";
+       var xhr = new XMLHttpRequest();
+       var fd = new FormData();
+       xhr.open("GET", url, true);
+       xhr.onreadystatechange = function() {
+         if (xhr.readyState == 4 && xhr.status == 200) {
+           // Every thing ok, file uploaded
+           // console.log(xhr.responseText); // handle response.
+           jsonTxt = xhr.responseText;
+           jsonObj = JSON.parse(jsonTxt);
+           //document.querySelector('#base_url').innerHTML="<strong>Base URL : </strong>"+jsonObj.baseURL;
+           $("#upload_credential").removeClass('hidden');
+           $("#base_url").html(
+             "<strong>Base URL : </strong>" + jsonObj.baseurl);
+           $("#access_token").html(
+             "<strong>Access Token : </strong>" +
+             jsonObj.accesstoken);
+           $("#client_token").html(
+             "<strong>Client Token : </strong>" +
+             jsonObj.clienttoken);
+           $("#secret")
+             .html("<strong>Secret : </strong>" + jsonObj.secret);
+           $("#upload_modal_body").html(
+             "<p>Your credential is loaded successfully!!!</p>");
+           $("#api_request").removeClass('hidden');
+         }
+       };
+       xhr.send(fd);
+     };
+
+     function sendRequest() {
+       var x = document.getElementById("api_url").value;
+
+       if (x == "/ccu/v2/queues/default") {
+         //$("#json_response").empty();
+         var responseTxt;
+         var jsonObj;
+         var prettyJsonTxt;
+         var url = "/run";
+         var xhr = new XMLHttpRequest();
+         xhr.open("GET", url, true);
+         xhr.setRequestHeader("Endpoint", "/ccu/v2/queues/default");
+         xhr.onreadystatechange = function() {
+           if (xhr.readyState == 4 && xhr.status == 200) {
+             console.log(xhr.responseText); // handle response.
+             $("#api_response").removeClass('hidden');
+             try {
+               responseTxt = xhr.responseText;
+               jsonObj = JSON.parse(responseTxt);
+               prettyJsonTxt = JSON.stringify(jsonObj, undefined, 2); // spacing level = 2
+               $("#api_response_msg").html("<pre>" + prettyJsonTxt + "</pre>");
+               //console.log(str);
+               //document.querySelector('#json_response').innerHTML = "<pre>"+ syntaxHighlight(prettyJsonTxt) + "</pre>";
+             } catch (err) {
+               $("#api_response_msg").html("<pre>OPEN API call failed!!!!</prep>");
+             }
+             $("#api_modal_body").html("<p>OPEN API call finished!!!</p>");
+           }
+         };
+
+         xhr.send();
+       } else if (x == "/ccu/v2/queues/purge") {
+         var responseTxt;
+         var jsonObj;
+         var prettyJsonTxt;
+         var url = "/run";
+         var xhr = new XMLHttpRequest();
+				 var requestbody = $("#myTextArea").html();
+
+         xhr.open("POST", url, true);
+         xhr.setRequestHeader("Endpoint", "/ccu/v2/queues/purge");
+         xhr.onreadystatechange = function() {
+           if (xhr.readyState == 4 && xhr.status == 200) {
+             console.log(xhr.responseText); // handle response.
+             $("#api_response").removeClass('hidden');
+             try {
+               responseTxt = xhr.responseText;
+               jsonObj = JSON.parse(responseTxt);
+               prettyJsonTxt = JSON.stringify(jsonObj, null, 2); // spacing level = 2
+               $("#api_response_msg").html("<pre>" + syntaxHighlight(prettyJsonTxt) + "</pre>");
+               //console.log(str);
+               //document.querySelector('#json_response').innerHTML = "<pre>"+ syntaxHighlight(prettyJsonTxt) + "</pre>";
+             } catch (err) {
+               $("#api_response_msg").html("<pre>OPEN API call failed!!!!</prep>");
+             }
+             $("#api_modal_body").html("<p>OPEN API call finished!!!</p>");
+           }
+         };
+         xhr.send(requestbody);
+       } else if (x == "/ccu/v2/queues/purgestatus") {
+         //$("#json_response").empty();
+
+         var responseTxt;
+         var jsonObj;
+         var prettyJsonTxt;
+         var url = "/run";
+         var xhr = new XMLHttpRequest();
+         xhr.open("POST", url, true);
+         xhr.setRequestHeader("Endpoint", "/ccu/v2/queues/purgestatus");
+         xhr.onreadystatechange = function() {
+           if (xhr.readyState == 4 && xhr.status == 200) {
+             console.log(xhr.responseText); // handle response.
+             $("#api_response").removeClass('hidden');
+             purgeStatus();
+             purgeStatuscall();
+             try {
+               responseTxt = xhr.responseText;
+               jsonObj = JSON.parse(responseTxt);
+               prettyJsonTxt = JSON.stringify(jsonObj, null, 2); // spacing level = 2
+               $("#api_response_msg").html("<pre>" + syntaxHighlight(prettyJsonTxt) + "</pre>");
+               //console.log(str);
+               //document.querySelector('#json_response').innerHTML = "<pre>"+ syntaxHighlight(prettyJsonTxt) + "</pre>";
+             } catch (err) {
+               $("#api_response_msg").html("<pre>OPEN API call failed!!!!</prep>");
+             }
+             $("#api_modal_body").html("<p>OPEN API call finished!!!</p>");
+           }
+         };
+         xhr.send();
+       };
+     };
+
+     function output(inp) {
+       document.body.appendChild(document.createElement('pre')).innerHTML = inp;
+     };
+
+     function myFunction() {
+       var x = document.getElementById("api_url").value;
+       if (x == "/ccu/v2/queues/default") {
+         document.getElementById("demo").innerHTML = ""
+       } else if (x == "/ccu/v2/queues/purge", "/ccu/v2/queues/purgestatus") {
+         document.getElementById("demo").innerHTML = '<textarea id="myTextArea"  cols=60 rows=10>{"objects" : ["http://dd.yjeong.com/video/Wildlife.wmv"],"action": "remove", "type": "arl","domain": "production"} </textarea></br><br/>'
+         var ugly = document.getElementById('myTextArea').value;
+         var obj = JSON.parse(ugly);
+         var pretty = JSON.stringify(obj, undefined, 4);
+         document.getElementById('myTextArea').value = pretty;
+       }
+     }
+
+     function purgeStatus() {
+       var responseTxt = '{"estimatedSeconds": 240, "progressUri": "/ccu/v2/purges/d24e80a3-3db7-11e6-a1ce-55492b14f773", "purgeId": "d24e80a3-3db7-11e6-a1ce-55492b14f773", "supportId": "17PY1467177039787764-253781184", "httpStatus": 201, "detail": "Request accepted.", "pingAfterSeconds": 240}';
+       var jsonObj;
+       $("#purgestatus").removeClass('hidden');
+       jsonObj = JSON.parse(responseTxt);
+       $("#purgestatus_response_msg").html("baseURL/ccu/v2/purges/" + jsonObj['purgeId']);
+     }
+
+     function purgeStatuscall() {
+       var responseTxt = '{"originalEstimatedSeconds": 420, "originalQueueLength": 0, "supportId": "17SY1405954814899441-292938848", "httpStatus": 200, "purgeId": "57799d8b-10e4-11e4-9088-62ece60caaf0", "completionTime": "2014-07-21T14:42:18Z", "submittedBy": "client_name","purgeStatus":"In-Progress","submissionTime": "2014-07-21T14:39:30Z"}';
+       var jsonObj;
+       $("#purgestatuscall").removeClass('hidden');
+       jsonObj = JSON.parse(responseTxt);
+       $("#purgestatuscall_response_msg").html(jsonObj['purgeStatus']);
+     }
+
+     function syntaxHighlight(json) {
+       if (typeof json != 'string') {
+         json = JSON.stringify(json, undefined, 2);
+       }
+       json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+       return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function(match) {
+         var cls = 'number';
+         if (/^"/.test(match)) {
+           if (/:$/.test(match)) {
+             cls = 'key';
+           } else {
+             cls = 'string';
+           }
+         } else if (/true|false/.test(match)) {
+           cls = 'boolean';
+         } else if (/null/.test(match)) {
+           cls = 'null';
+         }
+         return '<span class="' + cls + '">' + match + '</span>';
+       });
+     }
+    </script>
+  </head>
+
+  <body onload ="tokenFunction()">
+    <div id="header_html"></div>
+
+    <div class="container">
+    <div class="blog-header">
+      <h1 class="blog-title">CCU OPEN API Test</h1>
+      <p class="lead blog-description">You can try Akamai CCU Open API with your own URL</p>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 blog-main">
+        <div class="blog-post">
+          <div id="api_request" >
+            <strong>OPEN API URL : </strong>
+            <select id = "api_url" onchange = "myFunction()">
+              <option value="base" selected> Select the API method below... </option>
+              <option value="/ccu/v2/queues/default">Queue Length API </option>
+              <option value="/ccu/v2/queues/purge">Purge Request API </option>
+              <option value="/ccu/v2/queues/purgestatus">Purge Status API </option>
+            </select>
+            <!--<input type="button" id="send_request" value="Invoke API"
+              onclick="sendRequest()" data-toggle="modal" data-target="#api_modal"/><br /> <br /> -->
+            <input type="button" id="send_request" value="Invoke API" onclick="sendRequest()"/><br/> <br/>
+            <p id="demo"></p>
+          </div>
+          <div id="api_response" class="hidden">
+            <label><strong>API response</strong></label><br />
+            <div id="api_response_msg"></div>
+            <br/>
+          </div>
+          <div id="purgestatus" class="hidden">
+            <label><strong>Purge Status API </strong></label><br />
+            <div id="purgestatus_response_msg"></div>
+            <br/>
+          </div>
+          <!-- <div>
+            <button onclick="purgeStatuscall()" class = "hidden"> Invoke Purgestatus API </button><br/><br/>
+            </div>-->
+          <div id="purgestatuscall" class="hidden">
+            <label><strong>Purge Status API response</strong></label><br />
+            <div id="purgestatuscall_response_msg"></div>
+            <br/>
+          </div>
+        </div>
+        <!-- /.blog-post -->
+        <div class="blog-post">
+          <h2 class="blog-post-title"></h2>
+          <p class="blog-post-meta"> <a href="#"></a></p>
+        </div>
+        <!-- /.blog-post -->
+      </div>
+      <!-- /.blog-main -->
+      <div class="col-sm-5 col-sm-offset-1 blog-sidebar">
+        <div class="sidebar-module sidebar-module-inset">
+          <h4>CCU </h4>
+          <p>
+          <div id="upload_credential" class="well hidden">
+            <div id="base_url"></div>
+            <div id="access_token"></div>
+            <div id="client_token"></div>
+            <div id="secret"></div>
+          </div>
+          </p>
+        </div>
+        <div class="sidebar-module sidebar-module-inset">
+          <h4>LUNA</h4>
+          <p>
+          <div id="upload_credential" class="well hidden">
+            <div id="base_url"></div>
+            <div id="access_token"></div>
+            <div id="client_token"></div>
+            <div id="secret"></div>
+          </div>
+          </p>
+        </div>
+        <!-- /.blog-sidebar -->
+      </div>
+      <!--/.blog-row -->
+    </div>
+    <!-- /.container -->
+  </div>
+
+  <div id="footer_html"></div>
+  <script>loadHeaderFooter();</script>
+</body>
+
+</html>
