@@ -2,6 +2,19 @@
  * Globals
  */
 
+/* Ricky */
+.top-buffer {
+  margin-top:20px;
+}
+
+pre {padding: 10px; margin: 10px; }
+.string { color: green; }
+.number { color: darkorange; }
+.boolean { color: blue; }
+.null { color: magenta; }
+.key { color: red; }
+/* Ricky end */
+
 body {
   font-family: Georgia, "Times New Roman", Times, serif;
   color: #555;

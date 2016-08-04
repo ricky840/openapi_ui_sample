@@ -78,17 +78,19 @@ post "/upload" do
   end
 end
 
-get "/run" do
+get "/run/:tokentype" do
   endpoint = request.env["HTTP_ENDPOINT"].to_s
   if not endpoint.nil?
-    result = makeGetRequest(session[:baseurl], endpoint, session[:clienttoken], session[:secret], session[:accesstoken])
+    api_token_type = params['tokentype']
+    tokens = session[api_token_type]
+    result = makePostRequest(tokens[:baseurl], endpoint, tokens[:clienttoken], tokens[:secret], tokens[:accesstoken])
     return result
   else
     return %Q[{"error" : "no end point URL provided"}]
   end
 end
 
-post "/run" do
+post "/run/:tokentype" do
   endpoint = request.env["HTTP_ENDPOINT"].to_s
   begin
     request_body = JSON.parse(request.body.read).to_s
@@ -97,7 +99,9 @@ post "/run" do
   end
 
   if not endpoint.nil?
-    result = makePostRequest(session[:baseurl], endpoint, session[:clienttoken], session[:secret], session[:accesstoken], request.body.read)
+    api_token_type = params['tokentype']
+    tokens = session[api_token_type]
+    result = makePostRequest(tokens[:baseurl], endpoint, tokens[:clienttoken], tokens[:secret], tokens[:accesstoken], request.body.read)
     return result
   else
     return %Q[{"error" : "no end point URL provided"}]

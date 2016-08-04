@@ -1,0 +1,133 @@
+<div class="container_fuild">
+
+  <div class="row">
+
+    <div class="col-md-5 col-md-offset-1">
+
+      <!-- API title goes here -->
+      <div class="row">
+        <div class="col-md-12">
+          <h2>CCU OPEN API Test</h2>
+          <p>You can try Akamai CCU Open API with your own URL</p>
+          <hr>
+        </div>
+      </div>
+
+      <!-- API body goes here -->
+      <div class="row">
+        <div class="col-md-12">
+
+          <div id="api_request" >
+						<div class="form-group">
+							<label for="api_url">CCU API Methods</label>
+							<select id="api_url" class="form-control" onchange="selectMethod(this.value)">
+								<option value="base" selected> Select the API method</option>
+								<option value="purge_request">Purge Request API</option>
+								<option value="purge_queue">Queue Length API</option>
+								<option value="purge_status">Purge Status API</option>
+							</select>
+						</div>
+          </div>
+
+          <div id="purge_request" style="display: none">
+						<div class="form-group">
+              <label for="purge_request_body">Purge Objects</label>
+              <textarea id="purge_request_body" class="form-control" rows="10" placeholder="JSON"></textarea>
+            </div>
+            <input class="btn btn-success" type="button" value="Validate" onclick="validateJSON()">
+            <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('purge_request')">
+          </div>
+
+          <div id="purge_status" style="display: none">
+            <div class="form-group">
+              <label for="">Purge ID</label>
+              <input type="text" class="form-control" placeholder="Purge ID here">
+            </div>
+            <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('purge_status')">
+          </div>
+
+          <div id="api_response_wrapper" class="form-group top-buffer" style="display: none">
+            <label for="api_response">Response</label>
+            <div id="api_response"></div>
+          </div>
+
+        </div>
+      </div> <!-- end of row -->
+    </div>
+
+    <!-- Toke HTML -->
+    <div class="col-md-4 col-md-offset-1">
+      <div id="token_html"></div>
+    </div>
+
+  </div> <!-- end of main row -->
+
+</div> <!-- container -->
+
+<div id="footer_html"></div>
+
+<script>
+  $(document).ready(function() {
+    loadTokenHtml();
+  });
+
+  function selectMethod(apitype) {
+    $("#api_url option").each(function() {
+      var each_apitype = $(this).val();
+      if (apitype == each_apitype) {
+        $("#"+each_apitype).show();
+      } else {
+        $("#"+each_apitype).hide();
+      }
+    });
+  }
+
+  function runAPI(apitype) {
+    if (apitype == "purge_request") {
+      var endpoint = "/ccu/v2/queues/default";
+      var body = $("#purge_request_body").val();
+      var return_response = sendAPIRequestPost(endpoint, "ccu_token", body);
+ 			var returnJson = JSON.parse(return_response);
+			$("#api_response").html("<pre>"+syntaxHighlight(returnJson)+"</pre>");
+      $("#api_response_wrapper").show();
+    }
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

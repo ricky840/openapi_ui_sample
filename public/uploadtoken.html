@@ -1,140 +1,117 @@
-<!DOCTYPE html>
-<html lang = "en">
-  <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>OPENAPI TEST</title>
-    <link href="css/blog.css" rel="stylesheet">
-    <link href="css/sticky-footer.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" crossorigin="anonymous">
-    <script src="js/jquery.min.js"></script>
-    <script src="js/common.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
-  </head>
-  <body>
-    <div id="header_html"></div>
+<div class="container_fuild">
 
+  <div class="row">
 
-    <div class="container_fuild">
+    <div class="col-md-5 col-md-offset-1">
 
+      <!-- API title goes here -->
       <div class="row">
+        <div class="col-md-12">
+          <h2>Upload API Client File</h2>
+          <p>Some comments on API</p>
+          <hr>
+        </div>
+      </div>
 
-        <div class="col-md-5 col-md-offset-1">
+      <!-- API body goes here -->
+      <div class="row">
+        <div class="col-md-12">
 
-          <!-- API title goes here -->
-          <div class="row">
-            <div class="col-md-12">
-              <h2>Upload API Client File</h2>
-              <p>Some comments on API</p>
-              <hr>
+          <div class="panel panel-default">
+            <div class = "panel-heading">
+              <h3 class="panel-title">Upload file for CCU API</h3>
             </div>
-          </div>
-
-          <!-- API body goes here -->
-          <div class="row">
-            <div class="col-md-12">
-
-              <div class="panel panel-default">
-                <div class = "panel-heading">
-                  <h3 class="panel-title">Upload file for CCU API</h3>
-                </div>
-                <div class="panel-body">
-                  <div class="form-group">
-                    <label for="upload_file">File input</label>
-                    <input type="file" id="upload_file" name="ccu_token" data-toggle="modal" data-target="#upload_modal">
-                    <p class="help-block">Example block-level help text here.</p>
-                  </div>
-                  <!-- Modal -->
-                  <div id="upload_modal" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
-                      <!-- Modal content-->
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h4 id="upload_title" class="modal-title">OPEN API Credential Upload</h4>
-                        </div>
-                        <div id="upload_modal_body" class="modal-body">
-                          <p>Select your credential file downloaded from LUNA</p>
-                        </div>
-                        <div class="modal-footer">
-                          <button id="close_upload_result" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div> <!-- panel body -->
+            <div class="panel-body">
+              <div class="form-group">
+                <label for="upload_file">File input</label>
+                <input type="file" id="upload_file" name="ccu_token" data-toggle="modal" data-target="#upload_modal">
+                <p class="help-block">Example block-level help text here.</p>
               </div>
-
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Upload file for LUNA API</h3>
-                </div>
-                <div class="panel-body">
-                  <div class="form-group">
-                    <label for="upload_file">File input</label>
-                    <input type="file" id="upload_file" name="luna_token" data-toggle="modal" data-target="#upload_modal">
-                    <p class="help-block">Example block-level help text here.</p>
-                  </div>
-                  <!-- Modal -->
-                  <div id="upload_modal" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
-                      <!-- Modal content-->
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h4 id="upload_title" class="modal-title">OPEN API Credential Upload</h4>
-                        </div>
-                        <div id="upload_modal_body" class="modal-body">
-                          <p>Select your credential file downloaded from LUNA</p>
-                        </div>
-                        <div class="modal-footer">
-                          <button id="close_upload_result" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                      </div>
+              <!-- Modal -->
+              <div id="upload_modal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 id="upload_title" class="modal-title">OPEN API Credential Upload</h4>
+                    </div>
+                    <div id="upload_modal_body" class="modal-body">
+                      <p>Select your credential file downloaded from LUNA</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button id="close_upload_result" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                   </div>
                 </div>
               </div>
+            </div> <!-- panel body -->
+          </div>
 
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Upload file for LUNA API</h3>
+            </div>
+            <div class="panel-body">
+              <div class="form-group">
+                <label for="upload_file">File input</label>
+                <input type="file" id="upload_file" name="luna_token" data-toggle="modal" data-target="#upload_modal">
+                <p class="help-block">Example block-level help text here.</p>
+              </div>
+              <!-- Modal -->
+              <div id="upload_modal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 id="upload_title" class="modal-title">OPEN API Credential Upload</h4>
+                    </div>
+                    <div id="upload_modal_body" class="modal-body">
+                      <p>Select your credential file downloaded from LUNA</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button id="close_upload_result" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+
         </div>
+      </div>
+    </div>
 
-        <!-- Token HTML -->
-        <div class="col-md-4 col-md-offset-1">
-          <div id="token_html"></div>
-        </div>
+    <!-- Token HTML -->
+    <div class="col-md-4 col-md-offset-1">
+      <div id="token_html"></div>
+    </div>
 
-      </div> <!-- end of main row -->
+  </div> <!-- end of main row -->
 
-    </div> <!-- container -->
+</div> <!-- container -->
 
-  <div id="footer_html"></div>
-  <script>
-    $(document).ready(function() {
-			loadHeaderFooter();
-      loadTokenHtml();
-		});
+<script>
+  $(document).ready(function() {
+    loadTokenHtml();
+  });
 
-    $(":file").change(function(){
-      api_client_type = this.name;
-      uploadFile(this.files[0], api_client_type);
+  $(":file").change(function(){
+    api_client_type = this.name;
+    uploadFile(this.files[0], api_client_type);
+  });
+
+  function uploadFile(file, api_client_type) {
+    var form = new FormData();
+    form.append("upload_file", file);
+    form.append("apiclienttype", api_client_type);
+    $.ajax({
+      url: '/upload',
+      data: form,
+      cache: false,
+      contentType: false,
+      processData: false,
+      type: 'POST',
+      success: function(data) { loadTokenHtml(); }
     });
-
-    function uploadFile(file, api_client_type) {
-      var form = new FormData();
-      form.append("upload_file", file);
-      form.append("apiclienttype", api_client_type);
-      $.ajax({
-        url: '/upload',
-        data: form,
-        cache: false,
-        contentType: false,
-        processData: false,
-        type: 'POST',
-        success: function(data) { loadTokenHtml(); }
-      });
-    }
-  </script>
-  </body>
-</html>
+  }
+</script>
