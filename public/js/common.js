@@ -16,7 +16,13 @@ function loadHeaderFooter() {
 function loadTokenHtml() {
   $.get("tokens.html", function(data){
     var data = $(data); //oh gee
-    var tokens = ["ccu_token", "luna_token"];
+    var tokens = [
+      "ccu_token",
+      "luna_token",
+      "dns_token",
+      "img_token",
+      "csi_token"
+    ];
     for (var i in tokens) {
       token_response = getTokenFromServer(tokens[i]);
       if (token_response != "null") {
@@ -116,3 +122,4 @@ function validateJsonTextarea(textarea_wrapper_id, textarea_id) {
     if (!wrapper_box.hasClass("has-error")) {wrapper_box.addClass("has-error");}
   }
 }
+
