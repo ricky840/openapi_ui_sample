@@ -83,7 +83,7 @@ get "/run/:tokentype" do
   if not endpoint.nil?
     api_token_type = params['tokentype']
     tokens = session[api_token_type]
-    result = makePostRequest(tokens[:baseurl], endpoint, tokens[:clienttoken], tokens[:secret], tokens[:accesstoken])
+    result = makeGetRequest(tokens[:baseurl], endpoint, tokens[:clienttoken], tokens[:secret], tokens[:accesstoken])
     return result
   else
     return %Q[{"error" : "no end point URL provided"}]

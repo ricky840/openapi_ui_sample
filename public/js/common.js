@@ -1,3 +1,9 @@
+$(function() {
+	$("[data-hide]").on("click", function(){
+		$(this).closest("." + $(this).attr("data-hide")).hide();
+	});
+});
+
 function loadPage(filename) {
   $("#main_body").hide().load(filename).fadeIn('slow');
 }
@@ -59,6 +65,15 @@ function sendAPIRequestPost(endpoint, tokentype, body) {
   return result;
 }
 
+function IsJsonString(str) {
+	try {
+		JSON.parse(str);
+	} catch (e) {
+		return false;
+	}
+	return true;
+}
+
 function syntaxHighlight(json) {
 	if (typeof json != 'string') {
 	  json = JSON.stringify(json, undefined, 2);
@@ -79,4 +94,25 @@ function syntaxHighlight(json) {
 		}
 		return '<span class="' + cls + '">' + match + '</span>';
 	});
+}
+
+function showNotification(msg) {
+  $("#notification").append(msg);
+  $("#notification").show();
+}
+
+function validateJsonTextarea(textarea_wrapper_id, textarea_id) {
+  var jsontxt = $("#"+textarea_id).val();
+  var wrapper_box = $("#"+textarea_wrapper_id);
+  if (IsJsonString(jsontxt)) {
+    wrapper_box.removeClass("has-error");
+    wrapper_box.children("span").remove();
+    wrapper_box.append('<span class="glyphicon glyphicon-ok form-control-feedback"></span>');
+    if (!wrapper_box.hasClass("has-success")) {wrapper_box.addClass("has-success");}
+  } else {
+    wrapper_box.removeClass("has-error");
+    wrapper_box.children("span").remove();
+    wrapper_box.append('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
+    if (!wrapper_box.hasClass("has-error")) {wrapper_box.addClass("has-error");}
+  }
 }
