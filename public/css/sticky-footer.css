@@ -5,6 +5,9 @@ html {
   min-height: 100%;
 }
 .main_body {
+  /* this is by ricky to give margin left and rigt */
+  margin-left: 10px;
+  margin-right: 30px;
   /* Margin bottom by footer height */
   margin-bottom: 100px;
 }

@@ -30,20 +30,30 @@
           </div>
 
           <div id="purge_request" style="display: none">
-						<div class="form-group">
+						<div id="textarea_wrapper" class="form-group has-feedback">
               <label for="purge_request_body">Purge Objects</label>
-              <textarea id="purge_request_body" class="form-control" rows="10" placeholder="JSON"></textarea>
+              <textarea id="purge_request_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'purge_request_body')"></textarea>
             </div>
-            <input class="btn btn-success" type="button" value="Validate" onclick="validateJSON()">
+            <input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper', 'purge_request_body')">
             <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('purge_request')">
           </div>
 
           <div id="purge_status" style="display: none">
             <div class="form-group">
               <label for="">Purge ID</label>
-              <input type="text" class="form-control" placeholder="Purge ID here">
+              <input id="purge_id" type="text" class="form-control" placeholder="Purge ID here">
             </div>
             <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('purge_status')">
+          </div>
+
+          <div id="purge_queue" style="display: none">
+            <fieldset disabled>
+              <div class="form-group">
+                <label for="">Queue Name</label>
+                <input id="purge_queue_name" type="text" class="form-control" placeholder="default">
+              </div>
+            </fieldset>
+            <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('purge_queue')">
           </div>
 
           <div id="api_response_wrapper" class="top-buffer" style="display: none">
@@ -71,6 +81,10 @@
     loadTokenHtml();
   });
 
+  var placeholder = '{"hostname":"test.domain.edgesuite.net","objects":["/test.jpg","/test.jpg"]}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#purge_request_body").attr("placeholder", placeholder);
+
   function selectMethod(apitype) {
     $("#api_url option").each(function() {
       var each_apitype = $(this).val();
@@ -83,52 +97,40 @@
     });
   }
 
+  function showResponse(return_response) {
+    var returnJson = JSON.parse(return_response);
+    $("#api_response").html("<pre>"+syntaxHighlight(returnJson)+"</pre>");
+    $("#api_response_wrapper").show();
+  }
+
   function runAPI(apitype) {
     if (apitype == "purge_request") {
       var endpoint = "/ccu/v2/queues/default";
       var body = $("#purge_request_body").val();
-      var return_response = sendAPIRequestPost(endpoint, "ccu_token", body);
- 			var returnJson = JSON.parse(return_response);
-			$("#api_response").html("<pre>"+syntaxHighlight(returnJson)+"</pre>");
-      $("#api_response_wrapper").show();
+      if (IsJsonString(body)) {
+        var return_response = sendAPIRequestPost(endpoint, "ccu_token", body);
+        showResponse(return_response);
+      } else {
+        showNotification("JSON is not in valid format");
+      }
+    }
+
+    if (apitype == "purge_status") {
+      var endpoint = "/ccu/v2/purges/";
+      var pid = $("#purge_id").val();
+      if (pid) {
+        endpoint = endpoint + pid;
+        var return_response = sendAPIRequestGet(endpoint, "ccu_token");
+        showResponse(return_response);
+      } else {
+        showNotification("Purge ID is empty");
+      }
+    }
+
+    if (apitype == "purge_queue") {
+      var endpoint = "/ccu/v2/queues/default";
+      var return_response = sendAPIRequestGet(endpoint, "ccu_token");
+      showResponse(return_response);
     }
   }
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

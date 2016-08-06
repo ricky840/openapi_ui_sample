@@ -103,7 +103,7 @@ function syntaxHighlight(json) {
 }
 
 function showNotification(msg) {
-  $("#notification").append(msg);
+  $("#notification .notification_content").html(msg);
   $("#notification").show();
 }
 
