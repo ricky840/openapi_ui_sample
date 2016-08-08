@@ -94,6 +94,24 @@ function sendAPIRequestPost(endpoint, tokentype, body) {
   }
 }
 
+function sendAPIRequestPut(endpoint, tokentype, body) {
+  if (seeIfTokenUploaded(tokentype)) {
+    var result = $.ajax({
+      type: "PUT",
+      url: "/run/" + tokentype,
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader("Endpoint", endpoint)
+      },
+      data: body,
+      async: false
+    }).responseText;
+
+    return result;
+  } else {
+    showNotification(tokentype + " is not uploaded. Please upload and try again.");
+  }
+}
+
 function IsJsonString(str) {
 	try {
 		JSON.parse(str);

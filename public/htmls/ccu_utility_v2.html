@@ -87,7 +87,7 @@
     showAPIActionContent('purge_request');
   });
 
-  var placeholder = '{"hostname":"test.domain.edgesuite.net","objects":["/test.jpg","/test.jpg"]}';
+  var placeholder = '{"objects":["http://ic-clean.datswatsup.com/test.jpg","http://ic-clean.datswatsup.com/test.jpg2"],"action":"remove","type":"arl","domain":"staging"}';
   placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
   $("#purge_request_body").val(placeholder);
 

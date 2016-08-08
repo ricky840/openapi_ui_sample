@@ -1,75 +1,145 @@
 <div class="container_fuild">
+  <div class="row"> <!-- main row -->
 
-  <div class="row">
-
-    <div class="col-md-5 col-md-offset-1">
+    <!-- API section -->
+    <div class="col-md-7">
 
       <!-- API title goes here -->
       <div class="row">
-        <div class="col-md-12">
-          <h2>Case Management OPEN API Test</h2>
-          <p>You can try Akamai Case Management Open API with your own URL</p>
+        <div class="col-md-3">
+          <div class="corner_space"></div>
+        </div>
+        <div class="col-md-9">
+          <h2>Case Management</h2>
+          <p>Case Management API is Akamai’s technology for resolving questions or issues with your Akamai applications and services.</p>
           <hr>
         </div>
       </div>
 
-      <!-- API body goes here -->
+      <!-- API content main body -->
       <div class="row">
-        <div class="col-md-12">
 
-          <div id="api_request" >
-						<div class="form-group">
-							<label for="api_url">Case Management API Methods</label>
-							<select id="api_url" class="form-control" onchange="selectMethod(this.value)">
-								<option value="base" selected> Select the API method</option>
-								<option value="listcase_category">List Cases per Cateogry API</option>
-								<option value="list_professional">List Professional Services Cases API</option>
-								<option value="listcases">List Cases API</option>
-							</select>
-						</div>
-          </div>
-
-          <div id="listcase_cateogry" style="display: none">
-						<div class="form-group">
-              <label for="purge_request_body">Purge Objects</label>
-              <textarea id="purge_request_body" class="form-control" rows="10" placeholder="JSON"></textarea>
-            </div>
-            <input class="btn btn-success" type="button" value="Validate" onclick="validateJSON()">
-            <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('purge_request')">
-          </div>
-
-          <div id="list_professional" style="display: none">
-            <div class="form-group">
-              <label for="">Purge ID</label>
-              <input type="text" class="form-control" placeholder="Purge ID here">
-            </div>
-            <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('purge_status')">
-          </div>
-
-          <div id="listcases" style="display: none">
-            <div class="form-group">
-              <label for="">Purge ID</label>
-              <input type="text" class="form-control" placeholder="Purge ID here">
-            </div>
-            <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('purge_status')">
-          </div>
-
-          <div id="api_response_wrapper" class="form-group top-buffer" style="display: none">
-            <label for="api_response">Response</label>
-            <div id="api_response"></div>
-          </div>
-
+        <!-- left menu -->
+        <div class="col-md-3">
+          <ul class="nav nav-pills nav-stacked">
+            <li role="presentation" class="disabled"><a href="#"><h5>Categories</h5></a></li>
+            <li role="presentation" onclick="showAPIActionContent('list_cases_per_category')"><a href="#">List Cases per Category</a></li>
+            <li role="presentation" onclick="showAPIActionContent('create_case')"><a href="#">Create a Case</a></li>
+            <li role="presentation" onclick="showAPIActionContent('list_professional')"><a href="#">List Professional Services Cases</a></li>
+            <li role="presentation" onclick="showAPIActionContent('create_professional')"><a href="#">Create a Professional Services Case</a></li>
+            <li role="presentation" class="disabled"><a href="#"><h5>Cases</h5></a></li>
+            <li role="presentation" onclick="showAPIActionContent('cases')"><a href="#">Cases</a></li>
+            <li role="presentation" onclick="showAPIActionContent('case')"><a href="#">Case</a></li>
+            <li role="presentation" onclick="showAPIActionContent('comments')"><a href="#">Comments</a></li>
+            <li role="presentation" onclick="showAPIActionContent('file_attachments')"><a href="#">File Attachments</a></li>
+            <li role="presentation" onclick="showAPIActionContent('resolutions')"><a href="#">Resolutions</a></li>
+          </ul>
         </div>
-      </div> <!-- end of row -->
-    </div>
 
-    <!-- Toke HTML -->
-    <div class="col-md-4 col-md-offset-1">
+        <!-- API action content -->
+        <div class="col-md-9">
+          <div id="api_action_body_wrapper">
+
+            <div id="list_case_per_category" class="each_api_action" style="display: none">
+              <div class="form-group">
+                <label for="">Purge ID</label>
+                <input id="purge_id" type="text" class="form-control" placeholder="Purge ID here">
+              </div>
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('purge_status')">
+            </div>
+
+            <div id="create_case" class="each_api_action" style="display: none">
+              <div id="textarea_wrapper" class="form-group has-feedback">
+                <label for="purge_request_body">Purge Objects</label>
+                <textarea id="purge_request_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'purge_request_body')"></textarea>
+              </div>
+              <input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper', 'purge_request_body')">
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('purge_request')">
+            </div>
+
+            <div id="list_professional" class="each_api_action" style="display: none">
+              <div class="form-group">
+                <label for="">Purge ID</label>
+                <input id="purge_id" type="text" class="form-control" placeholder="Purge ID here">
+              </div>
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('purge_status')">
+            </div>
+
+            <div id="create_professional" class="each_api_action" style="display: none">
+              <div id="textarea_wrapper" class="form-group has-feedback">
+                <label for="purge_request_body">Purge Objects</label>
+                <textarea id="purge_request_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'purge_request_body')"></textarea>
+              </div>
+              <input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper', 'purge_request_body')">
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('purge_request')">
+            </div>
+
+              <div id="" class="cases" style="display: none">
+              <fieldset disabled>
+                <div class="form-group">
+                  <label for="">Queue Name</label>
+                  <input id="purge_queue_name" type="text" class="form-control" placeholder="default">
+                </div>
+              </fieldset>
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('purge_queue')">
+            </div>
+
+              <div id="" class="case" style="display: none">
+              <div class="form-group">
+                <label for="">caseID</label>
+                <input id="case_id" type="text" class="form-control" placeholder="Case ID here">
+              </div>
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('case')">
+            </div>
+
+              <div id="" class="comments" style="display: none">
+              <fieldset disabled>
+                <div class="form-group">
+                  <label for="">Queue Name</label>
+                  <input id="purge_queue_name" type="text" class="form-control" placeholder="default">
+                </div>
+              </fieldset>
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('purge_queue')">
+            </div>
+
+              <div id="" class="file_attachments" style="display: none">
+              <fieldset disabled>
+                <div class="form-group">
+                  <label for="">Queue Name</label>
+                  <input id="purge_queue_name" type="text" class="form-control" placeholder="default">
+                </div>
+              </fieldset>
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('purge_queue')">
+            </div>
+
+              <div id="" class="resolutions" style="display: none">
+              <fieldset disabled>
+                <div class="form-group">
+                  <label for="">Queue Name</label>
+                  <input id="purge_queue_name" type="text" class="form-control" placeholder="default">
+                </div>
+              </fieldset>
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('purge_queue')">
+            </div>
+
+
+            <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+              <label for="api_response">Response</label>
+              <span id="api_response"></span>
+            </div>
+
+          </div> <!-- action body wrapper -->
+        </div> <!-- API action content end -->
+      </div> <!-- API content main body end -->
+
+    </div> <!-- API section end -->
+
+    <!-- Toke HTML column -->
+    <div class="col-md-4 col-sm-offset-1">
       <div id="token_html"></div>
     </div>
 
   </div> <!-- end of main row -->
-
 </div> <!-- container -->
 
 <div id="footer_html"></div>
@@ -77,30 +147,42 @@
 <script>
   $(document).ready(function() {
     loadTokenHtml();
+    showAPIActionContent('list_case_per_category');
   });
 
-  function selectMethod(apitype) {
-    $("#api_url option").each(function() {
-      var each_apitype = $(this).val();
-      if (apitype == each_apitype) {
-        $("#"+each_apitype).show();
-      } else {
-        $("#"+each_apitype).hide();
-      }
-    });
-  }
+  var placeholder = '{"hostname":"test.domain.edgesuite.net","objects":["/test.jpg","/test.jpg"]}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#purge_request_body").val(placeholder);
 
   function runAPI(apitype) {
-    if (apitype == "listcases") {
+    if (apitype == "purge_request") {
       var endpoint = "/ccu/v2/queues/default";
       var body = $("#purge_request_body").val();
+      if (IsJsonString(body)) {
+        var return_response = sendAPIRequestPost(endpoint, "ccu_token", body);
+        showResponse(return_response);
+      } else {
+        showNotification("JSON is not in valid format");
+      }
+    }
+
+    if (apitype == "case") {
+      var endpoint = "/cases/v1/portal-user/case/";
+      var pid = $("#case_id").val();
+      if (pid) {
+        endpoint = endpoint + pid;
+        var return_response = sendAPIRequestGet(endpoint, "ccu_token");
+        showResponse(return_response);
+      } else {
+        showNotification("Case ID is empty");
+      }
+    }
+
+    if (apitype == "purge_queue") {
+      var endpoint = "/ccu/v2/queues/default";
       var return_response = sendAPIRequestGet(endpoint, "ccu_token");
- 			var returnJson = JSON.parse(return_response);
-			$("#api_response").html("<pre>"+syntaxHighlight(returnJson)+"</pre>");
-      $("#api_response_wrapper").show();
+      showResponse(return_response);
     }
   }
 </script>
-
-
 

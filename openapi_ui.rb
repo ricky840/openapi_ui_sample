@@ -30,6 +30,23 @@ def makePostRequest(base_url, endpoint_url, client_token, client_secret, access_
   return res.body
 end
 
+def makePutRequest(base_url, endpoint_url, client_token, client_secret, access_token, request_body)
+	baseuri = URI(base_url)
+	http = Akamai::Edgegrid::HTTP.new(address = baseuri.host, post = baseuri.port)
+	http.setup_edgegrid(
+		client_token: client_token,
+		client_secret: client_secret,
+		access_token: access_token
+	)
+	req = Net::HTTP::Put.new(
+		URI.join(baseuri.to_s, endpoint_url).to_s,
+		initheader = { 'Content-Type' => 'application/json' }
+	)
+	req.body = request_body
+	res = http.request(req)
+  return res.body
+end
+
 get '/' do
   send_file './public/index.html'
 end
@@ -93,7 +110,7 @@ end
 post "/run/:tokentype" do
   endpoint = request.env["HTTP_ENDPOINT"].to_s
   begin
-    request_body = JSON.parse(request.body.read).to_s
+    request_body = JSON.generate(JSON.parse(request.body.read))
   rescue ParserError => e
     return %Q[{"error" : "#{e.message}"}]
   end
@@ -101,7 +118,25 @@ post "/run/:tokentype" do
   if not endpoint.nil?
     api_token_type = params['tokentype']
     tokens = session[api_token_type]
-    result = makePostRequest(tokens[:baseurl], endpoint, tokens[:clienttoken], tokens[:secret], tokens[:accesstoken], request.body.read)
+    result = makePostRequest(tokens[:baseurl], endpoint, tokens[:clienttoken], tokens[:secret], tokens[:accesstoken], request_body)
+    return result
+  else
+    return %Q[{"error" : "no end point URL provided"}]
+  end
+end
+
+put "/run/:tokentype" do
+  endpoint = request.env["HTTP_ENDPOINT"].to_s
+  begin
+    request_body = JSON.generate(JSON.parse(request.body.read))
+  rescue ParserError => e
+    return %Q[{"error" : "#{e.message}"}]
+  end
+
+  if not endpoint.nil?
+    api_token_type = params['tokentype']
+    tokens = session[api_token_type]
+    result = makePutRequest(tokens[:baseurl], endpoint, tokens[:clienttoken], tokens[:secret], tokens[:accesstoken], request_body)
     return result
   else
     return %Q[{"error" : "no end point URL provided"}]
