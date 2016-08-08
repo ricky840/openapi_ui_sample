@@ -1,37 +1,128 @@
 <div class="container_fuild">
+  <div class="row"> <!-- main row -->
 
-  <div class="row">
+    <!-- API section -->
+    <div class="col-md-7">
 
-    <div class="col-md-5 col-md-offset-1">
-
-      <!-- API title goes here -->
+			<!-- API title goes here -->
       <div class="row">
-        <div class="col-md-12">
-          <h2>API name goes here</h2>
-          <p>Some comments on API</p>
-          <hr>
-        </div>
-      </div>
+        <div class="col-md-3">
+          <div class="corner_space"></div>
+				</div>
+        <div class="col-md-9">
+					<h2>API TITLE</h2>
+					<p>Some comment on API</p>
+					<hr>
+				</div>
+			</div>
 
-      <!-- API body goes here -->
+      <!-- API content main body -->
       <div class="row">
-        <div class="col-md-12">
-          <p>API Sample or Demo</p>
-        </div>
-      </div>
-    </div>
 
-    <!-- Toke HTML -->
-    <div class="col-md-4 col-md-offset-1">
+        <!-- left menu -->
+        <div class="col-md-3">
+          <ul class="nav nav-pills nav-stacked">
+            <li role="presentation" class="disabled"><a href="#"><h5>Side Title</h5></a></li>
+            <li role="presentation" onclick="showAPIActionContent('api_function_1')"><a href="#">API function 1</a></li>
+            <li role="presentation" onclick="showAPIActionContent('api_function_2')"><a href="#">API function 2</a></li>
+            <li role="presentation" onclick="showAPIActionContent('api_function_3')"><a href="#">API function 3</a></li>
+          </ul>
+        </div>
+
+        <!-- API action content -->
+        <div class="col-md-9">
+          <div id="api_action_body_wrapper">
+
+            <!-- api function 1 -->
+            <div id="purge_request" class="each_api_action" style="display: none">
+              <div id="textarea_wrapper" class="form-group has-feedback">
+                <label for="purge_request_body">Purge Objects</label>
+                <textarea id="purge_request_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'purge_request_body')"></textarea>
+              </div>
+              <input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper', 'purge_request_body')">
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('purge_request')">
+            </div>
+
+            <!-- api function 2 -->
+            <div id="purge_status" class="each_api_action" style="display: none">
+              <div class="form-group">
+                <label for="">Purge ID</label>
+                <input id="purge_id" type="text" class="form-control" placeholder="Purge ID here">
+              </div>
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('purge_status')">
+            </div>
+
+            <!-- api function 3 -->
+            <div id="purge_queue" class="each_api_action" style="display: none">
+              <fieldset disabled>
+                <div class="form-group">
+                  <label for="">Queue Name</label>
+                  <input id="purge_queue_name" type="text" class="form-control" placeholder="default">
+                </div>
+              </fieldset>
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('purge_queue')">
+            </div>
+
+            <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+              <label for="api_response">Response</label>
+              <span id="api_response"></span>
+            </div>
+
+          </div> <!-- action body wrapper -->
+        </div> <!-- API action content end -->
+      </div> <!-- API content main body end -->
+
+    </div> <!-- API section end -->
+
+    <!-- Toke HTML column -->
+    <div class="col-md-4 col-sm-offset-1">
       <div id="token_html"></div>
     </div>
 
   </div> <!-- end of main row -->
-
 </div> <!-- container -->
+
 <div id="footer_html"></div>
+
 <script>
   $(document).ready(function() {
     loadTokenHtml();
+    showAPIActionContent('purge_request');
   });
+
+  var placeholder = '{"hostname":"test.domain.edgesuite.net","objects":["/test.jpg","/test.jpg"]}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#purge_request_body").val(placeholder);
+
+  function runAPI(apitype) {
+    if (apitype == "purge_request") {
+      var endpoint = "/ccu/v2/queues/default";
+      var body = $("#purge_request_body").val();
+      if (IsJsonString(body)) {
+        var return_response = sendAPIRequestPost(endpoint, "ccu_token", body);
+        showResponse(return_response);
+      } else {
+        showNotification("JSON is not in valid format");
+      }
+    }
+
+    if (apitype == "purge_status") {
+      var endpoint = "/ccu/v2/purges/";
+      var pid = $("#purge_id").val();
+      if (pid) {
+        endpoint = endpoint + pid;
+        var return_response = sendAPIRequestGet(endpoint, "ccu_token");
+        showResponse(return_response);
+      } else {
+        showNotification("Purge ID is empty");
+      }
+    }
+
+    if (apitype == "purge_queue") {
+      var endpoint = "/ccu/v2/queues/default";
+      var return_response = sendAPIRequestGet(endpoint, "ccu_token");
+      showResponse(return_response);
+    }
+  }
 </script>
+

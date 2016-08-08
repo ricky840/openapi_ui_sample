@@ -22,6 +22,7 @@
         <!-- left menu -->
         <div class="col-md-3">
           <ul class="nav nav-pills nav-stacked">
+            <li role="presentation" class="disabled"><a href="#"><h5>CCU APIs</h5></a></li>
             <li role="presentation" onclick="showAPIActionContent('purge_request')"><a href="#">Purge Request</a></li>
             <li role="presentation" onclick="showAPIActionContent('purge_queue')"><a href="#">Queue Length</a></li>
             <li role="presentation" onclick="showAPIActionContent('purge_status')"><a href="#">Purge Status</a></li>
@@ -88,18 +89,7 @@
 
   var placeholder = '{"hostname":"test.domain.edgesuite.net","objects":["/test.jpg","/test.jpg"]}';
   placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
-  $("#purge_request_body").attr("placeholder", placeholder);
-
-  function showAPIActionContent(obj_Id) {
-    $(".each_api_action").hide();
-    $("#"+obj_Id).show();
-  }
-
-  function showResponse(return_response) {
-    var returnJson = JSON.parse(return_response);
-    $("#api_response").html("<pre>"+syntaxHighlight(returnJson)+"</pre>");
-    $("#api_response_wrapper").show();
-  }
+  $("#purge_request_body").val(placeholder);
 
   function runAPI(apitype) {
     if (apitype == "purge_request") {

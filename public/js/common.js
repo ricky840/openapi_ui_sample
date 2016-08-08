@@ -1,8 +1,14 @@
+//for notification hide rather than dismiss
 $(function() {
 	$("[data-hide]").on("click", function(){
 		$(this).closest("." + $(this).attr("data-hide")).hide();
 	});
 });
+
+function showNotification(msg) {
+  $("#notification .notification_content").html(msg);
+  $("#notification").show();
+}
 
 function loadPage(filename) {
   $("#main_body").hide().load(filename).fadeIn('slow');
@@ -44,31 +50,48 @@ function getTokenFromServer(api_client_type) {
   return msg;
 }
 
+function seeIfTokenUploaded(tokentype) {
+  var msg = getTokenFromServer(tokentype);
+  if (msg != "null") {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 function sendAPIRequestGet(endpoint, tokentype) {
-  var result = $.ajax({
-      type: "GET",
+  if (seeIfTokenUploaded(tokentype)) {
+    var result = $.ajax({
+        type: "GET",
+        url: "/run/" + tokentype,
+        beforeSend: function(xhr) {
+          xhr.setRequestHeader("Endpoint", endpoint)
+        },
+        async: false
+      }).responseText;
+
+    return result;
+  } else {
+    showNotification(tokentype + " is not uploaded. Please upload and try again.");
+  }
+}
+
+function sendAPIRequestPost(endpoint, tokentype, body) {
+  if (seeIfTokenUploaded(tokentype)) {
+    var result = $.ajax({
+      type: "POST",
       url: "/run/" + tokentype,
       beforeSend: function(xhr) {
         xhr.setRequestHeader("Endpoint", endpoint)
       },
+      data: body,
       async: false
     }).responseText;
 
-  return result;
-}
-
-function sendAPIRequestPost(endpoint, tokentype, body) {
-  var result = $.ajax({
-    type: "POST",
-    url: "/run/" + tokentype,
-    beforeSend: function(xhr) {
-      xhr.setRequestHeader("Endpoint", endpoint)
-    },
-    data: body,
-    async: false
-  }).responseText;
-
-  return result;
+    return result;
+  } else {
+    showNotification(tokentype + " is not uploaded. Please upload and try again.");
+  }
 }
 
 function IsJsonString(str) {
@@ -102,11 +125,6 @@ function syntaxHighlight(json) {
 	});
 }
 
-function showNotification(msg) {
-  $("#notification .notification_content").html(msg);
-  $("#notification").show();
-}
-
 function validateJsonTextarea(textarea_wrapper_id, textarea_id) {
   var jsontxt = $("#"+textarea_id).val();
   var wrapper_box = $("#"+textarea_wrapper_id);
@@ -123,3 +141,15 @@ function validateJsonTextarea(textarea_wrapper_id, textarea_id) {
   }
 }
 
+//for each API fucntions. when side menu clicks hide/show
+function showAPIActionContent(obj_Id) {
+  $(".each_api_action").hide();
+  $("#"+obj_Id).show();
+}
+
+//show api call response
+function showResponse(return_response) {
+  var returnJson = JSON.parse(return_response);
+  $("#api_response").html("<pre>"+syntaxHighlight(returnJson)+"</pre>");
+  $("#api_response_wrapper").show();
+}
