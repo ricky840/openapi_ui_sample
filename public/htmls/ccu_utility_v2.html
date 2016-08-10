@@ -10,8 +10,8 @@
           <div class="corner_space"></div>
 				</div>
         <div class="col-md-9">
-					<h2>Content Control Utility</h2>
-					<p>The Content Control Utility (CCU) is Akamai’s technology for purging Edge content by request.</p>
+					<h2>Content Control Utility_V2</h2>
+					<p>The Content Control Utility (CCU) is Akamai’s technology for purging Edge content by request. The Luna Control Center provides a graphical interface to CCU for content administrators. The CCU REST API provides a programmatic interface for developers.</p>
 					<hr>
 				</div>
 			</div>
@@ -22,9 +22,9 @@
         <!-- left menu -->
         <div class="col-md-3">
           <ul class="nav nav-pills nav-stacked">
-            <li role="presentation" class="disabled"><a href="#"><h5>CCU APIs</h5></a></li>
+            <li><h5>CCU APIs</h5></li>
+            <li role="presentation" onclick="showAPIActionContent('purge_queue')"><a href="#">Request Queues</a></li>
             <li role="presentation" onclick="showAPIActionContent('purge_request')"><a href="#">Purge Request</a></li>
-            <li role="presentation" onclick="showAPIActionContent('purge_queue')"><a href="#">Queue Length</a></li>
             <li role="presentation" onclick="showAPIActionContent('purge_status')"><a href="#">Purge Status</a></li>
           </ul>
         </div>
@@ -34,18 +34,20 @@
           <div id="api_action_body_wrapper">
 
             <div id="purge_request" class="each_api_action" style="display: none">
+							<label for="purge_request_body">Purge Objects(Add a Request)</label>
+							<span class="help-block">Requests that the given objects (URLs, ARLs, or CPCodes) are purged. On success, returns a 201 status and a response including the progressUri that can be used to retrieve the status of the request.</span>
               <div id="textarea_wrapper" class="form-group has-feedback">
-                <label for="purge_request_body">Purge Objects</label>
-                <textarea id="purge_request_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'purge_request_body')"></textarea>
+                <textarea id="purge_request_body" class="form-control" rows="15" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'purge_request_body')"></textarea>
               </div>
-              <input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper', 'purge_request_body')">
+              <input class="btn btn-success" type="button" value="Validate JSON" onclick="validateJsonTextarea('textarea_wrapper', 'purge_request_body')">
               <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('purge_request')">
             </div>
 
             <div id="purge_status" class="each_api_action" style="display: none">
               <div class="form-group">
-                <label for="">Purge ID</label>
-                <input id="purge_id" type="text" class="form-control" placeholder="Purge ID here">
+                <label for="">Get Purge Status</label>
+                <span class="help-block">The status of a previously submitted request. This path should be retrieved from the progressUri field of the response to a purge request.</span>
+                <input id="purge_id" type="text" class="form-control" placeholder="57799d8b-10e4-11e4-9088-62ece60caaf0 (purgeId)">
               </div>
               <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('purge_status')">
             </div>
@@ -53,7 +55,8 @@
             <div id="purge_queue" class="each_api_action" style="display: none">
               <fieldset disabled>
                 <div class="form-group">
-                  <label for="">Queue Name</label>
+                  <label for="">Get Current Queue Size</label>
+									<span class="help-block">Retrieves the length of the queue length. This value should be always "default"</span>
                   <input id="purge_queue_name" type="text" class="form-control" placeholder="default">
                 </div>
               </fieldset>
@@ -61,7 +64,6 @@
             </div>
 
             <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
-              <label for="api_response">Response</label>
               <span id="api_response"></span>
             </div>
 
@@ -97,7 +99,7 @@
       var body = $("#purge_request_body").val();
       if (IsJsonString(body)) {
         var return_response = sendAPIRequestPost(endpoint, "ccu_token", body);
-        showResponse(return_response);
+        showResponse(body, return_response);
       } else {
         showNotification("JSON is not in valid format");
       }
@@ -109,16 +111,16 @@
       if (pid) {
         endpoint = endpoint + pid;
         var return_response = sendAPIRequestGet(endpoint, "ccu_token");
-        showResponse(return_response);
+        showResponse(endpoint, return_response);
       } else {
-        showNotification("Purge ID is empty");
+        showNotification("Please enter purgeId");
       }
     }
 
     if (apitype == "purge_queue") {
       var endpoint = "/ccu/v2/queues/default";
       var return_response = sendAPIRequestGet(endpoint, "ccu_token");
-      showResponse(return_response);
+      showResponse(endpoint, return_response);
     }
   }
 </script>

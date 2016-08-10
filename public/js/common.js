@@ -34,6 +34,7 @@ function loadTokenHtml() {
       if (token_response != "null") {
         jsonObj = JSON.parse(token_response);
         var api_client_type = jsonObj.apiclienttype;
+        data.find("#"+api_client_type+"-label").addClass("label-success");
         data.find("#"+api_client_type+"-base_url").html("<strong>Base URL : </strong>" + jsonObj.baseurl);
         data.find("#"+api_client_type+"-access_token").html("<strong>Access Token : </strong>" + jsonObj.accesstoken);
         data.find("#"+api_client_type+"-client_token").html("<strong>Client Token : </strong>" + jsonObj.clienttoken);
@@ -73,14 +74,22 @@ function sendAPIRequestGet(endpoint, tokentype) {
     return result;
   } else {
     showNotification(tokentype + " is not uploaded. Please upload and try again.");
+    return '{ "status": "token does not exist" }';
   }
 }
 
 function sendAPIRequestPost(endpoint, tokentype, body) {
   if (seeIfTokenUploaded(tokentype)) {
+
+		if (IsJsonString(body)) {
+			var apiurl = "/run/";
+		} else {
+      var apiurl = "/runrb/";
+    }
+
     var result = $.ajax({
       type: "POST",
-      url: "/run/" + tokentype,
+      url: apiurl + tokentype,
       beforeSend: function(xhr) {
         xhr.setRequestHeader("Endpoint", endpoint)
       },
@@ -91,6 +100,7 @@ function sendAPIRequestPost(endpoint, tokentype, body) {
     return result;
   } else {
     showNotification(tokentype + " is not uploaded. Please upload and try again.");
+    return '{ "status": "token does not exist" }';
   }
 }
 
@@ -109,6 +119,7 @@ function sendAPIRequestPut(endpoint, tokentype, body) {
     return result;
   } else {
     showNotification(tokentype + " is not uploaded. Please upload and try again.");
+    return '{ "status": "token does not exist" }';
   }
 }
 
@@ -166,8 +177,33 @@ function showAPIActionContent(obj_Id) {
 }
 
 //show api call response
-function showResponse(return_response) {
-  var returnJson = JSON.parse(return_response);
-  $("#api_response").html("<pre>"+syntaxHighlight(returnJson)+"</pre>");
-  $("#api_response_wrapper").show();
+function showResponse(request, return_response) {
+  if (IsJsonString(request)) {
+    var requestContent = syntaxHighlight(JSON.parse(request));
+  } else {
+    var requestContent = request;
+  }
+  var returnJson = syntaxHighlight(JSON.parse(return_response));
+  html = "<label class='actioncontentlabel'>Request</label><pre>"+requestContent+"</pre>";
+	html = html + "<label class='actioncontentlabel'>Response</label><pre>"+returnJson+"</pre>";
+  $("#api_response").html(html);
+  $("#api_response_wrapper").hide();
+  $("#api_response_wrapper").fadeIn("slow").focus();
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

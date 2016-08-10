@@ -1,0 +1,134 @@
+<div class="container_fuild">
+  <div class="row"> <!-- main row -->
+
+    <!-- API section -->
+    <div class="col-md-7">
+
+			<!-- API title goes here -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="corner_space"></div>
+				</div>
+        <div class="col-md-9">
+					<h2>Alerts</h2>
+					<p>Alert is Akamai’s technology for accessing active Akamai Luna Control Center Alerts and their details.</p>
+					<hr>
+				</div>
+			</div>
+
+      <!-- API content main body -->
+      <div class="row">
+
+        <!-- left menu -->
+        <div class="col-md-3">
+          <ul class="nav nav-pills nav-stacked">
+            <li role="presentation" class="disabled"><a href="#"><h5>Alerts APIs</h5></a></li>
+            <li role="presentation" onclick="showAPIActionContent('list_alerts')"><a href="#">List Alerts</a></li>
+            <li role="presentation" onclick="showAPIActionContent('list_alerts_by_cpcode')"><a href="#">List Alerts by CP Codes</a></li>
+            <li role="presentation" onclick="showAPIActionContent('get_alert')"><a href="#">Get an Alert</a></li>
+          </ul>
+        </div>
+
+        <!-- API action content -->
+        <div class="col-md-9">
+          <div id="api_action_body_wrapper">
+
+            <div id="list_alerts" class="each_api_action" style="display: none">
+              <div class="form-group">
+                <label for="status">Status</label>
+                <input id="status" type="text" class="form-control" placeholder="Must be 'active'">
+              </div>
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('list_alerts')">
+            </div>
+
+            <div id="list_alerts_by_cpcode" class="each_api_action" style="display: none">
+              <div class="form-group">
+                <label for="status">Status</label>
+                <input id="status" type="text" class="form-control" placeholder="Must be 'active'">
+              </div>
+              <div id="textarea_wrapper" class="form-group has-feedback">
+                <label for="list_alerts_by_cpcode_body">List Alerts Objects</label>
+                <textarea id="list_alerts_by_cpcode_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'list_alerts_by_cpcode_body')"></textarea>
+              </div>
+              <input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper', 'list_alerts_by_cpcode_body')">
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('list_alerts_by_cpcode')">
+            </div>
+
+            <div id="get_alert" class="each_api_action" style="display: none">
+              <div class="form-group">
+                <label for="aid">alertID</label>
+                <input id="aid" type="text" class="form-control" placeholder="The ID of the alert">
+              </div>
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('get_alerts')">
+            </div>
+
+            <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+              <span id="api_response"></span>
+            </div>
+
+          </div> <!-- action body wrapper -->
+        </div> <!-- API action content end -->
+      </div> <!-- API content main body end -->
+
+    </div> <!-- API section end -->
+
+    <!-- Toke HTML column -->
+    <div class="col-md-4 col-sm-offset-1">
+      <div id="token_html"></div>
+    </div>
+
+  </div> <!-- end of main row -->
+</div> <!-- container -->
+
+<div id="footer_html"></div>
+
+<script>
+  $(document).ready(function() {
+    loadTokenHtml();
+    showAPIActionContent('list_alerts');
+  });
+
+  var placeholder = '{"status": "active","cpCodes": "12345,24601"}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#list_alerts_by_cpcode_body").val(placeholder);
+
+  function runAPI(apitype) {
+    if (apitype == "list_alerts") {
+      var endpoint = "/alerts/v1/portal-user?status=";
+      var status = $("#status").val();
+      if (status) {
+        endpoint = endpoint + status;
+        var return_response = sendAPIRequestGet(endpoint, "luna_token");
+        showResponse(endpoint, return_response);
+      } else {
+        showNotification("Please enter status");
+    }
+  }
+
+    if (apitype == "list_alerts_by_cpcode") {
+      var endpoint = "/alerts/v1/portal-user?status=";
+      var status = $("#status").val();
+      endpoint = endpoint + status;
+      var body = $("#list_alerts_by_cpcode_body").val();
+      if (IsJsonString(body)) {
+        var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
+        showResponse(body, return_response);
+      } else {
+        showNotification("JSON is not in valid format");
+      }
+    }
+
+    if (apitype == "get_alerts") {
+      var endpoint = "alerts/v1/portal-user/alert/";
+      var aid = $("#aid").val();
+      if (aid) {
+        endpoint = endpoint + aid;
+        var return_response = sendAPIRequestGet(endpoint, "luna_token");
+        showResponse(endpoint, return_response);
+      } else {
+        showNotification("Please enter alertID");
+    }
+  }
+}
+</script>
+

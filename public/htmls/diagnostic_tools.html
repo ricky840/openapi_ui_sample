@@ -1,0 +1,229 @@
+<div class="container_fuild">
+  <div class="row"> <!-- main row -->
+
+    <!-- API section -->
+    <div class="col-md-7">
+
+			<!-- API title goes here -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="corner_space"></div>
+				</div>
+        <div class="col-md-9">
+					<h2>Diagnostic Tools</h2>
+					<p>The Diagnostic Tools is Akamai’s technology for exploring problems in DNS host-name mapping (dig) and network routing (mtr) from around the world.</p>
+					<hr>
+				</div>
+			</div>
+
+      <!-- API content main body -->
+      <div class="row">
+
+        <!-- left menu -->
+        <div class="col-md-3">
+          <ul class="nav nav-pills nav-stacked">
+            <li role="presentation" class="disabled"><a href="#"><h5>Diagnostic Tools APIs</h5></a></li>
+            <li role="presentation" onclick="showAPIActionContent('locations')"><a href="#">Locations</a></li>
+            <li role="presentation" onclick="showAPIActionContent('dig')"><a href="#">Dig</a></li>
+            <li role="presentation" onclick="showAPIActionContent('mtr')"><a href="#">MTR</a></li>
+            <li role="presentation" onclick="showAPIActionContent('akamai_translator')"><a href="#">Akamai Translator</a></li>
+            <li role="presentation" onclick="showAPIActionContent('error_translator')"><a href="#">Error Translator</a></li>
+            <li role="presentation" onclick="showAPIActionContent('ip_geolocator')"><a href="#">IP Geolocator</a></li>
+            <li role="presentation" onclick="showAPIActionContent('verify_cdn_ip')"><a href="#">Verify CDN IP</a></li>
+          </ul>
+        </div>
+
+        <!-- API action content -->
+        <div class="col-md-9">
+          <div id="api_action_body_wrapper">
+
+            <div id="locations" class="each_api_action" style="display: none">
+              <fieldset disabled>
+                <div class="form-group">
+                  <label for="">List Locations</label>
+                  <input id="locations" type="text" class="form-control" placeholder="locations">
+                </div>
+              </fieldset>
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('locations')">
+            </div>
+
+            <div id="dig" class="each_api_action" style="display: none">
+              <div class="form-group">
+                <label for="">Hostname</label>
+                <input id="hostname" type="text" class="form-control" placeholder="Hostname">
+                <span id="helpBlock" class="help-block">The domain name you want to get information about. Example: developer.akamai.com.</span>
+              </div>
+              <div class="form-group">
+                  <label for="queryType">Select Query Type</label>
+                    <select class="form-control" id="queryType">
+                      <option value="A">A</option>
+                      <option value="AAAA">AAAA</option>
+                      <option value="PTR">PTR</option>
+                      <option value="SOA">SOA</option>
+                      <option value="MX">MX</option>
+                      <option value="CNAME">CNAME</option>
+                    </select>
+              </div>
+              <div class="form-group">
+                <label for="">Location</label>
+                <input id="location" type="text" class="form-control" placeholder="Location">
+                <span id="helpBlock" class="help-block">Location of Akamai server from which you want to run dig. You can find servers using GET /diagnostic-tools/v1/locations.</span>
+              </div>
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('dig')">
+            </div>
+
+            <div id="mtr" class="each_api_action" style="display: none">
+              <div class="form-group">
+                <label for="">Destination Domain</label>
+                <input id="destinationDomain" type="text" class="form-control" placeholder="Destination Domain">
+                <span id="helpBlock" class="help-block">The domain name you want to get information about. Example: developer.akamai.com.</span>
+              </div>
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('mtr')">
+            </div>
+
+            <div id="akamai_translator" class="each_api_action" style="display: none">
+              <div class="form-group">
+                <label for="hostname2">Hostname</label>
+                <input id="hostname2" type="text" class="form-control" placeholder="Hostname">
+                <span id="helpBlock" class="help-block">Hostname for which to retrieve ARL information. Example: host.example.com.</span>
+              </div>
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('akamai_translator')">
+            </div>
+
+            <div id="error_translator" class="each_api_action" style="display: none">
+              <div class="form-group">
+                <label for="errorcode">Error Code</label>
+                <input id="errorcode" type="text" class="form-control" placeholder="Error Code">
+                <span id="helpBlock" class="help-block">Error code or reference number you want to translate, which typically appears on an error page. Example: 9.6f64d440.1318965461.2f2b078.</span>
+              </div>
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('error_translator')">
+            </div>
+
+            <div id="ip_geolocator" class="each_api_action" style="display: none">
+              <div class="form-group">
+                <label for="ip">IP</label>
+                <input id="ip" type="text" class="form-control" placeholder="IP">
+                <span id="helpBlock" class="help-block">IP Address.  Example: NNN.NNN.NNN.NNN.</span>
+              </div>
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('ip_geolocator')">
+            </div>
+
+              <div id="verify_cdn_ip" class="each_api_action" style="display: none">
+              <div class="form-group">
+                <label for="ip2">IP</label>
+                <input id="ip2" type="text" class="form-control" placeholder="IP">
+                <span id="helpBlock" class="help-block">IP Address you want to determine is included in the Akamai network. Example: NNN.NNN.NNN.NNN.</span>
+              </div>
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('verify_cdn_ip')">
+            </div>
+
+            <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+              <span id="api_response"></span>
+            </div>
+
+          </div> <!-- action body wrapper -->
+        </div> <!-- API action content end -->
+      </div> <!-- API content main body end -->
+
+    </div> <!-- API section end -->
+
+    <!-- Toke HTML column -->
+    <div class="col-md-4 col-sm-offset-1">
+      <div id="token_html"></div>
+    </div>
+
+  </div> <!-- end of main row -->
+</div> <!-- container -->
+
+<div id="footer_html"></div>
+
+<script>
+  $(document).ready(function() {
+    loadTokenHtml();
+    showAPIActionContent('locations');
+  });
+
+  function runAPI(apitype) {
+
+    if (apitype == "locations") {
+      var endpoint = "/diagnostic-tools/v1/locations";
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+      showResponse(endpoint, return_response);
+    }
+
+    if (apitype == "dig") {
+      var endpoint = "/diagnostic-tools/v1/dig?hostname";
+      var hostname = $("#hostname").val();
+      var queryType = $("#queryType").val();
+      var location = $("#location").val();
+      if (hostname) {
+        endpoint = endpoint + hostname + "&queryType=" + queryType + "&location=" + location;
+        var return_response = sendAPIRequestGet(endpoint, "luna_token");
+        showResponse(endpoint, return_response);
+      } else {
+        showNotification("Please enter Hostname and Location");
+      }
+    }
+
+    if (apitype == "mtr") {
+      var endpoint = "/diagnostic-tools/v1/mtr?destinationDomain=";
+      var destinationDomain = $("#destinationDomain").val();
+      if (destinationDomain) {
+        endpoint = endpoint + destinationDomain;
+        var return_response = sendAPIRequestGet(endpoint, "luna_token");
+        showResponse(endpoint, return_response);
+      } else {
+        showNotification("Please enter destinationDomain");
+      }
+    }
+
+    if (apitype == "akamai_translator") {
+      var endpoint = "/diagnostic-tools/v1/akamaitranslator?hostname=";
+      var hostname = $("#hostname2").val();
+      if (hostname) {
+        endpoint = endpoint + hostname;
+        var return_response = sendAPIRequestGet(endpoint, "luna_token");
+        showResponse(endpoint, return_response);
+      } else {
+        showNotification("Please enter hostname");
+      }
+    }
+
+    if (apitype == "error_translator") {
+      var endpoint = "/diagnostic-tools/v1/error_translator?errorCode=";
+      var errorcode = $("#errorcode").val();
+      if (errorcode) {
+        endpoint = endpoint + errorcode;
+        var return_response = sendAPIRequestGet(endpoint, "luna_token");
+        showResponse(endpoint, return_response);
+      } else {
+        showNotification("Please enter Error Code");
+      }
+    }
+
+    if (apitype == "ip_geolocator") {
+      var endpoint = "/diagnostic-tools/v1/ipgeolocator?ip=";
+      var ip = $("#ip").val();
+      if (ip) {
+        endpoint = endpoint + ip;
+        var return_response = sendAPIRequestGet(endpoint, "luna_token");
+        showResponse(endpoint, return_response);
+      } else {
+        showNotification("Please enter IP");
+      }
+    }
+
+    if (apitype == "verify_cdn_ip") {
+      var endpoint = "/diagnostic-tools/v1/verifycdnip?ip=";
+      var ip = $("#ip2").val();
+      if (ip) {
+        endpoint = endpoint + ip;
+        var return_response = sendAPIRequestGet(endpoint, "luna_token");
+        showResponse(endpoint, return_response);
+      } else {
+        showNotification("Please enter IP");
+      }
+    }
+  }
+</script>
+

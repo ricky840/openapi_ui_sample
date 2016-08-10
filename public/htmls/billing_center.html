@@ -1,0 +1,251 @@
+<div class="container_fuild">
+  <div class="row"> <!-- main row -->
+
+    <!-- API section -->
+    <div class="col-md-7">
+
+			<!-- API title goes here -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="corner_space"></div>
+				</div>
+        <div class="col-md-9">
+					<h2>Billing Center</h2>
+					<p>Billing Center is Akamai’s technology for acessing to contract usage data in JSON for accounts in which you have access.</p>
+					<hr>
+				</div>
+			</div>
+
+      <!-- API content main body -->
+      <div class="row">
+
+        <!-- left menu -->
+        <div class="col-md-3">
+          <ul class="nav nav-pills nav-stacked">
+            <li><h5>Check your ID</h5></li>
+            <li role="presentation" onclick="showAPIActionContent('chk_contract_RG_ID')"><a href="#">Contract/ReportingGroup ID</a></li>
+            <li role="presentation" onclick="showAPIActionContent('chk_product_ID')"><a href="#">Product ID</a></li>
+            <li><h5>Contracts</h5></li>
+            <li role="presentation" onclick="showAPIActionContent('statistics_per_contract')"><a href="#">Statistics per Contract</a></li>
+            <li role="presentation" onclick="showAPIActionContent('monthly_usage_per_contract')"><a href="#">Monthly Usage per Contract</a></li>
+            <li><h5>Reporting Groups</h5></li>
+            <li role="presentation" onclick="showAPIActionContent('statistics_per_reporting_group')"><a href="#">Statistics per Reporting Group</a></li>
+            <li role="presentation" onclick="showAPIActionContent('monthly_usage_per_reporting_group')"><a href="#">Monthly Usage per Reporting Group</a></li>
+          </ul>
+        </div>
+
+        <!-- API action content -->
+        <div class="col-md-9">
+          <div id="api_action_body_wrapper">
+             <div id="chk_contract_RG_ID" class="each_api_action" style="display: none">
+              <fieldset disabled>
+                <div class="form-group">
+                  <input id="chk_contract_RG_ID" type="text" class="form-control" placeholder="/billing-usage/v1/reportSources">
+                </div>
+              </fieldset>
+              <input class="btn btn-primary" type="button" value="Get ID" onclick="runAPI('chk_contract_RG_ID')">
+            </div>
+
+            <div id="chk_product_ID" class="each_api_action" style="display: none">
+              <div class="form-group">
+                <label for="">Contract/ReportingGroup ID</label>
+                <input id="contract_id" type="text" class="form-control" placeholder="Contract ID">
+              </div>
+              <input class="btn btn-primary" type="button" value="Get ID" onclick="runAPI('chk_product_ID')">
+            </div>
+
+            <div id="statistics_per_contract" class="each_api_action" style="display: none">
+              <div class="form-group">
+                <label for="">Contract ID</label>
+                <input id="contract_id" type="text" class="form-control" placeholder="Contract ID">
+                <span id="helpBlock" class="help-block">Identifies the contract under which data is aggregated. Example: 1-ABCD.</span>
+              </div>
+              <div class="form-group">
+                <label for="">Product ID</label>
+                <input id="product_id" type="text" class="form-control" placeholder="Product ID">
+                <span id="helpBlock" class="help-block">Identifies the contract under which data is aggregated. Example: 1-ABC012.</span>
+              </div>
+              <div class ="date"></div>
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('statistics_per_contract')">
+            </div>
+
+            <div id="monthly_usage_per_contract" class="each_api_action" style="display: none">
+              <div class="form-group">
+                <label for="">Contract ID</label>
+                <input id="contract_id" type="text" class="form-control" placeholder="Contract ID">
+                <span id="helpBlock" class="help-block">Identifies the contract under which data is aggregated. Example: 1-ABCD.</span>
+              </div>
+              <div class="form-group">
+                <label for="">Product ID</label>
+                <input id="product_id" type="text" class="form-control" placeholder="Product ID">
+                <span id="helpBlock" class="help-block">Identifies the contract under which data is aggregated. Example: 1-ABC012.</span>
+              </div>
+              <div class ="date"></div>
+              <fieldset disabled>
+                <div class="form-group">
+                  <label for="">Statistic Name</label>
+                  <input id="statisticName" type="text" class="form-control" placeholder="Total MB">
+                </div>
+              </fieldset>
+              <fieldset disabled>
+                <div class="form-group">
+                  <label for="">Billing Day Only</label>
+                  <input id="billingDayOnly" type="text" class="form-control" placeholder="true">
+                </div>
+              </fieldset>
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('monthly_usage_per_contract')">
+            </div>
+
+            <div id="statistics_per_reporting_group" class="each_api_action" style="display: none">
+              <div class="form-group">
+                <label for="">ReportingGroup ID</label>
+                <input id="reportinggroup_id" type="text" class="form-control" placeholder="ReportingGroup ID">
+                <span id="helpBlock" class="help-block">Identifies the unique reporting group. Example: 17405.</span>
+              </div>
+              <div class="form-group">
+                <label for="">Product ID</label>
+                <input id="product_id" type="text" class="form-control" placeholder="Product ID">
+                <span id="helpBlock" class="help-block">Identifies the contract under which data is aggregated. Example: 1-ABC012.</span>
+              </div>
+              <div class ="date"></div>
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('statistics_per_reporting_group')">
+            </div>
+
+            <div id="monthly_usage_per_reporting_group" class="each_api_action" style="display: none">
+              <div class="form-group">
+                <label for="">ReportingGroup ID</label>
+                <input id="reportinggroup_id" type="text" class="form-control" placeholder="ReportingGroup ID">
+                <span id="helpBlock" class="help-block">Identifies the unique reporting group. Example: 17405.</span>
+              </div>
+              <div class="form-group">
+                <label for="">Product ID</label>
+                <input id="product_id" type="text" class="form-control" placeholder="Product ID">
+                <span id="helpBlock" class="help-block">Identifies the contract under which data is aggregated. Example: 1-ABC012.</span>
+              </div>
+              <div class ="date"></div>
+              <fieldset disabled>
+                <div class="form-group">
+                  <label for="">Statistic Name</label>
+                  <input id="statisticName" type="text" class="form-control" placeholder="Total MB">
+                </div>
+              </fieldset>
+              <fieldset disabled>
+                <div class="form-group">
+                  <label for="">Billing Day Only</label>
+                  <input id="billingDayOnly" type="text" class="form-control" placeholder="true">
+                </div>
+              </fieldset>
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('monthly_usage_per_reporting_group')">
+            </div>
+
+            <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+              <span id="api_response"></span>
+            </div>
+
+          </div> <!-- action body wrapper -->
+        </div> <!-- API action content end -->
+      </div> <!-- API content main body end -->
+
+    </div> <!-- API section end -->
+
+    <!-- Toke HTML column -->
+    <div class="col-md-4 col-sm-offset-1">
+      <div id="token_html"></div>
+    </div>
+
+  </div> <!-- end of main row -->
+</div> <!-- container -->
+
+<div id="footer_html"></div>
+
+<script>
+  $(document).ready(function() {
+    loadTokenHtml();
+    showAPIActionContent('chk_contract_RG_ID');
+    $(".date").load("/htmls/date.html");
+  });
+
+  function runAPI(apitype) {
+
+    if (apitype == "chk_contract_RG_ID") {
+      var endpoint = "/billing-usage/v1/reportSources";
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+      showResponse(endpoint, return_response);
+    }
+
+    if (apitype == "chk_product_ID") {
+      var endpoint = "/billing-usage/v1/products";
+      var cid = $("#contract_id").val();
+      var body = 'reportSources=[{"type":"contract","id":"'+ cid + '"}]&endDate={"month":"12","year":"2015"}&startDate={"month":"01","year":"2015"}';
+      var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
+      showResponse(body, return_response);
+    }
+
+    if (apitype == "statistics_per_contract") {
+      var endpoint = "/billing-center-api/v2/contracts/";
+      var cid = $("#contract_id").val();
+      var pid = $("#product_id").val();
+      var year = $("#year option:selected").text();
+      var month = $("#month option:selected").text();
+      if (cid && pid) {
+        endpoint = endpoint + cid + "/products/" + pid + "/statistics?year=" + year + "&month=" + month;
+        var return_response = sendAPIRequestGet(endpoint, "luna_token");
+        showResponse(endpoint, return_response);
+      } else {
+        showNotification("Contract ID is empty");
+        //showNotification("Product ID is empty");
+      }
+    }
+
+    if (apitype == "statistics_per_contract") {
+      var endpoint = "/billing-center-api/v2/contracts/";
+      var cid = $("#contract_id").val();
+      var pid = $("#product_id").val();
+      var year = $("#year option:selected").text();
+      var month = $("#month option:selected").text();
+      if (cid && pid) {
+        endpoint = endpoint + cid + "/products/" + pid + "/measures?year=" + year + "&month=" + month + "&statisticName=Total MB&billingDayOnly=true";
+        var return_response = sendAPIRequestGet(endpoint, "luna_token");
+        showResponse(endpoint, return_response);
+      } else {
+        showNotification("Contract ID is empty");
+        showNotification("Product ID is empty");
+      }
+    }
+
+    if (apitype == "statistics_per_reporting_group") {
+      var endpoint = "/billing-center-api/v2/reporting-groups/";
+      var rid = $("#reportinggroup_id").val();
+      var pid = $("#product_id").val();
+      var year = $("#year option:selected").text();
+      var month = $("#month option:selected").text();
+      if (cid && pid) {
+        endpoint = endpoint + rid + "/products/" + pid + "/statistics?year=" + year + "&month=" + month;
+        var return_response = sendAPIRequestGet(endpoint, "luna_token");
+        showResponse(endpoint,return_response);
+      } else {
+        showNotification("ReportingGroup ID is empty");
+        showNotification("Product ID is empty");
+      }
+    }
+
+    if (apitype == "monthly_usage_per_reporting_group") {
+      var endpoint = "/billing-center-api/v2/reporting-groups/";
+      var rid = $("#reportinggroup_id").val();
+      var pid = $("#product_id").val();
+      var year = $("#year option:selected").text();
+      var month = $("#month option:selected").text();
+      if (cid && pid) {
+        endpoint = endpoint + rid + "/products/" + pid + "/measures?year=" + year + "&month=" + month + "&statisticName=Total MB&billingDayOnly=true";
+        var return_response = sendAPIRequestGet(endpoint, "luna_token");
+        showResponse(endpoint,return_response);
+      } else {
+        showNotification("ReportingGroup ID is empty");
+        showNotification("Product ID is empty");
+      }
+    }
+  }
+
+
+</script>
+

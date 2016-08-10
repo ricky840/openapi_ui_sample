@@ -15,6 +15,13 @@ end
 
 def makePostRequest(base_url, endpoint_url, client_token, client_secret, access_token, request_body)
 	baseuri = URI(base_url)
+  begin
+    JSON.parse(request_body)
+    content_type = 'application/json'
+  rescue JSON::ParserError => e
+    content_type = 'application/x-www-form-urlencoded'
+  end
+
 	http = Akamai::Edgegrid::HTTP.new(address = baseuri.host, post = baseuri.port)
 	http.setup_edgegrid(
 		client_token: client_token,
@@ -23,7 +30,7 @@ def makePostRequest(base_url, endpoint_url, client_token, client_secret, access_
 	)
 	req = Net::HTTP::Post.new(
 		URI.join(baseuri.to_s, endpoint_url).to_s,
-		initheader = { 'Content-Type' => 'application/json' }
+		initheader = { 'Content-Type' => content_type }
 	)
 	req.body = request_body
 	res = http.request(req)
@@ -111,9 +118,23 @@ post "/run/:tokentype" do
   endpoint = request.env["HTTP_ENDPOINT"].to_s
   begin
     request_body = JSON.generate(JSON.parse(request.body.read))
-  rescue ParserError => e
+  rescue JSON::ParserError => e
     return %Q[{"error" : "#{e.message}"}]
   end
+
+  if not endpoint.nil?
+    api_token_type = params['tokentype']
+    tokens = session[api_token_type]
+    result = makePostRequest(tokens[:baseurl], endpoint, tokens[:clienttoken], tokens[:secret], tokens[:accesstoken], request_body)
+    return result
+  else
+    return %Q[{"error" : "no end point URL provided"}]
+  end
+end
+
+post "/runrb/:tokentype" do
+  endpoint = request.env["HTTP_ENDPOINT"].to_s
+  request_body = request.body.read
 
   if not endpoint.nil?
     api_token_type = params['tokentype']
@@ -129,7 +150,7 @@ put "/run/:tokentype" do
   endpoint = request.env["HTTP_ENDPOINT"].to_s
   begin
     request_body = JSON.generate(JSON.parse(request.body.read))
-  rescue ParserError => e
+  rescue JSON::ParserError => e
     return %Q[{"error" : "#{e.message}"}]
   end
 

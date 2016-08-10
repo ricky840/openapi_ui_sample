@@ -40,51 +40,53 @@
         <div class="col-md-9">
           <div id="api_action_body_wrapper">
 
-            <div id="list_case_per_category" class="each_api_action" style="display: none">
+            <div id="list_cases_per_category" class="each_api_action" style="display: none">
               <div class="form-group">
-                <label for="">Purge ID</label>
-                <input id="purge_id" type="text" class="form-control" placeholder="Purge ID here">
+                <label for="">Category</label>
+                <select name="cateogry">
+                <option value="technical">Technical_Support</option>
+                <option value="billing">Billing_Support</option>
+                <option value="business">Business_Support</option>
+                </select>
               </div>
-              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('purge_status')">
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('list_cases_per_category')">
             </div>
 
             <div id="create_case" class="each_api_action" style="display: none">
               <div id="textarea_wrapper" class="form-group has-feedback">
-                <label for="purge_request_body">Purge Objects</label>
-                <textarea id="purge_request_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'purge_request_body')"></textarea>
+                <label for="create_case_body">Create a Case Objects</label>
+                <textarea id="create_case_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'create_case_body')"></textarea>
               </div>
-              <input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper', 'purge_request_body')">
-              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('purge_request')">
+              <input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper', 'create_case_body')">
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('create_case')">
             </div>
 
             <div id="list_professional" class="each_api_action" style="display: none">
               <div class="form-group">
-                <label for="">Purge ID</label>
-                <input id="purge_id" type="text" class="form-control" placeholder="Purge ID here">
+                <label for="">List Professional Services Cases</label>
               </div>
-              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('purge_status')">
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('list_professional')">
             </div>
 
             <div id="create_professional" class="each_api_action" style="display: none">
               <div id="textarea_wrapper" class="form-group has-feedback">
-                <label for="purge_request_body">Purge Objects</label>
-                <textarea id="purge_request_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'purge_request_body')"></textarea>
+                <label for="create_professional_body">Create a Prosessional Services Case Object</label>
+                <textarea id="create_professional_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'create_professional_body')"></textarea>
               </div>
-              <input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper', 'purge_request_body')">
-              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('purge_request')">
+              <input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper','create_professional_body')">
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('create_professional')">
             </div>
 
-              <div id="" class="cases" style="display: none">
+              <div id="cases" class="each_api_action" style="display: none">
               <fieldset disabled>
                 <div class="form-group">
-                  <label for="">Queue Name</label>
-                  <input id="purge_queue_name" type="text" class="form-control" placeholder="default">
+                  <label for="">List Cases</label>
                 </div>
               </fieldset>
-              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('purge_queue')">
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('cases')">
             </div>
 
-              <div id="" class="case" style="display: none">
+              <div id="case" class="each_api_action" style="display: none">
               <div class="form-group">
                 <label for="">caseID</label>
                 <input id="case_id" type="text" class="form-control" placeholder="Case ID here">
@@ -92,36 +94,35 @@
               <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('case')">
             </div>
 
-              <div id="" class="comments" style="display: none">
-              <fieldset disabled>
-                <div class="form-group">
-                  <label for="">Queue Name</label>
-                  <input id="purge_queue_name" type="text" class="form-control" placeholder="default">
+              <div id="comments" class="each_api_action" style="display: none">
+              <div class="form-group">
+                  <label for="">caseID</label>
+                  <input id="case_id" type="text" class="form-control" placeholder="Case ID here">
+                  <textarea id="comments_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'comments_body')"></textarea>
                 </div>
-              </fieldset>
-              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('purge_queue')">
+              <input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper','comments_body')">
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('comments')">
             </div>
 
-              <div id="" class="file_attachments" style="display: none">
-              <fieldset disabled>
-                <div class="form-group">
-                  <label for="">Queue Name</label>
-                  <input id="purge_queue_name" type="text" class="form-control" placeholder="default">
+              <div id="file_attachments" class="each_api_action" style="display: none">
+              <div class="form-group">
+                  <label for="">caseID</label>
+                  <input id="case_id" type="text" class="form-control" placeholder="Case ID here">
+                  <textarea id="file_attachments_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'file_attachments_body')"></textarea>
                 </div>
-              </fieldset>
-              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('purge_queue')">
+              <input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper','file_attachments_body')">
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('file_attachments')">
             </div>
 
-              <div id="" class="resolutions" style="display: none">
-              <fieldset disabled>
-                <div class="form-group">
-                  <label for="">Queue Name</label>
-                  <input id="purge_queue_name" type="text" class="form-control" placeholder="default">
+              <div id="resoultions" class="each_api_action" style="display: none">
+              <div class="form-group">
+                  <label for="">caseID</label>
+                  <input id="case_id" type="text" class="form-control" placeholder="Case ID here">
+                  <textarea id="resolutions_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'resolutions_body')"></textarea>
                 </div>
-              </fieldset>
-              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('purge_queue')">
+              <input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper','resolutions_body')">
+              <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('resolutions)">
             </div>
-
 
             <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
               <label for="api_response">Response</label>
@@ -147,23 +148,74 @@
 <script>
   $(document).ready(function() {
     loadTokenHtml();
-    showAPIActionContent('list_case_per_category');
+    showAPIActionContent('list_cases_per_category');
   });
 
-  var placeholder = '{"hostname":"test.domain.edgesuite.net","objects":["/test.jpg","/test.jpg"]}';
+  var placeholder = '{"description": "...","endUserAccountName": "...","endUserEmail": "...","endUserName": "...","endUserPhoneNumber": "...","product": "...","severity": "...","title": "...","indirectCustomerAccountId": "..."}';
   placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
-  $("#purge_request_body").val(placeholder);
+  $("#create_case_body").val(placeholder);
+
+  var placeholder = '{"description": "...","endUserAccountName": "...","endUserEmail": "...","endUserName": "...","endUserPhoneNumber": "...","product": "...","severity": "...","title": "...","indirectCustomerAccountId": "..."}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#create_professional_body").val(placeholder);
+
+  var placeholder = '{"comment": "Please give update on this case"}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#comments_body").val(placeholder);
+
+  var placeholder = '';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#file_attachments_body").val(placeholder);
+
+  var placeholder = '{"comment": "Issue is resolved. close the case"}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#resolutionsbody").val(placeholder);
 
   function runAPI(apitype) {
-    if (apitype == "purge_request") {
-      var endpoint = "/ccu/v2/queues/default";
-      var body = $("#purge_request_body").val();
+    if (apitype == "list_cases_per_category") {
+      var endpoint = "/cases/v1/";
+      var pid = $("#case_id").val();
+      if (pid) {
+        endpoint = endpoint + pid;
+        var return_response = sendAPIRequestGet(endpoint, "luna_token");
+        showResponse(return_response);
+      } else {
+        showNotification("Case ID is empty");
+      }
+    }
+
+    if (apitype == "create_case") {
+      var endpoint = "/cases/v1/";
+      var body = $("#create_case_body").val();
       if (IsJsonString(body)) {
-        var return_response = sendAPIRequestPost(endpoint, "ccu_token", body);
+        var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
         showResponse(return_response);
       } else {
         showNotification("JSON is not in valid format");
       }
+    }
+    
+    if (apitype == "list_professional") {
+      var endpoint = "/cases/v1/PS";
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+      showResponse(return_response);
+    }
+
+    if (apitype == "create_professional") {
+      var endpoint = "/cases/v1/PS";
+      var body = $("#create_professional_body").val();
+      if (IsJsonString(body)) {
+        var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
+        showResponse(return_response);
+      } else {
+        showNotification("JSON is not in valid format");
+      }
+    }
+
+    if (apitype == "cases") {
+      var endpoint = "/cases/v1/portal-user?";
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+      showResponse(return_response);
     }
 
     if (apitype == "case") {
@@ -171,18 +223,52 @@
       var pid = $("#case_id").val();
       if (pid) {
         endpoint = endpoint + pid;
-        var return_response = sendAPIRequestGet(endpoint, "ccu_token");
+        var return_response = sendAPIRequestGet(endpoint, "luna_token");
         showResponse(return_response);
       } else {
         showNotification("Case ID is empty");
       }
     }
 
-    if (apitype == "purge_queue") {
-      var endpoint = "/ccu/v2/queues/default";
-      var return_response = sendAPIRequestGet(endpoint, "ccu_token");
-      showResponse(return_response);
+    if (apitype == "comments") {
+      var endpoint = "/cases/v1/portal-user/case/";
+      var body = $("#comments_body").val();
+      var pid = $("#case_id").val();
+      if (pid) {
+        endpoint = endpoint + pid + "/notes";
+        var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
+        showResponse(return_response);
+      } else {
+        showNotification("Case ID is empty");
+      }
+    }
+
+    if (apitype == "file_attachments") {
+      var endpoint = "/cases/v1/portal-user/case/";
+      var body = $("#file_attachments_body").val();
+      var pid = $("#case_id").val();
+      if (pid) {
+        endpoint = endpoint + pid + "/files";
+        var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
+        showResponse(return_response);
+      } else {
+        showNotification("Case ID is empty");
+      }
+    }
+
+     if (apitype == "resolutions") {
+      var endpoint = "/cases/v1/portal-user/case/";
+      var body = $("#resolutions_body").val();
+      var pid = $("#case_id").val();
+      if (pid) {
+        endpoint = endpoint + pid + "/request-close";
+        var return_response = sendAPIRequestPut(endpoint, "luna_token", body);
+        showResponse(return_response);
+      } else {
+        showNotification("Case ID is empty");
+      }
     }
   }
+
 </script>
 
