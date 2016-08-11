@@ -11,7 +11,8 @@
 				</div>
         <div class="col-md-9">
 					<h2>Content Control Utility V3</h2>
-					<p>The Content Control Utility (CCU) API allows you to purge edge content by request. You can use the API to purge by URL, with support for purge by Content Provider (CP) code coming soon. This API leverages the new Fast Purge utility.</p><p><strong>NOTE</strong>: If the account is not properly enabled for Fast Purge, the purge request is processed by the legacy (V2) version of CCU.</p>
+          <p class="text-muted">The Content Control Utility (CCU) API allows you to purge edge content by request. You can use the API to purge by URL, with support for purge by Content Provider (CP) code coming soon. This API leverages the new Fast Purge utility.</p>
+          <p class="text-muted"><strong>NOTE</strong>: If the account is not properly enabled for Fast Purge, the purge request is processed by the legacy (V2) version of CCU.</p>
 					<hr>
 				</div>
 			</div>
@@ -73,6 +74,7 @@
             </div>
 
             <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+              <div id="loading_spinner" style="display: none"></div>
               <span id="api_response"></span>
             </div>
 
@@ -111,7 +113,6 @@
       endpoint = endpoint + network;
       if (IsJsonString(body)) {
         var return_response = sendAPIRequestPost(endpoint, "ccu_token", body);
-        showResponse(body, return_response);
       } else {
         showNotification("JSON is not in valid format");
       }
@@ -124,7 +125,6 @@
       endpoint = endpoint + network;
       if (IsJsonString(body)) {
         var return_response = sendAPIRequestPost(endpoint, "ccu_token", body);
-        showResponse(body, return_response);
       } else {
         showNotification("JSON is not in valid format");
       }

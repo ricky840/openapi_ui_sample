@@ -22,13 +22,13 @@
         <!-- left menu -->
         <div class="col-md-3">
           <ul class="nav nav-pills nav-stacked">
-            <li><h5>Check your ID</h5></li>
+            <li><h5>Contract/Reporting Group</h5></li>
             <li role="presentation" onclick="showAPIActionContent('chk_contract_RG_ID')"><a href="#">Contract/ReportingGroup ID</a></li>
             <li role="presentation" onclick="showAPIActionContent('chk_product_ID')"><a href="#">Product ID</a></li>
-            <li><h5>Contracts</h5></li>
+            <li><h5>Contracts Details</h5></li>
             <li role="presentation" onclick="showAPIActionContent('statistics_per_contract')"><a href="#">Statistics per Contract</a></li>
             <li role="presentation" onclick="showAPIActionContent('monthly_usage_per_contract')"><a href="#">Monthly Usage per Contract</a></li>
-            <li><h5>Reporting Groups</h5></li>
+            <li><h5>Reporting Groups Details</h5></li>
             <li role="presentation" onclick="showAPIActionContent('statistics_per_reporting_group')"><a href="#">Statistics per Reporting Group</a></li>
             <li role="presentation" onclick="showAPIActionContent('monthly_usage_per_reporting_group')"><a href="#">Monthly Usage per Reporting Group</a></li>
           </ul>
@@ -139,6 +139,7 @@
             </div>
 
             <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+              <div id="loading_spinner" style="display: none"></div>
               <span id="api_response"></span>
             </div>
 
@@ -170,7 +171,6 @@
     if (apitype == "chk_contract_RG_ID") {
       var endpoint = "/billing-usage/v1/reportSources";
       var return_response = sendAPIRequestGet(endpoint, "luna_token");
-      showResponse(endpoint, return_response);
     }
 
     if (apitype == "chk_product_ID") {
@@ -178,7 +178,6 @@
       var cid = $("#contract_id").val();
       var body = 'reportSources=[{"type":"contract","id":"'+ cid + '"}]&endDate={"month":"12","year":"2015"}&startDate={"month":"01","year":"2015"}';
       var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
-      showResponse(body, return_response);
     }
 
     if (apitype == "statistics_per_contract") {
@@ -190,7 +189,6 @@
       if (cid && pid) {
         endpoint = endpoint + cid + "/products/" + pid + "/statistics?year=" + year + "&month=" + month;
         var return_response = sendAPIRequestGet(endpoint, "luna_token");
-        showResponse(endpoint, return_response);
       } else {
         showNotification("Contract ID is empty");
         //showNotification("Product ID is empty");
@@ -206,7 +204,6 @@
       if (cid && pid) {
         endpoint = endpoint + cid + "/products/" + pid + "/measures?year=" + year + "&month=" + month + "&statisticName=Total MB&billingDayOnly=true";
         var return_response = sendAPIRequestGet(endpoint, "luna_token");
-        showResponse(endpoint, return_response);
       } else {
         showNotification("Contract ID is empty");
         showNotification("Product ID is empty");
@@ -222,7 +219,6 @@
       if (cid && pid) {
         endpoint = endpoint + rid + "/products/" + pid + "/statistics?year=" + year + "&month=" + month;
         var return_response = sendAPIRequestGet(endpoint, "luna_token");
-        showResponse(endpoint,return_response);
       } else {
         showNotification("ReportingGroup ID is empty");
         showNotification("Product ID is empty");
@@ -238,7 +234,6 @@
       if (cid && pid) {
         endpoint = endpoint + rid + "/products/" + pid + "/measures?year=" + year + "&month=" + month + "&statisticName=Total MB&billingDayOnly=true";
         var return_response = sendAPIRequestGet(endpoint, "luna_token");
-        showResponse(endpoint,return_response);
       } else {
         showNotification("ReportingGroup ID is empty");
         showNotification("Product ID is empty");

@@ -60,6 +60,7 @@
             </div>
 
             <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+              <div id="loading_spinner" style="display: none"></div>
               <span id="api_response"></span>
             </div>
 
@@ -97,7 +98,6 @@
       if (zone) {
         endpoint = endpoint + zone + "?start=" + start + "&end=" + end + "&start_time=" + start + "&end_time=" + end_time;
         var return_response = sendAPIRequestGet(endpoint, "luna_token");
-        showResponse(endpoint, return_response);
       } else {
         showNotification("Please enter Input Data");
       }

@@ -46,6 +46,7 @@
             </div>
 
             <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+              <div id="loading_spinner" style="display: none"></div>
               <span id="api_response"></span>
             </div>
 
@@ -81,7 +82,6 @@
     if (apitype == "get_zone") {
       var endpoint = "/config-dns/v1/zones/zone";
       var return_response = sendAPIRequestGet(endpoint, "luna_token");
-      showResponse(endpoint, return_response);
     }
 
     if (apitype == "add_modify_zone") {
@@ -89,7 +89,6 @@
       var body = $("#add_modify_zone_body").val();
       if (IsJsonString(body)) {
         var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
-        showResponse(body, return_response);
       } else {
         showNotification("JSON is not in valid format");
       }

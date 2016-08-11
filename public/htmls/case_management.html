@@ -125,7 +125,7 @@
             </div>
 
             <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
-              <label for="api_response">Response</label>
+              <div id="loading_spinner" style="display: none"></div>
               <span id="api_response"></span>
             </div>
 
@@ -178,7 +178,6 @@
       if (pid) {
         endpoint = endpoint + pid;
         var return_response = sendAPIRequestGet(endpoint, "luna_token");
-        showResponse(return_response);
       } else {
         showNotification("Case ID is empty");
       }
@@ -189,7 +188,6 @@
       var body = $("#create_case_body").val();
       if (IsJsonString(body)) {
         var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
-        showResponse(return_response);
       } else {
         showNotification("JSON is not in valid format");
       }
@@ -198,7 +196,6 @@
     if (apitype == "list_professional") {
       var endpoint = "/cases/v1/PS";
       var return_response = sendAPIRequestGet(endpoint, "luna_token");
-      showResponse(return_response);
     }
 
     if (apitype == "create_professional") {
@@ -206,7 +203,6 @@
       var body = $("#create_professional_body").val();
       if (IsJsonString(body)) {
         var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
-        showResponse(return_response);
       } else {
         showNotification("JSON is not in valid format");
       }
@@ -215,7 +211,6 @@
     if (apitype == "cases") {
       var endpoint = "/cases/v1/portal-user?";
       var return_response = sendAPIRequestGet(endpoint, "luna_token");
-      showResponse(return_response);
     }
 
     if (apitype == "case") {
@@ -224,7 +219,6 @@
       if (pid) {
         endpoint = endpoint + pid;
         var return_response = sendAPIRequestGet(endpoint, "luna_token");
-        showResponse(return_response);
       } else {
         showNotification("Case ID is empty");
       }
@@ -237,7 +231,6 @@
       if (pid) {
         endpoint = endpoint + pid + "/notes";
         var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
-        showResponse(return_response);
       } else {
         showNotification("Case ID is empty");
       }
@@ -250,7 +243,6 @@
       if (pid) {
         endpoint = endpoint + pid + "/files";
         var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
-        showResponse(return_response);
       } else {
         showNotification("Case ID is empty");
       }
@@ -263,7 +255,6 @@
       if (pid) {
         endpoint = endpoint + pid + "/request-close";
         var return_response = sendAPIRequestPut(endpoint, "luna_token", body);
-        showResponse(return_response);
       } else {
         showNotification("Case ID is empty");
       }

@@ -42,6 +42,7 @@ function loadTokenHtml() {
       }
     }
     $("#token_html").html(data);
+    $("#token_html").hide().fadeIn("slow");
   });
 }
 
@@ -66,9 +67,12 @@ function sendAPIRequestGet(endpoint, tokentype) {
         type: "GET",
         url: "/run/" + tokentype,
         beforeSend: function(xhr) {
-          xhr.setRequestHeader("Endpoint", endpoint)
+          xhr.setRequestHeader("Endpoint", endpoint);
+					showLoadingSpinner();
         },
-        async: false
+				success: function(responseTxt) {
+					showResponse(endpoint, responseTxt);
+				}
       }).responseText;
 
     return result;
@@ -92,9 +96,12 @@ function sendAPIRequestPost(endpoint, tokentype, body) {
       url: apiurl + tokentype,
       beforeSend: function(xhr) {
         xhr.setRequestHeader("Endpoint", endpoint)
+        showLoadingSpinner();
       },
       data: body,
-      async: false
+      success: function(responseTxt) {
+        showResponse(body, responseTxt);
+      }
     }).responseText;
 
     return result;
@@ -111,9 +118,12 @@ function sendAPIRequestPut(endpoint, tokentype, body) {
       url: "/run/" + tokentype,
       beforeSend: function(xhr) {
         xhr.setRequestHeader("Endpoint", endpoint)
+        showLoadingSpinner();
       },
       data: body,
-      async: false
+      success: function(responseTxt) {
+        showResponse(body, responseTxt);
+      }
     }).responseText;
 
     return result;
@@ -187,23 +197,13 @@ function showResponse(request, return_response) {
   html = "<label class='actioncontentlabel'>Request</label><pre>"+requestContent+"</pre>";
 	html = html + "<label class='actioncontentlabel'>Response</label><pre>"+returnJson+"</pre>";
   $("#api_response").html(html);
+  $("#loading_spinner").hide();
   $("#api_response_wrapper").hide();
   $("#api_response_wrapper").fadeIn("slow").focus();
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function showLoadingSpinner() {
+  $("#api_response").empty();
+  $("#loading_spinner").show();
+	$("#api_response_wrapper").show();
+}

@@ -64,6 +64,7 @@
             </div>
 
             <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+              <div id="loading_spinner" style="display: none"></div>
               <span id="api_response"></span>
             </div>
 
@@ -99,7 +100,6 @@
       var body = $("#purge_request_body").val();
       if (IsJsonString(body)) {
         var return_response = sendAPIRequestPost(endpoint, "ccu_token", body);
-        showResponse(body, return_response);
       } else {
         showNotification("JSON is not in valid format");
       }
@@ -111,7 +111,6 @@
       if (pid) {
         endpoint = endpoint + pid;
         var return_response = sendAPIRequestGet(endpoint, "ccu_token");
-        showResponse(endpoint, return_response);
       } else {
         showNotification("Please enter purgeId");
       }
@@ -120,7 +119,6 @@
     if (apitype == "purge_queue") {
       var endpoint = "/ccu/v2/queues/default";
       var return_response = sendAPIRequestGet(endpoint, "ccu_token");
-      showResponse(endpoint, return_response);
     }
   }
 </script>

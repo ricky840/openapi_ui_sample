@@ -11,7 +11,8 @@
 				</div>
         <div class="col-md-9">
 					<h2>Alerts</h2>
-					<p>Alert is Akamai’s technology for accessing active Akamai Luna Control Center Alerts and their details.</p>
+          <p class="text-muted">Alerts REST API provides access to active Alerts and Alert details in Akamai Luna Control Center.</p>
+          <p class="text-muted">The REST API responds to requests with standard HTTP status codes. In the case of a validation failure or when an API fails to process your request, an error message is returned in JSON format.</p>
 					<hr>
 				</div>
 			</div>
@@ -22,10 +23,10 @@
         <!-- left menu -->
         <div class="col-md-3">
           <ul class="nav nav-pills nav-stacked">
-            <li role="presentation" class="disabled"><a href="#"><h5>Alerts APIs</h5></a></li>
-            <li role="presentation" onclick="showAPIActionContent('list_alerts')"><a href="#">List Alerts</a></li>
+            <li><h5>Alerts APIs</h5></li>
+            <li role="presentation" onclick="showAPIActionContent('list_alerts')"><a href="#">List Active Alerts</a></li>
             <li role="presentation" onclick="showAPIActionContent('list_alerts_by_cpcode')"><a href="#">List Alerts by CP Codes</a></li>
-            <li role="presentation" onclick="showAPIActionContent('get_alert')"><a href="#">Get an Alert</a></li>
+            <li role="presentation" onclick="showAPIActionContent('get_alert')"><a href="#">Alert Details</a></li>
           </ul>
         </div>
 
@@ -34,35 +35,37 @@
           <div id="api_action_body_wrapper">
 
             <div id="list_alerts" class="each_api_action" style="display: none">
-              <div class="form-group">
-                <label for="status">Status</label>
-                <input id="status" type="text" class="form-control" placeholder="Must be 'active'">
-              </div>
+              <fieldset disabled>
+                <div class="form-group">
+                  <label for="status">List Alerts</label>
+                  <span class="help-block">Retrieves active alerts for a logged-in Luna user. Status must be "active"</span>
+                  <input id="status" type="text" class="form-control" placeholder="active">
+                </div>
+              </fieldset>
               <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('list_alerts')">
             </div>
 
             <div id="list_alerts_by_cpcode" class="each_api_action" style="display: none">
-              <div class="form-group">
-                <label for="status">Status</label>
-                <input id="status" type="text" class="form-control" placeholder="Must be 'active'">
-              </div>
+              <label for="list_alerts_by_cpcode_body">List Alerts by CP Codes</label>
+              <span class="help-block">Retrieves a subset of alerts for a logged-in Luna user. The following POST object members limit the scope of the output.</span>
               <div id="textarea_wrapper" class="form-group has-feedback">
-                <label for="list_alerts_by_cpcode_body">List Alerts Objects</label>
                 <textarea id="list_alerts_by_cpcode_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'list_alerts_by_cpcode_body')"></textarea>
               </div>
-              <input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper', 'list_alerts_by_cpcode_body')">
+              <input class="btn btn-success" type="button" value="Validate JSON" onclick="validateJsonTextarea('textarea_wrapper', 'list_alerts_by_cpcode_body')">
               <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('list_alerts_by_cpcode')">
             </div>
 
             <div id="get_alert" class="each_api_action" style="display: none">
               <div class="form-group">
-                <label for="aid">alertID</label>
-                <input id="aid" type="text" class="form-control" placeholder="The ID of the alert">
+                <label for="aid">Alert Details</label>
+                <span class="help-block">Retrieves alert details for the given alertId. The alert should be active.</span>
+                <input id="aid" type="text" class="form-control" placeholder="34608 (alertId)">
               </div>
               <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('get_alerts')">
             </div>
 
             <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+              <div id="loading_spinner" style="display: none"></div>
               <span id="api_response"></span>
             </div>
 
@@ -94,25 +97,15 @@
 
   function runAPI(apitype) {
     if (apitype == "list_alerts") {
-      var endpoint = "/alerts/v1/portal-user?status=";
-      var status = $("#status").val();
-      if (status) {
-        endpoint = endpoint + status;
-        var return_response = sendAPIRequestGet(endpoint, "luna_token");
-        showResponse(endpoint, return_response);
-      } else {
-        showNotification("Please enter status");
+      var endpoint = "/alerts/v1/portal-user?status=active";
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
     }
-  }
 
     if (apitype == "list_alerts_by_cpcode") {
-      var endpoint = "/alerts/v1/portal-user?status=";
-      var status = $("#status").val();
-      endpoint = endpoint + status;
+      var endpoint = "/alerts/v1/portal-user?status=active";
       var body = $("#list_alerts_by_cpcode_body").val();
       if (IsJsonString(body)) {
         var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
-        showResponse(body, return_response);
       } else {
         showNotification("JSON is not in valid format");
       }
@@ -124,7 +117,6 @@
       if (aid) {
         endpoint = endpoint + aid;
         var return_response = sendAPIRequestGet(endpoint, "luna_token");
-        showResponse(endpoint, return_response);
       } else {
         showNotification("Please enter alertID");
     }

@@ -25,6 +25,15 @@ div > label {
   font-size: 16px;
 }
 
+/* spinner */
+#loading_spinner {
+  content: url("/img/loading.gif");
+  width: 110px;
+  display: block;
+  margin: auto;
+  margin-top: 80px;
+}
+
 /*
 .corner_space {
   background-image: url("/img/suzi2.jpg");
