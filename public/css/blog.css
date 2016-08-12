@@ -25,6 +25,15 @@ div > label {
   font-size: 16px;
 }
 
+/* input short */
+.short {
+  width: 200px !important;
+}
+/* input shorter */
+.shorter {
+  width: 100px !important;
+}
+
 /* spinner */
 #loading_spinner {
   content: url("/img/loading.gif");

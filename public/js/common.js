@@ -35,14 +35,13 @@ function loadTokenHtml() {
         jsonObj = JSON.parse(token_response);
         var api_client_type = jsonObj.apiclienttype;
         data.find("#"+api_client_type+"-label").addClass("label-success");
-        data.find("#"+api_client_type+"-base_url").html("<strong>Base URL : </strong>" + jsonObj.baseurl);
-        data.find("#"+api_client_type+"-access_token").html("<strong>Access Token : </strong>" + jsonObj.accesstoken);
-        data.find("#"+api_client_type+"-client_token").html("<strong>Client Token : </strong>" + jsonObj.clienttoken);
-        data.find("#"+api_client_type+"-secret").html("<strong>Secret : </strong>" + jsonObj.secret);
+        data.find("#"+api_client_type+"-base_url").html("<strong>Base URL: </strong>" + jsonObj.baseurl);
+        data.find("#"+api_client_type+"-access_token").html("<strong>Access Token: </strong>" + jsonObj.accesstoken);
+        data.find("#"+api_client_type+"-client_token").html("<strong>Client Token: </strong>" + jsonObj.clienttoken);
+        data.find("#"+api_client_type+"-secret").html("<strong>Secret: </strong>" + jsonObj.secret);
       }
     }
     $("#token_html").html(data);
-    $("#token_html").hide().fadeIn("slow");
   });
 }
 
