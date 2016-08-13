@@ -78,8 +78,12 @@ function sendAPIRequestGet(endpoint, tokentype) {
           xhr.setRequestHeader("Endpoint", endpoint);
 					showLoadingSpinner();
         },
-				success: function(responseTxt) {
-					showResponse(endpoint, responseTxt);
+				success: function(responseTxt, status, jxhr) {
+          if (responseTxt) {
+            showResponse(endpoint, responseTxt);
+          } else {
+            showResponse(endpoint, "It was succesful but empty response from the server.");
+          }
 				}
       }).responseText;
 
@@ -107,8 +111,12 @@ function sendAPIRequestPost(endpoint, tokentype, body) {
         showLoadingSpinner();
       },
       data: body,
-      success: function(responseTxt) {
-        showResponse(body, responseTxt);
+      success: function(responseTxt, status, jxhr) {
+        if (responseTxt) {
+          showResponse(endpoint, responseTxt);
+        } else {
+          showResponse(endpoint, "It was succesful but empty response from the server.");
+        }
       }
     }).responseText;
 
@@ -129,8 +137,12 @@ function sendAPIRequestPut(endpoint, tokentype, body) {
         showLoadingSpinner();
       },
       data: body,
-      success: function(responseTxt) {
-        showResponse(body, responseTxt);
+      success: function(responseTxt, status, jxhr) {
+        if (responseTxt) {
+          showResponse(endpoint, responseTxt);
+        } else {
+          showResponse(endpoint, "It was succesful but empty response from the server.");
+        }
       }
     }).responseText;
 
@@ -201,9 +213,13 @@ function showResponse(request, return_response) {
   } else {
     var requestContent = request;
   }
-  var returnJson = syntaxHighlight(JSON.parse(return_response));
+  if (IsJsonString(return_response)) {
+    var returnContent = syntaxHighlight(JSON.parse(return_response));
+  } else {
+    var returnContent = return_response;
+  }
   html = "<label class='actioncontentlabel'>Request</label><pre>"+requestContent+"</pre>";
-	html = html + "<label class='actioncontentlabel'>Response</label><pre>"+returnJson+"</pre>";
+	html = html + "<label class='actioncontentlabel'>Response</label><pre>"+returnContent+"</pre>";
   $("#api_response").html(html);
   $("#loading_spinner").hide();
   $("#api_response_wrapper").hide();
