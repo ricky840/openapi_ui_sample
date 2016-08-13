@@ -209,10 +209,14 @@
     showAPIActionContent('chk_contract_RG_ID');
 		$('.input-daterange input').each(function() {
 			$(this).datepicker({
-				format: "yyyy-mm",
+				format: "mm/yyyy",
 				startView: "months",
-				minViewMode: "months"
+				minViewMode: "months",
+        startDate: '-3m',
+        endDate: '+0d',
+        autoclose: true
 			});
+      $(this).datepicker('setDate', getFormattedDate(new Date()));
 		});
   });
 
