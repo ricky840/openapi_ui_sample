@@ -54,6 +54,19 @@ def makePutRequest(base_url, endpoint_url, client_token, client_secret, access_t
   return res.body
 end
 
+def makeDeleteRequest(base_url, endpoint_url, client_token, client_secret, access_token)
+	baseuri = URI(base_url)
+	http = Akamai::Edgegrid::HTTP.new(address = baseuri.host, post = baseuri.port)
+	http.setup_edgegrid(
+		client_token: client_token,
+		client_secret: client_secret,
+		access_token: access_token
+	)
+  req = Net::HTTP::Delete.new(URI.join(baseuri.to_s, endpoint_url).to_s)
+	res = http.request(req)
+  return res.body
+end
+
 get '/' do
   send_file './public/index.html'
 end
@@ -158,6 +171,18 @@ put "/run/:tokentype" do
     api_token_type = params['tokentype']
     tokens = session[api_token_type]
     result = makePutRequest(tokens[:baseurl], endpoint, tokens[:clienttoken], tokens[:secret], tokens[:accesstoken], request_body)
+    return result
+  else
+    return %Q[{"error" : "no end point URL provided"}]
+  end
+end
+
+delete "/run/:tokentype" do
+  endpoint = request.env["HTTP_ENDPOINT"].to_s
+  if not endpoint.nil?
+    api_token_type = params['tokentype']
+    tokens = session[api_token_type]
+    result = makeDeleteRequest(tokens[:baseurl], endpoint, tokens[:clienttoken], tokens[:secret], tokens[:accesstoken])
     return result
   else
     return %Q[{"error" : "no end point URL provided"}]

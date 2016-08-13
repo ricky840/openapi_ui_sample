@@ -82,7 +82,34 @@ function sendAPIRequestGet(endpoint, tokentype) {
           if (responseTxt) {
             showResponse(endpoint, responseTxt);
           } else {
-            showResponse(endpoint, "It was succesful but empty response from the server.");
+		        temp_response = '{"status":"'+status+'","msg":"Empty response body from the server."}'
+            showResponse(endpoint, temp_response);
+          }
+				}
+      }).responseText;
+
+    return result;
+  } else {
+    showNotification(tokentype + " is not uploaded. Please upload and try again.");
+    return '{ "status": "token does not exist" }';
+  }
+}
+
+function sendAPIRequestDelete(endpoint, tokentype) {
+  if (seeIfTokenUploaded(tokentype)) {
+    var result = $.ajax({
+        type: "DELETE",
+        url: "/run/" + tokentype,
+        beforeSend: function(xhr) {
+          xhr.setRequestHeader("Endpoint", endpoint);
+					showLoadingSpinner();
+        },
+				success: function(responseTxt, status, jxhr) {
+          if (responseTxt) {
+            showResponse(endpoint, responseTxt);
+          } else {
+		        temp_response = '{"status":"'+status+'","msg":"Empty response body from the server."}'
+            showResponse(endpoint, temp_response);
           }
 				}
       }).responseText;
@@ -115,7 +142,8 @@ function sendAPIRequestPost(endpoint, tokentype, body) {
         if (responseTxt) {
           showResponse(endpoint, responseTxt);
         } else {
-          showResponse(endpoint, "It was succesful but empty response from the server.");
+          temp_response = '{"status":"'+status+'","msg":"Empty response body from the server."}'
+          showResponse(endpoint, temp_response);
         }
       }
     }).responseText;
@@ -141,7 +169,8 @@ function sendAPIRequestPut(endpoint, tokentype, body) {
         if (responseTxt) {
           showResponse(endpoint, responseTxt);
         } else {
-          showResponse(endpoint, "It was succesful but empty response from the server.");
+          temp_response = '{"status":"'+status+'","msg":"Empty response body from the server."}'
+          showResponse(endpoint, temp_response);
         }
       }
     }).responseText;
