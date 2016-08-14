@@ -50,8 +50,35 @@ function loadTokenHtml() {
         data.find("#"+api_client_type+"-secret").html("<strong>Secret: </strong>" + jsonObj.secret);
       }
     }
+    /* if luna_token uploaded update and show account info as well */
+    if (seeIfTokenUploaded('luna_token')) {
+      var account_info = getAccountInfoFromServer();
+      account_info = JSON.parse(account_info);
+      data.find("#account_name").html(account_info.accountName);
+      data.find("#account_id").html(account_info.accountId);
+      contracts = account_info.contracts;
+      if (contracts.constructor === Array) {
+        data.find("#account_info-label").addClass("label-success");
+        for (var i in contracts) {
+          var contractId = contracts[i].contractId;
+          var contractName = contracts[i].contractName;
+          htmltags = "<span>"+contractId+":"+" "+contractName+"</span><br>";
+          data.find("#contracts").append(htmltags);
+        }
+      } else {
+        data.find("#contracts").html(account_info.contracts);
+      }
+      data.find("#account_info").show(); //only show when luna_token is uploaded.
+    }
+
     $("#token_html").html(data);
   });
+}
+
+function getAccountInfoFromServer() {
+  var url = "/getaccountinfo";
+  var msg = $.ajax({type: "GET", url: url, async: false}).responseText;
+  return msg;
 }
 
 function getTokenFromServer(api_client_type) {

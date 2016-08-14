@@ -25,25 +25,8 @@
             <div class="panel-body">
               <div class="form-group">
                 <label for="upload_file">File input</label>
-                <input type="file" id="upload_file" name="ccu_token" data-toggle="modal" data-target="#upload_modal">
+                <input type="file" id="upload_file" name="ccu_token">
                 <p class="help-block">Example block-level help text here.</p>
-              </div>
-              <!-- Modal -->
-              <div id="upload_modal" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-                  <!-- Modal content-->
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h4 id="upload_title" class="modal-title">OPEN API Credential Upload</h4>
-                    </div>
-                    <div id="upload_modal_body" class="modal-body">
-                      <p>Select your credential file downloaded from LUNA</p>
-                    </div>
-                    <div class="modal-footer">
-                      <button id="close_upload_result" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div> <!-- panel body -->
           </div>
@@ -56,25 +39,8 @@
             <div class="panel-body">
               <div class="form-group">
                 <label for="upload_file">File input</label>
-                <input type="file" id="upload_file" name="luna_token" data-toggle="modal" data-target="#upload_modal">
+                <input type="file" id="upload_file" name="luna_token">
                 <p class="help-block">Example block-level help text here.</p>
-              </div>
-              <!-- Modal -->
-              <div id="upload_modal" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-                  <!-- Modal content-->
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h4 id="upload_title" class="modal-title">OPEN API Credential Upload</h4>
-                    </div>
-                    <div id="upload_modal_body" class="modal-body">
-                      <p>Select your credential file downloaded from LUNA</p>
-                    </div>
-                    <div class="modal-footer">
-                      <button id="close_upload_result" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -87,25 +53,8 @@
             <div class="panel-body">
               <div class="form-group">
                 <label for="upload_file">File input</label>
-                <input type="file" id="upload_file" name="dns_token" data-toggle="modal" data-target="#upload_modal">
+                <input type="file" id="upload_file" name="dns_token">
                 <p class="help-block">Example block-level help text here.</p>
-              </div>
-              <!-- Modal -->
-              <div id="upload_modal" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-                  <!-- Modal content-->
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h4 id="upload_title" class="modal-title">OPEN API Credential Upload</h4>
-                    </div>
-                    <div id="upload_modal_body" class="modal-body">
-                      <p>Select your credential file downloaded from LUNA</p>
-                    </div>
-                    <div class="modal-footer">
-                      <button id="close_upload_result" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -121,23 +70,6 @@
                 <input type="file" id="upload_file" name="csi_token" data-toggle="modal" data-target="#upload_modal">
                 <p class="help-block">Example block-level help text here.</p>
               </div>
-              <!-- Modal -->
-              <div id="upload_modal" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-                  <!-- Modal content-->
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h4 id="upload_title" class="modal-title">OPEN API Credential Upload</h4>
-                    </div>
-                    <div id="upload_modal_body" class="modal-body">
-                      <p>Select your credential file downloaded from LUNA</p>
-                    </div>
-                    <div class="modal-footer">
-                      <button id="close_upload_result" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
 
@@ -149,25 +81,8 @@
             <div class="panel-body">
               <div class="form-group">
                 <label for="upload_file">File input</label>
-                <input type="file" id="upload_file" name="img_token" data-toggle="modal" data-target="#upload_modal">
+                <input type="file" id="upload_file" name="img_token">
                 <p class="help-block">Example block-level help text here.</p>
-              </div>
-              <!-- Modal -->
-              <div id="upload_modal" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-                  <!-- Modal content-->
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h4 id="upload_title" class="modal-title">OPEN API Credential Upload</h4>
-                    </div>
-                    <div id="upload_modal_body" class="modal-body">
-                      <p>Select your credential file downloaded from LUNA</p>
-                    </div>
-                    <div class="modal-footer">
-                      <button id="close_upload_result" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -185,15 +100,54 @@
 
 </div> <!-- container -->
 
+<!-- Modal -->
+<div id="upload_modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="upload_title" class="modal-title">{OPENAPI} Credential Upload</h4>
+      </div>
+      <div id="upload_modal_body" class="modal-body" style="text-align: center">
+        <div id="loading_img"><img src="/img/loading.gif"><p>Please wait</p></div>
+        <div id="loading_complete" style="display: none"></div>
+      </div>
+      <div class="modal-footer">
+        <button id="close_upload_result" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
   $(document).ready(function() {
     loadTokenHtml();
   });
 
   $(":file").change(function(){
+    $("#loading_img").show();
+    $("#upload_modal").modal('toggle');
     api_client_type = this.name;
     uploadFile(this.files[0], api_client_type);
   });
+
+  $(":file").click(function(){
+    $("#loading_complete").hide();
+  });
+
+  function updateModal(status, data) {
+    $("#loading_img").hide();
+    if (status == "success") {
+			jsonObj = JSON.parse(data);
+      if (jsonObj.result == "success") {
+        $("#loading_complete").html("<p>The file has been uploaded successfully.</p>").show();
+      } else {
+        $("#loading_complete").html("<p>Upload failed. Try again</p><p>"+data+"</p>").show();
+      }
+    } else {
+      $("#loading_complete").html("<p>Upload failed. Try again.</p><p>"+data+"</p>").show();
+    }
+  }
 
   function uploadFile(file, api_client_type) {
     var form = new FormData();
@@ -206,7 +160,16 @@
       contentType: false,
       processData: false,
       type: 'POST',
-      success: function(data) { loadTokenHtml(); }
+      success: function(data, status, xhr) {
+        updateModal(status, data);
+        loadTokenHtml();
+      },
+      error: function(xhr, status, error) {
+        updateModal(status, error);
+        loadTokenHtml();
+      }
     });
   }
 </script>
+
+

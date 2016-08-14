@@ -1,5 +1,68 @@
 enable :sessions
 
+def getAccountInfo()
+  tokens = session['luna_token']
+  result = Hash.new
+
+  #get contract ids and account id/name
+  endpoint_acct = "/papi/v0/groups/"
+  endpoint_cont = "/papi/v0/contracts/"
+  result_acct = makeGetRequest(tokens[:baseurl], endpoint_acct, tokens[:clienttoken], tokens[:secret], tokens[:accesstoken])
+  result_cont = makeGetRequest(tokens[:baseurl], endpoint_cont, tokens[:clienttoken], tokens[:secret], tokens[:accesstoken])
+
+  begin
+    jsonObj_acct = JSON.parse(result_acct)
+    jsonObj_cont = JSON.parse(result_cont)
+
+    account_id = jsonObj_acct["accountId"]
+    account_name = jsonObj_acct["accountName"]
+    contracts = jsonObj_cont["contracts"]
+
+    result["account_id"] = account_id.nil? ? "Please allow access to PAPI" : account_id.split("_").last
+    result["account_name"] = account_name.nil? ? "Please allow access to PAPI" : account_name
+
+    if not contracts.nil?
+      arr_contracts = Array.new
+      contracts["items"].each do |each_contract|
+        contract_id = each_contract["contractId"].split("_").last
+        arr_contracts.push({"contractId" => contract_id})
+      end
+      result["contracts"] = arr_contracts
+    else
+      result["contracts"] = "Please allow access to PAPI"
+    end
+  rescue JSON::ParserError => e
+    result["account_id"] = "Please allow access to PAPI"
+    result["account_name"] = "Please allow access to PAPI"
+    result["contracts"] = "Please allow access to PAPI"
+  end
+
+  #get contract name. only run when there was contracts
+  if result["contracts"].class == Array
+    endpoint_cont_name = "/billing-usage/v1/reportSources"
+    result_cont_name = makeGetRequest(tokens[:baseurl], endpoint_cont_name, tokens[:clienttoken], tokens[:secret], tokens[:accesstoken])
+    begin
+      jsonObj_cont_name = JSON.parse(result_cont_name)
+      if jsonObj_cont_name["status"] == "ok" and not jsonObj_cont_name["contents"].nil?
+        contents = jsonObj_cont_name["contents"]
+        contents.each do |each_content|
+          result["contracts"].each do |each_contract|
+            if each_contract["contractId"] == each_content["id"] then each_contract["contractName"] = each_content["name"] end
+          end
+        end
+      else
+        raise JSON::ParserError
+      end
+    rescue JSON::ParserError => e
+      result["contracts"].each do |each_contract|
+        each_contract["contractName"] = "Please allow access to Billing Center API v1"
+      end
+    end
+  end
+  $stderr.puts result.inspect
+  return result
+end
+
 def makeGetRequest(base_url, endpoint_url, client_token, client_secret, access_token)
 	baseuri = URI(base_url)
 	http = Akamai::Edgegrid::HTTP.new(address = baseuri.host, post = baseuri.port)
@@ -109,6 +172,15 @@ post "/upload" do
       :secret => apitokens[:secret],
       :apiclienttype => apitokens[:apiclienttype]
     }
+    #if it is luna_token get account informations
+    if api_client_type == "luna_token"
+      account_info = getAccountInfo
+      session[api_client_type][:account_id] = account_info["account_id"]
+      session[api_client_type][:account_name] = account_info["account_name"]
+      session[api_client_type][:contracts] = account_info["contracts"]
+    end
+
+    apitokens[:result] = "success"
     return apitokens.to_json.to_s
   else
     return { :result => "Parse Error" }.to_json.to_s
@@ -195,6 +267,18 @@ get "/gettoken/:tokentype" do
   return tokens.to_json.to_s
 end
 
+get "/getaccountinfo" do
+  session_hash = session["luna_token"]
+  if session_hash.nil?
+    return %Q[{"error" : "Please upload LUNA token"}]
+  else
+    temp = Hash.new
+    temp[:accountId] = session_hash[:account_id]
+    temp[:accountName] = session_hash[:account_name]
+    temp[:contracts] = session_hash[:contracts]
+    return temp.to_json.to_s
+  end
+end
 
 
 
