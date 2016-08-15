@@ -1,0 +1,25 @@
+<div class="form-group">
+  <label for="">Akamai Translator</label>
+  <span id="helpBlock" class="help-block">Retrieve information about an Akamaized URL.</span>
+</div>
+
+<div class="form-group">
+  <label for="hostname2">Hostname</label>
+  <span id="helpBlock" class="help-block">Hostname for which to retrieve ARL information. Example: host.example.com.</span>
+  <input id="hostname2" type="text" class="form-control" placeholder="host.example.com">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/diagnostic-tools/v1/akamaitranslator?hostname=";
+    var hostname = $("#hostname2").val();
+    if (hostname) {
+      endpoint = endpoint + hostname;
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter hostname");
+    }
+  }
+</script>

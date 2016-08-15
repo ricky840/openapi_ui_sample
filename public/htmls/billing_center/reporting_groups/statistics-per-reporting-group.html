@@ -1,0 +1,59 @@
+<div class="form-group">
+  <label for="spr_reporting_group_id">List Statistics per Reporting Group</label>
+  <span id="helpBlock" class="help-block">Optionally run this operation if there’s only one type of information you want to include in a reporting group’s usage report, rather than the complete set. Availability of reportable statistics may depend on the term of the contract, hence the need to specify them for a range of time.</span>
+</div>
+
+<div class="form-group">
+  <label for="spr_reporting_group_id">Reporting Group ID</label>
+  <span id="helpBlock" class="help-block">Identifies the unique reporting group.</span>
+  <input id="spr_reporting_group_id" type="text" class="form-control" placeholder="86844">
+</div>
+
+<div class="form-group">
+  <label for="spr_product_id">Product ID</label>
+  <span id="helpBlock" class="help-block">Identifies the contract under which data is aggregated.</span>
+  <input id="spr_product_id" type="text" class="form-control" placeholder="B-3-1WYBV">
+</div>
+
+<div class="form-group">
+  <label for="">Date Range</label>
+  <span id="helpBlock" class="help-block">The date range of aggregated data.</span>
+  <div class="input-group input-daterange short">
+    <input type="text" class="form-control spr start" value="2016-01">
+    <span class="input-group-addon">to</span>
+    <input type="text" class="form-control spr end" value="2016-07">
+  </div>
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  $('.input-daterange input').each(function() {
+    $(this).datepicker({
+      format: "mm/yyyy",
+      startView: "months",
+      minViewMode: "months",
+      startDate: '-3m',
+      endDate: '+0d',
+      autoclose: true
+    });
+    $(this).datepicker('setDate', getFormattedDate(new Date()));
+  });
+
+  function runAPI() {
+    var endpoint = "/billing-center-api/v2/reporting-groups/";
+    var rgid = $("#spr_reporting_group_id").val();
+    var pid = $("#spr_product_id").val();
+    if (rgid && pid) {
+      var startYear = $('.input-daterange .spr.start').datepicker('getDate').getFullYear();
+      var startMonth = $('.input-daterange .spr.start').datepicker('getDate').getMonth() + 1;
+      var toYear = $('.input-daterange .spr.end').datepicker('getDate').getFullYear();
+      var toMonth = $('.input-daterange .spr.end').datepicker('getDate').getMonth() + 1;
+      var endpoint = "/billing-center-api/v2/reporting-groups/"+rgid+"/products/"+pid+"/statistics";
+      endpoint += "?fromYear="+startYear+"&fromMonth="+startMonth+"&toYear="+toYear+"&toMonth="+toMonth;
+      sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter Reporting Group/Product ID");
+    }
+  }
+</script>

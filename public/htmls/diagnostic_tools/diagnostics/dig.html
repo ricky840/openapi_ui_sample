@@ -1,0 +1,46 @@
+<div class="form-group">
+  <label for="">Run dig</label>
+  <span id="helpBlock" class="help-block">Run dig from the Akamai network to get a view of DNS information not local to you.</span>
+</div>
+
+<div class="form-group">
+  <label for="hostname">Hostname</label>
+  <span id="helpBlock" class="help-block">The domain name you want to get information about. Example: developer.akamai.com.</span>
+  <input id="hostname" type="text" class="form-control" placeholder="developer.akamai.com">
+</div>
+
+<div class="form-group">
+  <label for="queryType">Select Query Type</label>
+  <span id="helpBlock" class="help-block">Query type for the dig</span>
+    <select class="form-control" id="queryType">
+      <option value="A">A</option>
+      <option value="AAAA">AAAA</option>
+      <option value="PTR">PTR</option>
+      <option value="SOA">SOA</option>
+      <option value="MX">MX</option>
+      <option value="CNAME">CNAME</option>
+    </select>
+</div>
+
+<div class="form-group">
+  <label for="location">Location</label>
+  <span id="helpBlock" class="help-block">Location of Akamai server from which you want to run dig. You can find servers using GET /diagnostic-tools/v1/locations.</span>
+  <input id="location" type="text" class="form-control" placeholder="Boston, United States">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/diagnostic-tools/v1/dig?hostname=";
+    var hostname = $("#hostname").val();
+    var queryType = $("#queryType").val();
+    var location = $("#location").val();
+    if (hostname) {
+      endpoint = endpoint + hostname + "&queryType=" + queryType + "&location=" + encodeURI(location);
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter Hostname and Location");
+    }
+  }
+</script>

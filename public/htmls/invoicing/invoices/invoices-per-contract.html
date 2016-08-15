@@ -1,0 +1,50 @@
+<div class="form-group">
+  <label for="">List Contract's Invoices</label>
+  <span class="help-block">For a given contract, this lists available invoices for a specific month</span>
+</div>
+
+<div class="form-group">
+  <label for="">Contract ID</label>
+  <span class="help-block">Identifies the contract under which data is aggregated.</span>
+  <input id="inpcon_contract_id" type="text" class="form-control" placeholder="C-1BBSI2U (Contract ID)">
+</div>
+
+<div class="form-group">
+  <label for="">Invoice Date</label>
+  <span class="help-block">The year/month for which data is aggregated.</span>
+  <div class="input-group date short">
+    <input type="text" class="form-control inpcon" value="">
+    <div class="input-group-addon">
+      <span class="glyphicon glyphicon-th"></span>
+    </div>
+  </div>
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  $('.input-group.date input').each(function() {
+    $(this).datepicker({
+      format: "mm/yyyy",
+      startView: "months",
+      minViewMode: "months",
+      endDate: '+0d',
+      autoclose: true
+    });
+    $(this).datepicker('setDate', getFormattedDate(new Date()));
+  });
+
+  function runAPI() {
+    var cid = $("#inpcon_contract_id").val();
+    var selected_date = $('.input-group.date .inpcon').datepicker('getDate');
+    if (cid && selected_date) {
+      var year = selected_date.getFullYear();
+      var month = selected_date.getMonth() + 1;
+      var endpoint = "/invoicing-api/v2/contracts/"+cid+"/invoices?";
+      endpoint += "year="+year+"&month="+month;
+      sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Some of the required fields are missing. Please enter.");
+    }
+  }
+</script>

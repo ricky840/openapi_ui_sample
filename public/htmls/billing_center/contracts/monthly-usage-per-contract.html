@@ -1,0 +1,77 @@
+<div class="form-group">
+  <label for="">List Usage per Contract</label>
+  <span id="helpBlock" class="help-block">This lists a period of usage for en entire contract. See List Reporting Group’s Usage to report on related subsets of usage.</span>
+</div>
+
+<div class="form-group">
+  <label for="">Contract ID</label>
+  <span id="helpBlock" class="help-block">Identifies the contract under which data is aggregated.</span>
+  <input id="mupc_contract_id" type="text" class="form-control" placeholder="Contract ID">
+</div>
+
+<div class="form-group">
+  <label for="">Product ID</label>
+  <span id="helpBlock" class="help-block">Identifies the contract under which data is aggregated.</span>
+  <input id="mupc_product_id" type="text" class="form-control" placeholder="Product ID">
+</div>
+
+<div class="form-group">
+  <label for="">Date Range</label>
+  <span id="helpBlock" class="help-block">The date range of aggregated data.</span>
+  <div class="input-group input-daterange short">
+    <input type="text" class="form-control mupc start" value="2016-01">
+    <span class="input-group-addon">to</span>
+    <input type="text" class="form-control mupc end" value="2016-07">
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="">Statistic Unit</label>
+  <span id="helpBlock" class="help-block">Reports on a specific statistic, otherwise reports all statistics by default.</span>
+  <span id="helpBlock" class="help-block">Example: Total MB, 95/5 Mbps</span>
+  <input id="statisticName" type="text" class="form-control short" placeholder="Total MB">
+</div>
+
+<div class="form-group">
+  <label for="">Billing Day Only</label>
+  <span id="helpBlock" class="help-block">Aggregates cumulative data as of the end of the billing period, typically the end of the month, otherwise the day the contract's term expires. Supplementary data may be available when contracts are extended within a given month.</span>
+  <select class="form-control short" id="billingDayOnly">
+    <option value="true">true</option>
+    <option value="false">false</option>
+  </select>
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  $('.input-daterange input').each(function() {
+    $(this).datepicker({
+      format: "mm/yyyy",
+      startView: "months",
+      minViewMode: "months",
+      startDate: '-3m',
+      endDate: '+0d',
+      autoclose: true
+    });
+    $(this).datepicker('setDate', getFormattedDate(new Date()));
+  });
+
+  function runAPI() {
+    var cid = $("#mupc_contract_id").val();
+    var pid = $("#mupc_product_id").val();
+    if (cid && pid) {
+      var startYear = $('.input-daterange .mupc.start').datepicker('getDate').getFullYear();
+      var startMonth = $('.input-daterange .mupc.start').datepicker('getDate').getMonth() + 1;
+      var toYear = $('.input-daterange .mupc.end').datepicker('getDate').getFullYear();
+      var toMonth = $('.input-daterange .mupc.end').datepicker('getDate').getMonth() + 1;
+      var statName = encodeURI($('#statisticName').val());
+      var billingday = $('#billingDayOnly').val();
+      var endpoint = "/billing-center-api/v2/contracts/"+cid+"/products/"+pid+"/measures";
+      endpoint += "?fromYear="+startYear+"&fromMonth="+startMonth+"&toYear="+toYear+"&toMonth="+toMonth;
+      endpoint += "&statisticName="+statName+"&billingDayOnly="+billingday;
+      sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Some of the required fields are missing. Please enter.");
+    }
+  }
+</script>

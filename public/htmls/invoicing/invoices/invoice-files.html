@@ -1,0 +1,31 @@
+<div class="form-group">
+  <label for="">List Contract's Invoice Files</label>
+  <span class="help-block">For a given contract’s invoice, this lists available files, which often represent the same invoice data in different formats.</span>
+</div>
+
+<div class="form-group">
+  <label for="">Contract ID</label>
+  <span class="help-block">Identifies the contract under which data is aggregated.</span>
+  <input id="infiles_contract_id" type="text" class="form-control" placeholder="C-1BBSI2U (Contract ID)">
+</div>
+
+<div class="form-group">
+  <label for="">Invoice Number</label>
+  <span class="help-block">Ientifies each unique invoice.</span>
+  <input id="infiles_invoice_num" type="text" class="form-control" placeholder="16564000726 (Invoice Number)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var cid = $("#infiles_contract_id").val();
+    var invoice_num = $("#infiles_invoice_num").val();
+    if (cid && invoice_num) {
+      var endpoint = "/invoicing-api/v2/contracts/"+cid+"/invoices/"+invoice_num+"/files";
+      sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Some of the required fields are missing. Please enter.");
+    }
+  }
+</script>

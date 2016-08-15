@@ -1,0 +1,62 @@
+<div class="form-group">
+  <label for="">Data</label>
+  <span class="help-block">Retrieves the data for Object Delivery according to the given parameters.</span>
+</div>
+
+<div class="form-group">
+  <label for="">Date Range</label>
+  <span id="helpBlock" class="help-block">The date range of aggregated data. You can only choose one month of period.</span>
+  <div class="input-group input-daterange">
+    <input type="text" class="form-control od start" value="">
+    <span class="input-group-addon">to</span>
+    <input type="text" class="form-control od end" value="">
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="">Dimensions</label>
+  <span class="help-block">The IDs of required dimensions. (Comma separated numbers)</span>
+  <input id="od_dimention_ids" type="text" class="form-control" placeholder="1 (Time)">
+</div>
+
+<div class="form-group">
+  <label for="">Metrics</label>
+  <span class="help-block">The IDs of required metrics. (Comma separated numbers)</span>
+  <input id="od_metric_ids" type="text" class="form-control" placeholder="44 (Edge Volume)">
+</div>
+
+<div class="form-group">
+  <label for="">Cpcodes</label>
+  <span class="help-block">The cpcodes for which the data is required. (Comma separated cpcodes)</span>
+  <input id="od_cpcodes" type="text" class="form-control" placeholder="400439">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  $('.input-daterange input').each(function() {
+    $(this).datepicker({
+      startDate: '-1m',
+      endDate: '+0d',
+      autoclose: true
+    });
+    $(this).datepicker('setDate', getFormattedDate(new Date()));
+  });
+
+function runAPI() {
+  var dids = $("#od_dimention_ids").val();
+  var mids = $("#od_metric_ids").val();
+  var cpcodes = $("#od_cpcodes").val();
+  var start_date = getFormattedDate($('.input-daterange .od.start').datepicker('getDate'));
+  var end_date = getFormattedDate($('.input-daterange .od.end').datepicker('getDate'));
+  if (dids && mids && cpcodes && start_date && end_date) {
+    var endpoint = "/media-reports/v1/object-delivery/data?";
+    query = "startDate="+start_date+"&endDate="+end_date+"&dimensions="+dids;
+    query += "&metrics="+mids+"&cpcodes="+cpcodes;
+    endpoint += encodeURI(query);
+    sendAPIRequestGet(endpoint, "luna_token");
+  } else {
+    showNotification("Some of the required fields are missing. Please enter.");
+  }
+}
+</script>

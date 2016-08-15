@@ -1,0 +1,16 @@
+<fieldset disabled>
+  <div class="form-group">
+    <label for="status">List Alerts</label>
+    <span class="help-block">Retrieves active alerts for a logged-in Luna user. Status must be "active"</span>
+    <input id="status" type="text" class="form-control" placeholder="/alerts/v1/portal-user?status=active">
+  </div>
+</fieldset>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI(apitype) {
+    var endpoint = "/alerts/v1/portal-user?status=active";
+    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+  }
+</script>

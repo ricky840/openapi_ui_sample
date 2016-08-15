@@ -1,0 +1,37 @@
+<div class="form-group">
+  <label for="">Create a Notification</label>
+  <span class="help-block">This creates a new notification informing a set of users about invoices for a set of contracts. Each notification must specify a unique set of contracts.</span>
+  <div id="textarea_wrapper" class="form-group has-feedback">
+    <textarea id="noti_create_request_body" class="form-control" rows="15" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'noti_create_request_body')"></textarea>
+  </div>
+  <input class="btn btn-success" type="button" value="Validate JSON" onclick="validateJsonTextarea('textarea_wrapper', 'noti_create_request_body')">
+</div>
+
+<div class="form-group">
+  <label for="">Account ID</label>
+  <span class="help-block">Identifies the account under which data is aggregated.</span>
+  <input id="noti_create_account_id" type="text" class="form-control" placeholder="B-C-1BBSI2F (Account ID)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  var placeholder = '{"title":"Billing Center Invoice Notification","status":"ACTIVE","emails":["user@example.com"],"contractIds":["C-1BBSI2U"]}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#noti_create_request_body").val(placeholder);
+
+  function runAPI() {
+    var aid = $("#noti_create_account_id").val();
+    var body = $("#noti_create_request_body").val();
+    if (IsJsonString(body)) {
+      if (aid) {
+        var endpoint = "/invoicing-api/v2/accounts/"+aid+"/notifications";
+        var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
+      } else {
+        showNotification("Please enter account ID");
+      }
+    } else {
+      showNotification("JSON is not in valid format");
+    }
+  }
+</script>

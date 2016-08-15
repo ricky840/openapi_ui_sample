@@ -1,0 +1,53 @@
+<div class="form-group">
+  <label for="">Download Geobilling Files</label>
+  <span class="help-block">This provides details on invoicing for each geographic zone within the Akamai network.</span>
+</div>
+
+<div class="form-group">
+  <label for="">Contract ID</label>
+  <span class="help-block">Identifies the contract under which data is aggregated.</span>
+  <input id="geobfdwn_contract_id" type="text" class="form-control" placeholder="C-1BBSI2U (Contract ID)">
+</div>
+
+<div class="form-group">
+  <label for="">Product ID</label>
+  <span class="help-block">Identifies the product under which data is aggregated.</span>
+  <input id="geobfdwn_product_id" type="text" class="form-control" placeholder="M-LC-122937 (Product ID)">
+</div>
+
+<div class="form-group">
+  <label for="">Date</label>
+  <span class="help-block">The date for which data is aggregated.</span>
+  <div class="input-group dateday short">
+    <input type="text" class="form-control geobfdwn" value="">
+    <div class="input-group-addon">
+      <span class="glyphicon glyphicon-th"></span>
+    </div>
+  </div>
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  $('.input-group.dateday input').datepicker({
+    endDate: '+0d',
+    autoclose: true
+  });
+  $('.input-group.dateday input').datepicker('setDate', getFormattedDate(new Date()));
+
+  function runAPI() {
+    var cid = $("#geobfdwn_contract_id").val();
+    var pid = $("#geobfdwn_product_id").val();
+    var selected_date = $('.input-group.dateday .geobfdwn').datepicker('getDate');
+    if (cid && pid && selected_date) {
+      var year = selected_date.getFullYear();
+      var month = selected_date.getMonth() + 1;
+      var day = selected_date.getDate();
+      var endpoint = "/invoicing-api/v2/contracts/"+cid+"/products/"+pid+"/geo-billing-files";
+      endpoint += "?year="+year+"&month="+month+"&day="+day;
+      sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Some of the required fields are missing. Please enter.");
+    }
+  }
+</script>

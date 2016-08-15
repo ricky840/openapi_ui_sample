@@ -1,0 +1,15 @@
+<fieldset disabled>
+  <div class="form-group">
+    <label for="">Metrics</label>
+    <span class="help-block">Retrieves all the metrics available for Adaptive Media Delivery.</span>
+    <input id="locations" type="text" class="form-control" placeholder="/media-reports/v1/adaptive-media-delivery/metrics">
+  </div>
+</fieldset>
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+function runAPI() {
+  var endpoint = "/media-reports/v1/adaptive-media-delivery/metrics";
+  sendAPIRequestGet(endpoint, "luna_token");
+}
+</script>

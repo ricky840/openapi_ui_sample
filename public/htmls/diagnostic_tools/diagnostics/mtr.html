@@ -1,0 +1,33 @@
+<div class="form-group">
+  <label for="">Run mtr</label>
+  <span id="helpBlock" class="help-block">Run mtr from the Akamai network to a hostname.</span>
+</div>
+
+<div class="form-group">
+  <label for="">Destination Domain</label>
+  <span id="helpBlock" class="help-block">The domain name you want to get information about. Example: developer.akamai.com.</span>
+  <input id="destinationDomain" type="text" class="form-control" placeholder="developer.akamai.com">
+</div>
+
+<div class="form-group">
+  <label for="location">Location</label>
+  <span id="helpBlock" class="help-block">Location of Akamai server from which you want to run mtr. You can find servers using GET /diagnostic-tools/v1/locations.</span>
+  <input id="mtr_location" type="text" class="form-control" placeholder="Boston, United States">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/diagnostic-tools/v1/mtr?destinationDomain=";
+    var destinationDomain = $("#destinationDomain").val();
+    var location = $("#mtr_location").val();
+    if (destinationDomain && location) {
+      endpoint = endpoint + destinationDomain;
+      endpoint += "&location="+encodeURI(location);
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter Destination Domain and Location");
+    }
+  }
+</script>

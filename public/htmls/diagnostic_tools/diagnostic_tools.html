@@ -1,0 +1,65 @@
+<div class="container_fuild">
+  <div class="row"> <!-- main row -->
+
+    <!-- API section -->
+    <div class="col-md-7">
+
+			<!-- API title goes here -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="corner_space"></div>
+				</div>
+        <div class="col-md-9">
+          <h2>Diagnostic Tools API</h2>
+          <p>The Diagnostic Tools API offers programmatic access to a subset of Akamai’s diagnostic toolset available in Luna Control Center. With these tools you can self-diagnose and solve many common problems Akamai customers experience.</p>
+          <p>The Diagnostic Tools API responds to requests with standard HTTP status codes. When there’s a validation failure or when a resource fails to process your request, the API returns error messages in the HTTP Problem JSON format.</p>
+					<hr>
+				</div>
+			</div>
+
+      <!-- API content main body -->
+      <div class="row">
+
+        <!-- left menu -->
+        <div class="col-md-3">
+          <ul class="nav nav-pills nav-stacked">
+            <li><h5>Diagnostics</h5></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/diagnostic_tools/diagnostics/locations.html')"><a href="#">Locations</a></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/diagnostic_tools/diagnostics/dig.html')"><a href="#">dig</a></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/diagnostic_tools/diagnostics/mtr.html')"><a href="#">mtr</a></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/diagnostic_tools/diagnostics/akamai-translator.html')"><a href="#">Akamai Translator</a></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/diagnostic_tools/diagnostics/error-translator.html')"><a href="#">Error Translator</a></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/diagnostic_tools/diagnostics/ip-geolocator.html')"><a href="#">IP Geolocator</a></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/diagnostic_tools/diagnostics/verify-cdn-ip.html')"><a href="#">Verify CDN IP</a></li>
+          </ul>
+        </div>
+
+        <!-- API action content -->
+        <div class="col-md-9">
+					<!-- API action content goes here -->
+          <div id="api_action_body_wrapper"></div>
+          <!-- response -->
+          <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+            <div id="loading_spinner" style="display: none"></div>
+            <span id="api_response"></span>
+          </div>
+        </div> <!-- API action content end -->
+      </div> <!-- API content main body end -->
+
+    </div> <!-- API section end -->
+
+    <!-- Toke HTML column -->
+    <div class="col-md-4 col-sm-offset-1">
+      <div id="token_html"></div>
+    </div>
+
+  </div> <!-- end of main row -->
+</div> <!-- container -->
+
+<div id="footer_html"></div>
+
+<script>
+  $(document).ready(function() {
+    loadTokenHtml();
+  });
+</script>

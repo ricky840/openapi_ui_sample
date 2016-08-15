@@ -1,0 +1,77 @@
+<div class="form-group">
+  <label for="mpr_reporting_group_id">List Usage per Reporting Group</label>
+  <span id="helpBlock" class="help-block">Reporting groups collect sets of CP codes under a contract, allowing you to track billing for related types of traffic rather than for the entire contract.</span>
+</div>
+
+<div class="form-group">
+  <label for="mpr_reporting_group_id">Reporting Group ID</label>
+  <span id="helpBlock" class="help-block">Identifies the unique reporting group.</span>
+  <input id="mpr_reporting_group_id" type="text" class="form-control" placeholder="19144">
+</div>
+
+<div class="form-group">
+  <label for="mpr_product_id">Product ID</label>
+  <span id="helpBlock" class="help-block">Identifies the contract under which data is aggregated.</span>
+  <input id="mpr_product_id" type="text" class="form-control" placeholder="B-3-1WYBV">
+</div>
+
+<div class="form-group">
+  <label for="">Date Range</label>
+  <span id="helpBlock" class="help-block">The date range of aggregated data.</span>
+  <div class="input-group input-daterange short">
+    <input type="text" class="form-control mpr start" value="2016-01">
+    <span class="input-group-addon">to</span>
+    <input type="text" class="form-control mpr end" value="2016-07">
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="mpr_statisticName">Statistic Unit</label>
+  <span id="helpBlock" class="help-block">Reports on a specific statistic, otherwise reports all statistics by default.</span>
+  <span id="helpBlock" class="help-block">Example: Total MB, 95/5 Mbps</span>
+  <input id="mpr_statisticName" type="text" class="form-control" placeholder="Total MB">
+</div>
+
+<div class="form-group">
+  <label for="">Billing Day Only</label>
+  <span id="helpBlock" class="help-block">Aggregates cumulative data as of the end of the billing period, typically the end of the month, otherwise the day the contract's term expires. Supplementary data may be available when contracts are extended within a given month.</span>
+  <select class="form-control short" id="mpr_billingDayOnly">
+    <option value="true">true</option>
+    <option value="false">false</option>
+  </select>
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  $('.input-daterange input').each(function() {
+    $(this).datepicker({
+      format: "mm/yyyy",
+      startView: "months",
+      minViewMode: "months",
+      startDate: '-3m',
+      endDate: '+0d',
+      autoclose: true
+    });
+    $(this).datepicker('setDate', getFormattedDate(new Date()));
+  });
+
+  function runAPI() {
+    var rid = $("#mpr_reporting_group_id").val();
+    var pid = $("#mpr_product_id").val();
+    if (rid && pid) {
+      var startYear = $('.input-daterange .mpr.start').datepicker('getDate').getFullYear();
+      var startMonth = $('.input-daterange .mpr.start').datepicker('getDate').getMonth() + 1;
+      var toYear = $('.input-daterange .mpr.end').datepicker('getDate').getFullYear();
+      var toMonth = $('.input-daterange .mpr.end').datepicker('getDate').getMonth() + 1;
+      var statName = encodeURI($('#mpr_statisticName').val());
+      var billingday = $('#mpr_billingDayOnly').val();
+      var endpoint = "/billing-center-api/v2/reporting-groups/"+rid+"/products/"+pid+"/measures";
+      endpoint += "?fromYear="+startYear+"&fromMonth="+startMonth+"&toYear="+toYear+"&toMonth="+toMonth;
+      endpoint += "&statisticName="+statName+"&billingDayOnly="+billingday;
+      sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Some of the required fields are missing. Please enter.");
+    }
+  }
+</script>

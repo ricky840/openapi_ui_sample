@@ -1,0 +1,68 @@
+<div class="container_fuild">
+  <div class="row"> <!-- main row -->
+
+    <!-- API section -->
+    <div class="col-md-7">
+
+			<!-- API title goes here -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="corner_space"></div>
+				</div>
+        <div class="col-md-9">
+          <h2>The Invoicing API</h2>
+          <p>This API allows you to access your Akamai invoices.</p>
+					<hr>
+				</div>
+			</div>
+
+      <!-- API content main body -->
+      <div class="row">
+
+        <!-- left menu -->
+        <div class="col-md-3">
+          <ul class="nav nav-pills nav-stacked">
+            <li><h5>Invoices</h5></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/invoicing/invoices/invoices-per-account.html')"><a href="#">Invoices per Account</a></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/invoicing/invoices/invoices-per-contract.html')"><a href="#">Invoices per Contract</a></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/invoicing/invoices/invoice-files.html')"><a href="#">Invoice Files</a></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/invoicing/invoices/invoice-file-download.html')"><a href="#">Invoice File Download</a></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/invoicing/invoices/geobilling-file-download.html')"><a href="#">Geobilling File Download</a></li>
+            <li><h5>Notifications</h5></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/invoicing/notifications/list-notifications.html')"><a href="#">List Notifications</a></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/invoicing/notifications/create-a-notification.html')"><a href="#">Create a Notification</a></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/invoicing/notifications/get-a-notification.html')"><a href="#">Get a Notification</a></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/invoicing/notifications/modify-a-notification.html')"><a href="#">Modify a Notification</a></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/invoicing/notifications/remove-a-notification.html')"><a href="#">Remove a Notification</a></li>
+          </ul>
+        </div>
+
+        <!-- API action content -->
+        <div class="col-md-9">
+					<!-- API action content goes here -->
+          <div id="api_action_body_wrapper"></div>
+          <!-- response -->
+          <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+            <div id="loading_spinner" style="display: none"></div>
+            <span id="api_response"></span>
+          </div>
+        </div> <!-- API action content end -->
+      </div> <!-- API content main body end -->
+
+    </div> <!-- API section end -->
+
+    <!-- Toke HTML column -->
+    <div class="col-md-4 col-sm-offset-1">
+      <div id="token_html"></div>
+    </div>
+
+  </div> <!-- end of main row -->
+</div> <!-- container -->
+
+<div id="footer_html"></div>
+
+<script>
+  $(document).ready(function() {
+    loadTokenHtml();
+  });
+</script>

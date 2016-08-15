@@ -1,0 +1,24 @@
+<div class="form-group">
+  <label for="">List Notifications</label>
+  <span class="help-block">Notifications inform a set of users whenever there are changes to an invoice. This lists all available notifications.</span>
+</div>
+
+<div class="form-group">
+  <label for="">Account ID</label>
+  <span class="help-block">Identifies the account under which data is aggregated.</span>
+  <input id="noti_account_id" type="text" class="form-control" placeholder="1-L80Z1P (Account ID)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('noti')">
+
+<script>
+  function runAPI() {
+    var aid = $("#noti_account_id").val();
+    if (aid) {
+      var endpoint ="/invoicing-api/v2/accounts/"+aid+"/notifications"
+      sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Some of the required fields are missing. Please enter.");
+    }
+  }
+</script>

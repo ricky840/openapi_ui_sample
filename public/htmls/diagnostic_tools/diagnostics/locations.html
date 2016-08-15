@@ -1,0 +1,16 @@
+<fieldset disabled>
+  <div class="form-group">
+    <label for="locations">List Locations</label>
+    <span class="help-block">Returns a list of active Akamai server locations, from which you can run diagnostic tools.</span>
+    <input id="locations" type="text" class="form-control" placeholder="locations">
+  </div>
+</fieldset>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/diagnostic-tools/v1/locations";
+    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+  }
+</script>

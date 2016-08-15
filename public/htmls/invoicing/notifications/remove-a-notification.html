@@ -1,0 +1,31 @@
+<div class="form-group">
+  <label for="">Remove a Notification</label>
+  <span class="help-block">This removes a notification.</span>
+</div>
+
+<div class="form-group">
+  <label for="">Account ID</label>
+  <span class="help-block">Identifies the account under which data is aggregated.</span>
+  <input id="noti_remove_account_id" type="text" class="form-control" placeholder="B-C-1BBSI2F (Account ID)">
+</div>
+
+<div class="form-group">
+  <label for="">Notification ID</label>
+  <span class="help-block">Identifies each notification.</span>
+  <input id="noti_remove_notification_id" type="text" class="form-control" placeholder="4262 (Notification ID)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var aid = $("#noti_remove_account_id").val();
+    var nid = $("#noti_remove_notification_id").val();
+    if (nid) {
+      var endpoint = "/invoicing-api/v2/accounts/"+aid+"/notifications/"+nid;
+      var return_response = sendAPIRequestDelete(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter notification ID");
+    }
+  }
+</script>

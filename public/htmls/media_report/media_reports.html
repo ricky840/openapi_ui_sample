@@ -1,0 +1,70 @@
+<div class="container_fuild">
+  <div class="row"> <!-- main row -->
+
+    <!-- API section -->
+    <div class="col-md-7">
+
+			<!-- API title goes here -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="corner_space"></div>
+				</div>
+        <div class="col-md-9">
+          <h2>The Media Reports API</h2>
+          <p>Media Reports help you monitor and identify key trends of your Akamai Media Delivery solutions. Its one-stop, easy reporting interface within Luna Control Center gives you access to valuable insights to enhance your business by optimizing your streaming content, software downloads, and object delivery.</p>
+					<p>The Media Reports API provides an easy interface to manage how Akamai processes data for various media delivery products.</p>
+					<p>The REST API responds to requests with standard HTTP status codes. Error messages are embedded in the JSON response in the event of a validation failure or when the API fails to process your request.</p>
+					<hr>
+				</div>
+			</div>
+
+      <!-- API content main body -->
+      <div class="row">
+
+        <!-- left menu -->
+        <div class="col-md-3">
+          <ul class="nav nav-pills nav-stacked">
+            <li><h5>Download Delivery</h5></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/media_report/download_delivery/dimensions.html')"><a href="#">Dimensions</a></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/media_report/download_delivery/metrics.html')"><a href="#">Metrics</a></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/media_report/download_delivery/data.html')"><a href="#">Data</a></li>
+            <li><h5>Object Delivery</h5></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/media_report/object_delivery/dimensions.html')"><a href="#">Dimensions</a></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/media_report/object_delivery/metrics.html')"><a href="#">Metrics</a></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/media_report/object_delivery/data.html')"><a href="#">Data</a></li>
+            <li><h5>Adaptive Media Delivery</h5></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/media_report/adaptive_media_delivery/dimensions.html')"><a href="#">Dimensions</a></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/media_report/adaptive_media_delivery/metrics.html')"><a href="#">Metrics</a></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/media_report/adaptive_media_delivery/data.html')"><a href="#">Data</a></li>
+          </ul>
+        </div>
+
+        <!-- API action content -->
+        <div class="col-md-9">
+					<!-- API action content goes here -->
+          <div id="api_action_body_wrapper"></div>
+          <!-- response -->
+          <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+            <div id="loading_spinner" style="display: none"></div>
+            <span id="api_response"></span>
+          </div>
+        </div> <!-- API action content end -->
+      </div> <!-- API content main body end -->
+
+    </div> <!-- API section end -->
+
+    <!-- Toke HTML column -->
+    <div class="col-md-4 col-sm-offset-1">
+      <div id="token_html"></div>
+    </div>
+
+  </div> <!-- end of main row -->
+</div> <!-- container -->
+
+<div id="footer_html"></div>
+
+<script>
+  $(document).ready(function() {
+    loadTokenHtml();
+  });
+</script>

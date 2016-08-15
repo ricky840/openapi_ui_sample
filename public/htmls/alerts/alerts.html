@@ -1,0 +1,61 @@
+<div class="container_fuild">
+  <div class="row"> <!-- main row -->
+
+    <!-- API section -->
+    <div class="col-md-7">
+
+			<!-- API title goes here -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="corner_space"></div>
+				</div>
+        <div class="col-md-9">
+          <h2>Alerts API</h2>
+          <p>Alerts REST API provides access to active Alerts and Alert details in Akamai Luna Control Center.</p>
+					<p>The REST API responds to requests with standard HTTP status codes. In the case of a validation failure or when an API fails to process your request, an error message is returned in JSON format.</p>
+					<hr>
+				</div>
+			</div>
+
+      <!-- API content main body -->
+      <div class="row">
+
+        <!-- left menu -->
+        <div class="col-md-3">
+          <ul class="nav nav-pills nav-stacked">
+            <li><h5>Alerts</h5></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/alerts/alerts/list-alerts.html')"><a href="#">List Alerts</a></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/alerts/alerts/list-alerts-by-cpcodes.html')"><a href="#">List Alerts By Cpcodes</a></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/alerts/alerts/get-an-alert.html')"><a href="#">Get an Alert</a></li>
+          </ul>
+        </div>
+
+        <!-- API action content -->
+        <div class="col-md-9">
+					<!-- API action content goes here -->
+          <div id="api_action_body_wrapper"></div>
+          <!-- response -->
+          <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+            <div id="loading_spinner" style="display: none"></div>
+            <span id="api_response"></span>
+          </div>
+        </div> <!-- API action content end -->
+      </div> <!-- API content main body end -->
+
+    </div> <!-- API section end -->
+
+    <!-- Toke HTML column -->
+    <div class="col-md-4 col-sm-offset-1">
+      <div id="token_html"></div>
+    </div>
+
+  </div> <!-- end of main row -->
+</div> <!-- container -->
+
+<div id="footer_html"></div>
+
+<script>
+  $(document).ready(function() {
+    loadTokenHtml();
+  });
+</script>

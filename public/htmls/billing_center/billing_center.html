@@ -1,0 +1,66 @@
+<div class="container_fuild">
+  <div class="row"> <!-- main row -->
+
+    <!-- API section -->
+    <div class="col-md-7">
+
+			<!-- API title goes here -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="corner_space"></div>
+				</div>
+        <div class="col-md-9">
+          <h2>The Billing Center API</h2>
+          <p>The Billing Center API allows you to access your website’s monthly usage over the Akamai network.</p>
+					<p>This guide details the most recent version 2 of the Billing Center API, which provides data in JSON format. For the deprecated version 1, which provides CSV data, see Billing Center API, v1.</p>
+					<hr>
+				</div>
+			</div>
+
+      <!-- API content main body -->
+      <div class="row">
+
+        <!-- left menu -->
+        <div class="col-md-3">
+          <ul class="nav nav-pills nav-stacked">
+            <li><h5>Contract/Reporting Group</h5></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/billing_center/report-source.html')"><a href="#">Report Source</a></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/billing_center/product-id.html')"><a href="#">Products</a></li>
+            <li><h5>Contracts</h5></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/billing_center/contracts/statistics-per-contract.html')"><a href="#">Statistics per Contract</a></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/billing_center/contracts/monthly-usage-per-contract.html')"><a href="#">Monthly Usage per Contract</a></li>
+            <li><h5>Reporting Groups</h5></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/billing_center/reporting_groups/statistics-per-reporting-group.html')"><a href="#">Statistics per Reporting Group</a></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/billing_center/reporting_groups/monthly-usage-per-reporting-group.html')"><a href="#">Monthly Usage per Reporting Group</a></li>
+          </ul>
+        </div>
+
+        <!-- API action content -->
+        <div class="col-md-9">
+					<!-- API action content goes here -->
+          <div id="api_action_body_wrapper"></div>
+          <!-- response -->
+          <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+            <div id="loading_spinner" style="display: none"></div>
+            <span id="api_response"></span>
+          </div>
+        </div> <!-- API action content end -->
+      </div> <!-- API content main body end -->
+
+    </div> <!-- API section end -->
+
+    <!-- Toke HTML column -->
+    <div class="col-md-4 col-sm-offset-1">
+      <div id="token_html"></div>
+    </div>
+
+  </div> <!-- end of main row -->
+</div> <!-- container -->
+
+<div id="footer_html"></div>
+
+<script>
+  $(document).ready(function() {
+    loadTokenHtml();
+  });
+</script>

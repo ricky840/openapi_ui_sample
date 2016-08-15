@@ -1,0 +1,57 @@
+<div class="form-group">
+  <label for="">Download an Invoice File</label>
+  <span class="help-block">For a given contract's invoice file, this accesses the content of the file.</span>
+</div>
+
+<div class="form-group">
+  <label for="">Contract ID</label>
+  <span class="help-block">Identifies the contract under which data is aggregated.</span>
+  <input id="infdwn_contract_id" type="text" class="form-control" placeholder="C-1BBSI2U (Contract ID)">
+</div>
+
+<div class="form-group">
+  <label for="">Invoice Number</label>
+  <span class="help-block">Identifies each unique invoice.</span>
+  <input id="infdwn_invoice_num" type="text" class="form-control" placeholder="16564000726 (Invoice Number)">
+</div>
+
+<div class="form-group">
+  <label for="">Invoice Filename</label>
+  <span class="help-block">Identifies each invoice file.</span>
+  <input id="infdwn_invoice_file" type="text" class="form-control" placeholder="KR_DSM_ACCOUNT_NAME_1-L80Z1P_3-14GPIAR_16564000726_FINAL_1.pdf (Invoice Filename)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var cid = $("#infdwn_contract_id").val();
+    var invoice_num = $("#infdwn_invoice_num").val();
+    var filename = $("#infdwn_invoice_file").val();
+    if (cid && invoice_num && filename) {
+      var endpoint = "/invoicing-api/v2/contracts/"+cid+"/invoices/"+invoice_num+"/files/"+filename;
+      sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Some of the required fields are missing. Please enter.");
+    }
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
