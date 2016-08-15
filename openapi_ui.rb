@@ -267,6 +267,17 @@ get "/gettoken/:tokentype" do
   return tokens.to_json.to_s
 end
 
+get "/gettokens" do
+  tokens = ["ccu_token", "luna_token", "dns_token", "img_token", "csi_token"]
+  hshToken = Hash.new
+  tokens.each do |each_token|
+    if not session[each_token].nil?
+      hshToken[each_token] = session[each_token].to_json.to_s
+    end
+  end
+  return hshToken.to_json.to_s
+end
+
 get "/getaccountinfo" do
   session_hash = session["luna_token"]
   if session_hash.nil?

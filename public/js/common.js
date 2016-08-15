@@ -31,47 +31,44 @@ function loadHeaderFooter() {
 function loadTokenHtml() {
   $.get("tokens.html", function(data){
     var data = $(data); //oh gee
-    var tokens = [
-      "ccu_token",
-      "luna_token",
-      "dns_token",
-      "img_token",
-      "csi_token"
-    ];
-    for (var i in tokens) {
-      token_response = getTokenFromServer(tokens[i]);
-      if (token_response != "null") {
-        jsonObj = JSON.parse(token_response);
-        var api_client_type = jsonObj.apiclienttype;
+    token_response = getAllTokenFromServer();
+    jsonObj_response = JSON.parse(token_response);
+    if (jsonObj_response.length != 0) {
+      var keys = Object.keys(jsonObj_response);
+      for (var i in keys) {
+        var key_name = keys[i];
+        var jsonObj_tokenData = JSON.parse(jsonObj_response[key_name]);
+        var api_client_type = jsonObj_tokenData.apiclienttype;
         data.find("#"+api_client_type+"-label").addClass("label-success");
-        data.find("#"+api_client_type+"-base_url").html("<strong>Base URL: </strong>" + jsonObj.baseurl);
-        data.find("#"+api_client_type+"-access_token").html("<strong>Access Token: </strong>" + jsonObj.accesstoken);
-        data.find("#"+api_client_type+"-client_token").html("<strong>Client Token: </strong>" + jsonObj.clienttoken);
-        data.find("#"+api_client_type+"-secret").html("<strong>Secret: </strong>" + jsonObj.secret);
-      }
-    }
-    /* if luna_token uploaded update and show account info as well */
-    if (seeIfTokenUploaded('luna_token')) {
-      var account_info = getAccountInfoFromServer();
-      account_info = JSON.parse(account_info);
-      data.find("#account_name").html(account_info.accountName);
-      data.find("#account_id").html(account_info.accountId);
-      contracts = account_info.contracts;
-      if (contracts.constructor === Array) {
-        data.find("#account_info-label").addClass("label-success");
-        for (var i in contracts) {
-          var contractId = contracts[i].contractId;
-          var contractName = contracts[i].contractName;
-          htmltags = "<span>"+contractId+":"+" "+contractName+"</span><br>";
-          data.find("#contracts").append(htmltags);
-        }
-      } else {
-        data.find("#contracts").html(account_info.contracts);
-      }
-      data.find("#account_info").show(); //only show when luna_token is uploaded.
-    }
+        data.find("#"+api_client_type+"-base_url").html("<strong>Base URL: </strong>" + jsonObj_tokenData.baseurl);
+        data.find("#"+api_client_type+"-access_token").html("<strong>Access Token: </strong>" + jsonObj_tokenData.accesstoken);
+        data.find("#"+api_client_type+"-client_token").html("<strong>Client Token: </strong>" + jsonObj_tokenData.clienttoken);
+        data.find("#"+api_client_type+"-secret").html("<strong>Secret: </strong>" + jsonObj_tokenData.secret);
 
-    $("#token_html").html(data);
+        /* if luna_token uploaded update and show account info as well */
+        if (key_name == 'luna_token') {
+          var account_info = getAccountInfoFromServer();
+          account_info = JSON.parse(account_info);
+          data.find("#account_name").html(account_info.accountName);
+          data.find("#account_id").html(account_info.accountId);
+          contracts = account_info.contracts;
+          if (contracts.constructor === Array) {
+            data.find("#account_info-label").addClass("label-success");
+            for (var i in contracts) {
+              var contractId = contracts[i].contractId;
+              var contractName = contracts[i].contractName;
+              htmltags = "<span>"+contractId+":"+" "+contractName+"</span><br>";
+              data.find("#contracts").append(htmltags);
+            }
+          } else {
+            data.find("#contracts").html(account_info.contracts);
+          }
+          data.find("#account_info").show(); //only show when luna_token is uploaded.
+        }
+      }
+    }
+    //show tokens
+    $("#token_html").html(data).hide().fadeIn("slow");
   });
 }
 
@@ -83,6 +80,12 @@ function getAccountInfoFromServer() {
 
 function getTokenFromServer(api_client_type) {
   url = "/gettoken/" + api_client_type;
+  var msg = $.ajax({type: "GET", url: url, async: false}).responseText;
+  return msg;
+}
+
+function getAllTokenFromServer() {
+  url = "/gettokens";
   var msg = $.ajax({type: "GET", url: url, async: false}).responseText;
   return msg;
 }
