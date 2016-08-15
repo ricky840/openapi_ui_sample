@@ -175,10 +175,10 @@ function sendAPIRequestPost(endpoint, tokentype, body) {
       data: body,
       success: function(responseTxt, status, jxhr) {
         if (responseTxt) {
-          showResponse(endpoint, responseTxt);
+          showResponse(body, responseTxt);
         } else {
           temp_response = '{"status":"'+status+'","msg":"Empty response body from the server."}'
-          showResponse(endpoint, temp_response);
+          showResponse(body, temp_response);
         }
       }
     }).responseText;
@@ -202,10 +202,10 @@ function sendAPIRequestPut(endpoint, tokentype, body) {
       data: body,
       success: function(responseTxt, status, jxhr) {
         if (responseTxt) {
-          showResponse(endpoint, responseTxt);
+          showResponse(body, responseTxt);
         } else {
           temp_response = '{"status":"'+status+'","msg":"Empty response body from the server."}'
-          showResponse(endpoint, temp_response);
+          showResponse(body, temp_response);
         }
       }
     }).responseText;
