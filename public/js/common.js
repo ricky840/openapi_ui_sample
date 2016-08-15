@@ -23,6 +23,11 @@ function loadPage(filename) {
   $("#main_body").hide().load(filename).fadeIn('slow');
 }
 
+function loadApiActionPage(filename) {
+  $("#api_response_wrapper").hide();
+  $("#api_action_body_wrapper").hide().load(filename).fadeIn('slow');
+}
+
 function loadHeaderFooter() {
   $("#header_html").hide().load("header.html").fadeIn("slow");
   $("#footer_html").hide().load("footer.html").fadeIn("slow");

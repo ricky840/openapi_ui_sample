@@ -1,0 +1,102 @@
+<div class="container_fuild">
+  <div class="row"> <!-- main row -->
+
+    <!-- API section -->
+    <div class="col-md-7">
+
+			<!-- API title goes here -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="corner_space"></div>
+				</div>
+        <div class="col-md-9">
+					<h2>Traffic Management API</h2>
+          <p class="text-muted">A dynamic DNS system returns answers that are computed on the fly, and can vary from query to query. A typical use is to return the IP address of a server that’s assigned dynamically via DHCP, and can change from time to time, as is common with most home Internet connections.</p>
+          <p class="text-muted">Akamai’s GTM system is a dynamic DNS system; it manages traffic to your data centers by choosing the best answers, from moment to moment, to return to client nameservers in response to their queries about GTM domains.
+          </p>
+					<hr>
+				</div>
+			</div>
+
+      <!-- API content main body -->
+      <div class="row">
+
+        <!-- left menu -->
+        <div class="col-md-3">
+          <ul class="nav nav-pills nav-stacked">
+            <li><h5>Domains</h5></li>
+            <li role="presentation" onclick="loadPage()"><a href="#">List Domains</a></li>
+            <li role="presentation" onclick=""><a href="#">Get a Domain</a></li>
+            <li role="presentation" onclick=""><a href="#">Create or Update a Domain</a></li>
+            <li><h5>Data Centers</h5></li>
+            <li role="presentation" onclick=""><a href="#">List Data Centers</a></li>
+            <li role="presentation" onclick=""><a href="#">Create a Data Center</a></li>
+            <li role="presentation" onclick=""><a href="#">Get a Data Center</a></li>
+            <li role="presentation" onclick=""><a href="#">Update a Data Center</a></li>
+            <li role="presentation" onclick=""><a href="#">Remove a Data Center</a></li>
+            <li><h5>Properties</h5></li>
+            <li role="presentation" onclick=""><a href="#">List Properties</a></li>
+            <li role="presentation" onclick=""><a href="#">Get a Property</a></li>
+            <li role="presentation" onclick=""><a href="#">Create or Update a Property</a></li>
+            <li role="presentation" onclick=""><a href="#">Remove a Property</a></li>
+            <li><h5>Resources</h5></li>
+            <li role="presentation" onclick=""><a href="#">List Resources</a></li>
+            <li role="presentation" onclick=""><a href="#">Get a Resource</a></li>
+            <li role="presentation" onclick=""><a href="#">Create a Update a Resource</a></li>
+            <li role="presentation" onclick=""><a href="#">Remove a Resources</a></li>
+            <li><h5>Geographic Maps</h5></li>
+            <li role="presentation" onclick=""><a href="#">List Geographic Maps</a></li>
+            <li role="presentation" onclick=""><a href="#">Get a Geographic Map</a></li>
+            <li role="presentation" onclick=""><a href="#">Create a Geographic Map</a></li>
+            <li role="presentation" onclick=""><a href="#">Remove a Geographic Map</a></li>
+            <li><h5>CIDR Maps</h5></li>
+            <li role="presentation" onclick=""><a href="#">List CIDR Maps</a></li>
+            <li role="presentation" onclick=""><a href="#">Get a CIDR Map</a></li>
+            <li role="presentation" onclick=""><a href="#">Create or Update CIDR Map</a></li>
+            <li role="presentation" onclick=""><a href="#">Remove a CIDR Map</a></li>
+            <li><h5>Autonomous System Maps</h5></li>
+            <li role="presentation" onclick=""><a href="#">Get an AS Map</a></li>
+            <li role="presentation" onclick=""><a href="#">Create or Update an AS Map</a></li>
+            <li role="presentation" onclick=""><a href="#">Remove an AS Map</a></li>
+            <li><h5>Status</h5></li>
+            <li role="presentation" onclick=""><a href="#">Get Current Status</a></li>
+          </ul>
+        </div>
+
+        <!-- API action content -->
+        <div class="col-md-9">
+          <div id="api_action_body_wrapper">
+
+
+
+            <!-- API action content goes here -->
+
+
+          </div> <!-- action body wrapper -->
+
+          <!-- response -->
+          <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+            <div id="loading_spinner" style="display: none"></div>
+            <span id="api_response"></span>
+          </div>
+
+        </div> <!-- API action content end -->
+      </div> <!-- API content main body end -->
+
+    </div> <!-- API section end -->
+
+    <!-- Toke HTML column -->
+    <div class="col-md-4 col-sm-offset-1">
+      <div id="token_html"></div>
+    </div>
+
+  </div> <!-- end of main row -->
+</div> <!-- container -->
+
+<div id="footer_html"></div>
+
+<script>
+  $(document).ready(function() {
+    loadTokenHtml();
+  });
+</script>
