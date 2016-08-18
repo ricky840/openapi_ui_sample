@@ -23,6 +23,25 @@
 
         <!-- left menu -->
         <div class="col-md-3">
+          <div class= "sidemenu">
+            <div class="list-group panel">
+            <a href="#domains" class="list-group-item list-group-title" data-toggle="collapse" >Domains<span class="caret"></span></a>
+            <div class="collapse" id="domains">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/traffic_management/domains/list-domains.html')">List Domains</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/traffic_management/domains/get-a-domain.html')">Get a Domain</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/traffic_management/domains/create-or-update-a-domain.html')">Create or Update a Domain</a>
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#datacenters" class="list-group-item list-group-title" data-toggle="collapse" >Domains<span class="caret"></span></a>
+            <div class="collapse" id="datacenters">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/traffic_management/datacenters/list-data-centers.html')">List Data Centers</a>
+            </div> 
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
           <ul class="nav nav-pills nav-stacked">
             <li><h5>Domains</h5></li>
             <li role="presentation" onclick="loadApiActionPage('/htmls/traffic_management/domains/list-domains.html')"><a href="#">List Domains</a></li>

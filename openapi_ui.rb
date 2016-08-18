@@ -117,7 +117,7 @@ def makePutRequest(base_url, endpoint_url, client_token, client_secret, access_t
   return res.body
 end
 
-def makeDeleteRequest(base_url, endpoint_url, client_token, client_secret, access_token)
+def makeDeleteRequest(base_url, endpoint_url, client_token, client_secret, access_token, body = nil)
 	baseuri = URI(base_url)
 	http = Akamai::Edgegrid::HTTP.new(address = baseuri.host, post = baseuri.port)
 	http.setup_edgegrid(
@@ -126,6 +126,7 @@ def makeDeleteRequest(base_url, endpoint_url, client_token, client_secret, acces
 		access_token: access_token
 	)
   req = Net::HTTP::Delete.new(URI.join(baseuri.to_s, endpoint_url).to_s)
+  req.body = body if not body.nil?
 	res = http.request(req)
   return res.body
 end
@@ -188,7 +189,7 @@ post "/upload" do
 end
 
 get "/run/:tokentype" do
-  endpoint = request.env["HTTP_ENDPOINT"].to_s
+  endpoint = request.env["HTTP_ENDPOINT"].to_s.delete(' ')
   if not endpoint.nil?
     api_token_type = params['tokentype']
     tokens = session[api_token_type]
@@ -200,7 +201,7 @@ get "/run/:tokentype" do
 end
 
 post "/run/:tokentype" do
-  endpoint = request.env["HTTP_ENDPOINT"].to_s
+  endpoint = request.env["HTTP_ENDPOINT"].to_s.delete(' ')
   begin
     request_body = JSON.generate(JSON.parse(request.body.read))
   rescue JSON::ParserError => e
@@ -218,7 +219,7 @@ post "/run/:tokentype" do
 end
 
 post "/runrb/:tokentype" do
-  endpoint = request.env["HTTP_ENDPOINT"].to_s
+  endpoint = request.env["HTTP_ENDPOINT"].to_s.delete(' ')
   request_body = request.body.read
 
   if not endpoint.nil?
@@ -232,7 +233,7 @@ post "/runrb/:tokentype" do
 end
 
 put "/run/:tokentype" do
-  endpoint = request.env["HTTP_ENDPOINT"].to_s
+  endpoint = request.env["HTTP_ENDPOINT"].to_s.delete(' ')
   begin
     request_body = JSON.generate(JSON.parse(request.body.read))
   rescue JSON::ParserError => e
@@ -250,11 +251,13 @@ put "/run/:tokentype" do
 end
 
 delete "/run/:tokentype" do
-  endpoint = request.env["HTTP_ENDPOINT"].to_s
+  endpoint = request.env["HTTP_ENDPOINT"].to_s.delete(' ')
+  request_body = request.body.read
+
   if not endpoint.nil?
     api_token_type = params['tokentype']
     tokens = session[api_token_type]
-    result = makeDeleteRequest(tokens[:baseurl], endpoint, tokens[:clienttoken], tokens[:secret], tokens[:accesstoken])
+    result = makeDeleteRequest(tokens[:baseurl], endpoint, tokens[:clienttoken], tokens[:secret], tokens[:accesstoken], request_body)
     return result
   else
     return %Q[{"error" : "no end point URL provided"}]

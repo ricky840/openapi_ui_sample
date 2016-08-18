@@ -21,20 +21,28 @@
 
         <!-- left menu -->
         <div class="col-md-3">
-          <ul class="nav nav-pills nav-stacked">
-            <li><h5>Invoices</h5></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/invoicing/invoices/invoices-per-account.html')"><a href="#">Invoices per Account</a></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/invoicing/invoices/invoices-per-contract.html')"><a href="#">Invoices per Contract</a></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/invoicing/invoices/invoice-files.html')"><a href="#">Invoice Files</a></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/invoicing/invoices/invoice-file-download.html')"><a href="#">Invoice File Download</a></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/invoicing/invoices/geobilling-file-download.html')"><a href="#">Geobilling File Download</a></li>
-            <li><h5>Notifications</h5></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/invoicing/notifications/list-notifications.html')"><a href="#">List Notifications</a></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/invoicing/notifications/create-a-notification.html')"><a href="#">Create a Notification</a></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/invoicing/notifications/get-a-notification.html')"><a href="#">Get a Notification</a></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/invoicing/notifications/modify-a-notification.html')"><a href="#">Modify a Notification</a></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/invoicing/notifications/remove-a-notification.html')"><a href="#">Remove a Notification</a></li>
-          </ul>
+          <div class= "sidemenu">
+            <div class="list-group panel">
+            <a href="#invocies" class="list-group-item list-group-title" data-toggle="collapse" >Invoices<span class="caret"></span></a>
+            <div class="collapse" id="invocies">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/invoicing/invoices/invoices-per-account.html')">Invoices per Account</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/invoicing/invoices/invoices-per-contract.html')">Invoices per Contract</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/invoicing/invoices/invoice-files.html')">Invoice Files</a></li>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/invoicing/invoices/invoice-file-download.html')">Invoice File Download</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/invoicing/invoices/geobilling-file-download.html')">Geobilling File Download</a>
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#notifications" class="list-group-item list-group-title" data-toggle="collapse" >Notifications<span class="caret"></span></a>
+            <div class="collapse" id="notifications">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/invoicing/notifications/list-notifications.html')">List Notifications</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/invoicing/notifications/create-a-notification.html')">Create a Notification</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/invoicing/notifications/get-a-notification.html')">Get a Notification</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/invoicing/notifications/modify-a-notification.html')">Modify a Notification</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/invoicing/notifications/remove-a-notification.html')">Remove a Notification</a>
+            </div> 
+            </div>
+          </div>
         </div>
 
         <!-- API action content -->

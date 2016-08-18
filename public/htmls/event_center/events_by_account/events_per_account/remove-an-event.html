@@ -9,26 +9,24 @@
   <input id="aid" type="text" class="form-control" placeholder="1-7KLGH (accountId)">
 </div>
 
-<div id="textarea_wrapper" class="form-group has-feedback">
-  <textarea id="remove_an_event_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'remove_an_event_body')"></textarea>
+<div class="form-group">
+  <label for="elist">Event list</label>
+  <span id="helpBlock" class="help-block">List of event IDs</span>
+  <input id="elist" type="text" class="form-control" placeholder="{[117100,117103]}">
 </div>
-<input class="btn btn-success" type="button" value="Validate JSON" onclick="validateJsonTextarea('textarea_wrapper', 'remove_an_event_body')">
+
 <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
 
 <script>
-  var placeholder = '{[ 117100, 117103 ]}';
-  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
-  $("#remove_an_event_body").val(placeholder);
-
   function runAPI() {
     var endpoint = "/events/v2/";
     var aid = $("#aid").val();
-    endpoint = endpoint + aid + "/event";
-    var body = $("#remove_an_event_body").val();
-    if (IsJsonString(body)) {
-      var return_response = sendAPIRequestDelete(endpoint, "luna_token", body);
+    var elist = $("#elist").val();
+    if (aid && elist) {
+      endpoint = endpoint + aid + "/events";
+      var return_response = sendAPIRequestDelete(endpoint, "luna_token", elist);
     } else {
-      showNotification("JSON is not in valid format");
+      showNotification("Please enter accountID and Event List");
     }
   }
 

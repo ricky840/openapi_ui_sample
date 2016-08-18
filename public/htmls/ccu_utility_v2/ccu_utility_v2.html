@@ -1,0 +1,63 @@
+<div class="container_fuild">
+  <div class="row"> <!-- main row -->
+
+    <!-- API section -->
+    <div class="col-md-7">
+
+			<!-- API title goes here -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="corner_space"></div>
+				</div>
+        <div class="col-md-9">
+					<h2>Content Control Utility_V2</h2>
+					<p>The Content Control Utility (CCU) is Akamai’s technology for purging Edge content by request. The Luna Control Center provides a graphical interface to CCU for content administrators. The CCU REST API provides a programmatic interface for developers.</p>
+					<hr>
+				</div>
+			</div>
+
+      <!-- API content main body -->
+      <div class="row">
+
+        <!-- left menu -->
+        <div class="col-md-3">
+          <div class= "sidemenu">
+            <div class="list-group panel">
+            <a href="#ccu_utility_v2" class="list-group-item list-group-title" data-toggle="collapse" >CCU APIs<span class="caret"></span></a>
+            <div class="collapse" id="ccu_utility_v2">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/ccu_utility_v2/ccu_utility_v2/request-queues.html')">Request Queues</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/ccu_utility_v2/ccu_utility_v2/purge-request.html')">Purge Request</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/ccu_utility_v2/ccu_utility_v2/purge-status.html')">Purge Status</a>
+            </div> 
+            </div>
+          </div>
+        </div>
+
+        <!-- API action content -->
+        <div class="col-md-9">
+          <div id="api_action_body_wrapper"></div>
+            <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+              <div id="loading_spinner" style="display: none"></div>
+              <span id="api_response"></span>
+            </div>
+        </div> <!-- API action content end -->
+      </div> <!-- API content main body end -->
+
+    </div> <!-- API section end -->
+
+    <!-- Toke HTML column -->
+    <div class="col-md-4 col-sm-offset-1">
+      <div id="token_html"></div>
+    </div>
+
+  </div> <!-- end of main row -->
+</div> <!-- container -->
+
+<div id="footer_html"></div>
+
+<script>
+  $(document).ready(function() {
+    loadTokenHtml();
+  });
+</script>
+

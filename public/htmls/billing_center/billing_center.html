@@ -19,20 +19,31 @@
 
       <!-- API content main body -->
       <div class="row">
-
-        <!-- left menu -->
+      <!-- left menu -->
         <div class="col-md-3">
-          <ul class="nav nav-pills nav-stacked">
-            <li><h5>Contract/Reporting Group</h5></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/billing_center/report-source.html')"><a href="#">Report Source</a></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/billing_center/product-id.html')"><a href="#">Products</a></li>
-            <li><h5>Contracts</h5></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/billing_center/contracts/statistics-per-contract.html')"><a href="#">Statistics per Contract</a></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/billing_center/contracts/monthly-usage-per-contract.html')"><a href="#">Monthly Usage per Contract</a></li>
-            <li><h5>Reporting Groups</h5></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/billing_center/reporting_groups/statistics-per-reporting-group.html')"><a href="#">Statistics per Reporting Group</a></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/billing_center/reporting_groups/monthly-usage-per-reporting-group.html')"><a href="#">Monthly Usage per Reporting Group</a></li>
-          </ul>
+          <div class= "sidemenu">
+            <div class="list-group panel">
+            <a href="#contract_reporting_group" class="list-group-item list-group-title" data-toggle="collapse" >Contract/Reporting Group<span class="caret"></span></a>
+            <div class="collapse" id="contract_reporting_group">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/billing_center/report-source.html')">Report Source</a>  
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/billing_center/product-id.html')">Products</a>
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#contracts" class="list-group-item list-group-title" data-toggle="collapse" >Contracts<span class="caret"></span></a>
+            <div class="collapse" id="contracts">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/billing_center/contracts/statistics-per-contract.html')">Statistics per Contract</a> 
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/billing_center/contracts/monthly-usage-per-contract.html')">Monthly Usage per Contract</a>
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#reporting_groups" class="list-group-item list-group-title" data-toggle="collapse" >Reporting Groups<span class="caret"></span></a>
+            <div class="collapse" id="reporting_groups">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/billing_center/reporting_groups/statistics-per-reporting-group.html')">Statistics per Reporting Group</a> 
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/billing_center/reporting_groups/monthly-usage-per-reporting-group.html')">Monthly Usage per Reporting Group</a>
+            </div> 
+            </div>
+          </div>
         </div>
 
         <!-- API action content -->

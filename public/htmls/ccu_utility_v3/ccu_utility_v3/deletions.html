@@ -1,0 +1,36 @@
+<div class="form-group">
+  <label for="deletions_network">Select Network</label>
+  <span class="help-block">The network on which you want to delete the URL. You can choose either production or staging. If you do not specify a network, the operation is applied to Production.</span>
+  <select class="form-control" id="deletions_network">
+    <option value="staging">Staging</option>
+    <option value="production">Production</option>
+  </select>
+</div>
+<div class="form-group">
+  <label for="deletions_body">Deletions Object</label>
+  <span class="help-block">Objects that should be purged(deleted)</span>
+  <div id="textarea_wrapper_delete" class="form-group has-feedback">
+    <textarea id="deletions_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper_delete', 'deletions_body')"></textarea>
+  </div>
+</div>
+
+<input class="btn btn-success" type="button" value="Validate JSON" onclick="validateJsonTextarea('textarea_wrapper_delete', 'deletions_body')">
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('deletions')">
+
+<script>
+  var placeholder = '{"hostname": "ic-clean.datswatsup.com","objects": ["/graphics/picture.gif","/documents/brochure.pdf"]}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#deletions_body").val(placeholder);
+
+  function runAPI(apitype) {
+      var endpoint = "/ccu/v3/delete/url/";
+      var body = $("#deletions_body").val();
+      var network = $("#deletions_network").val();
+      endpoint = endpoint + network;
+      if (IsJsonString(body)) {
+        var return_response = sendAPIRequestPost(endpoint, "ccu_token", body);
+      } else {
+        showNotification("JSON is not in valid format");
+      }
+    }
+</script>

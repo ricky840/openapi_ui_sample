@@ -22,28 +22,64 @@
 
         <!-- left menu -->
         <div class="col-md-3">
-          <ul class="nav nav-pills nav-stacked">
-            <li><h5>Report Sources</h5></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/billing_center_v1/report_sources/report-sources.html')"><a href="#">Report Sources</a></li>
-            <li><h5>Products</h5></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/billing_center_v1/products/products.html')"><a href="#">Products</a></li>
-            <li><h5>Statistic Types</h5></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/billing_center_v1/statistic_types/statistic-types.html')"><a href="#">Statistic Types</a></li>
-            <li><h5>Contract Usage API</h5></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/billing_center_v1/contract_usage_api/csv-report.html')"><a href="#">CSV Report</a></li>
-            <li><h5>Monthly Usage Data</h5></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/billing_center_v1/monthly_usage_data/monthly-usage-data.html')"><a href="#">Monthly Usage Data</a></li>
-            <li><h5>CP Codes</h5></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/billing_center_v1/cp_codes/cp-codes.html')"><a href="#">CP Codes</a></li>
-            <li><h5>Measures</h5></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/billing_center_v1/measures/measures.html')"><a href="#">Measures</a></li>
-            <li><h5>Contract Usage Reseller API</h5></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/billing_center_v1/contract_usage_reseller_api/csv-data-for-reseller.html')"><a href="#">CSV Data for Reseller</a></li>
-            <li><h5>Report Sources for Reseller</h5></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/billing_center_v1/report_sources_for_reseller/report-sources-for-reseller.html')"><a href="#">Report Sources for Reseller</a></li>
-          </ul>
+          <div class= "sidemenu">
+            <div class="list-group panel">
+            <a href="#report_sources" class="list-group-item list-group-title" data-toggle="collapse" >Report Sources<span class="caret"></span></a>
+            <div class="collapse" id="report_sources">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/billing_center_v1/report_sources/report-sources.html')">Report Sources</a>  
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#products" class="list-group-item list-group-title" data-toggle="collapse" >Products<span class="caret"></span></a>
+            <div class="collapse" id="products">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/billing_center_v1/products/products.html')">Products</a>  
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#statistic_types" class="list-group-item list-group-title" data-toggle="collapse" >Statistic Types<span class="caret"></span></a>
+            <div class="collapse" id="statistic_types">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/billing_center_v1/statistic_types/statistic-types.html')">Statistic Types</a> 
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#contract_usage_api" class="list-group-item list-group-title" data-toggle="collapse" >Contract Usage API<span class="caret"></span></a>
+            <div class="collapse" id="contract_usage_api">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/billing_center_v1/contract_usage_api/csv-report.html')">CSV Report</a>
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#monthly_usage_data" class="list-group-item list-group-title" data-toggle="collapse" >Monthly Usage Data<span class="caret"></span></a>
+            <div class="collapse" id="monthly_usage_data">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/billing_center_v1/monthly_usage_data/monthly-usage-data.html')">Monthly Usage Data</a>
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#cp_codes" class="list-group-item list-group-title" data-toggle="collapse" >CP Codes<span class="caret"></span></a>
+            <div class="collapse" id="cp_codes">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/billing_center_v1/cp_codes/cp-codes.html')">CP Codes</a>
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#measures" class="list-group-item list-group-title" data-toggle="collapse" >Measures<span class="caret"></span></a>
+            <div class="collapse" id="measures">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/billing_center_v1/measures/measures.html')">Measures</a>
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#contract_usage_reseller_api" class="list-group-item list-group-title" data-toggle="collapse" >Contract Usage Reseller API<span class="caret"></span></a>
+            <div class="collapse" id="contract_usage_reseller_api">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/billing_center_v1/contract_usage_reseller_api/csv-data-for-reseller.html')">CSV Data for Reseller</a>
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#report_sources_for_reseller" class="list-group-item list-group-title" data-toggle="collapse" >Report Sources for Reseller<span class="caret"></span></a>
+            <div class="collapse" id="report_sources_for_reseller">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/billing_center_v1/report_sources_for_reseller/report-sources-for-reseller.html')">Report Sources for Reseller</a>
+            </div> 
+            </div>
+          </div>
         </div>
-
+        
         <!-- API action content -->
         <div class="col-md-9">
 					<!-- API action content goes here -->

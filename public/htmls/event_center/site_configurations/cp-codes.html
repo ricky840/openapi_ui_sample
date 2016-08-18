@@ -1,0 +1,26 @@
+<div class="form-group">
+  <label for="aid">CP Codes</label>
+  <span class="help-block">This controller deals specifically with provisioned data, that is, a CP code or a configuration. It does not provide traffic data for a site.</span>
+  <span class="help-block">Gets all CP codes for the given account. For the time being, these CP codes aren't limited only to the site.</span>
+</div>
+
+<div class="form-group">
+  <label for="aid">Account ID</label>
+  <span id="helpBlock" class="help-block">Unique identifier for the account.</span>
+  <input id="aid" type="text" class="form-control" placeholder="1-7KLGH (accountId)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/events/v2/";
+    var aid = $("#aid").val();
+    if (aid) {
+      endpoint = endpoint + aid + "/sites/cpcodes";
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter accountID");
+    }
+  }
+</script>

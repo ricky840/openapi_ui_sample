@@ -1,0 +1,20 @@
+<div class="form-group">
+    <label for="">Get Purge Status</label>
+    <span class="help-block">The status of a previously submitted request. This path should be retrieved from the progressUri field of the response to a purge request.</span>
+    <input id="purge_id" type="text" class="form-control" placeholder="57799d8b-10e4-11e4-9088-62ece60caaf0 (purgeId)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('purge_status')">
+
+<script>
+  function runAPI() {
+      var endpoint = "/ccu/v2/purges/";
+      var pid = $("#purge_id").val();
+      if (pid) {
+        endpoint = endpoint + pid;
+        var return_response = sendAPIRequestGet(endpoint, "ccu_token");
+      } else {
+        showNotification("Please enter purgeId");
+      }
+    }
+</script>

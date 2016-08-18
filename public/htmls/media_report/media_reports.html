@@ -23,20 +23,32 @@
 
         <!-- left menu -->
         <div class="col-md-3">
-          <ul class="nav nav-pills nav-stacked">
-            <li><h5>Download Delivery</h5></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/media_report/download_delivery/dimensions.html')"><a href="#">Dimensions</a></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/media_report/download_delivery/metrics.html')"><a href="#">Metrics</a></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/media_report/download_delivery/data.html')"><a href="#">Data</a></li>
-            <li><h5>Object Delivery</h5></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/media_report/object_delivery/dimensions.html')"><a href="#">Dimensions</a></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/media_report/object_delivery/metrics.html')"><a href="#">Metrics</a></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/media_report/object_delivery/data.html')"><a href="#">Data</a></li>
-            <li><h5>Adaptive Media Delivery</h5></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/media_report/adaptive_media_delivery/dimensions.html')"><a href="#">Dimensions</a></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/media_report/adaptive_media_delivery/metrics.html')"><a href="#">Metrics</a></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/media_report/adaptive_media_delivery/data.html')"><a href="#">Data</a></li>
-          </ul>
+          <div class= "sidemenu">
+            <div class="list-group panel">
+            <a href="#download_delivery" class="list-group-item list-group-title" data-toggle="collapse" >Download Delivery<span class="caret"></span></a>
+            <div class="collapse" id="download_delivery">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/media_report/download_delivery/dimensions.html')">Dimensions</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/media_report/download_delivery/metrics.html')">Metrics</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/media_report/download_delivery/data.html')">Data</a>
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#object_delivery" class="list-group-item list-group-title" data-toggle="collapse" >Object Delivery<span class="caret"></span></a>
+            <div class="collapse" id="object_delivery">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/media_report/object_delivery/dimensions.html')">Dimensions</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/media_report/object_delivery/metrics.html')">Metrics</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/media_report/object_delivery/data.html')">Data</a>
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#adaptive_media_delivery" class="list-group-item list-group-title" data-toggle="collapse" >Adaptive Media Delivery<span class="caret"></span></a>
+            <div class="collapse" id="adaptive_media_delivery">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/media_report/adaptive_media_delivery/dimensions.html')">Dimensions</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/media_report/adaptive_media_delivery/metrics.html')">Metrics</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/media_report/adaptive_media_delivery/data.html')">Data</a>
+            </div> 
+            </div>
+          </div>
         </div>
 
         <!-- API action content -->

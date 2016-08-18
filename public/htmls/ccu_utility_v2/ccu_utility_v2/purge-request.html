@@ -1,0 +1,27 @@
+<div class="form-group">
+	<label for="purge_request_body">Purge Objects(Add a Request)</label>
+	<span class="help-block">Requests that the given objects (URLs, ARLs, or CPCodes) are purged. On success, returns a 201 status and a response including the progressUri that can be used to retrieve the status of the request.</span>
+</div>
+
+<div id="textarea_wrapper" class="form-group has-feedback">
+	<textarea id="purge_request_body" class="form-control" rows="15" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'purge_request_body')"></textarea>
+</div>
+
+<input class="btn btn-success" type="button" value="Validate JSON" onclick="validateJsonTextarea('textarea_wrapper', 'purge_request_body')">
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  var placeholder = '{"objects":["http://ic-clean.datswatsup.com/test.jpg","http://ic-clean.datswatsup.com/test.jpg2"],"action":"remove","type":"arl","domain":"staging"}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#purge_request_body").val(placeholder);
+
+  function runAPI() {  
+      var endpoint = "/ccu/v2/queues/default";
+      var body = $("#purge_request_body").val();
+      if (IsJsonString(body)) {
+        var return_response = sendAPIRequestPost(endpoint, "ccu_token", body);
+      } else {
+        showNotification("JSON is not in valid format");
+      }
+     }
+</script>

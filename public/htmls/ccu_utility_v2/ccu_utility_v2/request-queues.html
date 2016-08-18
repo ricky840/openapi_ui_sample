@@ -1,0 +1,16 @@
+<fieldset disabled>
+	<div class="form-group">
+	  <label for="purge_queue_name">Get Current Queue Size</label>
+	  <span class="help-block">Retrieves the length of the queue length. This value should be always "default"</span>
+	  <input id="purge_queue_name" type="text" class="form-control" placeholder="default">
+	</div>
+</fieldset>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+      var endpoint = "/ccu/v2/queues/default";
+      var return_response = sendAPIRequestGet(endpoint, "ccu_token");    
+  }
+</script>

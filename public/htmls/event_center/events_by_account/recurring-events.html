@@ -21,9 +21,10 @@
   <input id="numberOfTimes" type="number" class="form-control" placeholder="(numberOfTimes)">
 </div>
 
-<div class="form-group">
+<div id="textarea_wrapper" class="form-group has-feedback">
   <textarea id="recurring_events_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'recurring_events_body')"></textarea>
 </div>
+
 <input class="btn btn-success" type="button" value="Validate JSON" onclick="validateJsonTextarea('textarea_wrapper', 'recurring_events_body')">
 <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
 

@@ -19,17 +19,20 @@
 
       <!-- API content main body -->
       <div class="row">
-
-        <!-- left menu -->
+      <!-- left menu -->
         <div class="col-md-3">
-          <ul class="nav nav-pills nav-stacked">
-            <li><h5>Alerts</h5></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/alerts/alerts/list-alerts.html')"><a href="#">List Alerts</a></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/alerts/alerts/list-alerts-by-cpcodes.html')"><a href="#">List Alerts By Cpcodes</a></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/alerts/alerts/get-an-alert.html')"><a href="#">Get an Alert</a></li>
-          </ul>
+          <div class= "sidemenu">
+            <div class="list-group panel">
+            <a href="#alerts" class="list-group-item list-group-title" data-toggle="collapse" >Alerts<span class="caret"></span></a>
+            <div class="collapse" id="alerts">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/alerts/alerts/list-alerts.html')">List Alerts</a>  
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/alerts/alerts/list-alerts-by-cpcodes.html')">List Alerts By Cpcodes</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/alerts/alerts/get-an-alert.html')">Get an Alert</a>
+            </div> 
+            </div>
+          </div>
         </div>
-
+        
         <!-- API action content -->
         <div class="col-md-9">
 					<!-- API action content goes here -->

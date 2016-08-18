@@ -105,12 +105,13 @@ function seeIfTokenUploaded(tokentype) {
 }
 
 function sendAPIRequestGet(endpoint, tokentype) {
+  endpoint = endpoint.replace(/\s+/g, '');
   if (seeIfTokenUploaded(tokentype)) {
     var result = $.ajax({
         type: "GET",
         url: "/run/" + tokentype,
         beforeSend: function(xhr) {
-          xhr.setRequestHeader("Endpoint", endpoint.trim());
+          xhr.setRequestHeader("Endpoint", endpoint);
 					showLoadingSpinner();
         },
 				success: function(responseTxt, status, jxhr) {
@@ -130,15 +131,19 @@ function sendAPIRequestGet(endpoint, tokentype) {
   }
 }
 
-function sendAPIRequestDelete(endpoint, tokentype) {
+function sendAPIRequestDelete(endpoint, tokentype, body) {
+  endpoint = endpoint.replace(/\s+/g, '');
+  if (body === undefined) { body = null; }
+
   if (seeIfTokenUploaded(tokentype)) {
     var result = $.ajax({
         type: "DELETE",
         url: "/run/" + tokentype,
         beforeSend: function(xhr) {
-          xhr.setRequestHeader("Endpoint", endpoint.trim());
+          xhr.setRequestHeader("Endpoint", endpoint);
 					showLoadingSpinner();
         },
+        data: body,
 				success: function(responseTxt, status, jxhr) {
           if (responseTxt) {
             showResponse(endpoint, responseTxt);
@@ -157,6 +162,7 @@ function sendAPIRequestDelete(endpoint, tokentype) {
 }
 
 function sendAPIRequestPost(endpoint, tokentype, body) {
+  endpoint = endpoint.replace(/\s+/g, '');
   if (seeIfTokenUploaded(tokentype)) {
 
 		if (IsJsonString(body)) {
@@ -169,7 +175,7 @@ function sendAPIRequestPost(endpoint, tokentype, body) {
       type: "POST",
       url: apiurl + tokentype,
       beforeSend: function(xhr) {
-        xhr.setRequestHeader("Endpoint", endpoint.trim());
+        xhr.setRequestHeader("Endpoint", endpoint);
         showLoadingSpinner();
       },
       data: body,
@@ -191,12 +197,13 @@ function sendAPIRequestPost(endpoint, tokentype, body) {
 }
 
 function sendAPIRequestPut(endpoint, tokentype, body) {
+  endpoint = endpoint.replace(/\s+/g, '');
   if (seeIfTokenUploaded(tokentype)) {
     var result = $.ajax({
       type: "PUT",
       url: "/run/" + tokentype,
       beforeSend: function(xhr) {
-        xhr.setRequestHeader("Endpoint", endpoint.trim());
+        xhr.setRequestHeader("Endpoint", endpoint);
         showLoadingSpinner();
       },
       data: body,
