@@ -1,0 +1,32 @@
+<div class="form-group">
+  <label for="aid">Event's Origin Statuses</label>
+  <span class="help-block">For all CP codes associated with the given event, gets the origin total for each HTTP status code category (i.e. 1xx, 2xx, 3xx, 4xx, 5xx). The data has multiple values in the data array, where the first element represents the count for 1xx responses and the last element is 5xx, with all elements in between in order. The data returned represents the number of completed HTTP request/responses (served from the origin) for that status code range.</span>
+</div>
+
+<div class="form-group">
+  <label for="aid">Account ID</label>
+  <span id="helpBlock" class="help-block">Unique identifier for the account.</span>
+  <input id="aid" type="text" class="form-control" placeholder="1-7KLGH (accountId)">
+</div>
+
+<div class="form-group">
+  <label for="eid">Event ID</label>
+  <span id="helpBlock" class="help-block">Unique identifier for the event.</span>
+  <input id="eid" type="number" class="form-control" placeholder="117100 (eventId)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/events/v2/";
+    var aid = $("#aid").val();
+    var eid = $("#eid").val();
+    if (aid && eid) {
+      endpoint = endpoint + aid + "/events/" + eid +"/trafficdata/cpcode/origin/status";
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter accountID and eventID");
+    }
+  }
+</script>

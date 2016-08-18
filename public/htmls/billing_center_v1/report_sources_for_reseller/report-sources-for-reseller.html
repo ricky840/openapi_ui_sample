@@ -1,0 +1,18 @@
+<fieldset disabled>
+  <div class="form-group">
+    <label for="rs_for_reseller">Report Sources for Reseller</label>
+    <span class="help-block">Gets all Report Sources for the user account. Report sources are used to limit the scope of returned contract usage data. There are two types of report sources, which are distinguished by the type parameter:</span>
+	<p class="text-muted"> - reportGroup: a reporting group</p>
+	<p class="text-muted"> - contract: a top level group (contract)</p>
+    <input id="rs_for_reseller" type="text" class="form-control" placeholder="/billing-usage/v1/reportSources">
+  </div>
+</fieldset>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI(apitype) {
+    var endpoint = "/billing-usage/v1/reportSources";
+    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+  }
+</script>

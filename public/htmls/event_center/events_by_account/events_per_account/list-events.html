@@ -1,0 +1,25 @@
+<div class="form-group">
+  <label for="aid">List Events</label>
+  <span class="help-block">Gets all events for the given account that have an event start date within the given date range if both ends of the range are specified. The range is ignored if either the start or end dates are unspecified.</span>
+</div>
+
+<div class="form-group">
+  <label for="aid">Account ID</label>
+  <span id="helpBlock" class="help-block">Unique identifier for the account.</span>
+  <input id="aid" type="text" class="form-control" placeholder="1-7KLGH (accountId)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/events/v2/";
+    var aid = $("#aid").val();
+    if (aid) {
+      endpoint = endpoint + aid + "/events";
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter accountID");
+    }
+  }
+</script>

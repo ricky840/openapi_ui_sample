@@ -1,0 +1,48 @@
+<div class="form-group">
+  <label for="recurring_events_body">Recurring Events</label>
+  <span class="help-block">Creates a new event with the given parameters. The only required fields are the event name, start and end date. All other fields are optional.</span>
+</div>
+
+<div class="form-group">
+  <label for="aid">Account ID</label>
+  <span id="helpBlock" class="help-block">Unique identifier for the account.</span>
+  <input id="aid" type="text" class="form-control" placeholder="1-7KLGH (accountId)">
+</div>
+
+<div class="form-group">
+  <label for="frequency">Frequency</label>
+  <span id="helpBlock" class="help-block">Periodicity of the recurring event</span>
+  <input id="frequency" type="text" class="form-control" placeholder="WEEKLY (frequency)">
+</div>
+
+<div class="form-group">
+  <label for="numberOfTimes">Number of Times</label>
+  <span id="helpBlock" class="help-block">Number of times/periods to follow.</span>
+  <input id="numberOfTimes" type="number" class="form-control" placeholder="(numberOfTimes)">
+</div>
+
+<div class="form-group">
+  <textarea id="recurring_events_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'recurring_events_body')"></textarea>
+</div>
+<input class="btn btn-success" type="button" value="Validate JSON" onclick="validateJsonTextarea('textarea_wrapper', 'recurring_events_body')">
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  var placeholder = '{"version": 0,"eventType": "STREAMING","description": "","start": 1380132900000,"end": 1380138300000, "createdDate": 1380133638759, "modifiedDate": 1380133638759, "customer": {}, "coordinators": [],"audienceLocations": [],"audienceSize": 0,"tags": [], "locked": false, "supportType": {}, "name": "apiary3","services": { "universalLiveStreams": [], "silverlightLiveStreams": [], "flashLiveStreams": [], "siteCPCodes": [],  "sripConfigs": [], "qosmReportPackIds": [],"smReportPackIds": []}}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#recurring_events_body").val(placeholder);
+
+  function runAPI() {
+    var endpoint = "/events/v2/";
+    var aid = $("#aid").val();
+    var frequency = $("#frequency").val();
+    var numberOfTimes = $("#numberOfTimes").val();
+    endpoint = endpoint + aid + "/events/recurring/" + "frequency=" + frequency + "&numberOfTimes=" + numberOfTimes;
+    var body = $("#recurring_events_body").val();
+    if (IsJsonString(body)) {
+      var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
+    } else {
+      showNotification("JSON is not in valid format");
+    }
+  }
+</script>

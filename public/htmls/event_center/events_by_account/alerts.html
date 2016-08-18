@@ -1,0 +1,25 @@
+<div class="form-group">
+  <label for="aid">Alerts</label>
+  <span class="help-block">Returns all the Alerts associated with the CP codes for the current account. Times are converted to the user's timezone based on their user account. This operation determines the CP codes associated with the services of an event, then determines the correct Alert definition, then pulls only those alerts from AMS. Many CP codes map to an Alert, and if that Alert fires it is returned. It's not possible at this time to determine which CP code triggered the Alert.</span>
+</div>
+
+<div class="form-group">
+  <label for="aid">Account ID</label>
+  <span id="helpBlock" class="help-block">Unique identifier for the account.</span>
+  <input id="aid" type="text" class="form-control" placeholder="1-7KLGH (accountId)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/events/v2/";
+    var aid = $("#aid").val();
+    if (aid) {
+      endpoint = endpoint + aid + "/events/alerts";
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter accountID");
+    }
+  }
+</script>

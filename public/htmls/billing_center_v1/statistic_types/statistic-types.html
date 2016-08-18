@@ -1,0 +1,66 @@
+<div class="form-group">
+  <label for="spc_contract_id">Statistic Types</label>
+  <span id="helpBlock" class="help-block">Gets a list of statistic types that are valid for the given product in the provided timespan.</span>
+</div>
+
+<div class="form-group">
+  <label for="spc_product_id">Product ID</label>
+  <span id="helpBlock" class="help-block">Identifies the product under which data is aggregated.</span>
+  <input id="spc_product_id" type="text" class="form-control" placeholder="B-3-1WYBV">
+</div>
+
+<div class="form-group">
+  <label for="reportsource_type">Select Report Source Type</label>
+  <select class="form-control" id="reportsource_type">
+    <option value="reportGroup">reportGroup</option>
+    <option value="contract">Contract</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="spc_reportsource_id">Report Source ID</label>
+  <span id="helpBlock" class="help-block">Identifies the reportGroup or contract under which data is aggregated.</span>
+  <input id="spc_reportsource_id" type="text" class="form-control" placeholder="C-1BBSI2U">
+</div>
+
+<div class="form-group">
+  <label for="">Date Range</label>
+  <span id="helpBlock" class="help-block">The date range of aggregated data.</span>
+  <div class="input-group input-daterange short">
+    <input type="text" class="form-control spc start" value="2016-01">
+    <span class="input-group-addon">to</span>
+    <input type="text" class="form-control spc end" value="2016-07">
+  </div>
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('statistics_per_contract')">
+
+<script>
+  $('.input-daterange input').each(function() {
+    $(this).datepicker({
+      format: "mm/yyyy",
+      startView: "months",
+      minViewMode: "months",
+      startDate: '-3m',
+      endDate: '+0d',
+      autoclose: true
+    });
+    $(this).datepicker('setDate', getFormattedDate(new Date()));
+  });
+
+  function runAPI() {
+    var pid = $("#spc_product_id").val();
+    var type = $("#reportsource_type").val();
+    var rid = $("#spc_reportsource_id").val();
+    if (pid && type && rid) {
+      var startYear = $('.input-daterange .spc.start').datepicker('getDate').getFullYear();
+      var startMonth = $('.input-daterange .spc.start').datepicker('getDate').getMonth() + 1;
+      var endYear = $('.input-daterange .spc.end').datepicker('getDate').getFullYear();
+      var endMonth = $('.input-daterange .spc.end').datepicker('getDate').getMonth() + 1;
+      var endpoint = "/billing-usage/v1/statisticTypes/"+ pid + "/" + type + "/" + rid + "/" +startMonth + "/" +startYear + "/" +endMonth + "/" +endYear;
+      sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter Contract/reportGroup or Product ID");
+    }
+  }
+</script>

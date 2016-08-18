@@ -1,0 +1,33 @@
+<div class="form-group">
+  <label for="aid">Event Traffic Data by CP Code</label>
+  <span class="help-block">Fetches traffic data for provided CP codes. The resources in this class are intended mainly for use with site traffic. While they may return traffic data for HD streams, this is not guaranteed, nor is the data guaranteed to be accurate. Data is returned as data and time pairs, where data is an array of potentially multiple values. Time is the Unix epoch time (in milliseconds), and data is always represented in kilobits per second. Data may have multiple values in many cases; for example, HTTP status code traffic data.</span>
+  <span class="help-block">Gets the sum of all edge bandwidth data for all CP codes that are associated with the event. The data is returned in kilobits per second.</span>
+</div>
+
+<div class="form-group">
+  <label for="aid">Account ID</label>
+  <span id="helpBlock" class="help-block">Unique identifier for the account.</span>
+  <input id="aid" type="text" class="form-control" placeholder="1-7KLGH (accountId)">
+</div>
+
+<div class="form-group">
+  <label for="eid">Event ID</label>
+  <span id="helpBlock" class="help-block">Unique identifier for the event.</span>
+  <input id="eid" type="number" class="form-control" placeholder="117100 (eventId)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/events/v2/";
+    var aid = $("#aid").val();
+    var eid = $("#eid").val();
+    if (aid && eid) {
+      endpoint = endpoint + aid + "/events/" + eid +"/trafficdata/cpcode/edge/bandwidth";
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter accountID and eventID");
+    }
+  }
+</script>

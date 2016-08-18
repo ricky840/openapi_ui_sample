@@ -1,0 +1,133 @@
+<div class="container_fuild">
+  <div class="row"> <!-- main row -->
+
+    <!-- API section -->
+    <div class="col-md-7">
+
+			<!-- API title goes here -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="corner_space"></div>
+				</div>
+        <div class="col-md-9">
+          <h2>The Event Center API</h2>
+          <p>The Event Center API is a group of REST resources that provide access to event data. This includes event configuration, event reporting, and alerts.</p>
+					<hr>
+				</div>
+			</div>
+
+      <!-- API content main body -->
+      <div class="row">
+
+        <!-- left menu -->
+        <div class="col-md-3">
+          <div class= "sidemenu">
+            <div class="list-group panel">
+
+            <a href="#events_by_account" class="list-group-item list-group-title" data-toggle="collapse">Events by Account<span class="caret"></span></a>
+            <div class="collapse" id="events_by_account">
+              <a href="#events_per_account" class="list-group-item list-group-lv1" data-toggle="collapse">Events per Account<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="events_per_account">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#events_per_account" onclick="loadApiActionPage('/htmls/event_center/events_by_account/events_per_account/list-events.html')">List Events</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#events_per_account" onclick="loadApiActionPage('/htmls/event_center/events_by_account/events_per_account/post-a-new-event.html')">POST a New Event</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#events_per_account" onclick="loadApiActionPage('/htmls/event_center/events_by_account/events_per_account/put-a-new-event.html')">PUT a New Event</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#events_per_account" onclick="loadApiActionPage('/htmls/event_center/events_by_account/events_per_account/remove-an-event.html')">Remove an Event</a>
+              </div>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" data-parent="#" onclick="loadApiActionPage('/htmls/event_center/events_by_account/recurring-events.html')">Recurring Events</a>
+              <a href="#event" class="list-group-item list-group-lv1" data-toggle="collapse" data-parent="#event">Event<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="event">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#event" onclick="loadApiActionPage('/htmls/event_center/events_by_account/event/get-an-event.html')">Get an Event</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#event" onclick="loadApiActionPage('/htmls/event_center/events_by_account/event/post-modify-an-event.html')">POST - Modify an Event</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#event" onclick="loadApiActionPage('/htmls/event_center/events_by_account/event/put-modify-an-event.html')">PUT - Modify an Event</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#event" onclick="loadApiActionPage('/htmls/event_center/events_by_account/event/remove-an-event.html')">Remove an Event</a>
+              </div> 
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" data-parent="#" onclick="loadApiActionPage('/htmls/event_center/events_by_account/event-with-services.html')">Event with Services</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" data-parent="#" onclick="loadApiActionPage('/htmls/event_center/events_by_account/services-per-event.html')">Services per Event</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" data-parent="#" onclick="loadApiActionPage('/htmls/event_center/events_by_account/range-of-events.html')">Range of Events</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" data-parent="#" onclick="loadApiActionPage('/htmls/event_center/events_by_account/events-in-progress.html')">Events in Progress</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" data-parent="#" onclick="loadApiActionPage('/htmls/event_center/events_by_account/events-current-for-specific-time.html')">Events Current for Specific Time</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" data-parent="#" onclick="loadApiActionPage('/htmls/event_center/events_by_account/upcoming-events.html')">Upcoming Events</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" data-parent="#" onclick="loadApiActionPage('/htmls/event_center/events_by_account/impending-events.html')">Impending Events</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" data-parent="#" onclick="loadApiActionPage('/htmls/event_center/events_by_account/alerts.html')">Alerts</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" data-parent="#" onclick="loadApiActionPage('/htmls/event_center/events_by_account/alerts-per-event.html')">Alerts per Event</a>
+            </div>   
+            </div>
+
+            <div class="list-group panel">
+            <a href="#event_traffic_by_cp_code" class="list-group-item list-group-title" data-toggle="collapse">Event Traffic by CP Code<span class="caret"></span></a>
+            <div class="collapse" id="event_traffic_by_cp_code">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/event_center/event_traffic_by_cp_code/event-traffic-data-by-cp-code.html')">Event Traffic Data by CP Code</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" data-parent="#" onclick="loadApiActionPage('/htmls/event_center/event_traffic_by_cp_code/edge-bandwidth-per-cp-code.html')">Edge Bandwidth per CP Code</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" data-parent="#" onclick="loadApiActionPage('/htmls/event_center/event_traffic_by_cp_code/event-edge-requests.html')">Event's Edge Requests</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" data-parent="#" onclick="loadApiActionPage('/htmls/event_center/event_traffic_by_cp_code/event-edge-requests-per-cp-code.html')">Event's Edge Requests per CP Code</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" data-parent="#" onclick="loadApiActionPage('/htmls/event_center/event_traffic_by_cp_code/event-status-totals.html')">Event's Status Totals</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" data-parent="#" onclick="loadApiActionPage('/htmls/event_center/event_traffic_by_cp_code/event-status-totals-per-cp-code.html')">Event's Status Totals per CP Code</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" data-parent="#" onclick="loadApiActionPage('/htmls/event_center/event_traffic_by_cp_code/event-bandwidth-data.html')">Event's Bandwidth Data</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" data-parent="#" onclick="loadApiActionPage('/htmls/event_center/event_traffic_by_cp_code/event-bandwidth-data-per-cp-code.html')">Event's Bandwidth Data per CP Code</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" data-parent="#" onclick="loadApiActionPage('/htmls/event_center/event_traffic_by_cp_code/event-origin-requests.html')">Event's Origin Requests</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" data-parent="#" onclick="loadApiActionPage('/htmls/event_center/event_traffic_by_cp_code/event-origin-requests-per-cp-code.html')">Event's Origin Requests per CP Code</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" data-parent="#" onclick="loadApiActionPage('/htmls/event_center/event_traffic_by_cp_code/event-origin-statuses.html')">Event's Origin Statuses</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" data-parent="#" onclick="loadApiActionPage('/htmls/event_center/event_traffic_by_cp_code/event-origin-statuses-per-cp-code.html')">Event's Origin Statuses per CP Code</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" data-parent="#" onclick="loadApiActionPage('/htmls/event_center/event_traffic_by_cp_code/event-io-bandwidth.html')">Event's I/O Bandwidth</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" data-parent="#" onclick="loadApiActionPage('/htmls/event_center/event_traffic_by_cp_code/event-io-bandwidth-per-cp-code.html')">Event's I/O Bandwidth per CP Code</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" data-parent="#" onclick="loadApiActionPage('/htmls/event_center/event_traffic_by_cp_code/event-requests.html')">Event's Requests</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" data-parent="#" onclick="loadApiActionPage('/htmls/event_center/event_traffic_by_cp_code/event-requests-per-cp-code.html')">Event's Requests per CP Code</a>      
+            </div> 
+            </div>
+
+            <div class="list-group panel">
+            <a href="#event_ipa_or_sxl_traffic" class="list-group-item list-group-title" data-toggle="collapse" >Event IPA or SXL Traffic<span class="caret"></span></a>
+            <div class="collapse" id="event_ipa_or_sxl_traffic">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/event_center/event_ipa_or_sxl_traffic/srip-connections.html')">SRIP Connections</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/event_center/event_ipa_or_sxl_traffic/srip-connections-per-slot.html')">SRIP Connections per Slot</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/event_center/event_ipa_or_sxl_traffic/srip-bandwidth.html')">SRIP Bandwidth</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/event_center/event_ipa_or_sxl_traffic/srip-bandwidth-per-slot.html')">SRIP Bandwidth per Slot</a>
+            </div> 
+            </div>
+
+            <div class="list-group panel">
+            <a href="#qos_and_security_monitor" class="list-group-item list-group-title" data-toggle="collapse" >QoS and Security Monitor<span class="caret"></span></a>
+            <div class="collapse" id="qos_and_security_monitor">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/event_center/qos_and_security_monitor/audience-size.html')">Audience Size</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/event_center/qos_and_security_monitor/rebuffering-data.html')">Rebuffering Data</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/event_center/qos_and_security_monitor/report-packs.html')">Report Packs</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/event_center/qos_and_security_monitor/request-denied-data.html')">Request Denied Data</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/event_center/qos_and_security_monitor/request-warned-data.html')">Request Warned Data</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/event_center/qos_and_security_monitor/rules-triggered-data.html')">Rules Triggered Data</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/event_center/qos_and_security_monitor/startup-time-data.html')">Startup Time Data</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/event_center/qos_and_security_monitor/successful-attempts-data.html')">Successful Attempts Data</a>
+            </div> 
+            </div>
+          </div>
+
+        </div><!-- left menu end -->
+
+        <!-- API action content -->
+        <div class="col-md-9">
+					<!-- API action content goes here -->
+          <div id="api_action_body_wrapper"></div>
+          <!-- response -->
+          <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+            <div id="loading_spinner" style="display: none"></div>
+            <span id="api_response"></span>
+          </div>
+        </div> <!-- API action content end -->
+      </div> <!-- API content main body end -->
+
+    </div> <!-- API section end -->
+
+    <!-- Toke HTML column -->
+    <div class="col-md-4 col-sm-offset-1">
+      <div id="token_html"></div>
+    </div>
+
+  </div> <!-- end of main row -->
+</div> <!-- container -->
+
+<div id="footer_html"></div>
+
+<script>
+  $(document).ready(function() {
+    loadTokenHtml();
+  });
+</script>

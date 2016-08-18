@@ -1,0 +1,44 @@
+<div class="form-group">
+  <label for="post_modify_an_event_body">POST - Modify an Event</label>
+  <span class="help-block">Updates a single event with the response body. This operation can also update the event's services (e.g. streaming, site, etc.) for the given event. This service expects that the entire service list be submitted, rather than just changes (additions, removals). To load the full list, use the Get Event with its Services operation.</span>
+  <span class="help-block">The request must include a version stamp fetched with the Get Event with its Services operation. If the version stamp sent in the response is different from the current version stamp, an error is raised.</span>
+  <span class="help-block">Note that the request body (the updated event) may include the ID field, but this is ignored, as the ID is specified in the URL. Likewise, any session-specific data (customer ID, username, modified time, etc.) are ignored if sent in the request.</span>
+</div>
+
+<div class="form-group">
+  <label for="aid">Account ID</label>
+  <span id="helpBlock" class="help-block">Unique identifier for the account.</span>
+  <input id="aid" type="text" class="form-control" placeholder="1-7KLGH (accountId)">
+</div>
+
+<div class="form-group">
+  <label for="eid">Event ID</label>
+  <span id="helpBlock" class="help-block">Unique identifier for the event.</span>
+  <input id="eid" type="number" class="form-control" placeholder="117100 (eventId)">
+</div>
+  
+<div id="textarea_wrapper" class="form-group has-feedback">
+  <textarea id="post_modify_an_event_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'post_modify_an_event_body')"></textarea>
+</div>
+<input class="btn btn-success" type="button" value="Validate JSON" onclick="validateJsonTextarea('textarea_wrapper', 'post_modify_an_event_body')">
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('post_modify_an_event')">
+
+
+<script>
+  var placeholder = '{"id": 117100,"customerEventId": null, "version": 1, "name": "apiary2", "description": null, "eventType": "COMBINED", "customer": {   "accountID": "1-7KLGH", "accountName": "Akamai Internal", "supportLevel": null },"start": 1380132000000,"end": 1380151800000,"createdDate": 1380132781000,"createdBy": "ccare2","modifiedDate": 1380132781000, "modifiedBy": "ccare2","audienceSize": 0,"audienceLocations": [],"coordinators": [], "locked": false, "tags": [], "services": null, "supportType": null}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#post_modify_an_event_body").val(placeholder);
+
+  function runAPI() {
+    var endpoint = "/events/v2/";
+    var aid = $("#aid").val();
+    var eid = $("#eid").val();
+    endpoint = endpoint + aid + "/events/" + eid;
+    var body = $("#post_modify_an_event_body").val();
+    if (IsJsonString(body)) {
+      var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
+    } else {
+      showNotification("JSON is not in valid format");
+    }
+  }
+</script>

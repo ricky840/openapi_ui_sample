@@ -1,0 +1,25 @@
+<div class="form-group">
+  <label for="aid">Events in Progress</label>
+  <span class="help-block">Gets events that are currently live for the customer associated with this specified account ID. More specifically, the events that have a start time less than or equal to the current time, and an end time greater than or equal to the current time.</span>
+</div>
+
+<div class="form-group">
+  <label for="aid">Account ID</label>
+  <span id="helpBlock" class="help-block">Unique identifier for the account.</span>
+  <input id="aid" type="text" class="form-control" placeholder="1-7KLGH (accountId)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/events/v2/";
+    var aid = $("#aid").val();
+    if (aid) {
+      endpoint = endpoint + aid + "/events/live";
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter accountID");
+    }
+  }
+</script>

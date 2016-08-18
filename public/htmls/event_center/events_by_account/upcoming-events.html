@@ -1,0 +1,25 @@
+<div class="form-group">
+  <label for="aid">Upcoming Events</label>
+  <span class="help-block">Gets events that are upcoming for the specified account. More specifically, the events that have a start time greater than the current time and less than a given range.</span>
+</div>
+
+<div class="form-group">
+  <label for="aid">Account ID</label>
+  <span id="helpBlock" class="help-block">Unique identifier for the account.</span>
+  <input id="aid" type="text" class="form-control" placeholder="1-7KLGH (accountId)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/events/v2/";
+    var aid = $("#aid").val();
+    if (aid) {
+      endpoint = endpoint + aid + "/events/upcoming";
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter accountID");
+    }
+  }
+</script>

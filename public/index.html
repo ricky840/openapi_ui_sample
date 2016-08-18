@@ -5,10 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{OPENAPI} TEST PAGE</title>
-    <link href="css/blog.css" rel="stylesheet">
-    <link href="css/sticky-footer.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" crossorigin="anonymous">
+    <link href="css/sticky-footer.css" rel="stylesheet">
+    <link href="css/blog.css" rel="stylesheet">
     <link href="css/bootstrap-datepicker3.standalone.css" rel="stylesheet">
     <script src="js/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
@@ -44,16 +44,22 @@
           </thead>
           <tbody>
             <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/alerts.html')">Alerts</a></td>
+              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/alerts/alerts.html')">Alerts</a></td>
               <td style="text-align:left;">Access active Akamai Luna Control Center Alerts and their details.</td>
               <td class="required-token" style="text-align:center;">LUNA</td>
               <td class="api-status" style="text-align:center">GA</td>
             </tr>
             <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/billing_center.html')">Billing Center</div></a></td>
+              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/billing_center/billing_center.html')">Billing Center</div></a></td>
               <td style="text-align:left;">Access to contract usage data in JSON for accounts in which you have access.</td>
               <td class="required-token" style="text-align:center;">LUNA</td>
               <td class="api-status" style="text-align:center">GA</td>
+            </tr>
+            <tr>
+              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/billing_center_v1/billing_center_v1.html')">Billing Center V1</div></a></td>
+              <td style="text-align:left;">Access to contract usage data in CSV format for accounts in which you have access.</td>
+              <td class="required-token" style="text-align:center;">LUNA</td>
+              <td class="api-status" style="text-align:center">Deprecated</td>
             </tr>
             <tr>
               <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/case_management.html')">Case Management</div></a></td>
@@ -74,7 +80,7 @@
               <td class="api-status" style="text-align:center">GA</td>
             </tr>
             <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/diagnostic_tools.html')">Diagnostic Tools</a></td>
+              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/diagnostic_tools/diagnostic_tools.html')">Diagnostic Tools</a></td>
               <td style="text-align:left;">Explore problems in DNS host-name mapping (dig) and network routing (mtr) from around the world.</td>
               <td class="required-token" style="text-align:center;">LUNA</td>
               <td class="api-status" style="text-align:center">GA</td>
@@ -92,7 +98,7 @@
               <td class="api-status" style="text-align:center">GA</td>
             </tr>
             <tr>
-              <td style="text-align:left;"><a href="#">Event Center</a></td>
+              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/event_center/event_center.html')">Event Center</a></td>
               <td style="text-align:left;">See Luna Event Center configuration, reporting and alerts events.</td>
               <td class="required-token" style="text-align:center;">LUNA</td>
               <td class="api-status" style="text-align:center">GA</td>
@@ -110,7 +116,7 @@
               <td class="api-status" style="text-align:center">GA</td>
             </tr>
             <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/invoices.html')">Invoicing</a></td>
+              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/invoices/invoices.html')">Invoicing</a></td>
               <td style="text-align:left;">Allows you to access your Akamai invoices.</td>
               <td class="required-token" style="text-align:center;">LUNA</td>
               <td class="api-status" style="text-align:center">GA</td>
@@ -128,7 +134,7 @@
               <td class="api-status" style="text-align:center">GA</td>
             </tr>
             <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/media_reports.html')">Media Reports</a></td>
+              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/media_reports/media_reports.html')">Media Reports</a></td>
               <td style="text-align:left;">Retrieve usage and quality metrics for the Media Delivery products - Adaptive Media Delivery, Download Delivery, RTMP Media Delivery and Object Delivery.</td>
               <td class="required-token" style="text-align:center;">LUNA</td>
               <td class="api-status" style="text-align:center">GA</td>

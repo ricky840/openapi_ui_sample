@@ -1,0 +1,25 @@
+<div class="form-group">
+  <label for="aid">Report Packs</label>
+  <span class="help-block">Pulls only QoS and WAF/Security Monitor Report Packs Types Support (clientside_qos1_live, clientside_qos1_sm).</span>
+</div>
+
+<div class="form-group">
+  <label for="aid">Account ID</label>
+  <span id="helpBlock" class="help-block">Unique identifier for the account.</span>
+  <input id="aid" type="text" class="form-control" placeholder="1-7KLGH (accountId)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/events/v2/";
+    var aid = $("#aid").val();
+    if (aid) {
+      endpoint = endpoint + aid + "/qos/getReportPacks";
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter accountID");
+    }
+  }
+</script>

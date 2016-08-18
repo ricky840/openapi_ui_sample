@@ -1,0 +1,75 @@
+<div class="container_fuild">
+  <div class="row"> <!-- main row -->
+
+    <!-- API section -->
+    <div class="col-md-7">
+
+			<!-- API title goes here -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="corner_space"></div>
+				</div>
+        <div class="col-md-9">
+          <h2>The Billing Center V1 API</h2>
+          <p>This guide details the original version 1 of the Billing Center API. This API version has been deprecated. For the most recent version 2, see the Billing Center API.</p>
+					<p>The API allows you to access your monthly Akamai usage data in CSV format, aggregating it per contract or per reporting group. See the Reference section for details on available resources.</p>
+					<hr>
+				</div>
+			</div>
+
+      <!-- API content main body -->
+      <div class="row">
+
+        <!-- left menu -->
+        <div class="col-md-3">
+          <ul class="nav nav-pills nav-stacked">
+            <li><h5>Report Sources</h5></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/billing_center_v1/report_sources/report-sources.html')"><a href="#">Report Sources</a></li>
+            <li><h5>Products</h5></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/billing_center_v1/products/products.html')"><a href="#">Products</a></li>
+            <li><h5>Statistic Types</h5></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/billing_center_v1/statistic_types/statistic-types.html')"><a href="#">Statistic Types</a></li>
+            <li><h5>Contract Usage API</h5></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/billing_center_v1/contract_usage_api/csv-report.html')"><a href="#">CSV Report</a></li>
+            <li><h5>Monthly Usage Data</h5></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/billing_center_v1/monthly_usage_data/monthly-usage-data.html')"><a href="#">Monthly Usage Data</a></li>
+            <li><h5>CP Codes</h5></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/billing_center_v1/cp_codes/cp-codes.html')"><a href="#">CP Codes</a></li>
+            <li><h5>Measures</h5></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/billing_center_v1/measures/measures.html')"><a href="#">Measures</a></li>
+            <li><h5>Contract Usage Reseller API</h5></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/billing_center_v1/contract_usage_reseller_api/csv-data-for-reseller.html')"><a href="#">CSV Data for Reseller</a></li>
+            <li><h5>Report Sources for Reseller</h5></li>
+            <li role="presentation" onclick="loadApiActionPage('/htmls/billing_center_v1/report_sources_for_reseller/report-sources-for-reseller.html')"><a href="#">Report Sources for Reseller</a></li>
+          </ul>
+        </div>
+
+        <!-- API action content -->
+        <div class="col-md-9">
+					<!-- API action content goes here -->
+          <div id="api_action_body_wrapper"></div>
+          <!-- response -->
+          <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+            <div id="loading_spinner" style="display: none"></div>
+            <span id="api_response"></span>
+          </div>
+        </div> <!-- API action content end -->
+      </div> <!-- API content main body end -->
+
+    </div> <!-- API section end -->
+
+    <!-- Toke HTML column -->
+    <div class="col-md-4 col-sm-offset-1">
+      <div id="token_html"></div>
+    </div>
+
+  </div> <!-- end of main row -->
+</div> <!-- container -->
+
+<div id="footer_html"></div>
+
+<script>
+  $(document).ready(function() {
+    loadTokenHtml();
+  });
+</script>

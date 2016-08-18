@@ -1,0 +1,34 @@
+<div class="form-group">
+  <label for="post_a_new_event_body">POST a New Event</label>
+  <span class="help-block">Creates a new event with the given parameters. The only required fields are the event name, start and end date. All other fields are optional.</span>
+</div>
+
+<div class="form-group">
+  <label for="aid">Account ID</label>
+  <span id="helpBlock" class="help-block">Unique identifier for the account.</span>
+  <input id="aid" type="text" class="form-control" placeholder="1-7KLGH (accountId)">
+</div>
+
+<div id="textarea_wrapper" class="form-group has-feedback">
+  <textarea id="post_a_new_event_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'post_a_new_event_body')"></textarea>
+</div>
+<input class="btn btn-success" type="button" value="Validate JSON" onclick="validateJsonTextarea('textarea_wrapper', 'post_a_new_event_body')">
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('post_a_new_event')">
+
+<script>
+  var placeholder = '{"audienceLocations": [],"audienceSize": 0,"coordinators": [],"createdDate": 1380132769680,"customer": {}, "description": "", "end": 1380151800000, "eventType": "STREAMING","locked": false, "modifiedDate": 1380132769680,"name": "apiary2","services": { "flashLiveStreams": [], "qosmReportPackIds": [], "silverlightLiveStreams": [],"siteCPCodes": [],"smReportPackIds": [], "sripConfigs": [],"universalLiveStreams": []},"start": 1380132000000, "supportType": {}, "tags": [], "version": 0}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#post_a_new_event_body").val(placeholder);
+
+  function runAPI() {
+    var endpoint = "/events/v2/";
+    var aid = $("#aid").val();
+    endpoint = endpoint + aid + "/event";
+    var body = $("#post_a_new_event_body").val();
+    if (IsJsonString(body)) {
+      var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
+    } else {
+      showNotification("JSON is not in valid format");
+    }
+  }
+</script>

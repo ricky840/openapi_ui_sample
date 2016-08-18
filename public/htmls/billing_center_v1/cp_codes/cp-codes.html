@@ -1,0 +1,58 @@
+<div class="form-group">
+  <label for="spc_contract_id">CP Codes</label>
+  <span id="helpBlock" class="help-block">This method returns a list of cp codes that are available in the given report source in the given time span. If there is no report data for the given selection, no cp codes will be returned even if the report source has cp codes defined in a different time span.</span>
+</div>
+
+<div class="form-group">
+  <label for="reportsource_type">Select Report Source Type</label>
+  <select class="form-control" id="reportsource_type">
+    <option value="reportGroup">reportGroup</option>
+    <option value="contract">Contract</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="spc_reportsource_id">Report Source ID</label>
+  <span id="helpBlock" class="help-block">Identifies the reportGroup or contract under which data is aggregated.</span>
+  <input id="spc_reportsource_id" type="text" class="form-control" placeholder="C-1BBSI2U">
+</div>
+
+<div class="form-group">
+  <label for="">Date</label>
+  <span class="help-block">The year/month for which data is aggregated.</span>
+  <div class="input-group date short">
+    <input type="text" class="form-control inpacct" value="">
+    <div class="input-group-addon">
+      <span class="glyphicon glyphicon-th"></span>
+    </div>
+  </div>
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  $('.input-group.date input').each(function() {
+    $(this).datepicker({
+      format: "mm/yyyy",
+      startView: "months",
+      minViewMode: "months",
+      endDate: '+0d',
+      autoclose: true
+    });
+    $(this).datepicker('setDate', getFormattedDate(new Date()));
+  });
+
+  function runAPI() {
+    var rtype = $("#reportsource_type").val();
+    var rid = $("#spc_reportsource_id").val();
+    var selected_date = $('.input-group.date .inpacct').datepicker('getDate');
+    if (rtype && rid) {
+      var year = selected_date.getFullYear();
+      var month = selected_date.getMonth() + 1;
+      var endpoint = "/billing-usage/v1/cpcodes/"+ rtype + "/" + rid + "/" + month + "/" + year;
+      sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter ReportSource type and ReportSource ID");
+    }
+  }
+</script>

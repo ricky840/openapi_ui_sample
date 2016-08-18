@@ -110,7 +110,7 @@ function sendAPIRequestGet(endpoint, tokentype) {
         type: "GET",
         url: "/run/" + tokentype,
         beforeSend: function(xhr) {
-          xhr.setRequestHeader("Endpoint", endpoint);
+          xhr.setRequestHeader("Endpoint", endpoint.trim());
 					showLoadingSpinner();
         },
 				success: function(responseTxt, status, jxhr) {
@@ -136,7 +136,7 @@ function sendAPIRequestDelete(endpoint, tokentype) {
         type: "DELETE",
         url: "/run/" + tokentype,
         beforeSend: function(xhr) {
-          xhr.setRequestHeader("Endpoint", endpoint);
+          xhr.setRequestHeader("Endpoint", endpoint.trim());
 					showLoadingSpinner();
         },
 				success: function(responseTxt, status, jxhr) {
@@ -169,7 +169,7 @@ function sendAPIRequestPost(endpoint, tokentype, body) {
       type: "POST",
       url: apiurl + tokentype,
       beforeSend: function(xhr) {
-        xhr.setRequestHeader("Endpoint", endpoint)
+        xhr.setRequestHeader("Endpoint", endpoint.trim());
         showLoadingSpinner();
       },
       data: body,
@@ -196,7 +196,7 @@ function sendAPIRequestPut(endpoint, tokentype, body) {
       type: "PUT",
       url: "/run/" + tokentype,
       beforeSend: function(xhr) {
-        xhr.setRequestHeader("Endpoint", endpoint)
+        xhr.setRequestHeader("Endpoint", endpoint.trim());
         showLoadingSpinner();
       },
       data: body,
