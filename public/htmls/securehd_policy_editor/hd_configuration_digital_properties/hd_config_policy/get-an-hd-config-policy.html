@@ -1,0 +1,25 @@
+<div class="form-group">
+  <label for="securehd">Get an HD Config Policy</label>
+  <span class="help-block">Get policy assignments for given hostname</span>
+</div>
+
+<div class="form-group">
+  <label for="domain">Domain</label>
+  <span class="help-block">The fully qualified domain name for the host in question.</span>
+  <input id="domain" type="text" class="form-control" placeholder="speedy.example.com. (domain)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/config-media-security/v1/security/live/";
+    var domain = $("#domain").val();
+    if (domain) {
+      endpoint = endpoint + domain + "/policy";
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter Domain");
+    }
+  }
+</script>

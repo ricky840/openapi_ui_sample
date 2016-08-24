@@ -1,0 +1,16 @@
+<fieldset disabled>
+  <div class="form-group">
+    <label for="securehd">List Designated Market Areas</label>
+    <span class="help-block">Get available DMAs for Content Targetting feature</span>
+    <input id="sercurehd" type="text" class="form-control" placeholder="/config-media-security/v1/security/dmas">
+  </div>
+</fieldset>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/config-media-security/v1/security/dmas";
+    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+  }
+</script>

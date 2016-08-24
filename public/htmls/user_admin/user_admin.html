@@ -1,0 +1,118 @@
+<div class="container_fuild">
+  <div class="row"> <!-- main row -->
+
+    <!-- API section -->
+    <div class="col-md-7">
+
+			<!-- API title goes here -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="corner_space"></div>
+				</div>
+        <div class="col-md-9">
+					<h2>The User Admin API</h2>
+          <p class="text-muted">The User Admin API lets you perform Create, Read, Update and Delete operations on Users, Groups, and Roles.</p>
+          <hr>
+				</div>
+			</div>
+
+      <!-- API content main body -->
+      <div class="row">
+
+        <!-- left menu -->
+        <div class="col-md-3">
+          <div class= "sidemenu">
+            <div class="list-group panel">
+            <a href="#groups" class="list-group-item list-group-title" data-toggle="collapse" >Groups<span class="caret"></span></a>
+            <div class="collapse" id="groups">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/user_admin/groups/groups.html')">Groups</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/user_admin/groups/nested-groups.html')">Nested Groups</a>
+              <a href="#group" class="list-group-item list-group-lv1" data-toggle="collapse">Group<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="group">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#group" onclick="loadApiActionPage('/htmls/user_admin/groups/group/get-a-group.html')">Get a Group</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#group" onclick="loadApiActionPage('/htmls/user_admin/groups/group/modify-a-group.html')">Modify a Group</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#group" onclick="loadApiActionPage('/htmls/user_admin/groups/group/create-a-new-group.html')">Create a New Group</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#group" onclick="loadApiActionPage('/htmls/user_admin/groups/group/remove-a-group.html')">Remove a Group</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/user_admin/groups/move-groups.html')">Move Groups</a>
+              </div> 
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#properties" class="list-group-item list-group-title" data-toggle="collapse" >Properties<span class="caret"></span></a>
+            <div class="collapse" id="properties">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/user_admin/properties/properties-per-group.html')">Properties per Group</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/user_admin/properties/properties.html')">Properties</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/user_admin/properties/users-per-property.html')">Users per Property</a>
+              <a href="#user_property_exceptions" class="list-group-item list-group-lv1" data-toggle="collapse">User's Property Exceptions<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="user_property_exceptions">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#user_property_exceptions" onclick="loadApiActionPage('/htmls/user_admin/properties/user_property_exceptions/list-property-exceptions.html')">List a User's Property Exceptions</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#user_property_exceptions" onclick="loadApiActionPage('/htmls/user_admin/properties/user_property_exceptions/modify-property-exceptions.html')">Modify a User's Set of Property Exceptions</a>
+              </div> 
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/user_admin/properties/property-exception.html')">Property Exception</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/user_admin/properties/move-property.html')">Move Property</a>
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#roles" class="list-group-item list-group-title" data-toggle="collapse" >Roles<span class="caret"></span></a>
+            <div class="collapse" id="roles">
+              <a href="#roles2" class="list-group-item list-group-lv1" data-toggle="collapse">Roles<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="roles2">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#roles2" onclick="loadApiActionPage('/htmls/user_admin/roles/roles/list-roles.html')">List Roles</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#roles2" onclick="loadApiActionPage('/htmls/user_admin/roles/roles/create-a-new-role.html')">Create a New Role</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#roles2" onclick="loadApiActionPage('/htmls/user_admin/roles/roles/modify-a-role.html')">Modify a Role</a>
+              </div> 
+              <a href="#role" class="list-group-item list-group-lv1" data-toggle="collapse">Roles<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="role">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#role" onclick="loadApiActionPage('/htmls/user_admin/roles/role/get-a-role.html')">Get a Role</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#role" onclick="loadApiActionPage('/htmls/user_admin/roles/role/remove-a-role.html')">Remove a Role</a>
+              </div> 
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/user_admin/roles/grantable-roles.html')">Grantable Roles</a>            
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#users" class="list-group-item list-group-title" data-toggle="collapse" >Users<span class="caret"></span></a>
+            <div class="collapse" id="users">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/user_admin/users/users.html')">Users</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/user_admin/users/users-per-account.html')">Users per Account</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/user_admin/users/users-per-group.html')">Users per Group</a>    
+              <a href="#user" class="list-group-item list-group-lv1" data-toggle="collapse">User<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="user">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#user" onclick="loadApiActionPage('/htmls/user_admin/users/user/get-a-user.html')">Get a User</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#user" onclick="loadApiActionPage('/htmls/user_admin/users/user/modify-a-user.html')">Modify a User</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#user" onclick="loadApiActionPage('/htmls/user_admin/users/user/remove-a-user.html')">Remove a User</a>
+              </div> 
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/user_admin/users/user-password.html')">User Password</a>            
+            </div> 
+            </div>
+          </div>
+        </div>
+
+        <!-- API action content -->
+        <div class="col-md-9">
+          <!-- API action content goes here -->
+          <div id="api_action_body_wrapper"></div>
+          <!-- API action content response -->
+          <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: block">
+            <div id="loading_spinner" style="display: none"></div>
+            <span id="api_response"></span>
+          </div>
+        </div> <!-- API action content end -->
+      </div> <!-- API content main body end -->
+
+    </div> <!-- API section end -->
+
+    <!-- Toke HTML column -->
+    <div class="col-md-4 col-sm-offset-1">
+      <div id="token_html"></div>
+    </div>
+
+  </div> <!-- end of main row -->
+</div> <!-- container -->
+
+<div id="footer_html"></div>
+
+<script>
+  $(document).ready(function() {
+    loadTokenHtml();
+  });
+</script>

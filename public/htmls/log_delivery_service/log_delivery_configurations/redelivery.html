@@ -1,0 +1,25 @@
+<div class="form-group">
+  <label for="get_a_redelivery_body">Get a Redelivery</label>
+  <span class="help-block">Gets information about redelivery request for the specified redeliveryId. For details on response members, see the Redelivery object.</span>
+</div>
+
+<div class="form-group">
+  <label for="rid">Redelivery ID</label>
+  <span class="help-block">ID of the redelivery.</span>
+  <input id="sid" type="long" class="form-control" placeholder="(redeliveryId)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "lds/v1/redeliveries/";
+    var rid = $("#rid").val();
+    if (rid) {
+      endpoint = endpoint + rid;
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter Redelivery ID");
+    }
+  }
+</script>

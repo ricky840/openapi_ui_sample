@@ -1,0 +1,35 @@
+<div class="form-group">
+  <label for="case">Comment on a Case</label>
+  <span class="help-block">Add a comment to a case. Specify the case ID to which you want to add a comment.</span>
+</div>
+
+<div class="form-group">
+  <label for="cid">Case ID</label>
+  <span class="help-block">Retrieves Cases details for the given CaseId. </span>
+  <input id="cid" type="text" class="form-control" placeholder="F-CS-1776092 (caseID)">
+</div>
+
+<div id="textarea_wrapper" class="form-group has-feedback">
+  <textarea id="comments_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'comments_body')"></textarea>
+</div>
+
+<input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper','comments_body')">
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+ var placeholder = '{"comment": "Please give update on this case"}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#comments_body").val(placeholder);
+
+ function runAPI() {   
+      var endpoint = "/cases/v1/portal-user/case/";
+      var cid = $("#cid").val();
+      endpoint = endpoint + cid + "/notes"
+      var body = $("#comments_body").val();
+      if (IsJsonString(body)) {
+        var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
+      } else {
+        showNotification("JSON is not in valid format");
+      }
+    }
+</script>

@@ -1,0 +1,26 @@
+<div class="form-group">
+  <label for="">Create a New Configuration</label>
+  <span class="help-block">Creates a new configuration. Profile created with assigned Domain</span>
+</div>
+
+<div class="form-group">
+  <label for="create_configuration">Modify an HD Config Policy Object</label>
+  <div id="textarea_wrapper" class="form-group has-feedback">
+    <textarea id="create_configuration" class="form-control" rows="10" placeholder="" ></textarea>
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  var placeholder = '<?xml version="1.0" encoding="UTF-8"?><domain><configuration-details><configuration-name>live_test_123</configuration-name><hostname>livetestapi-lh.akamai-domain.net</hostname><reporting-cpcode>123456</reporting-cpcode><configuration-type>Universal Streaming Live</configuration-type><access-control-group>1-ABCDEF</access-control-group></configuration-details><archive-configuration><archive-cpcode>987654</archive-cpcode><archive-storage-location>EU/US preferred</archive-storage-location></archive-configuration><domain-versions><domain-version><delivery-formats><hd-flash-1.0>Disabled</hd-flash-1.0><adobe-hds>Enabled</adobe-hds><apple-hls>Enabled</apple-hls></delivery-formats><advanced-configuration><adobe-hds-advanced-config><hds-segment-duration>5</hds-segment-duration></adobe-hds-advanced-config><apple-hls-advanced-config><hls-segment-duration>10</hls-segment-duration><audio-only-stream-from-lowest-bitrate>Enabled</audio-only-stream-from-lowest-bitrate></apple-hls-advanced-config></advanced-configuration></domain-version></domain-versions></domain>';
+  $("#create_configuration").val(formatXml(placeholder));
+
+  placeholder = formatXml(placeholder);
+  $("#create_configuration").val(placeholder);
+
+  function runAPI() {
+    var endpoint = "/config-media-live/v1/live";
+    var body = $("#create_configuration").val();
+    var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
+  }
+</script>

@@ -1,0 +1,25 @@
+<div class="form-group">
+  <label for="">Get an AS Map</label>
+  <span class="help-block">Name of Traffic Management domain.</span>
+  <input id="domain_name" type="text" class="form-control" placeholder="example.akadns.net">
+</div>
+
+<div class="form-group">
+  <label for="mname">Map Name</label>
+  <span class="help-block">Name of AS Map to create or update.</span>
+  <input id="mname" type="text" class="form-control" placeholder="Software-rollout (mapName)">
+</div>
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var domain = $("#domain_name").val();
+    var mname = $("#mname").val();
+    if (domain && mname) {
+      var endpoint = "/config-gtm/v1/domains/"+domain+"/as-maps/"+mname;
+      sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter domain name and map name");
+    }
+  }
+</script>

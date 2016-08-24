@@ -1,0 +1,34 @@
+<div class="form-group">
+  <label for="sharing_body">Share a Network List</label>
+  <span class="help-block">Shares a Network List with the specified accounts.</span>
+</div>
+
+<div class="form-group">
+  <label for="uid">Unique ID</label>
+  <span class="help-block">Unique Id of List</span>
+  <input id="uid" type="text" class="form-control" placeholder="17807_TRAININGIPLMN (unique-Id)">
+</div>
+
+<div id="textarea_wrapper" class="form-group has-feedback">
+  <textarea id="sharing_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'sharing_body')"></textarea>
+</div>
+
+<input class="btn btn-success" type="button" value="Validate JSON" onclick="validateJsonTextarea('textarea_wrapper', 'sharing_body')">
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  var placeholder = '{"accounts": [ "ACCOUNT_ID"],"acgs": [  "ACG_ID"]}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#sharing_body").val(placeholder);
+
+  function runAPI() {
+    var uid = $("#uid").val();
+    var endpoint = "/network-list/v1/network_lists/" + uid + "/share";
+    var body = $("#sharing_body").val();
+    if (IsJsonString(body)) {
+      var return_response = sendAPIRequestPut(endpoint, "luna_token", body);
+    } else {
+      showNotification("JSON is not in valid format");
+    }
+  }
+</script>

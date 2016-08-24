@@ -1,0 +1,25 @@
+<div class="form-group">
+  <label for="securehd">Region</label>
+  <span class="help-block">Get available Regions given country code for Content Targetting feature</span>
+</div>
+
+<div class="form-group">
+  <label for="ccode">Country Code</label>
+  <span class="help-block">The country code.</span>
+  <input id="ccode" type="text" class="form-control" placeholder="US (countryCode)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/config-media-security/v1/security/regions/";
+    var ccode = $("#ccode").val();
+    if (ccode) {
+      endpoint = endpoint + ccode;
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter Country Code");
+    }
+  }
+</script>

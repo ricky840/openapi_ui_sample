@@ -1,0 +1,35 @@
+<div class="form-group">
+  <label for="securehd">HD Config Policy per Environment</label>
+  <span class="help-block">Get policy assignment for network (staging/production)</span>
+</div>
+
+<div class="form-group">
+  <label for="domain">Domain</label>
+  <span class="help-block">The fully qualified domain name for the host in question.</span>
+  <input id="domain" type="text" class="form-control" placeholder="speedy.example.com. (domain)">
+</div>
+
+<div class="form-group">
+  <label for="environment">Select Environment</label>
+  <span class="help-block">The environment.</span>
+  <select class="form-control" id="environment">
+    <option value="Staging">Staging</option>
+    <option value="Production">Production</option>
+  </select>
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/config-media-security/v1/security/live/";
+    var domain = $("#domain").val();
+    var environment = $("#environment").val();
+    if (domain) {
+      endpoint = endpoint + domain + "/policy/" + environment;
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter Domain and select the Environment");
+    }
+  }
+</script>

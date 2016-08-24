@@ -1,0 +1,162 @@
+<div class="container_fuild">
+  <div class="row"> <!-- main row -->
+
+    <!-- API section -->
+    <div class="col-md-7">
+
+			<!-- API title goes here -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="corner_space"></div>
+				</div>
+        <div class="col-md-9">
+          <h2>The Cloudlets API</h2>
+          <p>Cloudlets are value-added applications that complement Akamai’s core delivery solutions to solve specific business challenges. Cloudlets bring a site’s business logic closer to the end user by placing it on the “edge” of the content delivery platform.</p>
+          <p>The Cloudlets v2 API allows you to create and view Cloudlet policies and policy versions. In addition, use this API to</p>
+          <p>- activate a Cloudlet policy version on either the staging or production networks.</p>
+          <p>- delete a Cloudlet policy.</p>
+          <p>- view group-level information about a particular Cloudlet.</p>
+          <hr>
+				</div>
+			</div>
+
+      <!-- API content main body -->
+      <div class="row">
+
+        <!-- left menu -->
+        <div class="col-md-3">
+          <div class= "sidemenu">
+            <div class="list-group panel">
+            <a href="#cloutdlets" class="list-group-item list-group-title" data-toggle="collapse">Cloudlets<span class="caret"></span></a>
+            <div class="collapse" id="cloutdlets">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/cloudlets/cloudlets/cloudlets.html')">Cloudlets</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/cloudlets/cloudlets/cloudlet.html')">Cloudlet</a>
+            </div>   
+            </div>
+            <div class="list-group panel">
+            <a href="#goup_level_cloutdlets" class="list-group-item list-group-title" data-toggle="collapse">Group-Level Cloudlets<span class="caret"></span></a>
+            <div class="collapse" id="goup_level_cloutdlets">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/cloudlets/group_level_cloudlets/groups.html')">Groups</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/cloudlets/group_level_cloudlets/group.html')">Group</a>
+            </div>   
+            </div>
+            <div class="list-group panel">
+            <a href="#policies" class="list-group-item list-group-title" data-toggle="collapse">Policies<span class="caret"></span></a>
+            <div class="collapse" id="policies">
+              <a href="#policies2" class="list-group-item list-group-lv1" data-toggle="collapse">Policies<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="policies2">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#policies2" onclick="loadApiActionPage('/htmls/cloudlets/policies/policies/list-policies.html')">List Policies</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#policies2" onclick="loadApiActionPage('/htmls/cloudlets/policies/policies/create-a-policy.html')">Create a Policy</a>
+              </div>
+              <a href="#policy" class="list-group-item list-group-lv1" data-toggle="collapse">Policy<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="policy">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#policy" onclick="loadApiActionPage('/htmls/cloudlets/policies/policy/get-a-policy.html')">Get a Policy</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#policy" onclick="loadApiActionPage('/htmls/cloudlets/policies/policy/update-a-policy.html')">Update a Policy</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#policy" onclick="loadApiActionPage('/htmls/cloudlets/policies/policy/remove-a-policy.html')">Remove a Policy</a>
+              </div>  
+            </div>
+            </div>
+            <div class="list-group panel">
+            <a href="#policy_versions" class="list-group-item list-group-title" data-toggle="collapse">Policy Versions<span class="caret"></span></a>
+            <div class="collapse" id="policy_versions">
+              <a href="#policiy_versions2" class="list-group-item list-group-lv1" data-toggle="collapse">Policiy Versions<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="policiy_versions2">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#policiy_versions2" onclick="loadApiActionPage('/htmls/cloudlets/policy_versions/policy_versions/list-policy-versions.html')">List Policy Versions</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#policiy_versions2" onclick="loadApiActionPage('/htmls/cloudlets/policy_versions/policy_versions/create-a-new-policy-version.html')">Create a New Policy Version</a>
+              </div>
+              <a href="#policy_version_requests" class="list-group-item list-group-lv1" data-toggle="collapse">Policy Version requests<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="policy_version_requests">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#policy_version_requests" onclick="loadApiActionPage('/htmls/cloudlets/policy_versions/policy_version_requests/get-a-policy-version.html')">Get a Policy Version</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#policy_version_requests" onclick="loadApiActionPage('/htmls/cloudlets/policy_versions/policy_version_requests/update-a-policy-version.html')">Update a Policy Version</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#policy_version_requests" onclick="loadApiActionPage('/htmls/cloudlets/policy_versions/policy_version_requests/remove-a-policy-version.html')">Remove a Policy Version</a>
+              </div>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/cloudlets/policy_versions/policy-version-rules.html')">Policy Version Rules</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/cloudlets/policy_versions/policy-version-rule-requests.html')">Policy Version Rule Requests</a>
+            </div>
+            </div>
+            <div class="list-group panel">
+            <a href="#property_associations" class="list-group-item list-group-title" data-toggle="collapse">Property Associations<span class="caret"></span></a>
+            <div class="collapse" id="property_associations">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/cloudlets/property_associations/associated-properties.html')">Associated Properties</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/cloudlets/property_associations/properties-associated-with-a-policy.html')">Properties Associated with a Policy</a>
+            </div>   
+            </div>
+            <div class="list-group panel">
+            <a href="#cloudlets_origins_for_application_load_balancer" class="list-group-item list-group-title" data-toggle="collapse">Cloudlets Origins for Application Load Balancer<span class="caret"></span></a>
+            <div class="collapse" id="cloudlets_origins_for_application_load_balancer">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/cloudlets/cloudlets_origins_for_application_load_balancer/cloudlets-origins.html')">Cloudlets Origins</a>
+              <a href="#cloudlets_origin" class="list-group-item list-group-lv1" data-toggle="collapse">Cloudlets Origin<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="cloudlets_origin">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#cloudlets_origin" onclick="loadApiActionPage('/htmls/cloudlets/cloudlets_origins_for_application_load_balancer/cloudlets_origin/get-a-cloudlets-origin.html')">Get a Cloudlets Origin</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#cloudlets_origin" onclick="loadApiActionPage('/htmls/cloudlets/cloudlets_origins_for_application_load_balancer/cloudlets_origin/update-a-cloudlets-origin.html')">Update a Cloudlets Origin</a>
+              </div>
+              <a href="#cloudlets_origin_versions" class="list-group-item list-group-lv1" data-toggle="collapse">Cloudlets Origin Versions<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="cloudlets_origin_versions">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#cloudlets_origin_versions" onclick="loadApiActionPage('/htmls/cloudlets/cloudlets_origins_for_application_load_balancer/cloudlets_origin_versions/list-cloudlets-origin-versions.html')">List Cloudlets Origin Versions</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#cloudlets_origin_versions" onclick="loadApiActionPage('/htmls/cloudlets/cloudlets_origins_for_application_load_balancer/cloudlets_origin_versions/create-a-cloudlets-origin-version.html')">Create a Cloudlets Origin Version</a>
+              </div>
+              <a href="#cloudlets_origin_version_requests" class="list-group-item list-group-lv1" data-toggle="collapse">Cloudlets Origin Version Requests<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="cloudlets_origin_version_requests">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#cloudlets_origin_version_requests" onclick="loadApiActionPage('/htmls/cloudlets/cloudlets_origins_for_application_load_balancer/cloudlets_origin_version_requests/get-a-cloudlets-origin-version.html')">Get a Cloudlets Origin Version</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#cloudlets_origin_version_requests" onclick="loadApiActionPage('/htmls/cloudlets/cloudlets_origins_for_application_load_balancer/cloudlets_origin_version_requests/update-a-cloudlets-origin-version.html')">Update a Cloudlets Origin Version</a>
+              </div>
+            </div>   
+            </div>
+            <div class="list-group panel">
+            <a href="#cloudlets_origin_version_activations" class="list-group-item list-group-title" data-toggle="collapse">Cloudlets Origin Version Activations<span class="caret"></span></a>
+            <div class="collapse" id="cloudlets_origin_version_activations">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/cloudlets/cloudlets_origin_version_activations/current-cloudlets-origin-version-activations.html')">Current Cloudlets Origin Version Activations</a>
+              <a href="#cloudlets_origin_activations" class="list-group-item list-group-lv1" data-toggle="collapse">Cloudlets Origin Activations<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="cloudlets_origin_activations">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#cloudlets_origin_activations" onclick="loadApiActionPage('/htmls/cloudlets/cloudlets_origin_version_activations/cloudlets_origin_activations/list-cloudlets-origin-activations.html')">List Cloudlets Origin Activations</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#cloudlets_origin_activations" onclick="loadApiActionPage('/htmls/cloudlets/cloudlets_origin_version_activations/cloudlets_origin_activations/activate-a-cloudlets-origin-version.html')">Activate a Cloudlets Origin Version</a>
+              </div>
+            </div>
+            </div>
+            <div class="list-group panel">
+            <a href="#policy_activations" class="list-group-item list-group-title" data-toggle="collapse">Policy Activations<span class="caret"></span></a>
+            <div class="collapse" id="policy_activations">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/cloudlets/policy_activations/all-activations.html')">All Activations</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/cloudlets/policy_activations/policy-version-activation.html')">Policy Version Activation</a>
+            </div>   
+            </div>
+            <div class="list-group panel">
+            <a href="#schemas" class="list-group-item list-group-title" data-toggle="collapse">Schemas<span class="caret"></span></a>
+            <div class="collapse" id="schemas">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/cloudlets/schemas/json-schema.html')">JSON Schema</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/cloudlets/schemas/json-schemas-for-specific-cloudlet.html')">JSON Schemas for Specific Cloudlet</a>
+            </div>   
+            </div>
+          </div>
+        </div><!-- left menu end -->
+
+        <!-- API action content -->
+        <div class="col-md-9">
+     
+					<!-- API action content goes here -->
+          <div id="api_action_body_wrapper"></div>
+          <!-- response -->
+          <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+            <div id="loading_spinner" style="display: none"></div>
+            <span id="api_response"></span>
+          </div>
+        </div> <!-- API action content end -->
+      </div> <!-- API content main body end -->
+
+    </div> <!-- API section end -->
+
+    <!-- Toke HTML column -->
+    <div class="col-md-4 col-sm-offset-1">
+      <div id="token_html"></div>
+    </div>
+
+  </div> <!-- end of main row -->
+</div> <!-- container -->
+
+<div id="footer_html"></div>
+
+<script>
+  $(document).ready(function() {
+    loadTokenHtml();
+  });
+</script>

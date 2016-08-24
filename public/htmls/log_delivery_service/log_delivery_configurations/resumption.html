@@ -1,0 +1,34 @@
+<div class="form-group">
+  <label for="resumption_body">Resumption</label>
+  <span class="help-block">Resume log delivery configuration for given serviceId.</span>
+</div>
+<div class="form-group">
+  <label for="sid">Service ID</label>
+  <span class="help-block">Servoce ID of the configuration.</span>
+  <input id="sid" type="number" class="form-control" placeholder="214137 (serviceId)">
+</div>
+<div id="textarea_wrapper" class="form-group has-feedback">
+    <textarea id="resumption_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'resumption_body')"></textarea>
+</div>
+
+  <input class="btn btn-success" type="button" value="Validate JSON" onclick="validateJsonTextarea('textarea_wrapper', 'resumption_body')">
+  <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+
+<script>
+  var placeholder = '{}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#resumption_body").val(placeholder);
+
+  function runAPI() {
+    var endpoint = "lds/v1/configurations/resume/";
+    var sid = $("#sid").val();
+    endpoint = endpoint + sid;
+    var body = $("#resumption_body").val();
+    if (IsJsonString(body)) {
+      var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
+    } else {
+      showNotification("JSON is not in valid format");
+    }
+  }
+</script>

@@ -1,0 +1,26 @@
+<div class="form-group">
+  <label for="network_lists_body">Create a Network List</label>
+  <span class="help-block">Create a new Network List.</span>
+  <div id="textarea_wrapper" class="form-group has-feedback">
+    <textarea id="create_a_network_list_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'create_a_network_list_body')"></textarea>
+  </div>
+</div>
+
+<input class="btn btn-success" type="button" value="Validate JSON" onclick="validateJsonTextarea('textarea_wrapper', 'create_a_network_list_body')">
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  var placeholder = '{"name": "botlist", "type": "IP","list": ["201.22.44.12","8.7.6.0/24"  ]}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#create_a_network_list_body").val(placeholder);
+
+  function runAPI() {
+    var endpoint = "/network-list/v1/network_lists";
+    var body = $("#create_a_network_list_body").val();
+    if (IsJsonString(body)) {
+      var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
+    } else {
+      showNotification("JSON is not in valid format");
+    }
+  }
+</script>

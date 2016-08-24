@@ -1,0 +1,20 @@
+<div class="form-group">
+  <label for="policies">Property Associations</label>
+  <span class="help-block">NOTE: See Property Association Object to view the property definitions for these operations.</span>
+</div>
+
+<fieldset disabled>
+  <div class="form-group">
+    <label for="policies">List Associated Properties</label>
+    <input id="policies" type="text" class="form-control" placeholder="/cloudlets/api/v2/properties">
+  </div>
+</fieldset>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI(apitype) {
+    var endpoint = "/cloudlets/api/v2/properties";
+    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+  }
+</script>

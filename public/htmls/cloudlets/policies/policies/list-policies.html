@@ -1,0 +1,22 @@
+<div class="form-group">
+  <label for="policies">Policies</label>
+  <span class="help-block">The operations in this section allow you to create and list Cloudlet policies. In addition, use the DELETE operation to remove a Cloudlet policy.</span>
+  <span class="help-block">NOTE: See Policy Object to view the property definitions for these operations. Click here for the match properties.</span>
+</div>
+
+<fieldset disabled>
+  <div class="form-group">
+    <label for="policies">List Policies</label>
+    <span class="help-block">Returns information for all available policies.</span>
+    <input id="policies" type="text" class="form-control" placeholder="/cloudlets/api/v2/policies">
+  </div>
+</fieldset>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI(apitype) {
+    var endpoint = "/cloudlets/api/v2/policies";
+    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+  }
+</script>

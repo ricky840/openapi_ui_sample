@@ -1,0 +1,33 @@
+<div class="form-group">
+  <label for="dictionary_body">Get a Dictionary</label>
+  <span class="help-block">Get a list of dictionary items. Each dictionary item contains key and value members.</span>
+</div>
+<div class="form-group">
+  <label for="dictionaryName">Select Dictionary Name</label>
+  <span class="help-block">Dictionary name value.</span>
+  <select class="form-control" id="dictionaryName">
+    <option value="DELIVERY_FREQUENCY">DELIVERY_FREQUENCY</option>
+    <option value="LOG_FORMATS">LOG_FORMATS</option>
+    <option value="ENCODINGS">ENCODINGS</option>
+    <option value="MESSAGE_SIZES">MESSAGE_SIZES</option>
+    <option value="PHONES">PHONES</option>
+    <option value="PRODUCTS">PRODUCTS</option>
+    <option value="PRODUCT_GROUPS_FOR_ACGS">PRODUCT_GROUPS_FOR_ACGS</option>
+  </select>
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+
+<script>
+  function runAPI() {
+    var endpoint = "lds/v1/dictionaries/";
+    var dictionaryName = $("#dictionaryName").val();
+    if (dictionaryName) {
+      endpoint = endpoint + dictionaryName;
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please select Dictionary Name");
+    }
+  }
+</script>

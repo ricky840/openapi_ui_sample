@@ -1,0 +1,37 @@
+<div class="form-group">
+  <label for="">Edit an Existing Stream</label>
+  <span class="help-block">Name of Media Streaming domain.</span>
+  <input id="domain_name" type="text" class="form-control" placeholder="example.akadns.net">
+</div>
+
+<div class="form-group">
+  <label for="sid">Stream ID</label>
+  <span class="help-block">Stream ID as provided by GET</span>
+  <input id="sid" type="text" class="form-control" placeholder="10000 (streamID)">
+</div>
+
+<div class="form-group">
+  <label for="edit_stream">Edit an Existing Stream Object</label>
+  <div id="textarea_wrapper" class="form-group has-feedback">
+    <textarea id="edit_stream" class="form-control" rows="10" placeholder="" ></textarea>
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  var placeholder = '<?xml version="1.0" encoding="UTF-8"?><stream><stream-id>12345</stream-id><stream-type>Universal Streaming Live</stream-type><stream-name>STREAM1</stream-name><primary-contact-name>Stream User1</primary-contact-name><secondary-contact-name>Stream User2</secondary-contact-name><notification-email>example@domain.com</notification-email><encoder-settings><primary-encoder-ip>250.250.250.250</primary-encoder-ip><backup-encoder-ip>250.250.250.251</backup-encoder-ip><password>password</password></encoder-settings><dvr-settings><dvr>Disabled</dvr></dvr-settings></stream>';
+  $("#edit_stream").val(formatXml(placeholder));
+
+  function runAPI() {
+    var endpoint = "/config-media-live/v1/live/";
+    var domain = $("#domain").val();
+    var sid = $("#sid").val();
+    var body = $("#edit_stream").val();
+    if (domain && sid) {
+      endpoint = endpoint + domain + "/stream/" + sid;
+      var return_response = sendAPIRequestPut(endpoint, "luna_token", body);
+    } else {
+      showNotification("Please enter Domain and streamID");
+    }
+  }
+</script>

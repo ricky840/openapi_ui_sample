@@ -1,0 +1,30 @@
+<div class="form-group">
+  <label for="">Stream settings to be used to create the new stream</label>
+  <span class="help-block">Name of Media Streaming domain.</span>
+  <input id="domain_name" type="text" class="form-control" placeholder="example.akadns.net">
+</div>
+
+<div class="form-group">
+  <label for="create_stream">Modify an HD Config Policy Object</label>
+  <div id="textarea_wrapper" class="form-group has-feedback">
+    <textarea id="create_stream" class="form-control" rows="10" placeholder=""></textarea>
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  var placeholder = '<?xml version="1.0" encoding="UTF-8"?><stream><stream-type>Universal Streaming Live</stream-type><stream-name>STREAM1</stream-name><primary-contact-name>Stream User1</primary-contact-name><secondary-contact-name>Stream User2</secondary-contact-name><notification-email>example@domain.com</notification-email><encoder-settings><primary-encoder-ip>250.250.250.250</primary-encoder-ip><backup-encoder-ip>250.250.250.251</backup-encoder-ip><password>password</password></encoder-settings><dvr-settings><dvr>Disabled</dvr></dvr-settings></stream>';
+  $("#create_stream").val(formatXml(placeholder));
+
+  function runAPI() {
+    var endpoint = "/config-media-live/v1/live/";
+    var domain = $("#domain_name").val();
+    var body = $("#create_stream").val();
+    if (pid) {
+      endpoint = endpoint + domain + "/stream";
+      var return_response = sendAPIRequestPut(endpoint, "luna_token", body);
+    } else {
+      showNotification("Please enter Domain");
+    }
+  }
+</script>

@@ -1,0 +1,25 @@
+<div class="form-group">
+  <label for="media">Download Analytics Data Sources</label>
+  <span class="help-block">A data source is a collection of raw log data with detailed information on each access to your digital property made by a user.</span>
+</div>
+
+<div class="form-group">
+  <label for="rid">ReportPack ID</label>
+  <span class="help-block">The ID of the report pack</span>
+  <input id="rid" type="number" class="form-control" placeholder="30149 (reportPackId)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/media-analytics/v1/download-analytics/report-packs/";
+    var rid = $("#rid").val();
+    if (rid) {
+      endpoint = endpoint + rid + "/data-sources";
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter reportPackID");
+    }
+  }
+</script>

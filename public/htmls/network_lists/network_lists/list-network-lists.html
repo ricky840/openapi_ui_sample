@@ -1,0 +1,19 @@
+<div class="form-group">
+  <label for="network_lists_body">List Network Lists</label>
+  <span class="help-block">List all configured Network Lists for the authenticated user.</span>
+</div>
+
+<div class="form-group">
+<fieldset disabled>
+    <input id="list" type="text" class="form-control" placeholder="/network-list/v1/network_lists">
+</fieldset>
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/network-list/v1/network_lists";
+    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+  }
+</script>

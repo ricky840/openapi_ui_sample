@@ -1,0 +1,25 @@
+<div class="form-group">
+  <label for="modify_a_configuration_body">Get a Configuration</label>
+  <span class="help-block">Gets information about Log Delivery Configuration for the specified serviceId. For details on response members, see the Configuration object.</span>
+</div>
+
+<div class="form-group">
+  <label for="sid">Service ID</label>
+  <span class="help-block">Service ID of the configuration.</span>
+  <input id="sid" type="number" class="form-control" placeholder="214137 (serviceId)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "lds/v1/configurations/";
+    var sid = $("#sid").val();
+    if (sid) {
+      endpoint = endpoint + sid;
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter serviceID");
+    }
+  }
+</script>

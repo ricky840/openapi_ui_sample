@@ -1,0 +1,25 @@
+<div class="form-group">
+  <label for="securehd">Remove a Policy</label>
+  <span class="help-block">Delete policy from system (both staging and production network)</span>
+</div>
+
+<div class="form-group">
+  <label for="pid">Policy ID</label>
+  <span class="help-block">The ID of the policy to fetch.</span>
+  <input id="pid" type="number" class="form-control" placeholder="1234 (policyId)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/config-media-security/v1/security/";
+    var pid = $("#pid").val();
+    if (pid) {
+      endpoint = endpoint + pid + "/promoteDelete";
+      var return_response = sendAPIRequestDelete(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter policyID");
+    }
+  }
+</script>

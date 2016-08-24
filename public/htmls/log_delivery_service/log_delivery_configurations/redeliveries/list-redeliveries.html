@@ -1,0 +1,16 @@
+<fieldset disabled>
+  <div class="form-group">
+    <label for="list-configurations">List Redeliveries</label>
+    <span class="help-block">Lists all log redelivery requests. For details on response members, see the Redelivery object.</span>
+    <input id="list" type="text" class="form-control" placeholder="/lds/v1/redeliveries">
+  </div>
+</fieldset>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/lds/v1/redeliveries";
+    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+  }
+</script>

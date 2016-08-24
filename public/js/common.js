@@ -121,7 +121,11 @@ function sendAPIRequestGet(endpoint, tokentype) {
 		        temp_response = '{"status":"'+status+'","msg":"Empty response body from the server."}'
             showResponse(endpoint, temp_response);
           }
-				}
+				},
+        error: function(xhr, status, error_msg) {
+          error_msg = status + ": " + error_msg
+          showResponse(endpoint, error_msg);
+        }
       }).responseText;
 
     return result;
@@ -151,7 +155,11 @@ function sendAPIRequestDelete(endpoint, tokentype, body) {
 		        temp_response = '{"status":"'+status+'","msg":"Empty response body from the server."}'
             showResponse(endpoint, temp_response);
           }
-				}
+				},
+        error: function(xhr, status, error_msg) {
+          error_msg = status + ": " + error_msg
+          showResponse(endpoint, error_msg);
+        }
       }).responseText;
 
     return result;
@@ -186,6 +194,10 @@ function sendAPIRequestPost(endpoint, tokentype, body) {
           temp_response = '{"status":"'+status+'","msg":"Empty response body from the server."}'
           showResponse(body, temp_response);
         }
+      },
+      error: function(xhr, status, error_msg) {
+        error_msg = status + ": " + error_msg
+        showResponse(body, error_msg);
       }
     }).responseText;
 
@@ -198,6 +210,8 @@ function sendAPIRequestPost(endpoint, tokentype, body) {
 
 function sendAPIRequestPut(endpoint, tokentype, body) {
   endpoint = endpoint.replace(/\s+/g, '');
+  if (body === undefined) { body = null; }
+
   if (seeIfTokenUploaded(tokentype)) {
     var result = $.ajax({
       type: "PUT",
@@ -214,6 +228,10 @@ function sendAPIRequestPut(endpoint, tokentype, body) {
           temp_response = '{"status":"'+status+'","msg":"Empty response body from the server."}'
           showResponse(body, temp_response);
         }
+      },
+      error: function(xhr, status, error_msg) {
+        error_msg = status + ": " + error_msg
+        showResponse(body, error_msg);
       }
     }).responseText;
 
@@ -283,11 +301,13 @@ function showResponse(request, return_response) {
     var requestContent = syntaxHighlight(JSON.parse(request));
   } else {
     var requestContent = request;
+    requestContent = requestContent.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/ /g, '&nbsp;').replace(/\n/g,'<br />');
   }
   if (IsJsonString(return_response)) {
     var returnContent = syntaxHighlight(JSON.parse(return_response));
   } else {
     var returnContent = return_response;
+    returnContent = returnContent.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/ /g, '&nbsp;').replace(/\n/g,'<br />');
   }
   html = "<label class='actioncontentlabel'>Request</label><pre>"+requestContent+"</pre>";
 	html = html + "<label class='actioncontentlabel'>Response</label><pre>"+returnContent+"</pre>";
@@ -302,3 +322,60 @@ function showLoadingSpinner() {
   $("#loading_spinner").show();
 	$("#api_response_wrapper").show();
 }
+
+function formatXml(xml) {
+  var formatted = '';
+  var reg = /(>)(<)(\/*)/g;
+  xml = xml.replace(reg, '$1\r\n$2$3');
+  var pad = 0;
+  jQuery.each(xml.split('\r\n'), function(index, node) {
+    var indent = 0;
+    if (node.match( /.+<\/\w[^>]*>$/ )) {
+        indent = 0;
+    } else if (node.match( /^<\/\w/ )) {
+        if (pad != 0) {
+            pad -= 1;
+        }
+    } else if (node.match( /^<\w[^>]*[^\/]>.*$/ )) {
+        indent = 1;
+    } else {
+        indent = 0;
+    }
+
+    var padding = '';
+    for (var i = 0; i < pad; i++) {
+        padding += '  ';
+    }
+
+    formatted += padding + node + '\r\n';
+    pad += indent;
+  });
+
+  //formatted = formatted.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/ /g, '&nbsp;').replace(/\n/g,'<br />');
+  return formatted;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

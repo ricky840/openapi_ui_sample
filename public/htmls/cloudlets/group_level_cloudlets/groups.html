@@ -1,0 +1,22 @@
+<div class="form-group">
+  <label for="cloudlets">Group-Level Cloudlets</label>
+  <span class="help-block">Collection of commands used to return group-level information for Cloudlets.</span>
+  <span class="help-block">NOTE: See Group-Level Cloudlet Object to view the property definitions for these operations.</span>
+</div>
+
+<fieldset disabled>
+  <div class="form-group">
+    <label for="groups">List Groups</label>
+    <span class="help-block">Returns information about the Cloudlet types associated with the groups you have edit privileges for.</span>
+    <input id="groups" type="text" class="form-control" placeholder="/cloudlets/api/v2/group-info">
+  </div>
+</fieldset>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI(apitype) {
+    var endpoint = "/cloudlets/api/v2/group-info";
+    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+  }
+</script>

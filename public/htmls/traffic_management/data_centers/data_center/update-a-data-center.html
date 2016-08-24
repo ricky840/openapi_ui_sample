@@ -1,0 +1,38 @@
+<div class="form-group">
+  <label for="">Update a Data Center</label>
+  <span class="help-block">Name of Traffic Management domain</span>
+  <input id="domain_name" type="text" class="form-control" placeholder="example.akadns.net">
+</div>
+
+<div class="form-group">
+  <label for="did">DataCenter ID</label>
+  <span class="help-block">Numeric id of the data center.</span>
+  <input id="did" type="number" class="form-control" placeholder="5331 (datacenterId)">
+</div>
+
+<div class="form-group">
+  <span class="help-block">Update Data Center Object</span>
+  <div id="textarea_wrapper" class="form-group has-feedback">
+    <textarea id="update_a_data_center" class="form-control" rows="15" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'update_a_data_center')"></textarea>
+  </div>
+  <input class="btn btn-success" type="button" value="Validate JSON" onclick="validateJsonTextarea('textarea_wrapper', 'update_a_data_center')">
+  <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+</div>
+
+<script>
+  var placeholder = '{"city": "Downpatrick","cloneOf": 0,"continent": "EU","country": "GB","datacenterId": 3133,"defaultLoadObject": {"loadObject": null,"loadObjectPort": 0,"loadServers": null},"latitude": 54.367,"longitude": -5.582,"nickname": "Winterfell"}'
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#update_a_data_center").val(placeholder);
+
+  function runAPI() {
+    var domain_name =  $("#domain_name").val();
+    var domain_config = $("#update_a_data_center").val();
+    var did = $("#did").val();
+    if (IsJsonString(domain_config) && domain_name) {
+      var endpoint = "/config-gtm/v1/domains/"+domain_name+"/datacenters"+did;
+      sendAPIRequestPut(endpoint, "luna_token", domain_config);
+    } else {
+      showNotification("Please make sure JSON is in valid format and enter a domain name & datacenterID");
+    }
+  }
+</script>

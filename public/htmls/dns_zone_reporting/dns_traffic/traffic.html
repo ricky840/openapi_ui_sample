@@ -1,0 +1,45 @@
+<div class="form-group">
+    <label for="zone">Zone</label>
+    <span id="helpBlock" class="help-block">Name of Zone. Example: example.com.</span>
+    <input id="zone" type="text" class="form-control" placeholder="Zone">    
+</div>
+<div class="form-group">
+    <label for="start">Start Date</label>
+    <span id="helpBlock" class="help-block">Start date, in yyyyMMdd format. Example: 20131231.</span>
+    <input id="start" type="text" class="form-control" placeholder="Start Date">
+</div>
+<div class="form-group">
+    <label for="end">End Date</label>
+     <span id="helpBlock" class="help-block">End date, in yyyyMMdd format. Example: 20140101.</span>
+    <input id="end" type="text" class="form-control" placeholder="End Date">
+</div>
+<div class="form-group">
+    <label for="start_time">Start Time</label>
+    <span id="helpBlock" class="help-block">Start time, in HH:mm format. Example: 00:30.</span>
+    <input id="start_time" type="text" class="form-control" placeholder="Start Time">
+</div>
+<div class="form-group">
+    <label for="end_time">End Time</label>
+    <span id="helpBlock" class="help-block">End time, in HH:mm format. Example: 14:30.</span>
+    <input id="end_time" type="text" class="form-control" placeholder="End Time">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+
+<script>
+ function runAPI() {   
+      var endpoint = "/data-dns/v1/traffic/";
+      var zone = $("#zone").val();
+      var start = $("#start").val();
+      var end = $("#end").val();
+      var start_time = $("#start_time").val();
+      var end_time = $("#end_time").val();
+      if (zone) {
+        endpoint = endpoint + zone + "?start=" + start + "&end=" + end + "&start_time=" + start + "&end_time=" + end_time;
+        var return_response = sendAPIRequestGet(endpoint, "luna_token");
+      } else {
+        showNotification("Please enter Input Data");
+      }
+    }
+</script>

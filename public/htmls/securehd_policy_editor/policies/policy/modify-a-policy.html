@@ -1,0 +1,36 @@
+<div class="form-group">
+  <label for="securehd">Modify a Policy</label>
+  <span class="help-block">Update security policy on Staging network.</span>
+</div>
+
+<div class="form-group">
+  <label for="pid">Policy ID</label>
+  <span class="help-block">The ID of the policy to fetch.</span>
+  <input id="pid" type="number" class="form-control" placeholder="1234 (policyId)">
+</div>
+
+<div class="form-group">
+  <label for="modify_a_policy_body">Create a Policy</label>
+  <span class="help-block">Create new security policy on staging network</span>
+  <div id="textarea_wrapper" class="form-group has-feedback">
+    <textarea id="modify_a_policy_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'modify_a_policy_body')"></textarea>
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  var placeholder = '<?xml version="1.0"?><security-policy><name>POLICY NAME</name><description>Description for "POLICY NAME"</description><token-auth-feature><enabled>true</enabled><password>RANDOMHEXVALUES</password><enforce-on-initial-request>true</enforce-on-initial-request><enforce-on-content-request>true</enforce-on-content-request></token-auth-feature><media-encryption-feature><enabled>true</enabled><percentage-coverage>100</percentage-coverage></media-encryption-feature><content-targeting-feature><enabled>false</enabled><geo-protection><enabled>false</enabled><allow-locations>true</allow-locations><countries><country><country-code>US</country-code></country></countries><regions /><override-ips /><geo-redirect-on-deny-enabled>false</geo-redirect-on-deny-enabled><dmas /></geo-protection><ip-access><enabled>false</enabled><allow-ips>false</allow-ips><ip-list /><ip-redirect-on-deny-enabled>false</ip-redirect-on-deny-enabled></ip-access><referral-domain><enabled>false</enabled><allowed-domains /><referrer-redirect-on-deny-enabled>false</referrer-redirect-on-deny-enabled></referral-domain></content-targeting-feature><player-verification-feature><enabled>false</enabled><support-player-enabled>false</support-player-enabled><reset-support-player>false</reset-support-player><time-left-for-support-player>0</time-left-for-support-player><players><player><hash>SAMPLEHASH1</hash><description>Sample Player 2</description><enabled>true</enabled></player><player><hash>SAMPLEHASH1</hash><description>Sample Player</description><enabled>true</enabled></player></players></player-verification-feature></security-policy>';
+  $("#modify_a_policy_body").val(placeholder);
+
+  function runAPI() {
+    var endpoint = "/config-media-security/v1/security/";
+    var pid = $("#pid").val();
+    var body = $("#modify_a_policy_body").val();
+    if (pid) {
+      endpoint = endpoint + pid;
+      var return_response = sendAPIRequestGet(endpoint, "luna_token", body);
+    } else {
+      showNotification("Please enter policyID");
+    }
+  }
+</script>

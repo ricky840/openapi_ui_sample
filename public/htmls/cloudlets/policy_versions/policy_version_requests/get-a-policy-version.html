@@ -1,0 +1,32 @@
+<div class="form-group">
+  <label for="policy">Get a Policy Version</label>
+  <span class="help-block">Returns information about a specific Cloudlet policy version.</span>
+</div>
+
+<div class="form-group">
+  <label for="pid">Policy ID</label>
+  <span class="help-block">The ID of the policy.</span>
+  <input id="pid" type="number" class="form-control" placeholder="18063 (policyID)">
+</div>    
+
+<div class="form-group">
+  <label for="version">Version</label>
+  <span class="help-block">The version number of the policy.</span>
+  <input id="version" type="number" class="form-control" placeholder="3(version)">
+</div>          
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/cloudlets/api/v2/policies/";
+    var pid = $("#pid").val();
+    var version = $("#version").val();
+    if (pid && version) {
+      endpoint = endpoint + pid + "/versions/" + version;
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter policyID and Version");
+    }
+  }
+</script>

@@ -1,0 +1,25 @@
+<div class="form-group">
+  <label for="cloudlet">Get a Group</label>
+  <span class="help-block">Returns information about the Cloudlet types associated with the selected group. For results to display, you must have edit privileges for one or more Cloudlet types within the group.</span>
+</div>
+
+<div class="form-group">
+  <label for="gid">Group ID</label>
+  <span class="help-block">For GET operations, returns only policies associated with the group ID entered. Enter -1 to request policies from your default group, and enter 0 to get policies in all groups.</span>
+  <input id="gid" type="number" class="form-control" placeholder="65555 (groupID)">
+</div>          
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/cloudlets/api/v2/group-info/";
+    var gid = $("#gid").val();
+    if (gid) {
+      endpoint = endpoint + gid;
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter groupID");
+    }
+  }
+</script>

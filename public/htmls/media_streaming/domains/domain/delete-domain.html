@@ -1,0 +1,19 @@
+<div class="form-group">
+  <label for="">Delete the Profile settings</label>
+  <span class="help-block">Name of Media Streaming domain.</span>
+  <input id="domain_name" type="text" class="form-control" placeholder="example.akadns.net">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var domain = $("#domain_name").val();
+    if (domain) {
+      var endpoint = "/config-media-live/v1/live/"+domain;
+      sendAPIRequestDelete(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter domain name");
+    }
+  }
+</script>

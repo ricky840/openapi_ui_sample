@@ -1,0 +1,25 @@
+<div class="form-group">
+  <label for="">Resources</label>
+  <span class="help-block">An abstract entity that governs the properties within a data center and has the ability to constrain the load on the properties that it governs. Think of a resource as something that can impose a capacity constraint on the load associated with one or more properties in a data center. The goal of resources is to encapsulate the architecture and topology of the network in a data center.</span>
+  <span class="help-block">For example, each property normally has an associated resource that represents the capacity of the servers for that property. In addition, there might be a resource that constrains the aggregate bandwidth available to all properties in a data center.</span>
+</div>
+
+<div class="form-group">
+  <label for="">Domain</label>
+  <span class="help-block">Name of Traffic Management domain.</span>
+  <input id="domain_name" type="text" class="form-control" placeholder="example.akadns.net">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var domain = $("#domain_name").val();
+    if (domain) {
+      var endpoint = "/config-gtm/v1/domains/"+domain+"/resources";
+      sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter domain name");
+    }
+  }
+</script>

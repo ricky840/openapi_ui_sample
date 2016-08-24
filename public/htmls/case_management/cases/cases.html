@@ -1,0 +1,41 @@
+<div class="form-group">
+  <label for="categories">List Cases</label>
+  <span class="help-block">Retrieve cases for the logged-in portal user. Depending on query params this method may be used to retrieved active, closed, user, and/or company cases.</span>
+</div>
+
+<div class="form-group">
+  <label for="status">Select Status</label>
+  <span class="help-block">Retrieves all if missing, both active and closed cases.</span>
+  <select class="form-control" id="status">
+    <option value="active">active</option>
+    <option value="closed">closed</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="type">Select Type</label>
+  <span class="help-block">Retrieves all if missing, both user and company cases.</span>
+  <select class="form-control" id="type">
+    <option value="user">user</option>
+    <option value="company">company</option>
+  </select>
+</div>
+
+<fieldset disabled>
+<div class="form-group">
+  <label for="category">Category</label>
+  <span class="help-block">ts for technicalSupport, or etc (currently ignored).</span>
+  <input id="categories" type="text" class="form-control" placeholder="Possible Value : ts">
+</div>
+</fieldset>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+  	var status = $("#status").val();
+  	var type = $("#type").val();
+    var endpoint = "/cases/v1/portal-user?status=" + status + "&type=" + type + "&category=ts";
+    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+  }
+</script>

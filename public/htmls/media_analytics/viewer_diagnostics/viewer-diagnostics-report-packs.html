@@ -1,0 +1,16 @@
+<fieldset disabled>
+  <div class="form-group">
+    <label for="media">Viewer Diagnostics Report Packs</label>
+    <span class="help-block">Returns name, id, and timezone for all report packs created for your account.</span>
+    <input id="media" type="text" class="form-control" placeholder="/media-analytics/v1/viewer-diagnostics/report-packs">
+  </div>
+</fieldset>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/media-analytics/v1/viewer-diagnostics/report-packs";
+    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+  }
+</script>

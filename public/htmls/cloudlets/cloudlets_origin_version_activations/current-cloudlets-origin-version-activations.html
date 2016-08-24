@@ -1,0 +1,19 @@
+<div class="form-group">
+  <label for="cloudlets">Current Cloudlets Origin Version Activations</label>
+</div>
+
+<fieldset disabled>
+  <div class="form-group">
+    <label for="cloudlets">List Cloudlets Origin Activations</label>
+    <input id="cloudlets" type="text" class="form-control" placeholder="/cloudlets/api/v2/origins/currentActivations">
+  </div>
+</fieldset>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI(apitype) {
+    var endpoint = "/cloudlets/api/v2/origins/currentActivations";
+    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+  }
+</script>

@@ -1,0 +1,25 @@
+<div class="form-group">
+  <label for="create_a_configuration_body">Create a Configuration</label>
+  <span class="help-block">Create a Log Delivery Configuration. If the request is successful, response contents is set to serviceId of newly created configuration. For details on response members, see the Configuration object.</span>
+  <div id="textarea_wrapper" class="form-group has-feedback">
+    <textarea id="create_a_configuration_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'create_a_configuration_body')"></textarea>
+  </div>
+  <input class="btn btn-success" type="button" value="Validate JSON" onclick="validateJsonTextarea('textarea_wrapper', 'create_a_configuration_body')">
+  <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+</div>
+
+<script>
+  var placeholder = '{"configurationType": "PRIMARY","acgObject": { "id": 222222,   "type": "CP_CODE"  },"productGroupId": 1,"startDate": 1401840000000, "endDate": 1402531200000,"logFormat": { "dictId": "16"}, "logIdentifier": "fasfasfa", "aggregationType": "CALENDAR", "deliveryType": "EMAIL", "emailConfiguration": {  "emailAddress": "saf@fa.pl" }, "deliveryThreshold": "99","deliverResidualFlag": true,"messageSize": {  "dictId": "3"},"encoding": {  "dictId": "4"},"encodingKey": "-----BEGIN PGP PUBLIC KEY BLOCK-----xxxx-----END PGP PUBLIC KEY BLOCK-----","contact": {  "dictId": "xxxxx", "contactEmail": [ "aaa@aa.pl", "bbb@bbb.com"  ] }}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#create_a_configuration_body").val(placeholder);
+
+  function runAPI() {
+    var endpoint = "/lds/v1/configurations";
+    var body = $("#create_a_configuration_body").val();
+    if (IsJsonString(body)) {
+      var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
+    } else {
+      showNotification("JSON is not in valid format");
+    }
+  }
+</script>

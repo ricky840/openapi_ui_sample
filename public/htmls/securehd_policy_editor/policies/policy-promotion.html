@@ -1,0 +1,35 @@
+<div class="form-group">
+  <label for="securehd">Promote a Policy</label>
+  <span class="help-block">Promote security policy to production network.</span>
+</div>
+
+<div class="form-group">
+  <label for="pid">Policy ID</label>
+  <span class="help-block">The ID of the policy to fetch.</span>
+  <input id="pid" type="number" class="form-control" placeholder="1234 (policyId)">
+</div>
+
+<div class="form-group">
+  <label for="promote_a_policy_body">Promote a Policy Object</label>
+  <div id="textarea_wrapper" class="form-group has-feedback">
+    <textarea id="promote_a_policy_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'promote_a_policy_body')"></textarea>
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  var placeholder = '{}';
+  $("#promote_a_policy_body").val(placeholder);
+
+  function runAPI() {
+    var endpoint = "/config-media-security/v1/security/";
+    var pid = $("#pid").val();
+    var body = $("#promote_a_policy_body").val();
+    if (pid) {
+      endpoint = endpoint + pid + "/promote";
+      var return_response = sendAPIRequestPut(endpoint, "luna_token", body);
+    } else {
+      showNotification("Please enter policyID");
+    }
+  }
+</script>

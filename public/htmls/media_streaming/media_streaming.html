@@ -1,0 +1,129 @@
+<div class="container_fuild">
+  <div class="row"> <!-- main row -->
+
+    <!-- API section -->
+    <div class="col-md-7">
+
+			<!-- API title goes here -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="corner_space"></div>
+				</div>
+        <div class="col-md-9">
+					<h2>Media Streaming API</h2>
+          <p class="text-muted">You can use these REST APIs for Akamai® HD Network: Utility, Domain, Stream, and Archive Management. The following sections explain how to use these APIs to build a customized interface: Utility APIs, Domain APIs, Stream APIs, Archive Management APIs</p>
+          <p class="text-muted">and provide several common examples of their use - Example 1: Creating a Domain Workflow, Example 2: Creating a New Domain Version Workflow, Example 3: Activating a Domain Version on Staging or Production, Example 4: Creating a New Stream Workflow, Example 5: Editing an Existing Stream Workflow, Example 6: Archive Management/Editing an Event</p>
+          <hr>
+				</div>
+			</div>
+
+      <!-- API content main body -->
+      <div class="row">
+
+        <!-- left menu -->
+        <div class="col-md-3">
+          <div class= "sidemenu">
+            <div class="list-group panel">
+            <a href="#domains" class="list-group-item list-group-title" data-toggle="collapse" >Domains<span class="caret"></span></a>
+            <div class="collapse" id="domains">
+              <a href="#domains2" class="list-group-item list-group-lv1" data-toggle="collapse">Domains<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="domains2">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#domains2" onclick="loadApiActionPage('/htmls/media_streaming/domains/domains/return-lists.html')">Return lists of all Universal Streaming</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#domains2" onclick="loadApiActionPage('/htmls/media_streaming/domains/domains/create-a-new-configuration.html')">Create a new configuration</a>
+              </div> 
+              <a href="#domain" class="list-group-item list-group-lv1" data-toggle="collapse">Domain<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="domain">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#domain" onclick="loadApiActionPage('/htmls/media_streaming/domains/domain/get-profile.html')">Get the Profile Settings</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#domain" onclick="loadApiActionPage('/htmls/media_streaming/domains/domain/delete-domain.html')">Delete a domain</a>
+              </div> 
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#streams" class="list-group-item list-group-title" data-toggle="collapse" >Streams<span class="caret"></span></a>
+            <div class="collapse" id="streams">
+              <a href="#streams2" class="list-group-item list-group-lv1" data-toggle="collapse">Streams<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="streams2">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#streams2" onclick="loadApiActionPage('/htmls/media_streaming/streams/streams/get-streams.html')">Get Streams</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#streams2" onclick="loadApiActionPage('/htmls/media_streaming/streams/streams/create-the-new-stream.html')">Create the new stream</a>
+              </div> 
+              <a href="#stream" class="list-group-item list-group-lv1" data-toggle="collapse">Stream<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="stream">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#stream" onclick="loadApiActionPage('/htmls/media_streaming/streams/stream/get-stream.html')">Get the Stream Details</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#stream" onclick="loadApiActionPage('/htmls/media_streaming/streams/stream/delete-stream.html')">Delete a Stream</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#stream" onclick="loadApiActionPage('/htmls/media_streaming/streams/stream/edit-stream.html')">Edit an Existing Stream</a>
+              </div> 
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#events" class="list-group-item list-group-title" data-toggle="collapse" >Events<span class="caret"></span></a>
+            <div class="collapse" id="events">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/media_streaming/events/list-stream.html')">Get list of the Stream</a>
+              <a href="#event" class="list-group-item list-group-lv1" data-toggle="collapse">Event<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="event">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#event" onclick="loadApiActionPage('/htmls/media_streaming/events/event/get-event.html')">Get the Event Details</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#event" onclick="loadApiActionPage('/htmls/media_streaming/events/event/update-stream.html')">Update a Stream Event</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#event" onclick="loadApiActionPage('/htmls/media_streaming/events/event/delete-stream.html')">Delete the Event Details</a>
+              </div> 
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#versions" class="list-group-item list-group-title" data-toggle="collapse" >Versions<span class="caret"></span></a>
+            <div class="collapse" id="versions">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/media_streaming/versions/create-version.html')">Create a New Profile Version</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/media_streaming/versions/get-version.html')">Profile version settings</a>
+              <a href="#activation" class="list-group-item list-group-lv1" data-toggle="collapse">Activation<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="activation">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#activation" onclick="loadApiActionPage('/htmls/media_streaming/versions/activation/get-activation.html')">Get Activation Status</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#activation" onclick="loadApiActionPage('/htmls/media_streaming/versions/activation/activate-version.html')">Activate Profile Version</a>
+              </div>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/media_streaming/versions/returen-archive-location.html')">Return a Archive Location</a> 
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#utilities" class="list-group-item list-group-title" data-toggle="collapse" >Utilities<span class="caret"></span></a>
+            <div class="collapse" id="utilities">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/media_streaming/utilities/get-contact-name.html')">Get Contact Names List</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/media_streaming/utilities/get-countries.html')">Get Countries list</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/media_streaming/utilities/get-cpcodes.html')">Get CPCodes List</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/media_streaming/utilities/get-delivery-formats.html')">Get Delivery Formats List</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/media_streaming/utilities/get-ingest-formats.html')">Get Ingest Formats List</a>
+            </div> 
+            </div>
+          </div>
+        </div>
+
+        <!-- API action content -->
+        <div class="col-md-9">
+          <!-- API action content goes here -->
+          <div id="api_action_body_wrapper">
+          <p class="text-muted">Note the following:</p>
+          <p class="text-muted">- Currently, the APIs support only Akamai HD for the Adobe® HTTP Dynamic Streaming and Apple® HTTP Live Streaming.</p>
+          <p class="text-muted">- All the APIs might not work for every user. The APIs work based on the permissions available to the logged in user.</p>
+          <p class="text-muted">- For all APIs, when passing content as XML, please set the Content-Type HTTP header to application/xml.</p>
+          <p class="text-muted">- You must look at the detailed API documentation and the XMLs associated with the output and input payload. Look for the Type documentation associated with each XML element, and you will find more valuable documentation about individual elements.</p>
+          <p class="text-muted">- All the APIs work similar to the functionality available through the existing Luna Control Center.</p></div>
+          <!-- API action content response -->
+          <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: block">
+            <div id="loading_spinner" style="display: none"></div>
+            <span id="api_response"></span>
+          </div>
+        </div> <!-- API action content end -->
+      </div> <!-- API content main body end -->
+
+    </div> <!-- API section end -->
+
+    <!-- Toke HTML column -->
+    <div class="col-md-4 col-sm-offset-1">
+      <div id="token_html"></div>
+    </div>
+
+  </div> <!-- end of main row -->
+</div> <!-- container -->
+
+<div id="footer_html"></div>
+
+<script>
+  $(document).ready(function() {
+    loadTokenHtml();
+  });
+</script>

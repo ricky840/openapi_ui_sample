@@ -1,0 +1,32 @@
+<div class="form-group">
+  <label for="schemas">JSON Schema</label>
+  <span class="help-block">Get a JSON schema for interacting with policies to validate different requests used with this API.</span>
+</div>
+
+<div class="form-group">
+  <label for="sname">Select Schema Name</label>
+  <span class="help-block">The name of the JSON schema.</span>
+  <select class="form-control" id="sname">
+    <option value="create-policy.json">create-policy.json (Create a new policy)</option>
+    <option value="update-policy.json">update-policy.json (Update a policy)</option>
+    <option value="clone-policy.json">clone-policy.json (Clone an existing policy)</option>
+    <option value="create-nimbus_policy_version-{cloudletType}-1.0.json">create-nimbus_policy_version-{cloudletType}-1.0.json (Create or clone a policy version)</option>
+    <option value="update-nimbus_policy_version-{cloudletType}-1.0.json">update-nimbus_policy_version-{cloudletType}-1.0.json (Update a policy version)</option>
+    <option value="match_rule-{cloudletType}-1.0.json">match_rule-{cloudletType}-1.0.json (Create or update a match rule)</option> 
+  </select>
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/cloudlets/api/v2/schemas/";
+    var sname = $("#sname").val();
+    if (sname) {
+      endpoint = endpoint + sname;
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please Select Schema Name");
+    }
+  }
+</script>

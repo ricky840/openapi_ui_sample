@@ -1,0 +1,25 @@
+<div class="form-group">
+  <label for="remove_an_element_body">Remove an Element</label>
+  <span class="help-block">Deletes the specified element from the list.</span>
+</div>
+
+<div class="form-group">
+  <label for="uid">Unique ID</label>
+  <span class="help-block">Unique Id of List</span>
+  <input id="uid" type="text" class="form-control" placeholder="17807_TRAININGIPLMN (unique-Id)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/network-list/v1/network_lists/";
+    var uid = $("#uid").val();
+    if (uid) {
+      endpoint = endpoint + uid + "/element";
+      var return_response = sendAPIRequestDelete(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter Unique ID");
+    }
+  }
+</script>

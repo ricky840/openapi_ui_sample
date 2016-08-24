@@ -1,0 +1,32 @@
+<div class="form-group">
+  <label for="media">Download Analytics Data Store</label>
+  <span class="help-block">Details include list of dimensions, list of metrics, aggregation interval, purge interval, maximum allowed query interval and so on.</span>
+</div>
+
+<div class="form-group">
+  <label for="rid">ReportPack ID</label>
+  <span class="help-block">The ID of the report pack</span>
+  <input id="rid" type="number" class="form-control" placeholder="30149 (reportPackId)">
+</div>
+
+<div class="form-group">
+  <label for="did">DataStore ID</label>
+  <span class="help-block">The ID of the data store</span>
+  <input id="did" type="number" class="form-control" placeholder="175 (dataStoreId)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/media-analytics/v1/download-analytics/report-packs/";
+    var rid = $("#rid").val();
+    var did = $("#did").val();
+    if (rid && did) {
+      endpoint = endpoint + rid + "/data-stores/" + did;
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter reportPackID and dataStoreID");
+    }
+  }
+</script>

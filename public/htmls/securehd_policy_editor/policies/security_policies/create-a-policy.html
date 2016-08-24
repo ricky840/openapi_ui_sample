@@ -1,0 +1,20 @@
+<div class="form-group">
+  <label for="create_a_policy_body">Create a Policy</label>
+  <span class="help-block">Create new security policy on staging network</span>
+  <div id="textarea_wrapper" class="form-group has-feedback">
+    <textarea id="create_a_policy_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'create_a_policy_body')"></textarea>
+  </div>
+
+  <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+</div>
+
+<script>
+  var placeholder = '<?xml version="1.0"?><security-policy><name>POLICY NAME</name><description>Description for "POLICY NAME"</description><token-auth-feature><enabled>true</enabled><password>RANDOMHEXVALUES</password><enforce-on-initial-request>true</enforce-on-initial-request><enforce-on-content-request>true</enforce-on-content-request></token-auth-feature><media-encryption-feature><enabled>true</enabled><percentage-coverage>100</percentage-coverage></media-encryption-feature><content-targeting-feature><enabled>false</enabled><geo-protection><enabled>false</enabled><allow-locations>true</allow-locations><countries><country><country-code>US</country-code></country></countries><regions /><override-ips /><geo-redirect-on-deny-enabled>false</geo-redirect-on-deny-enabled><dmas /></geo-protection><ip-access><enabled>false</enabled><allow-ips>false</allow-ips><ip-list /><ip-redirect-on-deny-enabled>false</ip-redirect-on-deny-enabled></ip-access><referral-domain><enabled>false</enabled><allowed-domains /><referrer-redirect-on-deny-enabled>false</referrer-redirect-on-deny-enabled></referral-domain></content-targeting-feature><player-verification-feature><enabled>false</enabled><support-player-enabled>false</support-player-enabled><reset-support-player>false</reset-support-player><time-left-for-support-player>0</time-left-for-support-player><players><player><hash>SAMPLEHASH1</hash><description>Sample Player 2</description><enabled>true</enabled></player><player><hash>SAMPLEHASH1</hash><description>Sample Player</description><enabled>true</enabled></player></players></player-verification-feature></security-policy>';
+  $("#create_a_policy_body").val(placeholder);
+
+  function runAPI() {
+    var endpoint = "/config-media-security/v1/security";
+    var body = $("#create_a_policy_body").val();
+    var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
+  }
+</script>

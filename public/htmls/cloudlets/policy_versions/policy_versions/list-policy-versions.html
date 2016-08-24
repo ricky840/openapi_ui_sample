@@ -1,0 +1,26 @@
+<div class="form-group">
+  <label for="policy_versions">Policy Versions</label>
+  <span class="help-block">The operations in this section allow you to create and list Cloudlet policy versions. In addition, use the DELETE operation to remove a version of a Cloudlet policy.</span>
+  <span class="help-block">NOTE: See Policy Version Object to view the property definitions for these operations. Click here for the match properties.</span>
+</div>
+
+<div class="form-group">
+  <label for="pid">Policy ID</label>
+  <span class="help-block">The ID of the policy.</span>
+  <input id="pid" type="number" class="form-control" placeholder="18063 (policyID)">
+</div>          
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/cloudlets/api/v2/policies/";
+    var pid = $("#pid").val();
+    if (pid) {
+      endpoint = endpoint + pid + "/versions";
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter policyID");
+    }
+  }
+</script>

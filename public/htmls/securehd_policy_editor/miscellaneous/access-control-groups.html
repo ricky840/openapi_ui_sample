@@ -1,0 +1,16 @@
+<fieldset disabled>
+  <div class="form-group">
+    <label for="securehd">List Access Control Groups</label>
+    <span class="help-block">Get available acgs/subacgs for an account</span>
+    <input id="sercurehd" type="text" class="form-control" placeholder="/config-media-security/v1/security/acgs">
+  </div>
+</fieldset>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/config-media-security/v1/security/acgs";
+    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+  }
+</script>

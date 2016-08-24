@@ -1,0 +1,22 @@
+<div class="form-group">
+  <label for="cloudlets">Cloudlets</label>
+  <span class="help-block">Collection of commands used to return Cloudlet-level information.</span>
+  <span class="help-block">NOTE: See Cloudlet Information Object to view the property definitions for these operations.</span>
+</div>
+
+<fieldset disabled>
+  <div class="form-group">
+    <label for="cloudlets">List Cloudlets</label>
+    <span class="help-block">Returns name, code, and ID (cloudletId) information for all available Cloudlets. You need the cloudletId when creating a new Policy.</span>
+    <input id="cloudlets" type="text" class="form-control" placeholder="/cloudlets/api/v2/cloudlet-info">
+  </div>
+</fieldset>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI(apitype) {
+    var endpoint = "/cloudlets/api/v2/cloudlet-info";
+    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+  }
+</script>

@@ -1,0 +1,25 @@
+<div class="form-group">
+  <label for="add_an_element_body">Add an Element</label>
+  <span class="help-block">Adds the specified element to the list.</span>
+</div>
+
+<div class="form-group">
+  <label for="uid">Unique ID</label>
+  <span class="help-block">Unique Id of List</span>
+  <input id="uid" type="text" class="form-control" placeholder="17807_TRAININGIPLMN (unique-Id)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+  	var endpoint = "/network-list/v1/network_lists/";
+    var uid = $("#uid").val();
+    if (uid) {
+      endpoint = endpoint + uid + "/element";
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter Unique ID");
+    }
+  }
+</script>

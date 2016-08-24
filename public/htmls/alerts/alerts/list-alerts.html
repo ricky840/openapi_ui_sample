@@ -9,7 +9,7 @@
 <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
 
 <script>
-  function runAPI(apitype) {
+  function runAPI() {
     var endpoint = "/alerts/v1/portal-user?status=active";
     var return_response = sendAPIRequestGet(endpoint, "luna_token");
   }

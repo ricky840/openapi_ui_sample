@@ -1,0 +1,16 @@
+<fieldset disabled>
+  <div class="form-group">
+    <label for="">Contacts</label>
+    <span class="help-block">Get Contact Names List for organization</span>
+    <input id="" type="text" class="form-control" placeholder="/config-media-live/v1/live/utils/contacts">
+  </div>
+</fieldset>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/config-media-live/v1/live/utils/contacts";
+    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+  }
+</script>

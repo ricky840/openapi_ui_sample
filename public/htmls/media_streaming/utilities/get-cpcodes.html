@@ -1,0 +1,16 @@
+<fieldset disabled>
+  <div class="form-group">
+    <label for="">CPcode</label>
+    <span class="help-block">Returns a list of HD Live and NetStorage CPCodes available to be used for provisioning</span>
+    <input id="" type="text" class="form-control" placeholder="/config-media-live/v1/live/utils/cpcode">
+  </div>
+</fieldset>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/config-media-live/v1/live/utils/cpcode";
+    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+  }
+</script>

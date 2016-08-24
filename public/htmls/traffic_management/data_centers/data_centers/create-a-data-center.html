@@ -1,0 +1,31 @@
+<div class="form-group">
+  <label for="">Create a Data Center</label>
+  <span class="help-block">Name of Traffic Management domain</span>
+  <input id="domain_name" type="text" class="form-control" placeholder="example.akadns.net">
+</div>
+
+<div class="form-group">
+  <span class="help-block">Create Data Center Object</span>
+  <div id="textarea_wrapper" class="form-group has-feedback">
+    <textarea id="create_a_data_center" class="form-control" rows="15" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'create_a_data_center')"></textarea>
+  </div>
+  <input class="btn btn-success" type="button" value="Validate JSON" onclick="validateJsonTextarea('textarea_wrapper', 'create_a_data_center')">
+  <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+</div>
+
+<script>
+  var placeholder = '{"city": "Doune","stateOrProvince": "Perthshire","cloneOf": 0,"continent": "EU","country": "GB","defaultLoadObject": {"loadObject": null,"loadObjectPort": 0,"loadServers": null},"latitude": 56.185096,"longitude": -4.050264,"nickname": "Winterfell"}'
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#create_a_data_center").val(placeholder);
+
+  function runAPI() {
+    var domain_name =  $("#domain_name").val();
+    var domain_config = $("#create_a_data_center").val();
+    if (IsJsonString(domain_config) && domain_name) {
+      var endpoint = "/config-gtm/v1/domains/"+domain_name+"/datacenters";
+      sendAPIRequestPost(endpoint, "luna_token", domain_config);
+    } else {
+      showNotification("Please make sure JSON is in valid format and enter a domain name");
+    }
+  }
+</script>

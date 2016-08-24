@@ -1,0 +1,16 @@
+<fieldset disabled>
+  <div class="form-group">
+    <label for="list-configurations">List Configurations</label>
+    <span class="help-block">Gets Log Delivery Configurations for all acgObjects to which the currently logged-in user has access. This method retrieves CP code, EDNS, and GTM property configurations. For details on response members, see the Configuration object.</span>
+    <input id="list" type="text" class="form-control" placeholder="/lds/v1/configurations">
+  </div>
+</fieldset>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/lds/v1/configurations";
+    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+  }
+</script>

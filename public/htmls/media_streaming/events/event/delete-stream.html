@@ -1,0 +1,32 @@
+<div class="form-group">
+  <label for="">Delete the Event Details</label>
+  <span class="help-block">Name of Media Streaming domain.</span>
+  <input id="domain_name" type="text" class="form-control" placeholder="example.akadns.net">
+</div>
+
+<div class="form-group">
+  <label for="sid">Stream ID</label>
+  <span class="help-block">Stream ID as provided by GET</span>
+  <input id="sid" type="text" class="form-control" placeholder="10000 (streamID)">
+</div>
+
+<div class="form-group">
+  <label for="ename">Event Name</label>
+  <span class="help-block">Event Name as provided by GET</span>
+  <input id="ename" type="text" class="form-control" placeholder="event_name (eventName)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var domain = $("#domain_name").val();
+    var sid = $("#sid").val();
+    if (domain && sid && ename) {
+      var endpoint = "/config-media-live/v1/live/"+domain+"/stream/"+sid+"/event/"+ename;
+      sendAPIRequestDelete(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter domain name & streamID & event name");
+    }
+  }
+</script>

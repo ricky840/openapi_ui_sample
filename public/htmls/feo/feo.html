@@ -1,0 +1,62 @@
+<div class="container_fuild">
+  <div class="row"> <!-- main row -->
+
+    <!-- API section -->
+    <div class="col-md-7">
+
+			<!-- API title goes here -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="corner_space"></div>
+				</div>
+        <div class="col-md-9">
+          <h2>Front-End Optimization API</h2>
+          <p>The Front-End Optimization (FEO) API provides a way to use FEO functionality programmatically rather than through FEO’s Configuration Manager.</p>
+					<p>FEO accelerates web pages by creating modified versions of the HTML and supporting resources that can render more quickly. The techniques FEO uses to accelerate pages are called optimization methods (or just optimizations). Some optimization methods are specific to resource files such as images, JavaScript, and style sheets. Other optimizations adjust the prioritization and queuing of rendering activities.</p>
+					<hr>
+				</div>
+			</div>
+
+      <!-- API content main body -->
+      <div class="row">
+      <!-- left menu -->
+        <div class="col-md-3">
+          <div class= "sidemenu">
+            <div class="list-group panel">
+            <a href="#configuration_management" class="list-group-item list-group-title" data-toggle="collapse">Configuration Management<span class="caret"></span></a>
+            <div class="collapse" id="configuration_management">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/feo/configuration_management/purge.html')">Purge</a>  
+            </div> 
+            </div>
+          </div>
+        </div>
+        
+        <!-- API action content -->
+        <div class="col-md-9">
+					<!-- API action content goes here -->
+          <div id="api_action_body_wrapper"></div>
+          <!-- response -->
+          <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+            <div id="loading_spinner" style="display: none"></div>
+            <span id="api_response"></span>
+          </div>
+        </div> <!-- API action content end -->
+      </div> <!-- API content main body end -->
+
+    </div> <!-- API section end -->
+
+    <!-- Toke HTML column -->
+    <div class="col-md-4 col-sm-offset-1">
+      <div id="token_html"></div>
+    </div>
+
+  </div> <!-- end of main row -->
+</div> <!-- container -->
+
+<div id="footer_html"></div>
+
+<script>
+  $(document).ready(function() {
+    loadTokenHtml();
+  });
+</script>

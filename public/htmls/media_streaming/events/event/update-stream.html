@@ -1,0 +1,44 @@
+<div class="form-group">
+  <label for="">Update a Stream Event</label>
+  <span class="help-block">Name of Media Streaming domain.</span>
+  <input id="domain_name" type="text" class="form-control" placeholder="example.akadns.net">
+</div>
+
+<div class="form-group">
+  <label for="sid">Stream ID</label>
+  <span class="help-block">Stream ID as provided by GET</span>
+  <input id="sid" type="text" class="form-control" placeholder="10000 (streamID)">
+</div>
+
+<div class="form-group">
+  <label for="ename">Event Name</label>
+  <span class="help-block">Event Name as provided by GET</span>
+  <input id="ename" type="text" class="form-control" placeholder="event_name (eventName)">
+</div>
+
+<div class="form-group">
+  <label for="update_stream">Update a Stream Event Object</label>
+  <div id="textarea_wrapper" class="form-group has-feedback">
+    <textarea id="update_stream" class="form-control" rows="10" placeholder=""></textarea>
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  var placeholder = '<?xml version="1.0" encoding="UTF-8"?><event><stream-id>10001</stream-id><event-name>sports_event</event-name><primary-event><archive-start-time>05/15/2013 12:40:21 PM</archive-start-time><archive-end-time>06/15/2013 12:38:00 PM</archive-end-time><on-air-time>05/15/2013 12:40:21 PM</on-air-time><delete-time>05/15/2013 12:40:21 PM</delete-time></primary-event></event>';
+  $("#update_stream").val(formatXml(placeholder));
+
+  function runAPI() {
+    var endpoint = "/config-media-live/v1/live/";
+    var domain = $("#domain").val();
+    var sid = $("#sid").val();
+    var ename = $("#ename").val();
+    var body = $("#update_stream").val();
+    if (domain && sid && ename) {
+      endpoint = endpoint + domain + "/stream/" + sid + "/event/" + ename;
+      var return_response = sendAPIRequestPut(endpoint, "luna_token", body);
+    } else {
+      showNotification("Please enter Domain & streamID & event name");
+    }
+  }
+</script>

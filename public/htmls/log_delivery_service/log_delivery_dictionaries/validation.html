@@ -1,0 +1,21 @@
+<div class="form-group">
+  <label for="dictionary_body">Get Validation Context</label>
+  <span class="help-block">Get the dictionary's validation context.</span>
+</div>
+
+<fieldset disabled>
+  <div class="form-group">
+    <label for="list-configurations">Dictionary Name</label>
+    <span class="help-block">Dictionary name value</span>
+    <input id="list" type="text" class="form-control" placeholder="ENCODINGS">
+  </div>
+</fieldset>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/lds/v1/dictionaries/ENCODINGS/validation/data";
+    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+  }
+</script>

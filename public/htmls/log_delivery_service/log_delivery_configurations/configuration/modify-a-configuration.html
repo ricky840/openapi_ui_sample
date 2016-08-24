@@ -1,0 +1,34 @@
+<div class="form-group">
+  <label for="modify_a_configuration_body">Modify a Configuration</label>
+  <span class="help-block">Updates Log Delivery Configuration for given serviceId. For details on response members, see the Configuration object.</span>
+</div>
+<div class="form-group">
+  <label for="sid">Service ID</label>
+  <span class="help-block">Service ID of the configuration.</span>
+  <input id="sid" type="number" class="form-control" placeholder="214137 (serviceId)">
+</div>
+<div id="textarea_wrapper" class="form-group has-feedback">
+    <textarea id="modify_a_configuration_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'modify_a_configuration_body')"></textarea>
+</div>
+
+  <input class="btn btn-success" type="button" value="Validate JSON" onclick="validateJsonTextarea('textarea_wrapper', 'modify_a_configuration_body')">
+  <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+
+<script>
+  var placeholder = '{"configurationType": "SHADOW","acgObject": {  "id": 11111,  "type": "EDNS" }, "productGroupId": 1,"startDate": 1402358400000, "endDate": 1403222400000, "logFormat": {  "dictId": "17"}, "logIdentifier": "asfa", "aggregationType": "COLLECTION", "deliveryType": "EMAIL", "ftpConfiguration": {  "login": "ftpLogin",  "machine": "ftpMachine",  "password": "ftpPassword", "directory": "path/to/directory"},"deliveryFrequency": {  "dictId": "1"},"messageSize": { "dictId": "3"},"encoding": {"dictId": "2"},"contact": {"contactEmail": [ "asf@Fa.pl"],"dictId": "xxxx"}}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#modify_a_configuration_body").val(placeholder);
+
+  function runAPI() {
+    var endpoint = "lds/v1/configurations/";
+    var sid = $("#sid").val();
+    endpoint = endpoint + sid;
+    var body = $("#modify_a_configuration_body").val();
+    if (IsJsonString(body)) {
+      var return_response = sendAPIRequestPut(endpoint, "luna_token", body);
+    } else {
+      showNotification("JSON is not in valid format");
+    }
+  }
+</script>

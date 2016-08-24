@@ -6,10 +6,13 @@
 .top-buffer {
   margin-top:20px;
 }
-
+textarea {
+  font-family: consolas;
+}
 pre {
   padding: 20px !important;
   margin: 10px;
+  font-family: consolas;
 }
 .string { color: green; }
 .number { color: darkorange; }

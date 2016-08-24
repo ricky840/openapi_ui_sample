@@ -1,0 +1,62 @@
+<div class="form-group">
+  <label for="media">Qos Monitor Report Data</label>
+  <span class="help-block">Retrieving data for a specific report based on the query parameters. The parameters filterParams and sortParams are used to filter and sort data. The values for these parameters must be UTF-8 encoded JSON strings. Example strings are provided in the parameter description below.</span>
+</div>
+
+<div class="form-group">
+  <label for="rid">ReportPack ID</label>
+  <span class="help-block">The ID of the report pack</span>
+  <input id="rid" type="number" class="form-control" placeholder="30149 (reportPackId)">
+</div>
+
+<div class="form-group">
+  <label for="">Date Range</label>
+  <span id="helpBlock" class="help-block">The date range of aggregated data.</span>
+  <div class="input-group input-daterange">
+    <input type="text" class="form-control spc start" value="2016-01">
+    <span class="input-group-addon">to</span>
+    <input type="text" class="form-control spc end" value="2016-07">
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="did">Dimension IDs</label>
+  <span class="help-block">Dimension IDs. The ID can be abtained from the data stores API(Comma separated numbers)</span>
+  <input id="did" type="text" class="form-control" placeholder="164, 8 (dimensions Id)">
+</div>
+
+<div class="form-group">
+  <label for="mid">Metrics IDs</label>
+  <span class="help-block">Metric IDs. The ID can be abtained from the data stores API(Comma separated numbers)</span>
+  <input id="mid" type="text" class="form-control" placeholder="64, 115 (metrics Id)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+    $('.input-daterange input').each(function() {
+    $(this).datepicker({
+      startDate: '-3m',
+      endDate: '+0d',
+      autoclose: true
+    });
+    $(this).datepicker('setDate', getFormattedDate(new Date()));
+  });
+
+  function runAPI() {
+    var rid = $("#rid").val();
+    var did = $("#did").val();
+    var mid = $("#mid").val();
+
+    if (rid && did && mid) {
+      var start_date = $('.input-daterange .spc.start').datepicker({ dateFormat: 'mm/dd/yyyy'}).val();
+      var end_date = $('.input-daterange .spc.end').datepicker({ dateFormat: 'mm/dd/yyyy'}).val();
+      var endpoint = "/media-analytics/v1/qos-monitor/report-packs/"+rid+"/data";
+      endpoint += "?startDate="+start_date+"&endDate="+end_date+"&dimensions="+did+"&metrics="+mid;
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter Input Data");
+    }
+  }
+ 
+</script>

@@ -1,0 +1,35 @@
+<div class="form-group">
+  <label for="securehd">Clone a Policy</label>
+  <span class="help-block">Clone security policy on staging network.</span>
+</div>
+
+<div class="form-group">
+  <label for="pid">Policy ID</label>
+  <span class="help-block">The ID of the policy to fetch.</span>
+  <input id="pid" type="number" class="form-control" placeholder="1234 (policyId)">
+</div>
+
+<div class="form-group">
+  <label for="policy_cloning_body">Policy Cloning Object</label>
+  <div id="textarea_wrapper" class="form-group has-feedback">
+    <textarea id="policy_cloning_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'policy_cloning_body')"></textarea>
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  var placeholder = 'No body';
+  $("#policy_cloning_body").val(placeholder);
+
+  function runAPI() {
+    var endpoint = "/config-media-security/v1/security/";
+    var pid = $("#pid").val();
+    var body = $("#policy_cloning_body").val();
+    if (pid) {
+      endpoint = endpoint + pid + "/clonePolicy";
+      var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
+    } else {
+      showNotification("Please enter policyID");
+    }
+  }
+</script>

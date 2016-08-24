@@ -1,0 +1,94 @@
+<div class="container_fuild">
+  <div class="row"> <!-- main row -->
+
+    <!-- API section -->
+    <div class="col-md-7">
+
+			<!-- API title goes here -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="corner_space"></div>
+				</div>
+        <div class="col-md-9">
+          <h2>The Network Lists API</h2>
+          <p>The Network Lists API allows you to create and manage lists you can deploy to the Akamai Network to be used by multiple Akamai products and features. The Network Lists API currently supports two types of lists: IP addresses and geographic-based data.</p>
+          <hr>
+				</div>
+			</div>
+
+      <!-- API content main body -->
+      <div class="row">
+
+        <!-- left menu -->
+        <div class="col-md-3">
+          <div class= "sidemenu">
+            <div class="list-group panel">
+            <a href="#network_lists" class="list-group-item list-group-title" data-toggle="collapse">Network Lists<span class="caret"></span></a>
+            <div class="collapse" id="network_lists">
+              <a href="#network_lists2" class="list-group-item list-group-lv1" data-toggle="collapse">Network Lists<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="network_lists2">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#network_lists2" onclick="loadApiActionPage('/htmls/network_lists/network_lists/list-network-lists.html')">List Network Lists</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#network_lists2" onclick="loadApiActionPage('/htmls/network_lists/network_lists/create-a-network-list.html')">Create a Network List</a>
+              </div>
+              <a href="#network_list" class="list-group-item list-group-lv1" data-toggle="collapse">Network List6<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="network_list">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#network_list" onclick="loadApiActionPage('/htmls/network_lists/network_list/modify-a-network-list.html')">Modify a Network List</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#network_list" onclick="loadApiActionPage('/htmls/network_lists/network_list/get-a-network-list.html')">Get a Network List</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#network_list" onclick="loadApiActionPage('/htmls/network_lists/network_list/add-to-a-network-list.html')">Add to a Network List</a>
+              </div>
+              <a href="#element" class="list-group-item list-group-lv1" data-toggle="collapse">Element<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="element">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#element" onclick="loadApiActionPage('/htmls/network_lists/element/add-an-element.html')">Add an Element</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#element" onclick="loadApiActionPage('/htmls/network_lists/element/remove-an-element.html')">Remove an Element</a>
+              </div>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/network_lists/activation.html')">Activation</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/network_lists/activation-status.html')">Activation Status</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/network_lists/activation-snapshot.html')">Activation Snapshot</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/network_lists/searching.html')">Searching</a>
+              <a href="#sharing" class="list-group-item list-group-lv1" data-toggle="collapse">Sharing<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="sharing">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#sharing" onclick="loadApiActionPage('/htmls/network_lists/sharing/share-a-network-list.html')">Share a Network List</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#sharing" onclick="loadApiActionPage('/htmls/network_lists/sharing/list-sharing-status.html')">List Sharing Status</a>
+              </div>
+            </div>   
+            </div>
+          </div>
+
+        </div><!-- left menu end -->
+
+        <!-- API action content -->
+        <div class="col-md-9">
+     
+					<!-- API action content goes here -->
+          <div id="api_action_body_wrapper">
+          <p>This API allows you to create and upload a new Network List with a named reference handle. Operations are agnostic with regard to the list’s nature, as this association is made when the list is subscribed to by your Akamai product using Akamai Luna Control Center. For example, you might create and deploy an IP address-based Network List for the purpose of blocking certain IP addresses with your Kona Web Application Firewall (WAF) product. The list is not applied, however, until you subscribe to it with a WAF Firewall Policy.</p>
+          <p>You can share a Network List across multiple properties, Akamai products, and policies. This API also provides for list manipulation, allowing operations on individual list entries, appending of sets of list entries, or operations on an entire list, where bulk deletion can be effected.</p>
+          <p>List operations that apply to an entire list require the list to be uploaded in its entirety, resulting in either a success if no synchronization conflicts occur, or an error—retry paradigm, with the caller being provided a fresh list. Rate-limiting considerations govern operations on individual list entries, while size and deletion requirements govern usage of list append operations.</p>
+          <p>Network List activations result in implementations of updates to all services subscribed to the Network List.</p>
+          <p>API consumption may involve multiple asynchronous client updates to a single named Network List. Concurrent interaction with the API by multiple API clients is cause for concern. In instances where PUTS seek to replace a stale list (one based on an old sync point), the client call will fail with a message to retry with a newly-provided list. (See List Conflict–409 Status.)</p>                
+          </div>
+          <!-- response -->
+          <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+            <div id="loading_spinner" style="display: none"></div>
+            <span id="api_response"></span>
+          </div>
+        </div> <!-- API action content end -->
+      </div> <!-- API content main body end -->
+
+    </div> <!-- API section end -->
+
+    <!-- Toke HTML column -->
+    <div class="col-md-4 col-sm-offset-1">
+      <div id="token_html"></div>
+    </div>
+
+  </div> <!-- end of main row -->
+</div> <!-- container -->
+
+<div id="footer_html"></div>
+
+<script>
+  $(document).ready(function() {
+    loadTokenHtml();
+  });
+</script>

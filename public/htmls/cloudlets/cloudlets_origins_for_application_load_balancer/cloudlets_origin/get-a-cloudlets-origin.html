@@ -1,0 +1,24 @@
+<div class="form-group">
+  <label for="cloudlets">Get a Cloudlets Origin</label>
+</div>
+
+<div class="form-group">
+  <label for="oid">Origin ID</label>
+  <span class="help-block">The ID of the Origin.</span>
+  <input id="oid" type="text" class="form-control" placeholder="nsorigin1 (originID)">
+</div>          
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/cloudlets/api/v2/origins/";
+    var oid = $("#oid").val();
+    if (oid) {
+      endpoint = endpoint + oid;
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter originID");
+    }
+  }
+</script>

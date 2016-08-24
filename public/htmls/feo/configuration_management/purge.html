@@ -1,0 +1,28 @@
+<div class="form-group">
+  <label for="feo">Configuration Management</label>
+  <span class="help-block">Purge a Configuration</span>
+  <span class="help-block">Purge an active configuration version on a property.</span>
+</div>
+
+<div id="textarea_wrapper" class="form-group has-feedback">
+  <textarea id="feo_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'feo_body')"></textarea>
+</div>
+
+<input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper','feo_body')">
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+ var placeholder = '{ "assetName": "My Main Site","network": "S", "comments": "Spring catalog updates on main site"}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#feo_body").val(placeholder);
+
+ function runAPI() {   
+      var endpoint = "/feo/v1/purge";
+      var body = $("#feo_body").val();
+      if (IsJsonString(body)) {
+        var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
+      } else {
+        showNotification("JSON is not in valid format");
+      }
+    }
+</script>

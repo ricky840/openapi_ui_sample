@@ -1,0 +1,25 @@
+<div class="form-group">
+  <label for="">Activate profile version on an environment</label>
+  <span class="help-block">Name of Media Streaming domain.</span>
+  <input id="domain_name" type="text" class="form-control" placeholder="example.akadns.net">
+</div>
+
+<div class="form-group">
+  <label for="vid">Version ID</label>
+  <span class="help-block">Version ID as provided by GET</span>
+  <input id="vid" type="text" class="form-control" placeholder="2 (versionID)">
+</div>
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var domain = $("#domain_name").val();
+    var vid = $("#vid").val();
+    if (domain && vid) {
+      var endpoint = "/config-media-live/v1/live/"+domain+"/version/"+vid+"/activation";
+      sendAPIRequestPut(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter domain name and versionID");
+    }
+  }
+</script>

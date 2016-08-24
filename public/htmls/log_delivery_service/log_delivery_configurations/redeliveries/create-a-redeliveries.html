@@ -1,0 +1,28 @@
+<div class="form-group">
+  <label for="create_a_redelivery_body">Create a Redelivery</label>
+  <span class="help-block">Create a Log Configuration redelivery request. If the request is successful, the response contains a newly created redelivery identifier. For details on response members, see the Redelivery object.</span>
+</div>
+
+<div id="textarea_wrapper" class="form-group has-feedback">
+    <textarea id="create_a_redelivery_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'create_a_redelivery_body')"></textarea>
+</div>
+
+  <input class="btn btn-success" type="button" value="Validate JSON" onclick="validateJsonTextarea('textarea_wrapper', 'create_a_redelivery_body')">
+  <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+
+<script>
+  var placeholder = '{"serviceId": 188937, "beginTime": 0, "endTime": 24, "redeliveryDate": 1402531200000}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#create_a_redelivery_body").val(placeholder);
+
+  function runAPI() {
+    var endpoint = "lds/v1/redeliveries";
+    var body = $("#create_a_redelivery_body").val();
+    if (IsJsonString(body)) {
+      var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
+    } else {
+      showNotification("JSON is not in valid format");
+    }
+  }
+</script>

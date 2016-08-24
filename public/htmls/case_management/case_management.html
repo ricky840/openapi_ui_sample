@@ -1,0 +1,84 @@
+<div class="container_fuild">
+  <div class="row"> <!-- main row -->
+
+    <!-- API section -->
+    <div class="col-md-7">
+
+			<!-- API title goes here -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="corner_space"></div>
+				</div>
+        <div class="col-md-9">
+          <h2>Case Management API</h2>
+          <p>API to manage support requests to resolve questions or issues with your Akamai applications and services.</p>
+          <p>The REST API responds to requests with standard HTTP status codes. In the case of a validation failure or when an API fails to process your request, an error message is returned in JSON format.</p>
+          <hr>
+				</div>
+			</div>
+
+      <!-- API content main body -->
+      <div class="row">
+
+        <!-- left menu -->
+        <div class="col-md-3">
+          <div class= "sidemenu">
+            <div class="list-group panel">
+            <a href="#categories" class="list-group-item list-group-title" data-toggle="collapse">Categories<span class="caret"></span></a>
+            <div class="collapse" id="categories">
+              <a href="#cases_per_category" class="list-group-item list-group-lv1" data-toggle="collapse">Cases per Category<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="cases_per_category">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#cases_per_category" onclick="loadApiActionPage('/htmls/case_management/categories/cases_per_category/list-cases-per-category.html')">List Cases per Category</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#cases_per_category" onclick="loadApiActionPage('/htmls/case_management/categories/cases_per_category/create-a-case.html')">Create a Case</a>
+              </div>
+              <a href="#professional_services_cases" class="list-group-item list-group-lv1" data-toggle="collapse">Professional Services Cases<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="professional_services_cases">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#professional_services_cases" onclick="loadApiActionPage('/htmls/case_management/categories/professional_services_cases/list-professional-services-case.html')">List Professional Services Cases</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#professional_services_cases" onclick="loadApiActionPage('/htmls/case_management/categories/professional_services_cases/create-a-professional-services-case.html')">Create a Professional Services Case</a>
+              </div> 
+            </div>   
+            </div>
+            <div class="list-group panel">
+            <a href="#cases" class="list-group-item list-group-title" data-toggle="collapse">Cases<span class="caret"></span></a>
+            <div class="collapse" id="cases">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/case_management/cases/cases.html')">Cases</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/case_management/cases/case.html')">Case</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/case_management/cases/comments.html')">Comments</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/case_management/cases/file-attachments.html')">File Attachments</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/case_management/cases/resolutions.html')">Resoulutions</a>
+            </div>   
+            </div>
+          </div>
+
+        </div><!-- left menu end -->
+
+        <!-- API action content -->
+        <div class="col-md-9">
+     
+					<!-- API action content goes here -->
+          <div id="api_action_body_wrapper"></div>
+          <!-- response -->
+          <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+            <div id="loading_spinner" style="display: none"></div>
+            <span id="api_response"></span>
+          </div>
+        </div> <!-- API action content end -->
+      </div> <!-- API content main body end -->
+
+    </div> <!-- API section end -->
+
+    <!-- Toke HTML column -->
+    <div class="col-md-4 col-sm-offset-1">
+      <div id="token_html"></div>
+    </div>
+
+  </div> <!-- end of main row -->
+</div> <!-- container -->
+
+<div id="footer_html"></div>
+
+<script>
+  $(document).ready(function() {
+    loadTokenHtml();
+  });
+</script>

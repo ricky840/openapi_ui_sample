@@ -1,0 +1,25 @@
+<div class="form-group">
+  <label for="">Remove a Resource</label>
+  <span class="help-block">Name of Traffic Management domain.</span>
+  <input id="domain_name" type="text" class="form-control" placeholder="example.akadns.net">
+</div>
+
+<div class="form-group">
+  <label for="rname">Resouce Name</label>
+  <span class="help-block">Name of Resource to create or update.</span>
+  <input id="rname" type="text" class="form-control" placeholder="cpu (resourceName)">
+</div>
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var domain = $("#domain_name").val();
+    var rname = $("#rname").val();
+    if (domain && rname) {
+      var endpoint = "/config-gtm/v1/domains/"+domain+"/properties/"+rname;
+      sendAPIRequestDelete(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter domain name and resource name");
+    }
+  }
+</script>

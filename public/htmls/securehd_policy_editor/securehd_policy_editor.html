@@ -1,0 +1,111 @@
+<div class="container_fuild">
+  <div class="row"> <!-- main row -->
+
+    <!-- API section -->
+    <div class="col-md-7">
+
+			<!-- API title goes here -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="corner_space"></div>
+				</div>
+        <div class="col-md-9">
+          <h2>The SecureHD Policy Editor API</h2>
+          <p>The SecureHD Policy Editor (SPE) serves as a “one stop shop” solution for the configuration and application of various security services for your Akamai HD Network media content, allowing you to apply Token Authorization, Content Targeting (GEO Protection), Media Encryption and Player Verification protection. Luna Control Center provides a graphical interface to SPE.</p>
+          <p>The SPE REST API provides a RESTful, HTTP-based API with simple XML or JSON objects and informative HTTP messages for customers needing programmatic control of their SPE security settings. You can easily use it with most programming languages.</p>
+          <hr>
+				</div>
+			</div>
+
+      <!-- API content main body -->
+      <div class="row">
+
+        <!-- left menu -->
+        <div class="col-md-3">
+          <div class= "sidemenu">
+            <div class="list-group panel">
+            <a href="#policies" class="list-group-item list-group-title" data-toggle="collapse">Policies<span class="caret"></span></a>
+            <div class="collapse" id="policies">
+              <a href="#security_policies" class="list-group-item list-group-lv1" data-toggle="collapse">Security Policies<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="security_policies">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#security_policies" onclick="loadApiActionPage('/htmls/securehd_policy_editor/policies/security_policies/list-policies.html')">List Policies</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#security_policies" onclick="loadApiActionPage('/htmls/securehd_policy_editor/policies/security_policies/create-a-policy.html')">Create a Policy</a>
+              </div>
+              <a href="#policy" class="list-group-item list-group-lv1" data-toggle="collapse">Policy<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="policy">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#policy" onclick="loadApiActionPage('/htmls/securehd_policy_editor/policies/policy/get-a-policy.html')">Get a Policy</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#policy" onclick="loadApiActionPage('/htmls/securehd_policy_editor/policies/policy/modify-a-policy.html')">Modify a Policy</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#policy" onclick="loadApiActionPage('/htmls/securehd_policy_editor/policies/policy/mark-a-policy-for-deletion.html')">Mark a Policy for Deletion</a>
+              </div>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/securehd_policy_editor/policies/policy-per-environment.html')">Policy per Environment</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/securehd_policy_editor/policies/policy-cloning.html')">Policy Cloning</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/securehd_policy_editor/policies/policy-promotion.html')">Policy Promotion</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/securehd_policy_editor/policies/removing-policies.html')">Removing Policies</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/securehd_policy_editor/policies/restoring-policy-deletion.html')">Restoring Policy Deletion</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/securehd_policy_editor/policies/restoring-policy-edit.html')">Restoring Policy Edit</a>
+            </div>   
+            </div>
+            <div class="list-group panel">
+            <a href="#hd_configuration_digital_properties" class="list-group-item list-group-title" data-toggle="collapse">HD Configuration/Digital Properties<span class="caret"></span></a>
+            <div class="collapse" id="hd_configuration_digital_properties">
+              <a href="#hd_config_policy" class="list-group-item list-group-lv1" data-toggle="collapse">HD Config Policy<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="hd_config_policy">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#hd_config_policy" onclick="loadApiActionPage('/htmls/securehd_policy_editor/hd_configuration_digital_properties/hd_config_policy/get-an-hd-config-policy.html')">Get an HD Config Policy</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#hd_config_policy" onclick="loadApiActionPage('/htmls/securehd_policy_editor/hd_configuration_digital_properties/hd_config_policy/modify-an-hd-config-policy.html')">Modify an HD Config Policy</a>
+              </div>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/securehd_policy_editor/hd_configuration_digital_properties/hd-config-policy-per-environment.html')">HD Config Policy per Environment</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/securehd_policy_editor/hd_configuration_digital_properties/policy-assignments.html')">Policy Assignments</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/securehd_policy_editor/hd_configuration_digital_properties/policy-assignments-per-environment.html')">Policy Assignments per Environment</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/securehd_policy_editor/hd_configuration_digital_properties/promoting-policy-assignments.html')">Promoting Policy Assignments</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/securehd_policy_editor/hd_configuration_digital_properties/reverting-promotions.html')">Reverting Promotions</a>
+            </div>   
+            </div>
+            <div class="list-group panel">
+            <a href="#security_services" class="list-group-item list-group-title" data-toggle="collapse">Security Services<span class="caret"></span></a>
+            <div class="collapse" id="security_services">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/securehd_policy_editor/security_services/countries.html')">Countries</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/securehd_policy_editor/security_services/designated-market-areas.html')">Designated Market Areas</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/securehd_policy_editor/security_services/regions.html')">Regions</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/securehd_policy_editor/security_services/region.html')">Region</a>
+            </div>   
+            </div>
+            <div class="list-group panel">
+            <a href="#miscellaneous" class="list-group-item list-group-title" data-toggle="collapse">Miscellaneous<span class="caret"></span></a>
+            <div class="collapse" id="miscellaneous">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/securehd_policy_editor/miscellaneous/access-control-groups.html')">Access Control Groups</a>
+            </div>   
+            </div>
+          </div>
+
+        </div><!-- left menu end -->
+
+        <!-- API action content -->
+        <div class="col-md-9">
+     
+					<!-- API action content goes here -->
+          <div id="api_action_body_wrapper"></div>
+          <!-- response -->
+          <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+            <div id="loading_spinner" style="display: none"></div>
+            <span id="api_response"></span>
+          </div>
+        </div> <!-- API action content end -->
+      </div> <!-- API content main body end -->
+
+    </div> <!-- API section end -->
+
+    <!-- Toke HTML column -->
+    <div class="col-md-4 col-sm-offset-1">
+      <div id="token_html"></div>
+    </div>
+
+  </div> <!-- end of main row -->
+</div> <!-- container -->
+
+<div id="footer_html"></div>
+
+<script>
+  $(document).ready(function() {
+    loadTokenHtml();
+  });
+</script>

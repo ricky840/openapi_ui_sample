@@ -1,0 +1,16 @@
+<fieldset disabled>
+  <div class="form-group">
+    <label for="categories">List Professional Services Cases</label>
+    <span class="help-block">Retrieves product lists for the PS category and logged-in user.</span>
+    <input id="categories" type="text" class="form-control" placeholder="/cases/v1/PS">
+  </div>
+</fieldset>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/cases/v1/PS";
+    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+  }
+</script>

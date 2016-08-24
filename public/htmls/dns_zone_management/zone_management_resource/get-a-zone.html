@@ -1,0 +1,29 @@
+<div class="form-group">
+  <label for="get_a_zone">Get a Zone</label>
+  <span id="helpBlock" class="help-block">Returns the complete representation of the Zone, which includes all of the records for the specified Zone. Additionally, a token is returned, which is required when submitting a modified version of the Zone.</span>
+  <span id="helpBlock" class="help-block">NOTE: This resource can return in JSON (application/json) or XML (application/xml) format. Default: JSON.</span>
+</div>
+
+<div class="form-group">
+  <label for="get_a_zone">Zone</label>
+  <span id="helpBlock" class="help-block">Name of Zone.</span>
+  <input id="zone" type="text" class="form-control" placeholder="example.com">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/config-dns/v1/zones/";
+    var zone = $("#zone").val();
+    if (zone) {
+    endpoint = endpoint + zone;
+    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+  } else {
+    showNotification("Please enter Zone");
+  }
+  }
+ </script>
+
+
+

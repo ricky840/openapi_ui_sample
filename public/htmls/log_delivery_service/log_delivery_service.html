@@ -1,0 +1,90 @@
+<div class="container_fuild">
+  <div class="row"> <!-- main row -->
+
+    <!-- API section -->
+    <div class="col-md-7">
+
+			<!-- API title goes here -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="corner_space"></div>
+				</div>
+        <div class="col-md-9">
+          <h2>The Log Delivery Service API</h2>
+          <p>The Log Delivery Service API allows users to view, update, and delete configurations for the Luna portal’s log delivery service. The scope of the returned data is limited by the user’s account: its permissions and accessible set of acgObjects. The API provides data for the last 15 months.</p>
+					<hr>
+				</div>
+			</div>
+
+      <!-- API content main body -->
+      <div class="row">
+
+        <!-- left menu -->
+        <div class="col-md-3">
+          <div class= "sidemenu">
+            <div class="list-group panel">
+            <a href="#log_delivery_configurations" class="list-group-item list-group-title" data-toggle="collapse">Log Delivery Configurations<span class="caret"></span></a>
+            <div class="collapse" id="log_delivery_configurations">
+              <a href="#configurations" class="list-group-item list-group-lv1" data-toggle="collapse">Configurations<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="configurations">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#configurations" onclick="loadApiActionPage('/htmls/log_delivery_service/log_delivery_configurations/configurations/list-configurations.html')">List Configurations</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#configurations" onclick="loadApiActionPage('/htmls/log_delivery_service/log_delivery_configurations/configurations/create-a-configuration.html')">Create a Configuration</a>
+              </div>
+              <a href="#configuration" class="list-group-item list-group-lv1" data-toggle="collapse">Configuration<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="configuration">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#configuration" onclick="loadApiActionPage('/htmls/log_delivery_service/log_delivery_configurations/configuration/get-a-configuration.html')">Get a Configuration</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#configuration" onclick="loadApiActionPage('/htmls/log_delivery_service/log_delivery_configurations/configuration/modify-a-configuration.html')">Modify a Configuration</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#configuration" onclick="loadApiActionPage('/htmls/log_delivery_service/log_delivery_configurations/configuration/remove-a-configuration.html')">Remove a Configuration</a>
+              </div>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/log_delivery_service/log_delivery_configurations/configuration-copy.html')">Configuration Copy</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/log_delivery_service/log_delivery_configurations/suspension.html')">Suspension</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/log_delivery_service/log_delivery_configurations/resumption.html')">Resumption</a>
+              <a href="#redeliveries" class="list-group-item list-group-lv1" data-toggle="collapse">Redeliveries<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="redeliveries">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#redeliveries" onclick="loadApiActionPage('/htmls/log_delivery_service/log_delivery_configurations/redeliveries/list-redeliveries.html')">List Redeliveries</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#redeliveries" onclick="loadApiActionPage('/htmls/log_delivery_service/log_delivery_configurations/redeliveries/create-a-redeliveries.html')">Create a Redelivery</a>
+              </div>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/log_delivery_service/log_delivery_configurations/redelivery.html')">Redelivery</a>
+            </div>   
+            </div>
+            
+            <div class="list-group panel">
+            <a href="#log_delivery_dictionaries" class="list-group-item list-group-title" data-toggle="collapse">Log Delivery Dictionaries<span class="caret"></span></a>
+            <div class="collapse" id="log_delivery_dictionaries">          
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/log_delivery_service/log_delivery_dictionaries/dictionary.html')">Dictionary</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/log_delivery_service/log_delivery_dictionaries/validation.html')">Validation</a>
+            </div>   
+            </div>
+          </div>
+
+        </div><!-- left menu end -->
+
+        <!-- API action content -->
+        <div class="col-md-9">
+					<!-- API action content goes here -->
+          <div id="api_action_body_wrapper"></div>
+          <!-- response -->
+          <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+            <div id="loading_spinner" style="display: none"></div>
+            <span id="api_response"></span>
+          </div>
+        </div> <!-- API action content end -->
+      </div> <!-- API content main body end -->
+
+    </div> <!-- API section end -->
+
+    <!-- Toke HTML column -->
+    <div class="col-md-4 col-sm-offset-1">
+      <div id="token_html"></div>
+    </div>
+
+  </div> <!-- end of main row -->
+</div> <!-- container -->
+
+<div id="footer_html"></div>
+
+<script>
+  $(document).ready(function() {
+    loadTokenHtml();
+  });
+</script>

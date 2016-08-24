@@ -1,0 +1,24 @@
+<div class="form-group">
+  <label for="">Properties</label>
+  <span class="help-block">Representation of GTM property, (e.g., www) which in DNS terms is a subdomain of the domain. Combined with its domain (e.g., example.akadns.net), the fully qualified domain name www.example.akadns.net is used for load balancing.</span>
+</div>
+
+<div class="form-group">
+  <label for="">Domain</label>
+  <span class="help-block">Name of Traffic Management domain.</span>
+  <input id="domain_name" type="text" class="form-control" placeholder="example.akadns.net">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var domain = $("#domain_name").val();
+    if (domain) {
+      var endpoint = "/config-gtm/v1/domains/"+domain+"/properties";
+      sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter domain name");
+    }
+  }
+</script>

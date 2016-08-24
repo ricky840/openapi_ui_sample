@@ -1,0 +1,44 @@
+<div class="form-group">
+  <label for="policy">Add a Version Rule</label>
+  <span class="help-block">Add a new rule to an existing policy version. You can only add one rule at a time.</span>
+</div>
+
+<div class="form-group">
+  <label for="pid">Policy ID</label>
+  <span class="help-block">The ID of the policy.</span>
+  <input id="pid" type="number" class="form-control" placeholder="18063 (policyID)">
+</div>          
+
+<div class="form-group">
+  <label for="version">Version</label>
+  <span class="help-block">The version number of the policy.</span>
+  <input id="version" type="number" class="form-control" placeholder="3(version)">
+</div>
+
+<div id="textarea_wrapper" class="form-group has-feedback">
+  <textarea id="add_a_version_rule_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'add_a_version_rule_body')"></textarea>
+</div>
+
+<input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper','add_a_version_rule_body')">
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+ var placeholder = '{"matches": [ {   "matchType": "range",   "objectMatchValue": {     "type": "range","value": [1,25]},"matchOperator": "equals","negate": false,"caseSensitive": false}],"start": 0,"end": 0,"type": "asMatchRule","disabled": "false","forwardSettings": {"originId": "originremote2","useIncomingQueryString": true,"pathAndQS": "/sales/Q1/"},"name": "Q1Sales","id": null}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#add_a_version_rule_body").val(placeholder);
+
+ function runAPI() {   
+      var endpoint = "/cloudlets/api/v2/policies/";
+      var pid = $("#pid").val();
+      var version = $("#version").val();
+      endpoint = endpoint + pid + "/versions/" + version + "/rules";  
+      var body = $("#add_a_version_rule_body").val();
+      if (IsJsonString(body)) {
+        var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
+      } else {
+        showNotification("JSON is not in valid format");
+      }
+    }
+
+</script>
+

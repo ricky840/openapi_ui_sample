@@ -1,0 +1,30 @@
+<div class="form-group">
+  <label for="categories">List Cases per Category</label>
+  <span class="help-block">Retrieves product and problem lists for the category and logged-in user.</span>
+</div>
+
+<div class="form-group">
+  <label for="category">Select Category</label>
+  <span class="help-block">Category of lists to retrieve.</span>
+  <select class="form-control" id="category">
+    <option value="Technical_Support">Technical_Support</option>
+    <option value="Billing_Support">Billing_Support</option>
+    <option value="Business_Support">Business_Support</option>
+  </select>
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+
+function runAPI() {
+  var endpoint = "/cases/v1/";
+  var category = $("#category").val();
+  if (category) {
+    endpoint = endpoint + category;
+    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+  } else {
+    showNotification("Select Cateogry");
+  }
+}
+</script>

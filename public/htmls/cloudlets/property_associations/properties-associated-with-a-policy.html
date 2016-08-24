@@ -1,0 +1,25 @@
+<div class="form-group">
+  <label for="policy">Properties Associated with a Policy</label>
+  <span class="help-block">Get Associated Properties for a Policy</span>
+</div>
+
+<div class="form-group">
+  <label for="pid">Policy ID</label>
+  <span class="help-block">The ID of the policy.</span>
+  <input id="pid" type="number" class="form-control" placeholder="18063 (policyID)">
+</div>          
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/cloudlets/api/v2/";
+    var pid = $("#pid").val();
+    if (pid) {
+      endpoint = endpoint + pid + "/properties";
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter policyID");
+    }
+  }
+</script>

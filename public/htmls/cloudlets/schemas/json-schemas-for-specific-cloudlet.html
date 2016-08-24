@@ -1,0 +1,20 @@
+<div class="form-group">
+  <label for="schema">List Schemas per Cloudlet</label>
+  <span class="help-block">Get links to all the JSON schemas by Cloudlet type (cloudletCode) to validate different requests used with this API.</span>
+  <span class="help-block">NOTE: See List Cloudlets for information on how to obtain the cloudletCode.</span>
+</div>
+
+<fieldset disabled>
+  <div class="form-group">
+    <input id="policies" type="text" class="form-control" placeholder="/cloudlets/api/v2/schemas?cloudletType">
+  </div>
+</fieldset>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/cloudlets/api/v2/schemas?cloudletType";
+    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+  }
+</script>

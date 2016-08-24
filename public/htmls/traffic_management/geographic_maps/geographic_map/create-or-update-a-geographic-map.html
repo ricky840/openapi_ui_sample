@@ -1,0 +1,38 @@
+<div class="form-group">
+  <label for="">Create or Update a Geographic Map</label>
+  <span class="help-block">Name of Traffic Management domain</span>
+  <input id="domain_name" type="text" class="form-control" placeholder="example.akadns.net">
+</div>
+
+<div class="form-group">
+  <label for="mname">Map Name</label>
+  <span class="help-block">Name of Geographic Map to create or update.</span>
+  <input id="mname" type="text" class="form-control" placeholder="software-rollout(mapName)">
+</div>
+
+<div class="form-group">
+  <span class="help-block">Create or Update a Geographic Map Object</span>
+  <div id="textarea_wrapper" class="form-group has-feedback">
+    <textarea id="create_or_update_a_geographic_map" class="form-control" rows="15" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'create_or_update_a_geographic_map')"></textarea>
+  </div>
+  <input class="btn btn-success" type="button" value="Validate JSON" onclick="validateJsonTextarea('textarea_wrapper', 'create_or_update_a_geographic_map')">
+  <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+</div>
+
+<script>
+  var placeholder = '{"assignments": [{"countries": [ "GB" ],"datacenterId": 3133,"nickname": "UK users"}],"defaultDatacenter": {"datacenterId": 5400,"nickname": "Default Mapping"}, "name": "UK Delivery"}'
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#create_or_update_a_geographic_map").val(placeholder);
+
+  function runAPI() {
+    var domain_name =  $("#domain_name").val();
+    var domain_config = $("#create_or_update_a_geographic_map").val();
+    var mname = $("#mname").val();
+    if (IsJsonString(domain_config) && domain_name) {
+      var endpoint = "/config-gtm/v1/domains/"+domain_name+"/properties/"+mname;
+      sendAPIRequestPut(endpoint, "luna_token", domain_config);
+    } else {
+      showNotification("Please make sure JSON is in valid format and enter a domain name & map name");
+    }
+  }
+</script>

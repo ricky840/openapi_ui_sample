@@ -1,0 +1,28 @@
+<div class="form-group">
+  <label for="categories">Create a Professional Services Case</label>
+  <span class="help-block">Creates a PS case for the logged-in user. Provide as much data as you can to create an appropriate case.</span>
+</div>
+
+<div id="textarea_wrapper" class="form-group has-feedback">
+  <label for="create_professional_body">Create a Prosessional Services Case Object</label>
+  <textarea id="create_professional_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'create_professional_body')"></textarea>
+</div>
+
+<input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper','create_professional_body')">
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  var placeholder = '{"description": "...","endUserAccountName": "...","endUserEmail": "...","endUserName": "...","endUserPhoneNumber": "...","product": "...","severity": "...","title": "...","indirectCustomerAccountId": "..."}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#create_professional_body").val(placeholder);
+
+ function runAPI() {   
+      var endpoint = "/cases/v1/PS";
+      var body = $("#create_professional_body").val();
+      if (IsJsonString(body)) {
+        var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
+      } else {
+        showNotification("JSON is not in valid format");
+      }
+    }
+</script>

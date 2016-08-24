@@ -1,0 +1,63 @@
+<div class="container_fuild">
+  <div class="row"> <!-- main row -->
+
+    <!-- API section -->
+    <div class="col-md-7">
+
+			<!-- API title goes here -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="corner_space"></div>
+				</div>
+        <div class="col-md-9">
+					<h2>DNS - Zone Reporting API</h2>
+					<p>Welcome to Akamai’s Enhanced DNS service. Enhanced DNS is designed to integrate easily with your existing DNS infrastructure to provide a secure, high performance, highly available and scalable solution for DNS hosting. As part of this service, Akamai runs name servers in multiple networks and in many geographic locations that are capable of resolving queries for your zones. Akamai’s IP Anycast technology is also capable of providing an unprecedented level of reliability and performance for name resolution.</p>
+          <p>This report is based on the logs retrieved from all DNS Edge Servers. Because it takes some time to retrieve and process the logs, the most recent data is estimated based on a sample of your traffic. It is normal for this estimated, real-time data to be incomplete resulting in ‘holes’ in the estimated data set, depending on the samples aggregated for that time frame. These holes will not be seen once the logs are completed, aggregated and shown under historical data. The window for this estimation is usually the past 4–5 hours. If estimated data is included in the report, the start of the estimation data window will be above the columns of the report: “Estimated data start date/time:”</p>
+          <p>Each row represents the total number of DNS requests, as well as the total number of NXDOMAIN responses for a five-minute period.</p>
+					<hr>
+				</div>
+			</div>
+
+      <!-- API content main body -->
+      <div class="row">
+
+        <!-- left menu -->
+        <div class="col-md-3">
+          <div class= "sidemenu">
+            <div class="list-group panel">
+            <a href="#dns_traffic" class="list-group-item list-group-title" data-toggle="collapse" >DNS Traffic<span class="caret"></span></a>
+            <div class="collapse" id="dns_traffic">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/dns_zone_reporting/dns_traffic/traffic.html')">Get Traffic Report</a>  
+            </div> 
+            </div>
+          </div>
+        </div>
+
+        <!-- API action content -->
+        <div class="col-md-9">
+          <div id="api_action_body_wrapper"></div>
+            <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+              <div id="loading_spinner" style="display: none"></div>
+              <span id="api_response"></span>
+            </div>
+        </div> <!-- API action content end -->
+      </div> <!-- API content main body end -->
+
+    </div> <!-- API section end -->
+
+    <!-- Toke HTML column -->
+    <div class="col-md-4 col-sm-offset-1">
+      <div id="token_html"></div>
+    </div>
+
+  </div> <!-- end of main row -->
+</div> <!-- container -->
+
+<div id="footer_html"></div>
+
+<script>
+  $(document).ready(function() {
+    loadTokenHtml();
+  });
+</script>
+

@@ -102,6 +102,12 @@ end
 
 def makePutRequest(base_url, endpoint_url, client_token, client_secret, access_token, request_body)
 	baseuri = URI(base_url)
+  begin
+    JSON.parse(request_body)
+    content_type = 'application/json'
+  rescue JSON::ParserError => e
+    content_type = 'application/x-www-form-urlencoded'
+  end
 	http = Akamai::Edgegrid::HTTP.new(address = baseuri.host, post = baseuri.port)
 	http.setup_edgegrid(
 		client_token: client_token,
@@ -110,7 +116,7 @@ def makePutRequest(base_url, endpoint_url, client_token, client_secret, access_t
 	)
 	req = Net::HTTP::Put.new(
 		URI.join(baseuri.to_s, endpoint_url).to_s,
-		initheader = { 'Content-Type' => 'application/json' }
+		initheader = { 'Content-Type' => content_type }
 	)
 	req.body = request_body
 	res = http.request(req)
@@ -190,6 +196,12 @@ end
 
 get "/run/:tokentype" do
   endpoint = request.env["HTTP_ENDPOINT"].to_s.delete(' ')
+  begin
+    URI.parse(endpoint)
+  rescue URI::InvalidURIError => e
+    return %Q[{"error" : "#{e.message}"}]
+  end
+
   if not endpoint.nil?
     api_token_type = params['tokentype']
     tokens = session[api_token_type]
@@ -203,8 +215,9 @@ end
 post "/run/:tokentype" do
   endpoint = request.env["HTTP_ENDPOINT"].to_s.delete(' ')
   begin
+    URI.parse(endpoint)
     request_body = JSON.generate(JSON.parse(request.body.read))
-  rescue JSON::ParserError => e
+  rescue JSON::ParserError, URI::InvalidURIError => e
     return %Q[{"error" : "#{e.message}"}]
   end
 
@@ -221,6 +234,11 @@ end
 post "/runrb/:tokentype" do
   endpoint = request.env["HTTP_ENDPOINT"].to_s.delete(' ')
   request_body = request.body.read
+  begin
+    URI.parse(endpoint)
+  rescue URI::InvalidURIError => e
+    return %Q[{"error" : "#{e.message}"}]
+  end
 
   if not endpoint.nil?
     api_token_type = params['tokentype']
@@ -234,9 +252,10 @@ end
 
 put "/run/:tokentype" do
   endpoint = request.env["HTTP_ENDPOINT"].to_s.delete(' ')
+  request_body = request.body.read
   begin
-    request_body = JSON.generate(JSON.parse(request.body.read))
-  rescue JSON::ParserError => e
+    URI.parse(endpoint)
+  rescue URI::InvalidURIError => e
     return %Q[{"error" : "#{e.message}"}]
   end
 
@@ -253,6 +272,11 @@ end
 delete "/run/:tokentype" do
   endpoint = request.env["HTTP_ENDPOINT"].to_s.delete(' ')
   request_body = request.body.read
+  begin
+    URI.parse(endpoint)
+  rescue URI::InvalidURIError => e
+    return %Q[{"error" : "#{e.message}"}]
+  end
 
   if not endpoint.nil?
     api_token_type = params['tokentype']

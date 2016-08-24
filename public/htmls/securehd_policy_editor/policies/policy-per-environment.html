@@ -1,0 +1,35 @@
+<div class="form-group">
+  <label for="securehd">Policy per Environment</label>
+  <span class="help-block">Get security policy for given environment (staging/production)</span>
+</div>
+
+<div class="form-group">
+  <label for="pid">Policy ID</label>
+  <span class="help-block">The ID of the policy to fetch.</span>
+  <input id="pid" type="number" class="form-control" placeholder="1234 (policyId)">
+</div>
+
+<div class="form-group">
+  <label for="environment">Select Environment</label>
+  <span class="help-block">The environment.</span>
+  <select class="form-control" id="environment">
+    <option value="Staging">Staging</option>
+    <option value="Production">Production</option>
+  </select>
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/config-media-security/v1/security/";
+    var pid = $("#pid").val();
+    var environment = $("#environment").val();
+    if (pid) {
+      endpoint = endpoint + pid + "/" + environment;
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter policyID and select the Environment");
+    }
+  }
+</script>

@@ -1,0 +1,35 @@
+<div class="form-group">
+  <label for="securehd">Modify an HD Config Policy</label>
+  <span class="help-block">Update policy assignments for given hostname on staging network.</span>
+</div>
+
+<div class="form-group">
+  <label for="domain">Domain</label>
+  <span class="help-block">The fully qualified domain name for the host in question.</span>
+  <input id="domain" type="text" class="form-control" placeholder="speedy.example.com. (domain)">
+</div>
+
+<div class="form-group">
+  <label for="modify_an_hd_config_policy_body">Modify an HD Config Policy Object</label>
+  <div id="textarea_wrapper" class="form-group has-feedback">
+    <textarea id="modify_an_hd_config_policy_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'modify_an_hd_config_policy_body')"></textarea>
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  var placeholder = '<assignment><rules><rule><policy-name>POLICY NAME</policy-name><policy-id>1234</policy-id><path>/...</path><start-time>*</start-time><end-time>*</end-time></rule><rule><policy-name>POLICY NAME2</policy-name><policy-id>12345</policy-id><path>/abc/...</path><start-time>*</start-time><end-time>*</end-time></rule></rules></assignment>';
+  $("#modify_an_hd_config_policy_body").val(placeholder);
+
+  function runAPI() {
+    var endpoint = "/config-media-security/v1/security/";
+    var domain = $("#domain").val();
+    var body = $("#modify_an_hd_config_policy_body").val();
+    if (pid) {
+      endpoint = endpoint + domain + "/policy";
+      var return_response = sendAPIRequestPut(endpoint, "luna_token", body);
+    } else {
+      showNotification("Please enter Domain");
+    }
+  }
+</script>

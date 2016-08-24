@@ -1,0 +1,19 @@
+<div class="form-group">
+  <label for="searching_body">Search Network Lists</label>
+  <span class="help-block">Retrieves a list of all Network Lists having elements containing the search terms. Each Network List's status is also provided.</span>
+</div>
+
+<fieldset disabled>
+  <div class="form-group">
+    <input id="list" type="text" class="form-control" placeholder="/network-list/v1/network_lists/search">
+  </div>
+</fieldset>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/network-list/v1/network_lists/search";
+    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+  }
+</script>

@@ -27,59 +27,96 @@
             <div class="list-group panel">
             <a href="#domains" class="list-group-item list-group-title" data-toggle="collapse" >Domains<span class="caret"></span></a>
             <div class="collapse" id="domains">
-              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/traffic_management/domains/list-domains.html')">List Domains</a>
-              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/traffic_management/domains/get-a-domain.html')">Get a Domain</a>
-              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/traffic_management/domains/create-or-update-a-domain.html')">Create or Update a Domain</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/traffic_management/domains/domains.html')">Domains</a>
+              <a href="#domain" class="list-group-item list-group-lv1" data-toggle="collapse">HD Config Policy<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="domain">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#domain" onclick="loadApiActionPage('/htmls/traffic_management/domains/domain/get-a-domain.html')">Get a Domain</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#domain" onclick="loadApiActionPage('/htmls/traffic_management/domains/domain/create-or-update-a-domain.html')">Create or Update a Domain</a>
+              </div> 
             </div> 
             </div>
             <div class="list-group panel">
-            <a href="#datacenters" class="list-group-item list-group-title" data-toggle="collapse" >Domains<span class="caret"></span></a>
-            <div class="collapse" id="datacenters">
-              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/traffic_management/datacenters/list-data-centers.html')">List Data Centers</a>
+            <a href="#data_centers" class="list-group-item list-group-title" data-toggle="collapse" >Data Centers<span class="caret"></span></a>
+            <div class="collapse" id="data_centers">
+              <a href="#data_centers2" class="list-group-item list-group-lv1" data-toggle="collapse">Data Centers<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="data_centers2">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#data_centers2" onclick="loadApiActionPage('/htmls/traffic_management/data_centers/data_centers/list-data-centers.html')">List Data Centers</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#data_centers2" onclick="loadApiActionPage('/htmls/traffic_management/data_centers/data_centers/create-a-data-center.html')">Create a Data Center</a>
+              </div> 
+              <a href="#data_center" class="list-group-item list-group-lv1" data-toggle="collapse">Data Center<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="data_center">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#data_center" onclick="loadApiActionPage('/htmls/traffic_management/data_centers/data_center/get-a-data-center.html')">Get a Data Center</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#data_center" onclick="loadApiActionPage('/htmls/traffic_management/data_centers/data_center/update-a-data-center.html')">Update a Data Center</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#data_center" onclick="loadApiActionPage('/htmls/traffic_management/data_centers/data_center/remove-a-data-center.html')">Remove a Data Center</a>
+              </div> 
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#properties" class="list-group-item list-group-title" data-toggle="collapse" >Properties<span class="caret"></span></a>
+            <div class="collapse" id="properties">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/traffic_management/properties/properties.html')">Properties</a>
+              <a href="#property" class="list-group-item list-group-lv1" data-toggle="collapse">Property<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="property">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#property" onclick="loadApiActionPage('/htmls/traffic_management/properties/property/get-a-property.html')">Get a Property</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#property" onclick="loadApiActionPage('/htmls/traffic_management/properties/property/create-or-update-a-property.html')">Create or Update a Property</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#property" onclick="loadApiActionPage('/htmls/traffic_management/properties/property/remove-a-property.html')">Remove a Property</a>
+              </div> 
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#resources" class="list-group-item list-group-title" data-toggle="collapse" >Resources<span class="caret"></span></a>
+            <div class="collapse" id="resources">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/traffic_management/resources/resources.html')">Resources</a>
+              <a href="#resource" class="list-group-item list-group-lv1" data-toggle="collapse">Resource<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="resource">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#resource" onclick="loadApiActionPage('/htmls/traffic_management/resources/resource/get-a-resource.html')">Get a Resource</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#resource" onclick="loadApiActionPage('/htmls/traffic_management/resources/resource/create-or-update-a-resource.html')">Create or Update a Resource</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#resource" onclick="loadApiActionPage('/htmls/traffic_management/resources/resource/remove-a-resource.html')">Remove a Resource</a>
+              </div> 
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#geographic_maps" class="list-group-item list-group-title" data-toggle="collapse" >Geographic Maps<span class="caret"></span></a>
+            <div class="collapse" id="geographic_maps">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/traffic_management/geographic_maps/geographic-maps.html')">Geographic Maps</a>
+              <a href="#geographic_map" class="list-group-item list-group-lv1" data-toggle="collapse">Geographic Map<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="geographic_map">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#geographic_map" onclick="loadApiActionPage('/htmls/traffic_management/geographic_maps/geographic_map/get-a-geographic-map.html')">Get a Geographic Map</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#geographic_map" onclick="loadApiActionPage('/htmls/traffic_management/geographic_maps/geographic_map/create-or-update-a-geographic-map.html')">Create or Update a Geographic Map</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#geographic_map" onclick="loadApiActionPage('/htmls/traffic_management/geographic_maps/geographic_map/remove-a-geographic-map.html')">Remove a Geographic Map</a>
+              </div> 
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#cidr_maps" class="list-group-item list-group-title" data-toggle="collapse" >CIDR Maps<span class="caret"></span></a>
+            <div class="collapse" id="cidr_maps">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/traffic_management/cidr_maps/cidr-maps.html')">CIDR Maps</a>
+              <a href="#cidr_map" class="list-group-item list-group-lv1" data-toggle="collapse">CIDR Map<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="cidr_map">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#cidr_map" onclick="loadApiActionPage('/htmls/traffic_management/cidr_maps/cidr_map/get-a-cidr-map.html')">Get a CIDR Map</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#cidr_map" onclick="loadApiActionPage('/htmls/traffic_management/cidr_maps/cidr_map/create-or-update-a-cidr-map.html')">Create or Update a CIDR Map</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#cidr_map" onclick="loadApiActionPage('/htmls/traffic_management/cidr_maps/cidr_map/remove-a-cidr-map.html')">Remove a CIDR Map</a>
+              </div> 
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#autonomous_system_maps" class="list-group-item list-group-title" data-toggle="collapse" >Autonomous System Maps<span class="caret"></span></a>
+            <div class="collapse" id="autonomous_system_maps">
+              <a href="#as_map" class="list-group-item list-group-lv1" data-toggle="collapse">AS Map<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="as_map">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#as_map" onclick="loadApiActionPage('/htmls/traffic_management/autonomous_system_maps/get-an-as-map.html')">Get an AS Map</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#as_map" onclick="loadApiActionPage('/htmls/traffic_management/autonomous_system_maps/create-or-update-an-as-map.html')">Create or Update an AS Map</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#as_map" onclick="loadApiActionPage('/htmls/traffic_management/autonomous_system_maps/remove-an-as-map.html')">Remove an AS Map</a>
+              </div> 
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#status" class="list-group-item list-group-title" data-toggle="collapse" >Status<span class="caret"></span></a>
+            <div class="collapse" id="status">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/traffic_management/status/status.html')">Status</a>
             </div> 
             </div>
           </div>
-        </div>
-
-        <div class="col-md-3">
-          <ul class="nav nav-pills nav-stacked">
-            <li><h5>Domains</h5></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/traffic_management/domains/list-domains.html')"><a href="#">List Domains</a></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/traffic_management/domains/get-a-domain.html')"><a href="#">Get a Domain</a></li>
-            <li role="presentation" onclick="loadApiActionPage('/htmls/traffic_management/domains/create-or-update-a-domain.html')"><a href="#">Create or Update a Domain</a></li>
-            <li><h5>Data Centers</h5></li>
-            <li role="presentation" onclick=""><a href="#">List Data Centers</a></li>
-            <li role="presentation" onclick=""><a href="#">Create a Data Center</a></li>
-            <li role="presentation" onclick=""><a href="#">Get a Data Center</a></li>
-            <li role="presentation" onclick=""><a href="#">Update a Data Center</a></li>
-            <li role="presentation" onclick=""><a href="#">Remove a Data Center</a></li>
-            <li><h5>Properties</h5></li>
-            <li role="presentation" onclick=""><a href="#">List Properties</a></li>
-            <li role="presentation" onclick=""><a href="#">Get a Property</a></li>
-            <li role="presentation" onclick=""><a href="#">Create or Update a Property</a></li>
-            <li role="presentation" onclick=""><a href="#">Remove a Property</a></li>
-            <li><h5>Resources</h5></li>
-            <li role="presentation" onclick=""><a href="#">List Resources</a></li>
-            <li role="presentation" onclick=""><a href="#">Get a Resource</a></li>
-            <li role="presentation" onclick=""><a href="#">Create a Update a Resource</a></li>
-            <li role="presentation" onclick=""><a href="#">Remove a Resources</a></li>
-            <li><h5>Geographic Maps</h5></li>
-            <li role="presentation" onclick=""><a href="#">List Geographic Maps</a></li>
-            <li role="presentation" onclick=""><a href="#">Get a Geographic Map</a></li>
-            <li role="presentation" onclick=""><a href="#">Create a Geographic Map</a></li>
-            <li role="presentation" onclick=""><a href="#">Remove a Geographic Map</a></li>
-            <li><h5>CIDR Maps</h5></li>
-            <li role="presentation" onclick=""><a href="#">List CIDR Maps</a></li>
-            <li role="presentation" onclick=""><a href="#">Get a CIDR Map</a></li>
-            <li role="presentation" onclick=""><a href="#">Create or Update CIDR Map</a></li>
-            <li role="presentation" onclick=""><a href="#">Remove a CIDR Map</a></li>
-            <li><h5>Autonomous System Maps</h5></li>
-            <li role="presentation" onclick=""><a href="#">Get an AS Map</a></li>
-            <li role="presentation" onclick=""><a href="#">Create or Update an AS Map</a></li>
-            <li role="presentation" onclick=""><a href="#">Remove an AS Map</a></li>
-            <li><h5>Status</h5></li>
-            <li role="presentation" onclick=""><a href="#">Get Current Status</a></li>
-          </ul>
         </div>
 
         <!-- API action content -->
@@ -109,6 +146,5 @@
 <script>
   $(document).ready(function() {
     loadTokenHtml();
-    loadApiActionPage('/htmls/traffic_management/domains/list-domains.html');
   });
 </script>
