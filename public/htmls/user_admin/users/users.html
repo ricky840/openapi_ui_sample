@@ -1,0 +1,27 @@
+<div class="form-group">
+  <label for="">Create a New User</label>
+  <span class="help-block">Create and grant permissions to a new user.</span>
+</div>
+
+<div id="textarea_wrapper" class="form-group has-feedback">
+  <textarea id="create_user" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'create_user')"></textarea>
+</div>
+
+<input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper','create_user')">
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+ var placeholder = '{"firstName":"Diana","lastName":"Prince","email":"example_testemail@akamai.com","phone":"(444) 444-4444","timezone":"GMT","roleAssignments":[{"groupId":"72872","roleId":14}]}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#create_user").val(placeholder);
+
+ function runAPI() {   
+      var endpoint = "/user-admin/v1/users";
+      var body = $("#create_user").val();
+      if (IsJsonString(body)) {
+        var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
+      } else {
+        showNotification("JSON is not in valid format");
+      }
+    }
+</script>

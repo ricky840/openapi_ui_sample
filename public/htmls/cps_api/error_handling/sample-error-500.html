@@ -1,0 +1,16 @@
+<fieldset disabled>
+  <div class="form-group">
+    <label for="">Sample Error 500</label>
+    <span class="help-block">All API error responses have the following format with content type application/problem+json. All fields except detail will always be included in error-responses.</span>
+    <input id="status" type="text" class="form-control" placeholder="/cps/v2/sample-500">
+  </div>
+</fieldset>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/cps/v2/sample-500";
+    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+  }
+</script>

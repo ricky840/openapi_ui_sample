@@ -1,0 +1,17 @@
+<fieldset disabled>
+  <div class="form-group">
+    <label for="">Maps</label>
+    <span class="help-block">The following API end point can be used by the user to retrieve all the maps that belong to that particular user account.</span>
+    <span class="help-block">Lists all maps that belong to an account.</span>
+    <input id="" type="text" class="form-control" placeholder="/siteshield/v1/maps">
+  </div>
+</fieldset>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/siteshield/v1/maps";
+    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+  }
+</script>

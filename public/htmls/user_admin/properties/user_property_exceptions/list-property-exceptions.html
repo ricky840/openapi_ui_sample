@@ -1,0 +1,38 @@
+<div class="form-group">
+  <label for="">List a User's Property Exceptions</label>
+  <span class="help-block">Get the property exceptions for one user.</span>
+</div>
+
+<div class="form-group">
+  <label for="aid">Account ID</label>
+  <span class="help-block">Unique identifier for an account</span>
+  <input id="aid" type="text" class="form-control" placeholder="1-2ABCD (accountID)">
+</div>
+
+<div class="form-group">
+  <label for="gid">Group ID</label>
+  <span class="help-block">Unique numeric identifier for a group</span>
+  <input id="gid" type="number" class="form-control" placeholder="87673 (groupID)">
+</div>
+
+<div class="form-group">
+  <label for="cid">Contact ID</label>
+  <span class="help-block">Unique identifier for a user.</span>
+  <input id="cid" type="text" class="form-control" placeholder="1-0A1BCD (contactID)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var aid = $("#aid").val();
+    var gid = $("#gid").val();
+    var cid = $("#cid").val();
+    if (aid && gid && cid) {
+      var endpoint = "/user-admin/v1/accounts/"+aid+"/groups/"+gid+"/users/"+cid+"/propertyExceptions";
+      sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter accountID & groupID & contactID");
+    }
+  }
+</script>

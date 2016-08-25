@@ -1,0 +1,29 @@
+<div class="form-group"> 
+  <label for="">Fetch a Rule Format's JSON Schema</label>
+  <span class="help-block">Fetch the JSON schema for the given product and rule format.</span>
+</div>
+
+<div class="form-group">
+  <label for="pid">Product ID</label>
+  <input id="pid" type="text" class="form-control" placeholder="prd_Site_Accel (productID)">
+</div>
+
+<div class="form-group">
+  <label for="rf">Rule Format</label>
+  <input id="rf" type="text" class="form-control" placeholder="latest (ruleFormat)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var pid = $("#pid").val();
+    var rf = $("#rf").val();
+    if (pid && rf) {
+      var endpoint = "/papi/v0/schemas/products/"+pid+"/"+rf;
+      sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter productID & rule format");
+    }
+  }
+</script>

@@ -1,0 +1,34 @@
+<div class="form-group">
+  <label for="">Create a New Role</label>
+  <span class="help-block">Create a new role on an account.</span>
+</div>
+
+<div class="form-group">
+  <label for="aid">Account ID</label>
+  <span class="help-block">Unique identifier for an account</span>
+  <input id="aid" type="text" class="form-control" placeholder="1-2ABCD (accountID)">
+</div>
+
+<div id="textarea_wrapper" class="form-group has-feedback">
+  <textarea id="create_role" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'create_role')"></textarea>
+</div>
+
+<input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper','create_role')">
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+ var placeholder = '{"roleName":"Funky Test Role","roleDescription":"Description","grantedRoles":[{"roleId":86266},{"roleId":84513}]}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#create_role").val(placeholder);
+
+ function runAPI() {   
+      var aid = $("#aid").val();
+      var endpoint = "/user-admin/v1/accounts/"+aid+"/roles";
+      var body = $("#create_role").val();
+      if (IsJsonString(body)) {
+        var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
+      } else {
+        showNotification("JSON is not in valid format");
+      }
+    }
+</script>

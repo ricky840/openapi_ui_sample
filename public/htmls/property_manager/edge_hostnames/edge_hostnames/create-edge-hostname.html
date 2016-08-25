@@ -1,0 +1,39 @@
+<div class="form-group">
+  <label for="">Create a New Edge Hostname</label>
+  <span class="help-block">Create a new edge hostname entry. See the Data section for details on object members.</span>
+</div>
+
+<div class="form-group">
+  <label for="cid">Contract ID</label>
+  <input id="cid" type="text" class="form-control" placeholder="ctr_M-1TOTFAQ (contractID)">
+</div>
+
+<div class="form-group">
+  <label for="gid">Group ID</label>
+  <input id="gid" type="text" class="form-control" placeholder="grp_61240 (groupID)">
+</div>
+
+<div id="textarea_wrapper" class="form-group has-feedback">
+  <textarea id="create_edge_hostname" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'create_edge_hostname')"></textarea>
+</div>
+
+<input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper','create_edge_hostname')">
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+ var placeholder = '{"productId":"prd_PPP","domainPrefix":"www.my-domain.com","domainSuffix":"edgesuite.net","secure":true,"ipVersionBehavior":"IPV4"}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#create_edge_hostname").val(placeholder);
+
+ function runAPI() {   
+      var cid = $("#cid").val();
+      var gid = $("#gid").val();
+      var endpoint = "/papi/v0/edgehostnames/?contractId="+cid+"&groupId="+gid;
+      var body = $("#create_edge_hostname").val();
+      if (IsJsonString(body)) {
+        var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
+      } else {
+        showNotification("JSON is not in valid format");
+      }
+    }
+</script>

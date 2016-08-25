@@ -1,0 +1,23 @@
+<div class="form-group">
+  <label for="">Remove a User</label>
+</div>
+
+<div class="form-group">
+  <label for="cid">Contact ID</label>
+  <span class="help-block">Unique identifier for a user.</span>
+  <input id="cid" type="text" class="form-control" placeholder="1-0A1BCD (contactID)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var cid = $("#cid").val();
+    if (cid) {
+      var endpoint = "/user-admin/v1/users/"+cid;
+      sendAPIRequestDelete(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter contactID");
+    }
+  }
+</script>

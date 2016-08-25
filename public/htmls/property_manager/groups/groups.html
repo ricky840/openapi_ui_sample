@@ -1,0 +1,16 @@
+<fieldset disabled>
+  <div class="form-group">
+    <label for="">Groups</label>
+    <span class="help-block">Provides read-only information about groups, which may contain properties. (The User Admin API allows you to modify the group hierarchy.) This resource provides a flat list of groups, along with information to structure them as a hierarchy.</span>
+    <input id="" type="text" class="form-control" placeholder="/papi/v0/groups/">
+  </div>
+</fieldset>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/papi/v0/groups/";
+    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+  }
+</script>

@@ -1,0 +1,15 @@
+<fieldset disabled>
+  <div class="form-group">
+    <label for="">Fetch Client Settings</label>
+    <input id="" type="text" class="form-control" placeholder="/papi/v0/client-settings">
+  </div>
+</fieldset>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/papi/v0/client-settings";
+    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+  }
+</script>

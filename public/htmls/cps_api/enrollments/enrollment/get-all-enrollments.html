@@ -1,0 +1,23 @@
+<div class="form-group">
+  <label for="">Get All Enrollments</label>
+</div>
+
+<div class="form-group">
+  <label for="cid">Contract ID</label>
+  <span class="help-block">Contract-ID for the new Enrollemnt to be created against</span>
+  <input id="cid" type="text" class="form-control" placeholder="M-1TOTFAQ (contractID)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var cid = $("#cid").val();
+    if (cid) {
+      var endpoint = "/cps/v2/enrollments?contractId="+cid;
+      sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter contractID");
+    }
+  }
+</script>

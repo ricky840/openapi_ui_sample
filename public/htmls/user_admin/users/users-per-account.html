@@ -1,0 +1,24 @@
+<div class="form-group">
+  <label for="">Users per Account</label>
+  <span class="help-block">This operation provides you with information such as name and email address for every active user on any given account. This may include users from other accounts if they have specified roles in groups under that account. These users may include Professional Services Associates or other support personnel.</span>
+</div>
+
+<div class="form-group">
+  <label for="aid">Account ID</label>
+  <span class="help-block">Unique identifier for an account</span>
+  <input id="aid" type="text" class="form-control" placeholder="1-2ABCD (accountID)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var aid = $("#aid").val();
+    if (aid) {
+      var endpoint = "/user-admin/v1/accounts/"+aid+"/users";
+      sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter accountID");
+    }
+  }
+</script>

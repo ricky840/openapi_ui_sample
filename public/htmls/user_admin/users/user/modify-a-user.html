@@ -1,0 +1,34 @@
+<div class="form-group">
+  <label for="">Modify a User</label>
+  <span class="help-block">Edit a user's details and permissions.</span>
+</div>
+
+<div class="form-group">
+  <label for="cid">Contact ID</label>
+  <span class="help-block">Unique identifier for a user.</span>
+  <input id="cid" type="text" class="form-control" placeholder="1-0A1BCD (contactID)">
+</div>
+
+<div id="textarea_wrapper" class="form-group has-feedback">
+  <textarea id="modify_user" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'modify_user')"></textarea>
+</div>
+
+<input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper','modify_user')">
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+ var placeholder = '{"firstName":"Diana","lastName":"Prince","email":"example_testemail@akamai.com","phone":"(111) 111-1111","timezone":"GMT","roleAssignments":[{"groupId":"75152","roleId":14}]}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#modify_user").val(placeholder);
+
+ function runAPI() {   
+      var cid = $("#cid").val();
+      var endpoint = "/user-admin/v1/users/"+cid;
+      var body = $("#modify_user").val();
+      if (IsJsonString(body)) {
+        var return_response = sendAPIRequestPut(endpoint, "luna_token", body);
+      } else {
+        showNotification("JSON is not in valid format");
+      }
+    }
+</script>

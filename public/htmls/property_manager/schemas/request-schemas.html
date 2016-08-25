@@ -1,0 +1,23 @@
+<div class="form-group"> 
+  <label for="">Fetch a Request's JSON Schema</label>
+  <span class="help-block">Fetch the JSON schema for a particular request. These are typically linked from error messages about schema mismatches.</span>
+</div>
+
+<div class="form-group">
+  <label for="fname">File Name</label>
+  <input id="fname" type="text" class="form-control" placeholder="EdgeHostnamesPostRequestV0.json (filename)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var fname = $("#fname").val();
+    if (fname) {
+      var endpoint = "/papi/v0/schemas/request/"+fname;
+      sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter file name");
+    }
+  }
+</script>

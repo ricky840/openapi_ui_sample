@@ -1,0 +1,39 @@
+<div class="form-group">
+  <label for="">Create a New CP Code</label>
+  <span class="help-block">Create a new CP code entry. See the Data section for details on object members.</span>
+</div>
+
+<div class="form-group">
+  <label for="cid">Contract ID</label>
+  <input id="cid" type="text" class="form-control" placeholder="ctr_M-1TOTFAQ (contractID)">
+</div>
+
+<div class="form-group">
+  <label for="gid">Group ID</label>
+  <input id="gid" type="text" class="form-control" placeholder="grp_61240 (groupID)">
+</div>
+
+<div id="textarea_wrapper" class="form-group has-feedback">
+  <textarea id="create_cpcode" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'create_cpcode')"></textarea>
+</div>
+
+<input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper','create_cpcode')">
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+ var placeholder = '{"productId": "prd_Web_App_Accel", "cpcodeName": "SME WAA"}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#create_cpcode").val(placeholder);
+
+ function runAPI() {   
+      var cid = $("#cid").val();
+      var gid = $("#gid").val();
+      var endpoint = "/papi/v0/cpcodes/?contractId="+cid+"&groupId="+gid;
+      var body = $("#create_cpcode").val();
+      if (IsJsonString(body)) {
+        var return_response = sendAPIRequestPost(endpoint, "luna_token", body);
+      } else {
+        showNotification("JSON is not in valid format");
+      }
+    }
+</script>

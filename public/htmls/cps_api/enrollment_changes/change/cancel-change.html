@@ -1,0 +1,30 @@
+<div class="form-group">
+  <label for="">Cancel a Change</label>
+</div>
+
+<div class="form-group">
+  <label for="eid">Enrollment ID</label>
+  <span class="help-block">ID of the Enrollment in the form of an integer</span>
+  <input id="eid" type="number" class="form-control" placeholder="12345 (enrollmentID)">
+</div>
+
+<div class="form-group">
+  <label for="cid">Change ID</label>
+  <span class="help-block">ID of the Change in the form of an integer</span>
+  <input id="cid" type="number" class="form-control" placeholder="12345 (changeID)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var eid = $("#eid").val();
+    var cid = $("#cid").val();
+    if (eid && cid) {
+      var endpoint = "/cps/v2/enrollments/"+eid+"/changes/"+cid;
+      sendAPIRequestDelete(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter enrollmentID and changeID");
+    }
+  }
+</script>

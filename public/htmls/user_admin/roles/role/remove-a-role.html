@@ -1,0 +1,31 @@
+<div class="form-group">
+  <label for="">Remove a Role</label>
+  <span class="help-block">Delete a role from an account.</span>
+</div>
+
+<div class="form-group">
+  <label for="aid">Account ID</label>
+  <span class="help-block">Unique identifier for an account</span>
+  <input id="aid" type="text" class="form-control" placeholder="1-2ABCD (accountID)">
+</div>
+
+<div class="form-group">
+  <label for="rid">Role ID</label>
+  <span class="help-block">Unique identifier for a role object.</span>
+  <input id="rid" type="text" class="form-control" placeholder="00 (roleID)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var aid = $("#aid").val();
+    var rid = $("#rid").val();
+    if (aid && rid) {
+      var endpoint = "/user-admin/v1/accounts/"+aid+"/roles/"+rid;
+      sendAPIRequestDelete(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter accountID and roleID");
+    }
+  }
+</script>

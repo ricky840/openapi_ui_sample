@@ -1,0 +1,16 @@
+<fieldset disabled>
+  <div class="form-group">
+    <label for="">Rule Formats</label>
+    <span class="help-block">Fetch a list of available rule formats.</span>
+    <input id="" type="text" class="form-control" placeholder="/papi/v0/rule-formats">
+  </div>
+</fieldset>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/papi/v0/rule-formats";
+    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+  }
+</script>

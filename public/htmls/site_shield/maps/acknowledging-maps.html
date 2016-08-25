@@ -1,0 +1,25 @@
+<div class="form-group"> 
+  <label for="">Acknowledging Map</label>
+  <span class="help-block">The following API call allows the user to update the single instance of the Map. The user is able to perform this action only if the user has the permissions to acknowledge the map.</span>
+  <span class="help-block">This API allows the user to acknowledge that the list of proeposed CIDRS.</span>
+</div>
+
+<div class="form-group">
+  <label for="id">ID</label>
+  <span class="help-block">Numeric id of the Note to perform action with. Has example value.</span>
+  <input id="id" type="text" class="form-control" placeholder="674115 (ID)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var id = $("#id").val();
+    if (id) {
+      var endpoint = "/siteshield/v1/maps/"+id+"/acknowledge";
+      sendAPIRequestPost(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter ID");
+    }
+  }
+</script>

@@ -1,0 +1,177 @@
+<div class="container_fuild">
+  <div class="row"> <!-- main row -->
+
+    <!-- API section -->
+    <div class="col-md-7">
+
+			<!-- API title goes here -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="corner_space"></div>
+				</div>
+        <div class="col-md-9">
+					<h2>The Property Manager API</h2>
+          <p class="text-muted">The Property Manager API (a.k.a. PAPI) offers a programmatic OPEN interface to manage how Akamai edge servers process requests, responses, and objects served over the Akamai platform. A distributed property configuration encapsulates all the rules for how to process end-user requests for your web assets. Like the Luna Control Center’s Property Manager, this API lets you modify your property configurations and activate them on Akamai staging or production networks. The API allows you to access the same features rapidly and flexibly using your own tools. PAPI allows you to generate properties dynamically, associate them with dynamically generated hostnames, and to create new CP codes to report on your content’s traffic.</p>
+          <hr>
+				</div>
+			</div>
+
+      <!-- API content main body -->
+      <div class="row">
+
+        <!-- left menu -->
+        <div class="col-md-3">
+          <div class= "sidemenu">
+            <div class="list-group panel">
+            <a href="#groups" class="list-group-item list-group-title" data-toggle="collapse" >Groups<span class="caret"></span></a>
+            <div class="collapse" id="groups">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/property_manager/groups/groups.html')">Groups</a>
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#contracts" class="list-group-item list-group-title" data-toggle="collapse" >Contracts<span class="caret"></span></a>
+            <div class="collapse" id="contracts">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/property_manager/contracts/contracts.html')">Contracts</a>
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#products" class="list-group-item list-group-title" data-toggle="collapse" >Products<span class="caret"></span></a>
+            <div class="collapse" id="products">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/property_manager/products/products.html')">Products</a>
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#cp_codes" class="list-group-item list-group-title" data-toggle="collapse" >CP Codes<span class="caret"></span></a>
+            <div class="collapse" id="cp_codes">
+              <a href="#cp_codes2" class="list-group-item list-group-lv1" data-toggle="collapse">CP Codes<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="cp_codes2">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#cp_codes2" onclick="loadApiActionPage('/htmls/property_manager/cp_codes/cp_codes/fetch-list.html')">Fetch a List of CP Codes</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#cp_codes2" onclick="loadApiActionPage('/htmls/property_manager/cp_codes/cp_codes/create-cpcode.html')">Create a New CP Code</a>
+              </div>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/property_manager/cp_codes/cp-code.html')">CP Code</a>
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#edge_hostnames" class="list-group-item list-group-title" data-toggle="collapse" >Edge Hostnames<span class="caret"></span></a>
+            <div class="collapse" id="edge_hostnames">
+              <a href="#edge_hostnames2" class="list-group-item list-group-lv1" data-toggle="collapse">Edge Hostnames<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="edge_hostnames2">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#edge_hostnames2" onclick="loadApiActionPage('/htmls/property_manager/edge_hostnames/edge_hostnames/list-edge-hostname.html')">List Edge Hostnames</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#edge_hostnames2" onclick="loadApiActionPage('/htmls/property_manager/edge_hostnames/edge_hostnames/create-edge-hostname.html')">Create a New Edge Hostname</a>
+              </div>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/property_manager/edge_hostnames/edge-hostname.html')">Edge Hostname</a>
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#properties" class="list-group-item list-group-title" data-toggle="collapse" >Properties<span class="caret"></span></a>
+            <div class="collapse" id="properties">
+              <a href="#properties2" class="list-group-item list-group-lv1" data-toggle="collapse">Properties<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="properties2">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#properties2" onclick="loadApiActionPage('/htmls/property_manager/properties/properties/fetch-properties.html')">Fetch a List of Properties</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#properties2" onclick="loadApiActionPage('/htmls/property_manager/properties/properties/create-clone-property.html')">Create or Clone a property</a>
+              </div>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/property_manager/properties/property.html')">Property</a>
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#property_versions" class="list-group-item list-group-title" data-toggle="collapse" >Property Versions<span class="caret"></span></a>
+            <div class="collapse" id="property_versions">
+              <a href="#versions" class="list-group-item list-group-lv1" data-toggle="collapse">Versions<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="versions">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#versions" onclick="loadApiActionPage('/htmls/property_manager/property_versions/versions/list-property-versions.html')">List Property Versions</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#versions" onclick="loadApiActionPage('/htmls/property_manager/property_versions/versions/create-property-version.html')">Create a New Property Version</a>
+              </div>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/property_manager/property_versions/latest-version.html')">Latest Version</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/property_manager/property_versions/version.html')">Version</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/property_manager/property_versions/available-behaviors.html')">Available Behaviors</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/property_manager/property_versions/available-criteria.html')">Available Criteria</a>
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#property_version_hostnames" class="list-group-item list-group-title" data-toggle="collapse" >Property Version Hostnames<span class="caret"></span></a>
+            <div class="collapse" id="property_version_hostnames">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/property_manager/property_version_hostnames/fetch-property-version-hostnames.html')">Fetch a Property Version's Hostnames</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/property_manager/property_version_hostnames/set-property-version-hostnames.html')">Set a Property Version's Hostnames</a>
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#property_version_rules" class="list-group-item list-group-title" data-toggle="collapse" >Property Version Rules<span class="caret"></span></a>
+            <div class="collapse" id="property_version_rules">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/property_manager/property_version_rules/fetch-property-version-rule.html')">Fetch a Property Version's Rule Tree</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/property_manager/property_version_rules/fetch-rule-tree.html')">Fetch a Rule Tree's Digest</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/property_manager/property_version_rules/set-property-version-rule.html')">Set a Property Version's Rule Tree</a>
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#property_activations" class="list-group-item list-group-title" data-toggle="collapse" >Property Activations<span class="caret"></span></a>
+            <div class="collapse" id="property_activations">
+              <a href="#activations" class="list-group-item list-group-lv1" data-toggle="collapse">Activations<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="activations">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#activations" onclick="loadApiActionPage('/htmls/property_manager/property_activations/activations/fetch-property-activations.html')">Fetch a Property's Activations</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#activations" onclick="loadApiActionPage('/htmls/property_manager/property_activations/activations/create-new-activation.html')">Create a New Activation</a>
+              </div>
+              <a href="#activation" class="list-group-item list-group-lv1" data-toggle="collapse">Activation<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="activation">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#activation" onclick="loadApiActionPage('/htmls/property_manager/property_activations/activation/fetch-activation.html')">Fetch an Activation</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#activation" onclick="loadApiActionPage('/htmls/property_manager/property_activations/activation/cancel-pending-activation.html')">Cancel a Pending Activation</a>
+              </div>
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#rule_formats" class="list-group-item list-group-title" data-toggle="collapse" >Rule Formats<span class="caret"></span></a>
+            <div class="collapse" id="rule_formats">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/property_manager/rule_formats/rule-formats.html')">Rule Formats</a>
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#schemas" class="list-group-item list-group-title" data-toggle="collapse" >Schemas<span class="caret"></span></a>
+            <div class="collapse" id="schemas">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/property_manager/schemas/request-schemas.html')">Request Schemas</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/property_manager/schemas/rule-format-schemas.html')">Rule Format Schemas</a>
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#client_settings" class="list-group-item list-group-title" data-toggle="collapse" >Client Settings<span class="caret"></span></a>
+            <div class="collapse" id="client_settings">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/property_manager/client_settings/fetch-client-settings.html')">Fetch Client Settings</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/property_manager/client_settings/set-client-settings.html')">Set Client Settings</a>
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#build" class="list-group-item list-group-title" data-toggle="collapse" >Build<span class="caret"></span></a>
+            <div class="collapse" id="build">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/property_manager/build/build.html')">Build</a>
+            </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- API action content -->
+        <div class="col-md-9">
+          <!-- API action content goes here -->
+          <div id="api_action_body_wrapper"></div>
+          <!-- API action content response -->
+          <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: block">
+            <div id="loading_spinner" style="display: none"></div>
+            <span id="api_response"></span>
+          </div>
+        </div> <!-- API action content end -->
+      </div> <!-- API content main body end -->
+
+    </div> <!-- API section end -->
+
+    <!-- Toke HTML column -->
+    <div class="col-md-4 col-sm-offset-1">
+      <div id="token_html"></div>
+    </div>
+
+  </div> <!-- end of main row -->
+</div> <!-- container -->
+
+<div id="footer_html"></div>
+
+<script>
+  $(document).ready(function() {
+    loadTokenHtml();
+  });
+</script>

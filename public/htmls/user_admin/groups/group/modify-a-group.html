@@ -1,0 +1,42 @@
+<div class="form-group">
+  <label for="">Modify a Group</label>
+  <span class="help-block">Save changes to an existing group.</span>
+</div>
+
+<div class="form-group">
+  <label for="aid">Account ID</label>
+  <span class="help-block">Unique identifier for an account</span>
+  <input id="aid" type="text" class="form-control" placeholder="1-2ABCD (accountID)">
+</div>
+
+<div class="form-group">
+  <label for="gid">Group ID</label>
+  <span class="help-block">Unique numeric identifier for a group</span>
+  <input id="gid" type="number" class="form-control" placeholder="87673 (groupID)">
+</div>
+
+<div id="textarea_wrapper" class="form-group has-feedback">
+  <textarea id="modify_a_group" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'modify_a_group')"></textarea>
+</div>
+
+<input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper','modify_a_group')">
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+ var placeholder = '{"groupName": "newName"}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#modify_a_group").val(placeholder);
+
+ function runAPI() {   
+      var endpoint = "/user-admin/v1/accounts/";
+      var aid = $("#aid").val();
+      var gid = $("#gid").val();
+      endpoint = endpoint + aid + "/groups/" + gid;
+      var body = $("#modify_a_group").val();
+      if (IsJsonString(body)) {
+        var return_response = sendAPIRequestPut(endpoint, "luna_token", body);
+      } else {
+        showNotification("JSON is not in valid format");
+      }
+    }
+</script>

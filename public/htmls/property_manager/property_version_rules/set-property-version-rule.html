@@ -1,0 +1,51 @@
+<div class="form-group">
+  <label for="">Set a Property Version's Rule Tree</label>
+  <span class="help-block">Set a property version's complete rule tree.</span>
+</div>
+
+<div class="form-group">
+  <label for="cid">Contract ID</label>
+  <input id="cid" type="text" class="form-control" placeholder="ctr_M-1TOTFAQ (contractID)">
+</div>
+
+<div class="form-group">
+  <label for="gid">Group ID</label>
+  <input id="gid" type="text" class="form-control" placeholder="grp_61240 (groupID)">
+</div>
+
+<div class="form-group">
+  <label for="pid">Property ID</label>
+  <input id="pid" type="text" class="form-control" placeholder="prp_175780 (propertyID)">
+</div>
+
+<div class="form-group">
+  <label for="pversion">Property Version</label>
+  <input id="pversion" type="number" class="form-control" placeholder="3 (propertyVersion Number)">
+</div>
+
+<div id="textarea_wrapper" class="form-group has-feedback">
+  <textarea id="set_property_version_rule" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'set_property_version_rule')"></textarea>
+</div>
+
+<input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper','set_property_version_rule')">
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+ var placeholder = '{"rules":{"name":"default","children":[{"name":"Handle /my-path","criteriaMustSatisfy":"all","criteria":[{"name":"path","value":["/my-path"]}],"behaviors":[{"name":"caching","behavior":"max-age","ttl":"1m"}]}]}}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#set_property_version_rule").val(placeholder);
+
+ function runAPI() {   
+      var cid = $("#cid").val();
+      var gid = $("#gid").val();
+      var pid = $("#pid").val();
+      var pversion = $("#pversion").val();
+      var endpoint = "/papi/v0/properties/"+pid+"/versions/"+pversion+"/rules/?contractId="+cid+"&groupId="+gid;
+      var body = $("#set_property_version_rule").val();
+      if (IsJsonString(body)) {
+        var return_response = sendAPIRequestPut(endpoint, "luna_token", body);
+      } else {
+        showNotification("JSON is not in valid format");
+      }
+    }
+</script>

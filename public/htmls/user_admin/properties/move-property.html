@@ -1,0 +1,41 @@
+<div class="form-group">
+  <label for="">Move a Property to Another Group</label>
+</div>
+</div>
+
+<div class="form-group">
+  <label for="aid">Account ID</label>
+  <span class="help-block">Unique identifier for an account</span>
+  <input id="aid" type="text" class="form-control" placeholder="1-2ABCD (accountID)">
+</div>
+
+<div class="form-group">
+  <label for="pid">Property ID</label>
+  <span class="help-block">Within the User Admin API, the assetId is also known as the propertyId.</span>
+  <input id="pid" type="text" class="form-control" placeholder="123456 (propertyID)">
+</div>
+
+<div id="textarea_wrapper" class="form-group has-feedback">
+  <textarea id="move_property" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'move_property')"></textarea>
+</div>
+
+<input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper','move_property')">
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  var placeholder = '[{"sourceGroupId": 28717,"destinationGroupId": 28760}]';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#move_property").val(placeholder);
+
+ function runAPI() {   
+      var aid = $("#aid").val();
+      var pid = $("#pid").val();
+      var endpoint = "/user-admin/v1/accounts/"+aid+"/properties/"+pid;
+      var body = $("#move_property").val();
+      if (IsJsonString(body)) {
+        var return_response = sendAPIRequestPut(endpoint, "luna_token", body);
+      } else {
+        showNotification("JSON is not in valid format");
+      }
+    }
+</script>

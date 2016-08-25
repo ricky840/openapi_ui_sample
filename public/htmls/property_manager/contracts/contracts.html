@@ -1,0 +1,16 @@
+<fieldset disabled>
+  <div class="form-group">
+    <label for="">Contracts</label>
+    <span class="help-block">Provides read-only information about contracts, which enable products.</span>
+    <input id="" type="text" class="form-control" placeholder="/papi/v0/contracts/">
+  </div>
+</fieldset>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/papi/v0/contracts/";
+    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+  }
+</script>

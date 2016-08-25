@@ -1,0 +1,38 @@
+<div class="form-group">
+  <label for="">Property</label>
+  <span class="help-block">Get the details for one property.</span>
+</div>
+
+<div class="form-group">
+  <label for="aid">Account ID</label>
+  <span class="help-block">Unique identifier for an account</span>
+  <input id="aid" type="text" class="form-control" placeholder="1-2ABCD (accountID)">
+</div>
+
+<div class="form-group">
+  <label for="gid">Group ID</label>
+  <span class="help-block">Unique numeric identifier for a group</span>
+  <input id="gid" type="number" class="form-control" placeholder="87673 (groupID)">
+</div>
+
+<div class="form-group">
+  <label for="asid">Asset ID</label>
+  <span class="help-block">Within the User Admin API, the assetId is also known as the propertyId.</span>
+  <input id="asid" type="text" class="form-control" placeholder="123456 (assetID)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var aid = $("#aid").val();
+    var gid = $("#gid").val();
+    var asid = $("#asid").val();
+    if (aid && gid && asid) {
+      var endpoint = "/user-admin/v1/accounts/"+aid+"/groups/"+gid+"/properties/"+asid;
+      sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter accountID & groupID & assetID");
+    }
+  }
+</script>

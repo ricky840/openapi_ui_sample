@@ -1,0 +1,34 @@
+<div class="form-group">
+  <label for="">Update an Enrollment</label>
+  <span class="help-block">An enrollment update results in a Change creation and returns HTTP status Accepted (202), while enrollment updates that do not create a new Change returns a OK (200) status code.</span>
+</div>
+
+<div class="form-group">
+  <label for="eid">Enrollment ID</label>
+  <span class="help-block">ID of the Enrollment in the form of an integer</span>
+  <input id="eid" type="number" class="form-control" placeholder="12345 (enrollmentID)">
+</div>
+
+<div id="textarea_wrapper" class="form-group has-feedback">
+  <textarea id="update_enrollment" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'update_enrollment')"></textarea>
+</div>
+
+<input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper','update_enrollment')">
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+ var placeholder = '{"ra":"third-party","validationType":"third-party","certificateType":"third-party","networkConfiguration":{"networkType":"standard-worldwide","mustHaveCiphers":null,"preferredCiphers":"ak-akamai-default","sni":{"cloneDnsNames":false,"dnsNames":null}},"signatureAlgorithm":"SHA-256","changeManagement":false,"csr":{"cn":"www.example.com","c":"US","st":"MA","l":"Cambridge","o":"Akamai","ou":"WebEx","sans":["example.com","test.example.com"]},"org":{"name":"Akamai","addressLineOne":"8 cambridge center","addressLineTwo":null,"city":"Cambridge","region":"MA","postalCode":"02142","country":"US","phone":"(555) 555-5555"},"adminContact":{"firstName":"Fred","lastName":"Smith","phone":"(555) 555-5555","email":"fsmith@example.com"},"techContact":{"firstName":"Bob","lastName":"Sampson","phone":"(555) 555-5555","email":"bsampson@akamai.com"},"thirdParty":{"excludeSans":false}}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#update_enrollment").val(placeholder);
+
+ function runAPI() {   
+      var eid = $("#eid").val();
+      var endpoint = "/cps/v2/enrollments/"+eid;
+      var body = $("#update_enrollment").val();
+      if (IsJsonString(body)) {
+        var return_response = sendAPIRequestPut(endpoint, "luna_token", body);
+      } else {
+        showNotification("JSON is not in valid format");
+      }
+    }
+</script>

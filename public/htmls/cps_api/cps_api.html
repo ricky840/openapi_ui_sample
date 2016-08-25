@@ -1,0 +1,103 @@
+<div class="container_fuild">
+  <div class="row"> <!-- main row -->
+
+    <!-- API section -->
+    <div class="col-md-7">
+
+			<!-- API title goes here -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="corner_space"></div>
+				</div>
+        <div class="col-md-9">
+					<h2>The CPS API</h2>
+          <p class="text-muted">The Certificate Provisioning System (CPS) provides full life cycle management of SSL/TLS certificates for your Akamai Secure Delivery Network applications. This includes allowing you to request new certificates, modify existing certificates, automatically renew certificates, and delete certificates. CPS also manages key Transport Layer Security (TLS) configuration including cipher selection.</p>
+          <p class="text-muted">You can use this REST API as part of setting a secure website to ensure that the delivery of content to and from that site is secure. The SSL/TLS certificates that CPS provides authenticate the secure connection that the browser makes during secure delivery. CPS generates and secures the private key of each certificate.</p>
+          <p class="text-muted">You can also use the CPS API with the Secure Provisioning Service (SPS) API. The SPS API provides a convenient mechanism to provision certificates and secure edge hostnames in a single REST call. In addition, SPS can provision the most common certificate types and can add alt names to a SAN certificate. To perform advanced operations with certificates, use the CPS API. The CPS API is Akamai’s comprehensive toolbox for creating and modifying certificates. Since CPS and SPS both use enrollmentId to identify certificates, you can use the enrollmentId returned by one system as input on requests to the other system.</p>
+          <p class="text-muted">NOTE: CPS no longer supports Geotrust or Cybertrust certificates. Symantec is now the exclusive provider of both extended validation (EV) and organizational validation (OV) certificates. For more information, see Akamai Community.</p>
+          <hr>
+				</div>
+			</div>
+
+      <!-- API content main body -->
+      <div class="row">
+
+        <!-- left menu -->
+        <div class="col-md-3">
+          <div class= "sidemenu">
+            <div class="list-group panel">
+            <a href="#enrollments" class="list-group-item list-group-title" data-toggle="collapse" >Enrollments<span class="caret"></span></a>
+            <div class="collapse" id="enrollments">
+              <a href="#enrollment" class="list-group-item list-group-lv1" data-toggle="collapse">Enrollment<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="enrollment">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#enrollment" onclick="loadApiActionPage('/htmls/cps_api/enrollments/enrollment/create-enrollment.html')">Create Enrollment</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#enrollment" onclick="loadApiActionPage('/htmls/cps_api/enrollments/enrollment/get-all-enrollments.html')">Get All Enrollments</a>
+              </div>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/cps_api/enrollments/view-enrollment.html')">View Enrollment</a>
+              <a href="#modifying_enrollment" class="list-group-item list-group-lv1" data-toggle="collapse">Modifying Enrollment<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="modifying_enrollment">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#modifying_enrollment" onclick="loadApiActionPage('/htmls/cps_api/enrollments/modifying_enrollment/update-enrollment.html')">Update an Enrollment</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#modifying_enrollment" onclick="loadApiActionPage('/htmls/cps_api/enrollments/modifying_enrollment/delete-enrollment.html')">Delete an Enrollment</a>
+              </div>
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#enrollment_changes" class="list-group-item list-group-title" data-toggle="collapse" >Enrollment Changes<span class="caret"></span></a>
+            <div class="collapse" id="enrollment_changes">
+              <a href="#change" class="list-group-item list-group-lv1" data-toggle="collapse">Change<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="change">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#change" onclick="loadApiActionPage('/htmls/cps_api/enrollment_changes/change/get-change-status.html')">Get Change Status</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#change" onclick="loadApiActionPage('/htmls/cps_api/enrollment_changes/change/cancel-change.html')">Cancel a Change</a>
+              </div>
+              <a href="#change_input" class="list-group-item list-group-lv1" data-toggle="collapse">Change Input<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="change_input">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#change_input" onclick="loadApiActionPage('/htmls/cps_api/enrollment_changes/change_input/get-change-input-info.html')">Get Change Input Information</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#change_input" onclick="loadApiActionPage('/htmls/cps_api/enrollment_changes/change_input/change-input.html')">Change Input</a>
+              </div>
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#certificate" class="list-group-item list-group-title" data-toggle="collapse" >Certificate<span class="caret"></span></a>
+            <div class="collapse" id="certificate">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/cps_api/certificate/certificate.html')">Certificate</a>
+            </div> 
+            </div>
+            <div class="list-group panel">
+            <a href="#error_handling" class="list-group-item list-group-title" data-toggle="collapse" >Error Handling<span class="caret"></span></a>
+            <div class="collapse" id="error_handling">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/cps_api/error_handling/sample-error-500.html')">Sample Error 500</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/cps_api/error_handling/sample-error-404.html')">Sample Error 404</a>
+            </div> 
+            </div>
+          </div>
+        </div>
+
+        <!-- API action content -->
+        <div class="col-md-9">
+          <!-- API action content goes here -->
+          <div id="api_action_body_wrapper"></div>
+          <!-- API action content response -->
+          <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: block">
+            <div id="loading_spinner" style="display: none"></div>
+            <span id="api_response"></span>
+          </div>
+        </div> <!-- API action content end -->
+      </div> <!-- API content main body end -->
+
+    </div> <!-- API section end -->
+
+    <!-- Toke HTML column -->
+    <div class="col-md-4 col-sm-offset-1">
+      <div id="token_html"></div>
+    </div>
+
+  </div> <!-- end of main row -->
+</div> <!-- container -->
+
+<div id="footer_html"></div>
+
+<script>
+  $(document).ready(function() {
+    loadTokenHtml();
+  });
+</script>

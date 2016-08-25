@@ -1,0 +1,41 @@
+<div class="form-group"> 
+  <label for="">Cancel a Pending Activation</label>
+  <span class="help-block">Cancel an activation whose status is PENDING. A successful cancellation results in a 200 response and an ABORTED status. The client can still poll the canceled activation, but it no longer appears in the list of activations. If the activation is no longer PENDING, a 422 (unprocessable) error indicates that it can't be canceled. Canceling an activation that has already been canceled results in a 204 response, indicating there's no resource to delete. Attempting to cancel an unknown activation results in a 404 error.</span>
+</div>
+
+<div class="form-group">
+  <label for="cid">Contract ID</label>
+  <input id="cid" type="text" class="form-control" placeholder="ctr_M-1TOTFAQ (contractID)">
+</div>
+
+<div class="form-group">
+  <label for="gid">Group ID</label>
+  <input id="gid" type="text" class="form-control" placeholder="grp_61240 (groupID)">
+</div>
+
+<div class="form-group">
+  <label for="pid">Property ID</label>
+  <input id="pid" type="text" class="form-control" placeholder="prp_175780 (propertyID)">
+</div>
+
+<div class="form-group">
+  <label for="aid">Activation ID</label>
+  <input id="aid" type="text" class="form-control" placeholder="atv_1696855 (activationID)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var cid = $("#cid").val();
+    var gid = $("#gid").val();
+    var pid = $("#pid").val();
+    var aid = $("#aid").val();
+    if (cid && gid && pid && aid) {
+      var endpoint = "/papi/v0/properties/"+pid+"/activations/"+aid+"?contractId="+cid+"&groupId="+gid;
+      sendAPIRequestDelete(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter contractID & groupID & propertyID & activationID");
+    }
+  }
+</script>
