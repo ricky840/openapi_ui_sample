@@ -1,0 +1,24 @@
+<div class="form-group">
+  <label for="">Data Stores</label>
+  <span class="help-block">A data store is a collection of dimensions and metrics stored in a database that you can use to create a sub-set and configure reports suited to your requirements. Data store details help you determine the combination of dimensions and metrics to query. Each report pack comes with its standard data stores.</span>
+  <span class="help-block">Remember, you cannot combine dimensions and metrics across data stores.</span>
+</div>
+
+<div class="form-group">
+  <label for="rid">Report Pack ID</label>
+  <input id="rid" type="number" class="form-control" placeholder="101211 (reportPackID)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var rid = $("#rid").val();
+    if (rid) {
+      var endpoint = "/security-monitor/v1/report-packs/"+rid+"/data-stores";
+      sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter reportPackdID");
+    }
+  }
+</script>

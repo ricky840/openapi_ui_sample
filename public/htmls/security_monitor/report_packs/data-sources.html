@@ -1,0 +1,23 @@
+<div class="form-group">
+  <label for="">Data Sources</label>
+  <span class="help-block">A data source is a set of IDs (Policy IDs) that were assigned by you and Akamai in Luna Control Center for a firewall policy during WAF configuration.</span>
+</div>
+
+<div class="form-group">
+  <label for="rid">Report Pack ID</label>
+  <input id="rid" type="number" class="form-control" placeholder="101211 (reportPackID)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var rid = $("#rid").val();
+    if (rid) {
+      var endpoint = "/security-monitor/v1/report-packs/"+rid+"/data-sources";
+      sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter reportPackdID");
+    }
+  }
+</script>

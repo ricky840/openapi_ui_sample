@@ -16,7 +16,7 @@
     var aid = $("#aid").val();
     if (aid) {
       var endpoint = "/user-admin/v1/accounts/"+aid+"/roles";
-      sendAPIRequestGet(endpoint, "luna_token");
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
     } else {
       showNotification("Please enter accountID");
     }

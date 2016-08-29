@@ -1,0 +1,65 @@
+<div class="container_fuild">
+  <div class="row"> <!-- main row -->
+
+    <!-- API section -->
+    <div class="col-md-7">
+
+			<!-- API title goes here -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="corner_space"></div>
+				</div>
+        <div class="col-md-9">
+          <h2>Traffic Management Load feedback API</h2>
+          <p>The Traffic Management Load Feedback API allows users to submit load data for a GTM domain in either JSON or XML format via POST, and to fetch the current load state via GET.</p>
+          <hr>
+				</div>
+			</div>
+
+      <!-- API content main body -->
+      <div class="row">
+
+        <!-- left menu -->
+        <div class="col-md-3">
+          <div class= "sidemenu">
+            <div class="list-group panel">
+            <a href="#submit_fetch_loaddata" class="list-group-item list-group-title" data-toggle="collapse">Submit and Fetch Load Data<span class="caret"></span></a>
+            <div class="collapse" id="submit_fetch_loaddata">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/traffic_management_load_feedback/submit_fetch_loaddata/submit-load-data.html')">Submit Load Data</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/traffic_management_load_feedback/submit_fetch_loaddata/fetch-load-data.html')">Fetch Load Data</a>
+            </div>   
+            </div>
+          </div>
+        </div><!-- left menu end -->
+
+        <!-- API action content -->
+        <div class="col-md-9">
+     
+					<!-- API action content goes here -->
+          <div id="api_action_body_wrapper"></div>
+          <!-- response -->
+          <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+            <div id="loading_spinner" style="display: none"></div>
+            <span id="api_response"></span>
+            <button id="btn_save_response" type="button" onclick="saveResponse(this.id)" class="btn btn-primary" style="display: none">Save Response</button>
+          </div>
+        </div> <!-- API action content end -->
+      </div> <!-- API content main body end -->
+
+    </div> <!-- API section end -->
+
+    <!-- Toke HTML column -->
+    <div class="col-md-4 col-sm-offset-1">
+      <div id="token_html"></div>
+    </div>
+
+  </div> <!-- end of main row -->
+</div> <!-- container -->
+
+<div id="footer_html"></div>
+
+<script>
+  $(document).ready(function() {
+    loadTokenHtml();
+  });
+</script>

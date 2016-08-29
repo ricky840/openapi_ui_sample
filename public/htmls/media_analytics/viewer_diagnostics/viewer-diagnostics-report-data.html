@@ -51,10 +51,11 @@
 
   function runAPI() {
     var rid = $("#rid").val();
+    var vid = $("#vid").val();
     var did = $("#did").val();
     var mid = $("#mid").val();
-
-    if (rid && did && mid) {
+  
+    if (rid && vid && did && mid ) {
       var start_date = $('.input-daterange .spc.start').datepicker({ dateFormat: 'mm/dd/yyyy'}).val();
       var end_date = $('.input-daterange .spc.end').datepicker({ dateFormat: 'mm/dd/yyyy'}).val();
       var endpoint = "/media-analytics/v1/audience-analytics/report-packs/"+rid+"/viewers/"+vid+"/data";

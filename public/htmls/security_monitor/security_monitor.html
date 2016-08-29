@@ -1,0 +1,67 @@
+<div class="container_fuild">
+  <div class="row"> <!-- main row -->
+
+    <!-- API section -->
+    <div class="col-md-7">
+
+			<!-- API title goes here -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="corner_space"></div>
+				</div>
+        <div class="col-md-9">
+          <h2>The Security Monitor API</h2>
+          <p>Security Monitor gives real-time visibility to security scanning provided by Akamai Web Application Firewall (WAF) and Kona Site Defender (KSD) offerings. Security events logged from WAF/KSD are aggregated and displayed within minutes of their occurrence.</p>
+					<p>You can utilize the Security Monitor API to visualize and understand how your digital properties are protected. The REST API responds to requests with standard HTTP status codes. Error messages are embedded in the JSON response in the event of a validation failure or when the API fails to process your request.</p>
+					<hr>
+				</div>
+			</div>
+
+      <!-- API content main body -->
+      <div class="row">
+      <!-- left menu -->
+        <div class="col-md-3">
+          <div class= "sidemenu">
+            <div class="list-group panel">
+            <a href="#report_packs" class="list-group-item list-group-title" data-toggle="collapse" >Report Packs<span class="caret"></span></a>
+            <div class="collapse" id="report_packs">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/security_monitor/report_packs/report-packs.html')">Report Packs</a>  
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/security_monitor/report_packs/report-pack.html')">Report Pack</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/security_monitor/report_packs/data-stores.html')">Data Stores</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/security_monitor/report_packs/data-store.html')">Data Store</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/security_monitor/report_packs/data-sources.html')">Data Sources</a>
+            </div> 
+            </div>
+          </div>
+        </div>
+        
+        <!-- API action content -->
+        <div class="col-md-9">
+					<!-- API action content goes here -->
+          <div id="api_action_body_wrapper"></div>
+          <!-- response -->
+          <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+            <div id="loading_spinner" style="display: none"></div>
+            <span id="api_response"></span>
+            <button id="btn_save_response" type="button" onclick="saveResponse(this.id)" class="btn btn-primary" style="display: none">Save Response</button>
+          </div>
+        </div> <!-- API action content end -->
+      </div> <!-- API content main body end -->
+
+    </div> <!-- API section end -->
+
+    <!-- Toke HTML column -->
+    <div class="col-md-4 col-sm-offset-1">
+      <div id="token_html"></div>
+    </div>
+
+  </div> <!-- end of main row -->
+</div> <!-- container -->
+
+<div id="footer_html"></div>
+
+<script>
+  $(document).ready(function() {
+    loadTokenHtml();
+  });
+</script>

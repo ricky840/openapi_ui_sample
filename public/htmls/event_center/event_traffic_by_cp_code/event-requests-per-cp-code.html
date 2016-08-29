@@ -23,7 +23,7 @@
     var aid = $("#aid").val();
     var eid = $("#eid").val();
     if (aid && eid) {
-      endpoint = endpoint + aid + "/events/" + eid +"/trafficdata/cpcode/requests/ㅈ";
+      endpoint = endpoint + aid + "/events/" + eid +"/trafficdata/cpcode/requests/";
       var return_response = sendAPIRequestGet(endpoint, "luna_token");
     } else {
       showNotification("Please enter accountID and eventID");

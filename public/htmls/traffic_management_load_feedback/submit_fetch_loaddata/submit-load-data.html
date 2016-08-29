@@ -1,0 +1,47 @@
+<div class="form-group">
+  <label for="">Submit Load Data</label>
+  <span class="help-block">Use this action to submit load data. The URI specifies the domain, resource, and datacenterId of the instance to which the load data pertains. The data may be submitted in either XML or JSON format. To support legacy clients, we allow "region" as an alias for datacenterId. The timestamp string should be in XSD format.</span>
+  <span class="help-block">In the examples that follow, we'll assume you have a GTM domain called example.akadns.net. Within this domain, you have a resource called "connections", which reports the number of HTTP connections in a datacenter. In these examples, we will update and check the load data for the connections resource datacenter number 100.</span>
+</div>
+
+<div class="form-group">
+  <label for="domain">Domain Name</label>
+  <span class="help-block">The name of the GTM domain</span>
+  <input id="domain" type="text" class="form-control" placeholder="example.akadns.net (domain name)">
+</div>
+
+<div class="form-group">
+  <label for="resource">Resource Name</label>
+  <span class="help-block">The name of the resource</span>
+  <input id="resource" type="text" class="form-control" placeholder="connections (resource name)">
+</div>
+
+<div class="form-group">
+  <label for="did">Data Center ID</label>
+  <input id="did" type="number" class="form-control" placeholder="100 (datacenterID)">
+</div>
+
+<div class="form-group">
+  <label for="submit_load_data">Submit Load Data Object</label>
+  <div id="textarea_wrapper" class="form-group has-feedback">
+    <textarea id="submit_load_data" class="form-control" rows="10" placeholder="" ></textarea>
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  var placeholder = '<?xml version="1.0" encoding="UTF-8"?><load-object xmlns="http://www.akamai.com/FirstPoint/load-balancing" domain="example.akadns.net" timestamp="2015-05-01T19:38:53.188Z" version="1"><datacenter datacenterId="100"><resource name="connections"><current-load>20</current-load><target-load>25</target-load><max-load>30</max-load></resource></datacenter></load-object>';
+  $("#submit_load_data").val(formatXml(placeholder));
+
+  placeholder = formatXml(placeholder);
+  $("#submit_load_data").val(placeholder);
+
+  function runAPI() {
+    var domain = $("#domain").val();
+    var resource = $("#resource").val();
+    var did = $("#did").val();
+    var endpoint = "/gtm-load-data/v1/"+domain+"/"+resource+"/"+did;
+    var body = $("#submit_load_data").val();
+    var return_response = sendAPIRequestPost(endpoint, "dns_token", body);
+  }
+</script>

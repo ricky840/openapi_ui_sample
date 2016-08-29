@@ -17,7 +17,7 @@
     var uid = $("#uid").val();
     if (uid) {
       endpoint = endpoint + uid + "/element";
-      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+      var return_response = sendAPIRequestPut(endpoint, "luna_token");
     } else {
       showNotification("Please enter Unique ID");
     }

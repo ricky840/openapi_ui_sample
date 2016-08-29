@@ -62,8 +62,9 @@ function loadTokenHtml() {
             for (var i in contracts) {
               var contractId = contracts[i].contractId;
               var contractName = contracts[i].contractName;
-              htmltags = "<span>"+contractId+":"+" "+contractName+"</span><br>";
-              data.find("#contracts").append(htmltags);
+              html = "<div><a id='"+contractId+"' href='#' onclick=getProductList(this.id)><span class='caret'></span> "+contractId+":"+" "+contractName+" <i class='fa fa-spinner fa-pulse' style='display: none;'></i></a>";
+              html += "<ul id='"+contractId+"_product_item' style='display: none;'></ul></div>";
+              data.find("#contracts").append(html);
             }
           } else {
             data.find("#contracts").html(account_info.contracts);
@@ -104,14 +105,50 @@ function seeIfTokenUploaded(tokentype) {
   }
 }
 
-function sendAPIRequestGet(endpoint, tokentype) {
+function sendAPIRequestHead(endpoint, tokentype) {
   endpoint = endpoint.replace(/\s+/g, '');
+  if (seeIfTokenUploaded(tokentype)) {
+    var result = $.ajax({
+        type: "HEAD",
+        url: "/run/" + tokentype,
+        beforeSend: function(xhr) {
+          xhr.setRequestHeader("Endpoint", endpoint);
+					showLoadingSpinner();
+        },
+				success: function(responseTxt, status, jxhr) {
+          if (responseTxt) {
+            showResponse(endpoint, responseTxt);
+          } else {
+		        temp_response = '{"status":"'+status+'","msg":"Empty response body from the server."}'
+            showResponse(endpoint, temp_response);
+          }
+				},
+        error: function(xhr, status, error_msg) {
+          error_msg = status + ": " + error_msg
+          showResponse(endpoint, error_msg);
+        }
+      }).responseText;
+
+    return result;
+  } else {
+    showNotification(tokentype + " is not uploaded. Please upload and try again.");
+    return '{ "status": "token does not exist" }';
+  }
+}
+
+function sendAPIRequestGet(endpoint, tokentype, headers) {
+  if (headers === undefined) { headers = null; }
+  endpoint = endpoint.replace(/\s+/g, '');
+
   if (seeIfTokenUploaded(tokentype)) {
     var result = $.ajax({
         type: "GET",
         url: "/run/" + tokentype,
         beforeSend: function(xhr) {
           xhr.setRequestHeader("Endpoint", endpoint);
+          for (var key in headers) {
+            xhr.setRequestHeader(key, headers[key]);
+          }
 					showLoadingSpinner();
         },
 				success: function(responseTxt, status, jxhr) {
@@ -150,15 +187,15 @@ function sendAPIRequestDelete(endpoint, tokentype, body) {
         data: body,
 				success: function(responseTxt, status, jxhr) {
           if (responseTxt) {
-            showResponse(endpoint, responseTxt);
+            showResponse(endpoint, responseTxt, body);
           } else {
 		        temp_response = '{"status":"'+status+'","msg":"Empty response body from the server."}'
-            showResponse(endpoint, temp_response);
+            showResponse(endpoint, temp_response, body);
           }
 				},
         error: function(xhr, status, error_msg) {
           error_msg = status + ": " + error_msg
-          showResponse(endpoint, error_msg);
+          showResponse(endpoint, error_msg, body);
         }
       }).responseText;
 
@@ -171,17 +208,12 @@ function sendAPIRequestDelete(endpoint, tokentype, body) {
 
 function sendAPIRequestPost(endpoint, tokentype, body) {
   endpoint = endpoint.replace(/\s+/g, '');
+  if (body === undefined) { body = null; }
+
   if (seeIfTokenUploaded(tokentype)) {
-
-		if (IsJsonString(body)) {
-			var apiurl = "/run/";
-		} else {
-      var apiurl = "/runrb/";
-    }
-
     var result = $.ajax({
       type: "POST",
-      url: apiurl + tokentype,
+      url: "/run/" + tokentype,
       beforeSend: function(xhr) {
         xhr.setRequestHeader("Endpoint", endpoint);
         showLoadingSpinner();
@@ -189,15 +221,15 @@ function sendAPIRequestPost(endpoint, tokentype, body) {
       data: body,
       success: function(responseTxt, status, jxhr) {
         if (responseTxt) {
-          showResponse(body, responseTxt);
+          showResponse(endpoint, responseTxt, body);
         } else {
           temp_response = '{"status":"'+status+'","msg":"Empty response body from the server."}'
-          showResponse(body, temp_response);
+          showResponse(endpoint, temp_response, body);
         }
       },
       error: function(xhr, status, error_msg) {
         error_msg = status + ": " + error_msg
-        showResponse(body, error_msg);
+        showResponse(endpoint, error_msg, body);
       }
     }).responseText;
 
@@ -223,15 +255,15 @@ function sendAPIRequestPut(endpoint, tokentype, body) {
       data: body,
       success: function(responseTxt, status, jxhr) {
         if (responseTxt) {
-          showResponse(body, responseTxt);
+          showResponse(endpoint, responseTxt, body);
         } else {
           temp_response = '{"status":"'+status+'","msg":"Empty response body from the server."}'
-          showResponse(body, temp_response);
+          showResponse(endpoint, temp_response, body);
         }
       },
       error: function(xhr, status, error_msg) {
         error_msg = status + ": " + error_msg
-        showResponse(body, error_msg);
+        showResponse(endpoint, error_msg, body);
       }
     }).responseText;
 
@@ -296,24 +328,29 @@ function showAPIActionContent(obj_Id) {
 }
 
 //show api call response
-function showResponse(request, return_response) {
-  if (IsJsonString(request)) {
-    var requestContent = syntaxHighlight(JSON.parse(request));
+function showResponse(endpoint, return_response, requestbody) {
+  if (requestbody === undefined) { requestbody = null; }
+
+  if (IsJsonString(requestbody)) {
+    var highlighted_body = syntaxHighlight(JSON.parse(requestbody));
   } else {
-    var requestContent = request;
-    requestContent = requestContent.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/ /g, '&nbsp;').replace(/\n/g,'<br />');
+    var highlighted_body = escapeHtml(requestbody);
   }
+
   if (IsJsonString(return_response)) {
     var returnContent = syntaxHighlight(JSON.parse(return_response));
   } else {
-    var returnContent = return_response;
-    returnContent = returnContent.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/ /g, '&nbsp;').replace(/\n/g,'<br />');
+    var returnContent = escapeHtml(return_response);
   }
-  html = "<label class='actioncontentlabel'>Request</label><pre>"+requestContent+"</pre>";
+
+  if (requestbody == null) { html = "<label class='actioncontentlabel'>Request</label><pre>"+endpoint+"</pre>"; }
+  if (requestbody != null) { html = "<label class='actioncontentlabel'>Request</label><pre>"+endpoint+"\n\n"+highlighted_body+"</pre>"; }
 	html = html + "<label class='actioncontentlabel'>Response</label><pre>"+returnContent+"</pre>";
+  html += "<div id='api_response_raw' style='display: none;'>"+return_response+"</div>";
   $("#api_response").html(html);
   $("#loading_spinner").hide();
   $("#api_response_wrapper").hide();
+  $("#btn_save_response").show();
   $("#api_response_wrapper").fadeIn("slow").focus();
 }
 
@@ -321,6 +358,44 @@ function showLoadingSpinner() {
   $("#api_response").empty();
   $("#loading_spinner").show();
 	$("#api_response_wrapper").show();
+}
+
+function saveResponse(button_id) {
+  var api_response_raw = $("#api_response_raw").html();
+  $.post("/saveresponse", { response: api_response_raw }, function(data, status) {
+    if (status == "success") {
+      $("#"+button_id).html("Saved");
+      $("#"+button_id).removeClass("btn-primary");
+      $("#"+button_id).addClass("btn-success");
+      //reload
+      loadSavedResponse();
+    } else {
+      showNotification("Could not save the response. Try again.");
+    }
+  });
+}
+
+function loadSavedResponse() {
+  var pre_saved_response = $("#saved_response_pre");
+  var returnContent = false;
+  $.get("/loadresponse", function(return_response, status) {
+    if (status == "success") {
+      if (IsJsonString(return_response)) {
+        var returnContent = syntaxHighlight(JSON.parse(return_response));
+      } else if (return_response == "") {
+        //
+      } else {
+        var returnContent = escapeHtml(return_response);
+      }
+    } else {
+      returnContent = "Could not load the saved response";
+    }
+
+    if (returnContent) {
+      pre_saved_response.html(returnContent);
+      $("#saved_response").hide().fadeIn("slow");
+    }
+  });
 }
 
 function formatXml(xml) {
@@ -355,27 +430,10 @@ function formatXml(xml) {
   return formatted;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function escapeHtml(html) {
+  if (html) {
+     return html.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/ /g, '&nbsp;').replace(/\n/g,'<br />');
+  }
+}
 
 

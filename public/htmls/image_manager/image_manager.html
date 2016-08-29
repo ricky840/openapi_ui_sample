@@ -1,0 +1,100 @@
+<div class="container_fuild">
+  <div class="row"> <!-- main row -->
+
+    <!-- API section -->
+    <div class="col-md-7">
+
+			<!-- API title goes here -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="corner_space"></div>
+				</div>
+        <div class="col-md-9">
+          <h2>Image Manager API</h2>
+          <p>Image Manager transforms a website’s images by creating derivative images of various sizes and formats, and dynamically selecting the best image when requested by an end user.</p>
+          <p>The Image Manager API is an end-to-end solution to archive, manage, and deliver transformed images based on customer defined policies. In addition, you can organize a collection of original source images using group, tag, and search capabilities, and perform policy-based image transformations on your master images.</p>
+          <p>WARNING: The Image Manager API is currently released to customers in "Limited Availability." Contact your account representative to learn more.</p>
+          <hr>
+				</div>
+			</div>
+
+      <!-- API content main body -->
+      <div class="row">
+
+        <!-- left menu -->
+        <div class="col-md-3">
+          <div class= "sidemenu">
+            <div class="list-group panel">
+            <a href="#policies" class="list-group-item list-group-title" data-toggle="collapse">Policies<span class="caret"></span></a>
+            <div class="collapse" id="policies">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/image_manager/policies/policies.html')">Policies</a> 
+              <a href="#policy" class="list-group-item list-group-lv1" data-toggle="collapse">Policy<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="policy">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#policy" onclick="loadApiActionPage('/htmls/image_manager/policies/policy/get-policy.html')">Get a Policy</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#policy" onclick="loadApiActionPage('/htmls/image_manager/policies/policy/add-or-modify-policy.html')">Add or Modify a Policy</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#policy" onclick="loadApiActionPage('/htmls/image_manager/policies/policy/remove-policy.html')">Remove a Policy</a>
+              </div>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/image_manager/policies/policy-history.html')">Policy History</a>   
+            </div>   
+            </div>
+            <div class="list-group panel">
+            <a href="#images" class="list-group-item list-group-title" data-toggle="collapse">Images<span class="caret"></span></a>
+            <div class="collapse" id="images">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/image_manager/images/set-of-images.html')">Set of Images</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/image_manager/images/images-by-url.html')">Images by URL</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/image_manager/images/image.html')">Image</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/image_manager/images/images-per-policy.html')">Images per Policy</a>
+            </div>   
+            </div>
+            <div class="list-group panel">
+            <a href="#image_collections" class="list-group-item list-group-title" data-toggle="collapse">Image Collections<span class="caret"></span></a>
+            <div class="collapse" id="image_collections">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/image_manager/image_collections/image-collections.html')">Image Collections</a> 
+              <a href="#image_collection" class="list-group-item list-group-lv1" data-toggle="collapse">Image Collection<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="image_collection">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#image_collection" onclick="loadApiActionPage('/htmls/image_manager/image_collections/image_collection/get-image-collection.html')">Get an Image Collection</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#image_collection" onclick="loadApiActionPage('/htmls/image_manager/image_collections/image_collection/add-or-modify-image-collection.html')">Add or Modify an Image Collection</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#image_collection" onclick="loadApiActionPage('/htmls/image_manager/image_collections/image_collection/remove-image-collection.html')">Remove an Image Collection</a>
+              </div>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/image_manager/image_collections/image-collections-by-tag.html')">Image Collections By Tag</a> 
+              <a href="#image_collection_tag" class="list-group-item list-group-lv1" data-toggle="collapse">Image Collection Tag<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="image_collection_tag">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#image_collection_tag" onclick="loadApiActionPage('/htmls/image_manager/image_collections/image_collection_tag/get-tags.html')">Get an Image Collection's Tags</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#image_collection_tag" onclick="loadApiActionPage('/htmls/image_manager/image_collections/image_collection_tag/modify-tags.html')">Modify an Image Collection's Tags</a>
+              </div>
+            </div>   
+            </div>
+          </div>
+        </div><!-- left menu end -->
+
+        <!-- API action content -->
+        <div class="col-md-9">
+     
+					<!-- API action content goes here -->
+          <div id="api_action_body_wrapper"></div>
+          <!-- response -->
+          <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+            <div id="loading_spinner" style="display: none"></div>
+            <span id="api_response"></span>
+            <button id="btn_save_response" type="button" onclick="saveResponse(this.id)" class="btn btn-primary" style="display: none">Save Response</button>
+          </div>
+        </div> <!-- API action content end -->
+      </div> <!-- API content main body end -->
+
+    </div> <!-- API section end -->
+
+    <!-- Toke HTML column -->
+    <div class="col-md-4 col-sm-offset-1">
+      <div id="token_html"></div>
+    </div>
+
+  </div> <!-- end of main row -->
+</div> <!-- container -->
+
+<div id="footer_html"></div>
+
+<script>
+  $(document).ready(function() {
+    loadTokenHtml();
+  });
+</script>

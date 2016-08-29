@@ -24,16 +24,16 @@
         <div class="col-md-3">
           <div class= "sidemenu">
             <div class="list-group panel">
-            <a href="#diagnostics" class="list-group-item list-group-title" data-toggle="collapse" >Diagnostics<span class="caret"></span></a>
-            <div class="collapse" id="diagnostics">
-              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/diagnostic_tools/diagnostics/locations.html')">Locations</a>
-              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/diagnostic_tools/diagnostics/dig.html')">dig</a>
-              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/diagnostic_tools/diagnostics/mtr.html')">mtr</a>
-              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/diagnostic_tools/diagnostics/akamai-translator.html')">Akamai Translator</a>
-              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/diagnostic_tools/diagnostics/error-translator.html')">Error Translator</a>
-              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/diagnostic_tools/diagnostics/ip-geolocator.html')">IP Geolocator</a>
-              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/diagnostic_tools/diagnostics/verify-cdn-ip.html')">Verify CDN IP</a>
-            </div> 
+              <a href="#diagnostics" class="list-group-item list-group-title" data-toggle="collapse" >Diagnostics<span class="caret"></span></a>
+              <div class="collapse" id="diagnostics">
+                <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/diagnostic_tools/diagnostics/locations.html')">Locations</a>
+                <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/diagnostic_tools/diagnostics/dig.html')">dig</a>
+                <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/diagnostic_tools/diagnostics/mtr.html')">mtr</a>
+                <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/diagnostic_tools/diagnostics/akamai-translator.html')">Akamai Translator</a>
+                <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/diagnostic_tools/diagnostics/error-translator.html')">Error Translator</a>
+                <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/diagnostic_tools/diagnostics/ip-geolocator.html')">IP Geolocator</a>
+                <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/diagnostic_tools/diagnostics/verify-cdn-ip.html')">Verify CDN IP</a>
+              </div> 
             </div>
           </div>
         </div>
@@ -46,6 +46,7 @@
           <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
             <div id="loading_spinner" style="display: none"></div>
             <span id="api_response"></span>
+            <button id="btn_save_response" type="button" onclick="saveResponse(this.id)" class="btn btn-primary" style="display: none">Save Response</button>
           </div>
         </div> <!-- API action content end -->
       </div> <!-- API content main body end -->

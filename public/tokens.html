@@ -1,13 +1,23 @@
 <div class="row">
   <div id="account_info" style="display: none;">
-    <h4><span id="account_info-label" class="label label-default">Account Informations</span></h4>
+    <h4><span id="account_info-label" class="label label-success">Account Informations</span></h4>
     <div class="panel panel-default">
       <div class="panel-body">
-        <div><strong>Account Name: </strong><span id="account_name"></span></div>
-        <div><strong>Account ID: </strong><span id="account_id"></span></div>
-        <div><strong>Contracts(Id/Name) </strong><div id="contracts"></div></div>
+        <div><strong>Account Name</strong><div id="account_name"></div></div>
+        <div><strong>Account ID</strong><div id="account_id"></div></div>
+        <div>
+          <strong>Contracts(Id/Name)</strong>
+          <div id="contracts"></div>
+        </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="row">
+  <div id="saved_response" style="display: none;">
+    <h4><span id="saved_response-label" class="label label-success">Response Saved</span></h4>
+    <pre id="saved_response_pre" class="partialview"></pre>
   </div>
 </div>
 
@@ -80,4 +90,75 @@
     </div>
   </div>
 </div>
+
+<script>
+  $(document).ready(function() {
+    loadSavedResponse();
+  });
+
+  function getProductList(contract_id) {
+    var loading_icon = $("#"+contract_id+" i.fa-pulse");
+    var product_list_dom = $("#"+contract_id+"_product_item");
+
+    //see if it is open
+    if (product_list_dom.is(':visible')) {
+      loading_icon.hide();
+      product_list_dom.slideToggle("slow");
+      return false;
+    }
+
+    //if it was loaded before, just show it
+    if (!product_list_dom.is(':empty')) {
+      loading_icon.hide();
+      product_list_dom.slideToggle("slow");
+      return false;
+    }
+
+    //if it is not open
+    loading_icon.show();
+    var thisyear = (new Date()).getFullYear();
+    var body = 'reportSources=[{"type": "contract","id":"'+ contract_id + '"}]';
+    body += '&endDate={"month":"12","year":"'+thisyear+'"}&startDate={"month":"01","year":"'+thisyear+'"}';
+    var endpoint = "/billing-usage/v1/products";
+
+    if (seeIfTokenUploaded("luna_token")) {
+      $.ajax({
+        type: "POST",
+        url: "/run/luna_token",
+        beforeSend: function(xhr) {
+          xhr.setRequestHeader("Endpoint", endpoint);
+        },
+        data: body,
+        success: function(responseTxt, status, jxhr) {
+          loading_icon.hide();
+          jsonObj_response = JSON.parse(responseTxt);
+          if (jsonObj_response.status == "ok") {
+            product_ids = jsonObj_response.contents;
+            product_list = "";
+            for (var i in product_ids) {
+              product_list += "<li>"+product_ids[i].id+": "+product_ids[i].name+"</li>";
+            }
+
+            if (product_list != "") {
+              product_list_dom.html(product_list);
+            } else {
+              product_list_dom.html("No products are available on this contract.");
+            }
+
+            product_list_dom.slideToggle("slow");
+          } else {
+            return responseTxt;
+          }
+        },
+        error: function(xhr, status, error_msg) {
+          loading_icon.hide();
+          product_list_dom.html("error: couldn't load product list");
+        }
+      });
+    } else {
+      loading_icon.hide();
+      showNotification("luna_token is not uploaded. Please upload and try again.");
+    }
+  }
+</script>
 

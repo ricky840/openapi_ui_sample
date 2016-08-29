@@ -1,0 +1,96 @@
+<div class="container_fuild">
+  <div class="row"> <!-- main row -->
+
+    <!-- API section -->
+    <div class="col-md-7">
+
+			<!-- API title goes here -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="corner_space"></div>
+				</div>
+        <div class="col-md-9">
+          <h2>The Service-Level Agreement API</h2>
+          <p>The SLA API provides programmatic access to SLA test configurations and the resulting reports.</p>
+          <p>SLA tests measure certain availability and performance metrics. The results of these tests can help you check whether Akamai is achieving the performance gains and platform availability set forth in the Service-Level Agreement included with your purchase contract.</p>
+          <hr>
+				</div>
+			</div>
+
+      <!-- API content main body -->
+      <div class="row">
+
+        <!-- left menu -->
+        <div class="col-md-3">
+          <div class= "sidemenu">
+            <div class="list-group panel">
+            <a href="#quotas" class="list-group-item list-group-title" data-toggle="collapse">Quotas<span class="caret"></span></a>
+            <div class="collapse" id="quotas">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/service_level_agreement/quotas.html')">Quotas</a>
+            </div>   
+            </div>
+            <div class="list-group panel">
+            <a href="#create_test" class="list-group-item list-group-title" data-toggle="collapse">Create Test<span class="caret"></span></a>
+            <div class="collapse" id="create_test">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/service_level_agreement/create-test.html')">Create Test</a>
+            </div>   
+            </div>
+            <div class="list-group panel">
+            <a href="#tests" class="list-group-item list-group-title" data-toggle="collapse">Tests<span class="caret"></span></a>
+            <div class="collapse" id="tests">
+              <a href="#" class="list-group-iㅇtem list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/service_level_agreement/tests/tests.html')">Tests</a>
+              <a href="#test" class="list-group-item list-group-lv1" data-toggle="collapse">Test<span class="caret"></span></a>
+              <div class="collapse list group-submenu" id="test">
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#test" onclick="loadApiActionPage('/htmls/service_level_agreement/tests/test/delete-test.html')">Delete a Test Configuration</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#test" onclick="loadApiActionPage('/htmls/service_level_agreement/tests/test/update-test.html')">Update a Test Configuration</a>
+                <a href="#" class="list-group-item list-group-lv2" data-parent="#test" onclick="loadApiActionPage('/htmls/service_level_agreement/tests/test/get-test.html')">Get a Test Configuration</a>
+              </div>   
+            </div>   
+            </div>
+            <div class="list-group panel">
+            <a href="#agent_groups" class="list-group-item list-group-title" data-toggle="collapse">Agent Groups<span class="caret"></span></a>
+            <div class="collapse" id="agent_groups">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/service_level_agreement/agent-groups.html')">Agent Groups</a>
+            </div>   
+            </div>
+            <div class="list-group panel">
+            <a href="#reports" class="list-group-item list-group-title" data-toggle="collapse">Reports<span class="caret"></span></a>
+            <div class="collapse" id="reports">
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/service_level_agreement/performance-report.html')">Performance Report</a>
+              <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse"  onclick="loadApiActionPage('/htmls/service_level_agreement/availability-report.html')">Availability Report</a>
+            </div>   
+            </div> 
+          </div>
+        </div><!-- left menu end -->
+
+        <!-- API action content -->
+        <div class="col-md-9">
+     
+					<!-- API action content goes here -->
+          <div id="api_action_body_wrapper"></div>
+          <!-- response -->
+          <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+            <div id="loading_spinner" style="display: none"></div>
+            <span id="api_response"></span>
+            <button id="btn_save_response" type="button" onclick="saveResponse(this.id)" class="btn btn-primary" style="display: none">Save Response</button>
+          </div>
+        </div> <!-- API action content end -->
+      </div> <!-- API content main body end -->
+
+    </div> <!-- API section end -->
+
+    <!-- Toke HTML column -->
+    <div class="col-md-4 col-sm-offset-1">
+      <div id="token_html"></div>
+    </div>
+
+  </div> <!-- end of main row -->
+</div> <!-- container -->
+
+<div id="footer_html"></div>
+
+<script>
+  $(document).ready(function() {
+    loadTokenHtml();
+  });
+</script>

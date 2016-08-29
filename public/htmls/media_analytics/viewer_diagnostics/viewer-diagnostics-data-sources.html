@@ -16,7 +16,7 @@
     var endpoint = "/media-analytics/v1/viewer-diagnostics/report-packs/";
     var rid = $("#rid").val();
     if (rid) {
-      endpoint = endpoint + rid "/data-sources";
+      endpoint = endpoint + rid + "/data-sources";
       var return_response = sendAPIRequestGet(endpoint, "luna_token");
     } else {
       showNotification("Please enter reportPackID");

@@ -30,7 +30,7 @@
     var asid = $("#asid").val();
     if (aid && gid && asid) {
       var endpoint = "/user-admin/v1/accounts/"+aid+"/groups/"+gid+"/properties/"+asid+"/users";
-      sendAPIRequestGet(endpoint, "luna_token");
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
     } else {
       showNotification("Please enter accountID & groupID & assetID");
     }

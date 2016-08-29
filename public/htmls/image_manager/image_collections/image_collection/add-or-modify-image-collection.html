@@ -1,0 +1,46 @@
+<div class="form-group">
+  <label for="">Add or Modify an Image Collection</label>
+</div>
+
+<div class="form-group">
+  <label for="">Luna Token</label>
+  <input id="img_manager_token" type="text" class="form-control" placeholder="test-10400979">
+</div>
+
+<div class="form-group">
+  <label for="">Image Collection ID</label>
+  <input id="iid" type="text" class="form-control" placeholder="MyId432">
+</div>
+
+<div class="form-group">
+  <label for="">Add or Modify an Image Collection Object</label>
+  <div id="textarea_wrapper" class="form-group has-feedback">
+    <textarea id="image_collection_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'image_collection_body')"></textarea>
+  </div>
+</div>
+
+<input class="btn btn-success" type="button" value="Validate JSON" onclick="validateJsonTextarea('textarea_wrapper', 'image_collection_body')">
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+
+<script>
+  var placeholder = '{"id":"MyId432","tags":["red","shoe"],"definition":{"type":"Gallery","items":[{"type":"AkaImage","imageId":"/images/bag.front.jpg"},{"type":"AkaImage","imageId":"/images/bag.side.jpg"},{"type":"AkaImage","imageId":"/images/bag.back.jpg"}]}}';
+  placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
+  $("#image_collection_body").val(placeholder);
+
+  function runAPI() {
+    var iid = $("#iid").val();   
+    var img_manager_token = $("#img_manager_token").val();
+    var headers = {
+      "Luna-Token": img_manager_token,
+      "Content-Type": "application/json"
+    }
+    var endpoint = "/imaging/v0/imagecollections/"+iid;
+    var body = $("#image_collection_body").val();
+    if (IsJsonString(body)) {
+      var return_response = sendAPIRequestPut(endpoint, "img_token", body, headers);
+    } else {
+      showNotification("JSON is not in valid format");
+    }
+  }
+</script>

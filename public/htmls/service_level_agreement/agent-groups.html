@@ -1,0 +1,16 @@
+<fieldset disabled>
+  <div class="form-group">
+    <label for="">Agent Groups</label>
+    <span class="help-block">List Agent Groups</span>
+    <input id="" type="text" class="form-control" placeholder="/sla-api/v1/agent-groups">
+  </div>
+</fieldset>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/sla-api/v1/agent-groups";
+    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+  }
+</script>

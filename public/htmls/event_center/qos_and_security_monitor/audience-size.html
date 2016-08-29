@@ -24,7 +24,7 @@
     var aid = $("#aid").val();
     var eid = $("#eid").val();
     if (aid && eid) {
-      endpoint = endpoint + aid + "/events/" + eid + "/qos/qudiencesize";
+      endpoint = endpoint + aid + "/events/" + eid + "/qos/qudiencesize?";
       var return_response = sendAPIRequestGet(endpoint, "luna_token");
     } else {
       showNotification("Please enter accountID and eventID");

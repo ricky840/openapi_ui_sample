@@ -28,7 +28,7 @@
               <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/ccu_utility_v2/ccu_utility_v2/request-queues.html')">Request Queues</a>
               <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/ccu_utility_v2/ccu_utility_v2/purge-request.html')">Purge Request</a>
               <a href="#" class="list-group-item list-group-lv1" data-toggle="collapse" onclick="loadApiActionPage('/htmls/ccu_utility_v2/ccu_utility_v2/purge-status.html')">Purge Status</a>
-            </div> 
+            </div>
             </div>
           </div>
         </div>
@@ -36,10 +36,11 @@
         <!-- API action content -->
         <div class="col-md-9">
           <div id="api_action_body_wrapper"></div>
-            <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
-              <div id="loading_spinner" style="display: none"></div>
-              <span id="api_response"></span>
-            </div>
+          <div id="api_response_wrapper" class="each_api_action top-buffer" style="display: none">
+            <div id="loading_spinner" style="display: none"></div>
+            <span id="api_response"></span>
+            <button id="btn_save_response" type="button" onclick="saveResponse(this.id)" class="btn btn-primary" style="display: none">Save Response</button>
+          </div>
         </div> <!-- API action content end -->
       </div> <!-- API content main body end -->
 

@@ -1,0 +1,30 @@
+<fieldset disabled>
+  <div class="form-group">
+    <label for="">Policies</label>
+    <span class="help-block">Retrieve a list of all policy IDs.</span>
+    <input id="" type="text" class="form-control" placeholder="/imaging/v0/policies">
+  </div>
+</fieldset>
+
+<div class="form-group">
+  <label for="">Luna Token</label>
+  <input id="img_manager_token" type="text" class="form-control" placeholder="test-10400979">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/imaging/v0/policies";
+    var img_manager_token = $("#img_manager_token").val();    
+    if(img_manager_token){
+       var headers = {
+      "Luna-Token": img_manager_token,
+      "Content-Type": "application/json"
+    }
+       var return_response = sendAPIRequestGet(endpoint, "img_token", headers);
+    } else{
+        showNotification("Please enter Luna Token");
+    }
+  }   
+</script>

@@ -1,0 +1,34 @@
+<div class="form-group">
+  <label for="">Image</label>
+  <span class="help-block">Return detailed information about a specific image.</span>
+</div>
+
+<div class="form-group">
+  <label for="">Luna Token</label>
+  <input id="img_manager_token" type="text" class="form-control" placeholder="test-10400979">
+</div>
+
+<div class="form-group">
+  <label for="">ID</label>
+  <span class="help-block">ID of the image for which to retrieve metadata</span>
+  <input id="id" type="text" class="form-control" placeholder=".auto">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var id = $("#id").val();   
+    var img_manager_token = $("#img_manager_token").val();
+    if(id && img_manager_token){
+      var endpoint = "/imaging/v0/images/"+id;
+      var headers = {
+      "Luna-Token": img_manager_token,
+      "Content-Type": "application/json"
+    }
+      var return_response = sendAPIRequestGet(endpoint, "img_token", headers);
+    } else{
+      showNotification("Please enter Luna Token and ID");
+    }    
+  }
+</script>

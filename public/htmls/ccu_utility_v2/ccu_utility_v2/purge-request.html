@@ -15,13 +15,13 @@
   placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
   $("#purge_request_body").val(placeholder);
 
-  function runAPI() {  
-      var endpoint = "/ccu/v2/queues/default";
-      var body = $("#purge_request_body").val();
-      if (IsJsonString(body)) {
-        var return_response = sendAPIRequestPost(endpoint, "ccu_token", body);
-      } else {
-        showNotification("JSON is not in valid format");
-      }
-     }
+  function runAPI() {
+    var endpoint = "/ccu/v2/queues/default";
+    var body = $("#purge_request_body").val();
+    if (IsJsonString(body)) {
+      var return_response = sendAPIRequestPost(endpoint, "ccu_token", body);
+    } else {
+      showNotification("JSON is not in valid format");
+    }
+  }
 </script>

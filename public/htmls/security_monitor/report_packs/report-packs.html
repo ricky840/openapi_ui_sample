@@ -1,0 +1,17 @@
+<fieldset disabled>
+  <div class="form-group">
+    <label for="">Report Packs</label>
+    <span class="help-block">Report packs are a collection of reports fed by data sources and other components.</span>
+    <span class="help-block">Returns name, id, and timezone for all report packs created for your account.</span>
+    <input id="" type="text" class="form-control" placeholder="/security-monitor/v1/report-packs">
+  </div>
+</fieldset>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var endpoint = "/security-monitor/v1/report-packs";
+    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+  }
+</script>

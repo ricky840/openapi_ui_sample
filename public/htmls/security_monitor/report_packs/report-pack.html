@@ -1,0 +1,23 @@
+<div class="form-group">
+  <label for="">Report Pack</label>
+  <span class="help-block">Details include name of the report pack, data sources, and metrics and dimensions used in the report pack.</span>
+</div>
+
+<div class="form-group">
+  <label for="rid">Report Pack ID</label>
+  <input id="rid" type="number" class="form-control" placeholder="101211 (reportPackID)">
+</div>
+
+<input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+
+<script>
+  function runAPI() {
+    var rid = $("#rid").val();
+    if (rid) {
+      var endpoint = "/security-monitor/v1/report-packs/"+rid;
+      sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter reportPackdID");
+    }
+  }
+</script>

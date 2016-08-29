@@ -6,19 +6,28 @@
 .top-buffer {
   margin-top:20px;
 }
+
 textarea {
   font-family: consolas;
 }
+
 pre {
   padding: 20px !important;
-  margin: 10px;
+  /* margin: 10px; */
   font-family: consolas;
 }
+
 .string { color: green; }
 .number { color: darkorange; }
 .boolean { color: blue; }
 .null { color: magenta; }
-.key { color: red; }
+.key { color: red; font-weight: bold;}
+
+/* saved response */
+pre.partialview {
+  padding: 10px !important;
+  max-height: 500px;
+}
 
 /* this is for each api action content label */
 div > label {
@@ -68,6 +77,7 @@ div > label {
 .sidemenu .list-group-title {
   font-size: 15px;
 }
+
 
 /*
 .corner_space {

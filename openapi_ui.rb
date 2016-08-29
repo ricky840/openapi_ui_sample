@@ -1,4 +1,5 @@
-enable :sessions
+# enable :sessions
+use Rack::Session::Pool #to save session data in server(not in cookie)
 
 def getAccountInfo()
   tokens = session['luna_token']
@@ -37,7 +38,7 @@ def getAccountInfo()
     result["contracts"] = "Please allow access to PAPI"
   end
 
-  #get contract name. only run when there was contracts
+  #get contract name. only run when there was a contract
   if result["contracts"].class == Array
     endpoint_cont_name = "/billing-usage/v1/reportSources"
     result_cont_name = makeGetRequest(tokens[:baseurl], endpoint_cont_name, tokens[:clienttoken], tokens[:secret], tokens[:accesstoken])
@@ -59,11 +60,10 @@ def getAccountInfo()
       end
     end
   end
-  $stderr.puts result.inspect
   return result
 end
 
-def makeGetRequest(base_url, endpoint_url, client_token, client_secret, access_token)
+def makeGetRequest(base_url, endpoint_url, client_token, client_secret, access_token, headers = {})
 	baseuri = URI(base_url)
 	http = Akamai::Edgegrid::HTTP.new(address = baseuri.host, post = baseuri.port)
 	http.setup_edgegrid(
@@ -71,18 +71,31 @@ def makeGetRequest(base_url, endpoint_url, client_token, client_secret, access_t
 		client_secret: client_secret,
 		access_token: access_token
 	)
-  req = Net::HTTP::Get.new(URI.join(baseuri.to_s, endpoint_url).to_s)
+  req = Net::HTTP::Get.new(URI.join(baseuri.to_s, endpoint_url).to_s, initheader = headers)
 	res = http.request(req)
   return res.body
 end
 
-def makePostRequest(base_url, endpoint_url, client_token, client_secret, access_token, request_body)
+def makeHeadRequest(base_url, endpoint_url, client_token, client_secret, access_token, headers = {})
+	baseuri = URI(base_url)
+	http = Akamai::Edgegrid::HTTP.new(address = baseuri.host, post = baseuri.port)
+	http.setup_edgegrid(
+		client_token: client_token,
+		client_secret: client_secret,
+		access_token: access_token
+	)
+  req = Net::HTTP::Head.new(URI.join(baseuri.to_s, endpoint_url).to_s, initheader = headers)
+	res = http.request(req)
+  return res.body
+end
+
+def makePostRequest(base_url, endpoint_url, client_token, client_secret, access_token, request_body, headers = {})
 	baseuri = URI(base_url)
   begin
     JSON.parse(request_body)
-    content_type = 'application/json'
+    headers["Content-Type"] = "application/json"
   rescue JSON::ParserError => e
-    content_type = 'application/x-www-form-urlencoded'
+    headers["Content-Type"] = "application/x-www-form-urlencoded;charset=UTF-8"
   end
 
 	http = Akamai::Edgegrid::HTTP.new(address = baseuri.host, post = baseuri.port)
@@ -91,22 +104,19 @@ def makePostRequest(base_url, endpoint_url, client_token, client_secret, access_
 		client_secret: client_secret,
 		access_token: access_token
 	)
-	req = Net::HTTP::Post.new(
-		URI.join(baseuri.to_s, endpoint_url).to_s,
-		initheader = { 'Content-Type' => content_type }
-	)
+	req = Net::HTTP::Post.new(URI.join(baseuri.to_s, endpoint_url).to_s, initheader = headers)
 	req.body = request_body
 	res = http.request(req)
   return res.body
 end
 
-def makePutRequest(base_url, endpoint_url, client_token, client_secret, access_token, request_body)
+def makePutRequest(base_url, endpoint_url, client_token, client_secret, access_token, request_body, headers = {})
 	baseuri = URI(base_url)
   begin
     JSON.parse(request_body)
-    content_type = 'application/json'
+    headers["Content-Type"] = "application/json"
   rescue JSON::ParserError => e
-    content_type = 'application/x-www-form-urlencoded'
+    headers["Content-Type"] = "application/x-www-form-urlencoded;charset=UTF-8"
   end
 	http = Akamai::Edgegrid::HTTP.new(address = baseuri.host, post = baseuri.port)
 	http.setup_edgegrid(
@@ -114,16 +124,13 @@ def makePutRequest(base_url, endpoint_url, client_token, client_secret, access_t
 		client_secret: client_secret,
 		access_token: access_token
 	)
-	req = Net::HTTP::Put.new(
-		URI.join(baseuri.to_s, endpoint_url).to_s,
-		initheader = { 'Content-Type' => content_type }
-	)
+	req = Net::HTTP::Put.new(URI.join(baseuri.to_s, endpoint_url).to_s, initheader = headers)
 	req.body = request_body
 	res = http.request(req)
   return res.body
 end
 
-def makeDeleteRequest(base_url, endpoint_url, client_token, client_secret, access_token, body = nil)
+def makeDeleteRequest(base_url, endpoint_url, client_token, client_secret, access_token, body = nil, headers = {})
 	baseuri = URI(base_url)
 	http = Akamai::Edgegrid::HTTP.new(address = baseuri.host, post = baseuri.port)
 	http.setup_edgegrid(
@@ -131,7 +138,7 @@ def makeDeleteRequest(base_url, endpoint_url, client_token, client_secret, acces
 		client_secret: client_secret,
 		access_token: access_token
 	)
-  req = Net::HTTP::Delete.new(URI.join(baseuri.to_s, endpoint_url).to_s)
+  req = Net::HTTP::Delete.new(URI.join(baseuri.to_s, endpoint_url).to_s, initheader = headers)
   req.body = body if not body.nil?
 	res = http.request(req)
   return res.body
@@ -194,8 +201,14 @@ post "/upload" do
   end
 end
 
+
 get "/run/:tokentype" do
+  content_type 'text/html', :charset => 'utf-8'
   endpoint = request.env["HTTP_ENDPOINT"].to_s.delete(' ')
+  req_headers = Hash.new
+  req_headers["Luna-Token"] = request.env["HTTP_LUNA_TOKEN"].to_s.delete(' ') if not request.env["HTTP_LUNA_TOKEN"].nil?
+  req_headers["Content-Type"] = request.env["CONTENT_TYPE"].to_s.delete(' ') if not request.env["CONTENT_TYPE"].nil?
+
   begin
     URI.parse(endpoint)
   rescue URI::InvalidURIError => e
@@ -205,7 +218,30 @@ get "/run/:tokentype" do
   if not endpoint.nil?
     api_token_type = params['tokentype']
     tokens = session[api_token_type]
-    result = makeGetRequest(tokens[:baseurl], endpoint, tokens[:clienttoken], tokens[:secret], tokens[:accesstoken])
+    result = makeGetRequest(tokens[:baseurl], endpoint, tokens[:clienttoken], tokens[:secret], tokens[:accesstoken], req_headers)
+    return result
+  else
+    return %Q[{"error" : "no end point URL provided"}]
+  end
+end
+
+head "/run/:tokentype" do
+  content_type 'text/html', :charset => 'utf-8'
+  endpoint = request.env["HTTP_ENDPOINT"].to_s.delete(' ')
+  req_headers = Hash.new
+  req_headers["Luna-Token"] = request.env["HTTP_LUNA_TOKEN"].to_s.delete(' ') if not request.env["HTTP_LUNA_TOKEN"].nil?
+  req_headers["Content-Type"] = request.env["CONTENT_TYPE"].to_s.delete(' ') if not request.env["CONTENT_TYPE"].nil?
+
+  begin
+    URI.parse(endpoint)
+  rescue URI::InvalidURIError => e
+    return %Q[{"error" : "#{e.message}"}]
+  end
+
+  if not endpoint.nil?
+    api_token_type = params['tokentype']
+    tokens = session[api_token_type]
+    result = makeHeadRequest(tokens[:baseurl], endpoint, tokens[:clienttoken], tokens[:secret], tokens[:accesstoken], req_headers)
     return result
   else
     return %Q[{"error" : "no end point URL provided"}]
@@ -213,37 +249,23 @@ get "/run/:tokentype" do
 end
 
 post "/run/:tokentype" do
-  endpoint = request.env["HTTP_ENDPOINT"].to_s.delete(' ')
-  begin
-    URI.parse(endpoint)
-    request_body = JSON.generate(JSON.parse(request.body.read))
-  rescue JSON::ParserError, URI::InvalidURIError => e
-    return %Q[{"error" : "#{e.message}"}]
-  end
-
-  if not endpoint.nil?
-    api_token_type = params['tokentype']
-    tokens = session[api_token_type]
-    result = makePostRequest(tokens[:baseurl], endpoint, tokens[:clienttoken], tokens[:secret], tokens[:accesstoken], request_body)
-    return result
-  else
-    return %Q[{"error" : "no end point URL provided"}]
-  end
-end
-
-post "/runrb/:tokentype" do
-  endpoint = request.env["HTTP_ENDPOINT"].to_s.delete(' ')
+  content_type 'text/html', :charset => 'utf-8'
   request_body = request.body.read
+  endpoint = request.env["HTTP_ENDPOINT"].to_s.delete(' ')
+  req_headers = Hash.new
+  req_headers["Luna-Token"] = request.env["HTTP_LUNA_TOKEN"].to_s.delete(' ') if not request.env["HTTP_LUNA_TOKEN"].nil?
+  req_headers["Content-Type"] = request.env["CONTENT_TYPE"].to_s.delete(' ') if not request.env["CONTENT_TYPE"].nil?
+
   begin
     URI.parse(endpoint)
-  rescue URI::InvalidURIError => e
+  rescue JSON::ParserError => e
     return %Q[{"error" : "#{e.message}"}]
   end
 
   if not endpoint.nil?
     api_token_type = params['tokentype']
     tokens = session[api_token_type]
-    result = makePostRequest(tokens[:baseurl], endpoint, tokens[:clienttoken], tokens[:secret], tokens[:accesstoken], request_body)
+    result = makePostRequest(tokens[:baseurl], endpoint, tokens[:clienttoken], tokens[:secret], tokens[:accesstoken], request_body, req_headers)
     return result
   else
     return %Q[{"error" : "no end point URL provided"}]
@@ -251,8 +273,13 @@ post "/runrb/:tokentype" do
 end
 
 put "/run/:tokentype" do
-  endpoint = request.env["HTTP_ENDPOINT"].to_s.delete(' ')
+  content_type 'text/html', :charset => 'utf-8'
   request_body = request.body.read
+  endpoint = request.env["HTTP_ENDPOINT"].to_s.delete(' ')
+  req_headers = Hash.new
+  req_headers["Luna-Token"] = request.env["HTTP_LUNA_TOKEN"].to_s.delete(' ') if not request.env["HTTP_LUNA_TOKEN"].nil?
+  req_headers["Content-Type"] = request.env["CONTENT_TYPE"].to_s.delete(' ') if not request.env["CONTENT_TYPE"].nil?
+
   begin
     URI.parse(endpoint)
   rescue URI::InvalidURIError => e
@@ -262,7 +289,7 @@ put "/run/:tokentype" do
   if not endpoint.nil?
     api_token_type = params['tokentype']
     tokens = session[api_token_type]
-    result = makePutRequest(tokens[:baseurl], endpoint, tokens[:clienttoken], tokens[:secret], tokens[:accesstoken], request_body)
+    result = makePutRequest(tokens[:baseurl], endpoint, tokens[:clienttoken], tokens[:secret], tokens[:accesstoken], request_body, req_headers)
     return result
   else
     return %Q[{"error" : "no end point URL provided"}]
@@ -270,8 +297,13 @@ put "/run/:tokentype" do
 end
 
 delete "/run/:tokentype" do
-  endpoint = request.env["HTTP_ENDPOINT"].to_s.delete(' ')
+  content_type 'text/html', :charset => 'utf-8'
   request_body = request.body.read
+  endpoint = request.env["HTTP_ENDPOINT"].to_s.delete(' ')
+  req_headers = Hash.new
+  req_headers["Luna-Token"] = request.env["HTTP_LUNA_TOKEN"].to_s.delete(' ') if not request.env["HTTP_LUNA_TOKEN"].nil?
+  req_headers["Content-Type"] = request.env["CONTENT_TYPE"].to_s.delete(' ') if not request.env["CONTENT_TYPE"].nil?
+
   begin
     URI.parse(endpoint)
   rescue URI::InvalidURIError => e
@@ -281,7 +313,7 @@ delete "/run/:tokentype" do
   if not endpoint.nil?
     api_token_type = params['tokentype']
     tokens = session[api_token_type]
-    result = makeDeleteRequest(tokens[:baseurl], endpoint, tokens[:clienttoken], tokens[:secret], tokens[:accesstoken], request_body)
+    result = makeDeleteRequest(tokens[:baseurl], endpoint, tokens[:clienttoken], tokens[:secret], tokens[:accesstoken], request_body, req_headers)
     return result
   else
     return %Q[{"error" : "no end point URL provided"}]
@@ -318,6 +350,18 @@ get "/getaccountinfo" do
   end
 end
 
+post "/saveresponse" do
+  response_value = params['response']
+  session["response_value"] = response_value
+  res = { :result => "success" }
+  return  res.to_json.to_s
+end
+
+get "/loadresponse" do
+  content_type 'text/html', :charset => 'utf-8'
+  saved_response = session["response_value"]
+  return saved_response
+end
 
 
 
