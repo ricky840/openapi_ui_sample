@@ -1,5 +1,5 @@
 <div class="form-group">
-  <label for="aid">Rebuffering Data</label>
+  <label for="">Rebuffering Data</label>
   <span class="help-block">Pulls the rebuffering percentage for a given QoS Report pack.</span>
   <span class="help-block">NOTE: Data is limited to a maximum of 1.5 days. At present the only 'timeAggInterval' available is 60.</span>
 </div>
@@ -24,7 +24,7 @@
     var aid = $("#aid").val();
     var eid = $("#eid").val();
     if (aid && eid) {
-      endpoint = endpoint + aid + "/events/" + eid + "/qos/rebuffering";
+      endpoint = endpoint + aid + "/events/" + eid + "/qos/rebuffering?";
       var return_response = sendAPIRequestGet(endpoint, "luna_token");
     } else {
       showNotification("Please enter accountID and eventID");

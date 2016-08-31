@@ -362,18 +362,3 @@ get "/loadresponse" do
   saved_response = session["response_value"]
   return saved_response
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

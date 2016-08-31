@@ -367,6 +367,11 @@ function saveResponse(button_id) {
       $("#"+button_id).html("Saved");
       $("#"+button_id).removeClass("btn-primary");
       $("#"+button_id).addClass("btn-success");
+      $("#"+button_id).fadeOut("slow", function (){
+        $("#"+button_id).html("Saved Response");
+        $("#"+button_id).removeClass("btn-success");
+        $("#"+button_id).addClass("btn-primary");
+      });
       //reload
       loadSavedResponse();
     } else {
@@ -435,5 +440,18 @@ function escapeHtml(html) {
      return html.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/ /g, '&nbsp;').replace(/\n/g,'<br />');
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
