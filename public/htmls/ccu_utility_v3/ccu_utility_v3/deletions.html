@@ -23,14 +23,14 @@
   $("#deletions_body").val(placeholder);
 
   function runAPI(apitype) {
-      var endpoint = "/ccu/v3/delete/url/";
-      var body = $("#deletions_body").val();
-      var network = $("#deletions_network").val();
-      endpoint = endpoint + network;
-      if (IsJsonString(body)) {
-        var return_response = sendAPIRequestPost(endpoint, "ccu_token", body);
-      } else {
-        showNotification("JSON is not in valid format");
-      }
+    var endpoint = "/ccu/v3/delete/url/";
+    var body = $("#deletions_body").val();
+    var network = $("#deletions_network").val();
+    endpoint = endpoint + network;
+    if (IsJsonString(body)) {
+      var return_response = sendAPIRequestPost(endpoint, "ccu_token", body);
+    } else {
+      showNotification("JSON is not in valid format");
     }
+  }
 </script>
