@@ -1,15 +1,15 @@
 <fieldset disabled>
   <div class="form-group">
     <label for="">Dimensions</label>
-    <span class="help-block">Retrieves all the dimensions available for Adaptive Media Delivery.</span>
-    <input id="locations" type="text" class="form-control" placeholder="/media-reports/v1/adaptive-media-delivery/dimensions">
+    <span class="help-block">Retrieves all the dimensions available for Download Delivery.</span>
+    <input id="locations" type="text" class="form-control" placeholder="/media-reports/v1/download-delivery/dimensions">
   </div>
 </fieldset>
 <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
 
 <script>
 function runAPI() {
-  var endpoint = "/media-reports/v1/adaptive-media-delivery/dimensions";
+  var endpoint = "/media-reports/v1/download-delivery/dimensions";
   sendAPIRequestGet(endpoint, "luna_token");
 }
 </script>

@@ -56,6 +56,10 @@ div > label {
 }
 
 /* side menu */
+.sidemenu {
+  margin-left: 15px;
+}
+
 .sidemenu .list-group {
   box-shadow: none;
   margin-bottom: 0px;
@@ -85,6 +89,7 @@ div > label {
   color: #0099cc;
   font-size: 15px;
 }
+
 .quicklink {
   margin-left: 14px;
   margin-bottom: 10px;
@@ -92,27 +97,73 @@ div > label {
   display: block;
 }
 
-
-/*
 .corner_space {
-  background-image: url("/img/suzi2.jpg");
-  background-size: 200px;
-  height: 200px;
+  margin-left: 17px;
 }
+/*
 .corner_space:after {
   content: " 똑바로 해";
 }
 */
 
+/* navbar */
+.navbar-inverse {
+  border-radius: 0;
+}
+.navbar {
+	margin-bottom: 30px;
+}
+
+.bg-gray-lighter {
+	background-color: #f9f9f9;
+}
+
 /* Ricky end */
+.col-md-9 h2 {
+  font-weight: bold;
+  border-radius: 1px;
+  margin-bottom: 20px;
+  padding: 25px;
+  padding-left: 0px;
+  padding-top: 20px;
+  color: #777777;
+}
 
+.jumbotron div.row {
+	min-height: 95px;
+	height: auto;
+}
+.jumbotron {
+	background-color: #1096d4;
+	font-size: 18px;
+}
+.jumbotron h1 {
+	background-color: transparent;
+	padding-left: 0;
+  font-family: "Open Sans";
+	color: #fff;
+  font-weight: 120;
+  text-align: center;
+}
 
+.blog-header .blog-title {
+  font-weight: 120;
+  font-family: "Open Sans";
+}
 
+.table-wrapper {
+  padding:15px 35px 15px 35px;
+	/* background-color: #f9f9f9; */
+	background-color: white;
+  box-shadow: 0 0px 2000px -42px rgba(0,0,0,.15);
+  border-radius: 3px;
+}
 
-
-
-
-
+.background-wrapper {
+	background-image: url('../img/ak-background.jpg');
+	background-repeat: no-repeat;
+	background-size: 100% 50%;
+}
 
 h1, .h1,
 h2, .h2,
@@ -265,7 +316,8 @@ h6, .h6 {
   padding: 20px 0;
   color: #999;
   text-align: center;
-  background-color: #f9f9f9;
+  /* background-color: #f9f9f9; */
+  background-color: #222;
   border-top: 1px solid #e5e5e5;
 }
 

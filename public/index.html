@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{OPENAPI} DEMO</title>
+    <title>{OPENAPI} TESTER</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" crossorigin="anonymous">
     <link href="css/sticky-footer.css" rel="stylesheet">
@@ -16,210 +16,333 @@
     <script src="js/bootstrap-datepicker.js"></script>
     <script src="js/common.js"></script>
   </head>
-
-  <body>
+  <body >
     <div id="header_html"></div>
-
+    <!--
+      <div class="jumbotron">
+        <div class="container">
+          <div class="row">
+            <h1>{OPENAPI} TESTER</h1>
+          </div>
+        </div>
+      </div>
+      -->
     <div id="notification" class="container alert alert-danger alert-dismissible" role="alert" style="display: none">
       <button type="button" class="close" data-hide="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
+      <span aria-hidden="true">&times;</span>
       </button>
       <div class="notification_content"></div>
     </div>
-
-    <div id="main_body" class="main_body">
-      <div class="container">
-        <center>
-          <div class="blog-header">
-            <h1 class="blog-title">{OPENAPI} Demo Page</h1>
-            <br>
-            <p class="lead blog-description">Try Akamai's {OPENAPI} with your own credentials. Upload API token to get started.</p>
+    <div id="main_body" class="main_body" style="margin: 0px; margin-bottom:100px;">
+      <div class="background-wrapper">
+        <div class="container" style="width: 70%;">
+          <center>
+            <div class="blog-header">
+              <h1 class="blog-title">{OPENAPI} TESTER</h1>
+              <br>
+              <p class="lead blog-description">Try Akamai's {OPENAPI} with your own credentials. Upload API token to get started.</p>
+            </div>
+          </center>
+          <div class="table-wrapper">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th style="text-align:left;">API Name</th>
+                  <th style="text-align:left;">Description</th>
+                  <th style="text-align:left;">Required API Client(Token)</th>
+                  <th style="text-align:center;width:90px">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="text-align:left;">
+                    <a href="#">
+                      <div onclick="loadPage('/htmls/alerts/alerts.html')">Alerts</div>
+                    </a>
+                  </td>
+                  <td style="text-align:left;">Access active Akamai Luna Control Center Alerts and their details.</td>
+                  <td class="required-token" style="text-align:center;">LUNA</td>
+                  <td class="api-status" style="text-align:center">GA</td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;">
+                    <a href="#">
+                      <div onclick="loadPage('/htmls/billing_center/billing_center.html')">Billing Center</div>
+                    </a>
+                  </td>
+                  <td style="text-align:left;">Access to contract usage data in JSON for accounts in which you have access.</td>
+                  <td class="required-token" style="text-align:center;">LUNA</td>
+                  <td class="api-status" style="text-align:center">GA</td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;">
+                    <a href="#">
+                      <div onclick="loadPage('/htmls/billing_center_v1/billing_center_v1.html')">Billing Center V1</div>
+                    </a>
+                  </td>
+                  <td style="text-align:left;">Access to contract usage data in CSV format for accounts in which you have access.</td>
+                  <td class="required-token" style="text-align:center;">LUNA</td>
+                  <td class="api-status" style="text-align:center">Deprecated</td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;">
+                    <a href="#">
+                      <div onclick="loadPage('/htmls/case_management/case_management.html')">Case Management</div>
+                    </a>
+                  </td>
+                  <td style="text-align:left;">Resolve questions or issues with your Akamai applications and services.</td>
+                  <td class="required-token" style="text-align:center;">LUNA</td>
+                  <td class="api-status" style="text-align:center">GA</td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;">
+                    <a href="#">
+                      <div onclick="loadPage('/htmls/ccu_utility_v2/ccu_utility_v2.html')">Content Control Utility(v2)</div>
+                    </a>
+                  </td>
+                  <td style="text-align:left;">Purge Edge content by request. </td>
+                  <td class="required-token" style="text-align:center;">CCU</td>
+                  <td class="api-status" style="text-align:center">GA</td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;">
+                    <a href="#">
+                      <div onclick="loadPage('/htmls/cloudlets/cloudlets.html')">Cloudlets</div>
+                    </a>
+                  </td>
+                  <td style="text-align:left;">Create and manage Cloudlet policies and policy versions.</td>
+                  <td class="required-token" style="text-align:center;">LUNA</td>
+                  <td class="api-status" style="text-align:center">GA</td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;">
+                    <a href="#">
+                      <div onclick="loadPage('/htmls/diagnostic_tools/diagnostic_tools.html')">Diagnostic Tools</div>
+                    </a>
+                  </td>
+                  <td style="text-align:left;">Explore problems in DNS host-name mapping (dig) and network routing (mtr) from around the world.</td>
+                  <td class="required-token" style="text-align:center;">LUNA</td>
+                  <td class="api-status" style="text-align:center">GA</td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;">
+                    <a href="#">
+                      <div onclick="loadPage('/htmls/dns_zone_management/dns_zone_management.html')">DNS - Zone Management</div>
+                    </a>
+                  </td>
+                  <td style="text-align:left;">Manage a primary zone’s DNS records.</td>
+                  <td class="required-token" style="text-align:center;">LUNA</td>
+                  <td class="api-status" style="text-align:center">GA</td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;">
+                    <a href="#">
+                      <div onclick="loadPage('/htmls/dns_zone_reporting/dns_zone_reporting.html')">DNS - Zone Reporting</div>
+                    </a>
+                  </td>
+                  <td style="text-align:left;">Retrieve DNS hit information.</td>
+                  <td class="required-token" style="text-align:center;">LUNA</td>
+                  <td class="api-status" style="text-align:center">GA</td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;">
+                    <a href="#">
+                      <div onclick="loadPage('/htmls/event_center/event_center.html')">Event Center</div>
+                    </a>
+                  </td>
+                  <td style="text-align:left;">See Luna Event Center configuration, reporting and alerts events.</td>
+                  <td class="required-token" style="text-align:center;">LUNA</td>
+                  <td class="api-status" style="text-align:center">GA</td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;">
+                    <a href="#">
+                      <div onclick="loadPage('/htmls/feo/feo.html')">FEO</div>
+                    </a>
+                  </td>
+                  <td style="text-align:left;">Provides a way to use FEO functionality programmatically rather than through FEO's Configuration Manager.</td>
+                  <td class="required-token" style="text-align:center;">LUNA</td>
+                  <td class="api-status" style="text-align:center">GA</td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;">
+                    <a href="#">
+                      <div onclick="loadPage('/htmls/image_manager/image_manager.html')">Image Manager</div>
+                    </a>
+                  </td>
+                  <td style="text-align:left;">Maintain a catalog of source images, organize and transform the images, make them available for delivery by the Akamai Intelligent Platform.</td>
+                  <td class="required-token" style="text-align:center;">Image Manager</td>
+                  <td class="api-status" style="text-align:center">Beta</td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;">
+                    <a href="#">
+                      <div onclick="loadPage('/htmls/invoices/invoices.html')">Invoicing</div>
+                    </a>
+                  </td>
+                  <td style="text-align:left;">Allows you to access your Akamai invoices.</td>
+                  <td class="required-token" style="text-align:center;">LUNA</td>
+                  <td class="api-status" style="text-align:center">GA</td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;">
+                    <a href="#">
+                      <div onclick="loadPage('/htmls/log_delivery_service/log_delivery_service.html')">Log Delivery Service</div>
+                    </a>
+                  </td>
+                  <td style="text-align:left;">View, update and delete configurations for the Portal log delivery service.</td>
+                  <td class="required-token" style="text-align:center;">LUNA</td>
+                  <td class="api-status" style="text-align:center">GA</td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;">
+                    <a href="#">
+                      <div onclick="loadPage('/htmls/media_analytics/media_analytics.html')">Media Analytics</div>
+                    </a>
+                  </td>
+                  <td style="text-align:left;">Manage report packs, and fetch analytic data for a particular report pack.</td>
+                  <td class="required-token" style="text-align:center;">LUNA</td>
+                  <td class="api-status" style="text-align:center">GA</td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;">
+                    <a href="#">
+                      <div onclick="loadPage('/htmls/media_reports/media_reports.html')">Media Reports</div>
+                    </a>
+                  </td>
+                  <td style="text-align:left;">Retrieve usage and quality metrics for the Media Delivery products - Adaptive Media Delivery, Download Delivery, RTMP Media Delivery and Object Delivery.</td>
+                  <td class="required-token" style="text-align:center;">LUNA</td>
+                  <td class="api-status" style="text-align:center">GA</td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;">
+                    <a href="#">
+                      <div onclick="loadPage('/htmls/media_streaming/media_streaming.html')">Media Streaming</div>
+                    </a>
+                  </td>
+                  <td style="text-align:left;">Build a custom HD Network Management Interface with Akamai Utility, Domain, Stream, and Archive Management APIs. Latest (OPEN) version.</td>
+                  <td class="required-token" style="text-align:center;">LUNA</td>
+                  <td class="api-status" style="text-align:center">GA</td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;">
+                    <a href="#">
+                      <div onclick="loadPage('/htmls/network_lists/network_lists.html')">Network Lists</div>
+                    </a>
+                  </td>
+                  <td style="text-align:left;">Manage lists to be used by multiple Akamai products and features.</td>
+                  <td class="required-token" style="text-align:center;">LUNA</td>
+                  <td class="api-status" style="text-align:center">GA</td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;">
+                    <a href="#">
+                      <div onclick="loadPage('/htmls/securehd_policy_editor/securehd_policy_editor.html')">SecureHD Policy Editor</div>
+                    </a>
+                  </td>
+                  <td style="text-align:left;">Configure and apply various security services for your Akamai HD Network media content, including Token Authorization, Content Targeting (GEO Protection), Media Encryption and Player Verification protection.</td>
+                  <td class="required-token" style="text-align:center;">LUNA</td>
+                  <td class="api-status" style="text-align:center">GA</td>
+                <tr>
+                  <td style="text-align:left;">
+                    <a href="#">
+                      <div onclick="loadPage('/htmls/traffic_management/traffic_management.html')">Traffic Management</div>
+                    </a>
+                  </td>
+                  <td style="text-align:left;">Manage Traffic Management load balancing configurations.</td>
+                  <td class="required-token" style="text-align:center;">LUNA</td>
+                  <td class="api-status" style="text-align:center">GA</td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;">
+                    <a href="#">
+                      <div onclick="loadPage('/htmls/user_admin/user_admin.html')">User Admin</div>
+                    </a>
+                  </td>
+                  <td style="text-align:left;">Create and manage Users, Groups, and Roles.</td>
+                  <td class="required-token" style="text-align:center;">LUNA</td>
+                  <td class="api-status" style="text-align:center">GA</td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;">
+                    <a href="#">
+                      <div onclick="loadPage('/htmls/ccu_utility_v3/ccu_utility_v3.html')">Content Control Utility (v3)</div>
+                    </a>
+                  </td>
+                  <td style="text-align:left;">The Content Control Utility (CCU) API allows you to purge edge content by request using Akamai's new Fast Purge capability. At this time, you can invalidate or delete by URL only.</td>
+                  <td class="required-token" style="text-align:center;">CCU</td>
+                  <td class="api-status" style="text-align:center">Beta</td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;">
+                    <a href="#">
+                      <div onclick="loadPage('/htmls/cps_api/cps_api.html')">CPS API</div>
+                    </a>
+                  </td>
+                  <td style="text-align:left;">The Certificate Provisioning System API allows you to create and manage certificates.</td>
+                  <td class="required-token" style="text-align:center;">LUNA</td>
+                  <td class="api-status" style="text-align:center">Beta</td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;">
+                    <a href="#">
+                      <div onclick="loadPage('/htmls/property_manager/property_manager.html')">Property Manager</div>
+                    </a>
+                  </td>
+                  <td style="text-align:left;">Manage your web content on the Akamai edge network.</td>
+                  <td class="required-token" style="text-align:center;">LUNA</td>
+                  <td class="api-status" style="text-align:center">Beta</td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;">
+                    <a href="#">
+                      <div onclick="loadPage('/htmls/security_monitor/security_monitor.html')">Security Monitor</div>
+                    </a>
+                  </td>
+                  <td style="text-align:left;">Retrieve real-time data on security events.</td>
+                  <td class="required-token" style="text-align:center;">LUNA</td>
+                  <td class="api-status" style="text-align:center">Beta</td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;">
+                    <a href="#">
+                      <div onclick="loadPage('/htmls/service_level_agreement/service_level_agreement.html')">Service-Level Agreement API</div>
+                    </a>
+                  </td>
+                  <td style="text-align:left;">Accesses SLA test configurations and reports.</td>
+                  <td class="required-token" style="text-align:center;">LUNA</td>
+                  <td class="api-status" style="text-align:center">Beta</td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;">
+                    <a href="#">
+                      <div onclick="loadPage('/htmls/site_shield/site_shield.html')">Site Shield</div>
+                    </a>
+                  </td>
+                  <td style="text-align:left;">Provide a Site Shield interface for consumption by nonbrowser clients.</td>
+                  <td class="required-token" style="text-align:center;">LUNA</td>
+                  <td class="api-status" style="text-align:center">Beta</td>
+                </tr>
+                <tr>
+                  <td style="text-align:left;">
+                    <a href="#">
+                      <div onclick="loadPage('/htmls/traffic_management_load_feedback/traffic_management_load_feedback.html')">Traffic Management Load Feedback</div>
+                    </a>
+                  </td>
+                  <td style="text-align:left;">POST load data for a GTM domain and GET the current load state.</td>
+                  <td class="required-token" style="text-align:center;">DNS</td>
+                  <td class="api-status" style="text-align:center">Beta</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-        </center>
-
-        <table class="table table-hover table-striped">
-          <thead>
-            <tr>
-              <th style="text-align:left;">API Name</th>
-              <th style="text-align:left;">Description</th>
-              <th style="text-align:left;">Required API Client(Token)</th>
-              <th style="text-align:center;width:90px">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/alerts/alerts.html')">Alerts</a></td>
-              <td style="text-align:left;">Access active Akamai Luna Control Center Alerts and their details.</td>
-              <td class="required-token" style="text-align:center;">LUNA</td>
-              <td class="api-status" style="text-align:center">GA</td>
-            </tr>
-            <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/billing_center/billing_center.html')">Billing Center</div></a></td>
-              <td style="text-align:left;">Access to contract usage data in JSON for accounts in which you have access.</td>
-              <td class="required-token" style="text-align:center;">LUNA</td>
-              <td class="api-status" style="text-align:center">GA</td>
-            </tr>
-            <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/billing_center_v1/billing_center_v1.html')">Billing Center V1</div></a></td>
-              <td style="text-align:left;">Access to contract usage data in CSV format for accounts in which you have access.</td>
-              <td class="required-token" style="text-align:center;">LUNA</td>
-              <td class="api-status" style="text-align:center">Deprecated</td>
-            </tr>
-            <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/case_management/case_management.html')">Case Management</div></a></td>
-              <td style="text-align:left;">Resolve questions or issues with your Akamai applications and services.</td>
-              <td class="required-token" style="text-align:center;">LUNA</td>
-              <td class="api-status" style="text-align:center">GA</td>
-            </tr>
-            <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/ccu_utility_v2/ccu_utility_v2.html')">Content Control Utility(v2)</div></a></td>
-              <td style="text-align:left;">Purge Edge content by request. </td>
-              <td class="required-token" style="text-align:center;">CCU</td>
-              <td class="api-status" style="text-align:center">GA</td>
-            </tr>
-            <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/cloudlets/cloudlets.html')">Cloudlets</a></td>
-              <td style="text-align:left;">Create and manage Cloudlet policies and policy versions.</td>
-              <td class="required-token" style="text-align:center;">LUNA</td>
-              <td class="api-status" style="text-align:center">GA</td>
-            </tr>
-            <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/diagnostic_tools/diagnostic_tools.html')">Diagnostic Tools</a></td>
-              <td style="text-align:left;">Explore problems in DNS host-name mapping (dig) and network routing (mtr) from around the world.</td>
-              <td class="required-token" style="text-align:center;">LUNA</td>
-              <td class="api-status" style="text-align:center">GA</td>
-            </tr>
-            <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/dns_zone_management/dns_zone_management.html')">DNS - Zone Management</a></td>
-              <td style="text-align:left;">Manage a primary zone’s DNS records.</td>
-              <td class="required-token" style="text-align:center;">LUNA</td>
-              <td class="api-status" style="text-align:center">GA</td>
-            </tr>
-            <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/dns_zone_reporting/dns_zone_reporting.html')">DNS - Zone Reporting</a></td>
-              <td style="text-align:left;">Retrieve DNS hit information.</td>
-              <td class="required-token" style="text-align:center;">LUNA</td>
-              <td class="api-status" style="text-align:center">GA</td>
-            </tr>
-            <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/event_center/event_center.html')">Event Center</a></td>
-              <td style="text-align:left;">See Luna Event Center configuration, reporting and alerts events.</td>
-              <td class="required-token" style="text-align:center;">LUNA</td>
-              <td class="api-status" style="text-align:center">GA</td>
-            </tr>
-            <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/feo/feo.html')">FEO</a></td>
-              <td style="text-align:left;">Provides a way to use FEO functionality programmatically rather than through FEO's Configuration Manager.</td>
-              <td class="required-token" style="text-align:center;">LUNA</td>
-              <td class="api-status" style="text-align:center">GA</td>
-            </tr>
-            <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/image_manager/image_manager.html')">Image Manager</a></td>
-              <td style="text-align:left;">Maintain a catalog of source images, organize and transform the images, make them available for delivery by the Akamai Intelligent Platform.</td>
-              <td class="required-token" style="text-align:center;">Image Manager</td>
-              <td class="api-status" style="text-align:center">Beta</td>
-            </tr>
-            <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/invoices/invoices.html')">Invoicing</a></td>
-              <td style="text-align:left;">Allows you to access your Akamai invoices.</td>
-              <td class="required-token" style="text-align:center;">LUNA</td>
-              <td class="api-status" style="text-align:center">GA</td>
-            </tr>
-            <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/log_delivery_service/log_delivery_service.html')">Log Delivery Service</a></td>
-              <td style="text-align:left;">View, update and delete configurations for the Portal log delivery service.</td>
-              <td class="required-token" style="text-align:center;">LUNA</td>
-              <td class="api-status" style="text-align:center">GA</td>
-            </tr>
-            <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/media_analytics/media_analytics.html')">Media Analytics</a></td>
-              <td style="text-align:left;">Manage report packs, and fetch analytic data for a particular report pack.</td>
-              <td class="required-token" style="text-align:center;">LUNA</td>
-              <td class="api-status" style="text-align:center">GA</td>
-            </tr>
-            <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/media_reports/media_reports.html')">Media Reports</a></td>
-              <td style="text-align:left;">Retrieve usage and quality metrics for the Media Delivery products - Adaptive Media Delivery, Download Delivery, RTMP Media Delivery and Object Delivery.</td>
-              <td class="required-token" style="text-align:center;">LUNA</td>
-              <td class="api-status" style="text-align:center">GA</td>
-            </tr>
-            <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/media_streaming/media_streaming.html')">Media Streaming</a></td>
-              <td style="text-align:left;">Build a custom HD Network Management Interface with Akamai Utility, Domain, Stream, and Archive Management APIs. Latest (OPEN) version.</td>
-              <td class="required-token" style="text-align:center;">LUNA</td>
-              <td class="api-status" style="text-align:center">GA</td>
-            </tr>
-            <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/network_lists/network_lists.html')">Network Lists</a></td>
-              <td style="text-align:left;">Manage lists to be used by multiple Akamai products and features.</td>
-              <td class="required-token" style="text-align:center;">LUNA</td>
-              <td class="api-status" style="text-align:center">GA</td>
-            </tr>
-            <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/securehd_policy_editor/securehd_policy_editor.html')">SecureHD Policy Editor</a></td>
-              <td style="text-align:left;">Configure and apply various security services for your Akamai HD Network media content, including Token Authorization, Content Targeting (GEO Protection), Media Encryption and Player Verification protection.</td>
-              <td class="required-token" style="text-align:center;">LUNA</td>
-              <td class="api-status" style="text-align:center">GA</td>
-            <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/traffic_management/traffic_management.html')">Traffic Management</a></td>
-              <td style="text-align:left;">Manage Traffic Management load balancing configurations.</td>
-              <td class="required-token" style="text-align:center;">LUNA</td>
-              <td class="api-status" style="text-align:center">GA</td>
-            </tr>
-            <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/user_admin/user_admin.html')">User Admin</a></td>
-              <td style="text-align:left;">Create and manage Users, Groups, and Roles.</td>
-              <td class="required-token" style="text-align:center;">LUNA</td>
-              <td class="api-status" style="text-align:center">GA</td>
-            </tr>
-            <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/ccu_utility_v3/ccu_utility_v3.html')">Content Control Utility (v3)</a></td>
-              <td style="text-align:left;">The Content Control Utility (CCU) API allows you to purge edge content by request using Akamai's new Fast Purge capability. At this time, you can invalidate or delete by URL only.</td>
-              <td class="required-token" style="text-align:center;">CCU</td>
-              <td class="api-status" style="text-align:center">Beta</td>
-            </tr>
-            <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/cps_api/cps_api.html')">CPS API</a></td>
-              <td style="text-align:left;">The Certificate Provisioning System API allows you to create and manage certificates.</td>
-              <td class="required-token" style="text-align:center;">LUNA</td>
-              <td class="api-status" style="text-align:center">Beta</td>
-            </tr>
-            <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/property_manager/property_manager.html')">Property Manager</a></td>
-              <td style="text-align:left;">Manage your web content on the Akamai edge network.</td>
-              <td class="required-token" style="text-align:center;">LUNA</td>
-              <td class="api-status" style="text-align:center">Beta</td>
-            </tr>
-            <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/security_monitor/security_monitor.html')">Security Monitor</a></td>
-              <td style="text-align:left;">Retrieve real-time data on security events.</td>
-              <td class="required-token" style="text-align:center;">LUNA</td>
-              <td class="api-status" style="text-align:center">Beta</td>
-            </tr>
-            <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/service_level_agreement/service_level_agreement.html')">Service-Level Agreement API</a></td>
-              <td style="text-align:left;">Accesses SLA test configurations and reports.</td>
-              <td class="required-token" style="text-align:center;">LUNA</td>
-              <td class="api-status" style="text-align:center">Beta</td>
-            </tr>
-            <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/site_shield/site_shield.html')">Site Shield</a></td>
-              <td style="text-align:left;">Provide a Site Shield interface for consumption by nonbrowser clients.</td>
-              <td class="required-token" style="text-align:center;">LUNA</td>
-              <td class="api-status" style="text-align:center">Beta</td>
-            </tr>
-            <tr>
-              <td style="text-align:left;"><a href="#"><div onclick="loadPage('/htmls/traffic_management_load_feedback/traffic_management_load_feedback.html')">Traffic Management Load Feedback</a></td>
-              <td style="text-align:left;">POST load data for a GTM domain and GET the current load state.</td>
-              <td class="required-token" style="text-align:center;">DNS</td>
-              <td class="api-status" style="text-align:center">Beta</td>
-            </tr>
-          </tbody>
-        </table>
-
-      </div> <!-- container end -->
-    </div> <!-- main body end -->
-
+          <!-- table-wrapper -->
+        </div>
+        <!-- container end -->
+      </div>
+      <!-- background-wrapper -->
+    </div>
+    <!-- main body end -->
     <div id="footer_html"></div>
     <script>
       loadHeaderFooter();

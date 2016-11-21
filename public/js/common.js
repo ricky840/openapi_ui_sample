@@ -15,8 +15,9 @@ $(function() {
 });
 
 function showNotification(msg) {
-  $("#notification .notification_content").html(msg);
-  $("#notification").show();
+  //$("#notification .notification_content").html(msg);
+  //$("#notification").show();
+  alert(msg);
 }
 
 function loadPage(filename) {
