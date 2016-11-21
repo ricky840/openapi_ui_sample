@@ -4,7 +4,7 @@
 </div>
 
 <div id="textarea_wrapper" class="form-group has-feedback">
-	<textarea id="purge_request_body" class="form-control" rows="15" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'purge_request_body')"></textarea>
+	<textarea id="purge_request_body" class="form-control" rows="15" placeholder=""></textarea>
 </div>
 
 <input class="btn btn-success" type="button" value="Validate JSON" onclick="validateJsonTextarea('textarea_wrapper', 'purge_request_body')">
@@ -14,6 +14,9 @@
   var placeholder = '{"objects":["http://ic-clean.datswatsup.com/test.jpg","http://ic-clean.datswatsup.com/test.jpg2"],"action":"remove","type":"arl","domain":"staging"}';
   placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
   $("#purge_request_body").val(placeholder);
+  $("#purge_request_body").on('keydown blur', function(e){
+    validateJsonTextarea('textarea_wrapper', 'purge_request_body');
+  });
 
   function runAPI() {
     var endpoint = "/ccu/v2/queues/default";

@@ -1,25 +1,28 @@
 <div class="form-group">
   <label for="case">Close a Request</label>
-  <span class="help-block">Add Comments to the case. Use case ID in the path for which you want to add comment.</span>
+  <span class="help-block">Close out the case. You can leave a resolution comment.</span>
 </div>
 
 <div class="form-group">
   <label for="cid">Case ID</label>
-  <span class="help-block">Retrieves Cases details for the given CaseId. </span>
   <input id="cid" type="text" class="form-control" placeholder="F-CS-1776092 (caseID)">
 </div>
 
 <div id="textarea_wrapper" class="form-group has-feedback">
-  <textarea id="resolutions_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'resolutions_body')"></textarea>
+  <label for="resolutions_body">Resolution Comment</label>
+  <textarea id="resolutions_body" class="form-control" rows="10" placeholder=""></textarea>
 </div>
 
-<input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper','resolutions_body')">
+<input class="btn btn-success" type="button" value="Validate JSON" onclick="validateJsonTextarea('textarea_wrapper','resolutions_body')">
 <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
 
 <script>
- var placeholder = '{"comment": "Issue is resolved. close the case"}';
+  var placeholder = '{"comment": "Issue is resolved. close the case"}';
   placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
   $("#resolutions_body").val(placeholder);
+  $("#resolutions_body").on('keydown blur', function(e) {
+    validateJsonTextarea('textarea_wrapper', 'resolutions_body');
+  });
 
  function runAPI() {   
       var endpoint = "/cases/v1/portal-user/case/";

@@ -5,18 +5,21 @@
 
 <div id="textarea_wrapper" class="form-group has-feedback">
   <label for="create_professional_body">Create a Prosessional Services Case Object</label>
-  <textarea id="create_professional_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'create_professional_body')"></textarea>
+  <textarea id="create_professional_body" class="form-control" rows="10" placeholder=""></textarea>
 </div>
 
-<input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper','create_professional_body')">
+<input class="btn btn-success" type="button" value="Validate JSON" onclick="validateJsonTextarea('textarea_wrapper','create_professional_body')">
 <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
 
 <script>
   var placeholder = '{"description": "...","endUserAccountName": "...","endUserEmail": "...","endUserName": "...","endUserPhoneNumber": "...","product": "...","severity": "...","title": "...","indirectCustomerAccountId": "..."}';
   placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
   $("#create_professional_body").val(placeholder);
+  $("#create_professional_body").on('keydown blur', function(e) {
+    validateJsonTextarea('textarea_wrapper', 'create_professional_body');
+  });
 
- function runAPI() {   
+ function runAPI() {
       var endpoint = "/cases/v1/PS";
       var body = $("#create_professional_body").val();
       if (IsJsonString(body)) {

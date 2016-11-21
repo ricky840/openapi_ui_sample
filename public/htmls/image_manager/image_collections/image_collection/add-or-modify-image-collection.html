@@ -15,7 +15,7 @@
 <div class="form-group">
   <label for="">Add or Modify an Image Collection Object</label>
   <div id="textarea_wrapper" class="form-group has-feedback">
-    <textarea id="image_collection_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'image_collection_body')"></textarea>
+    <textarea id="image_collection_body" class="form-control" rows="10" placeholder=""></textarea>
   </div>
 </div>
 
@@ -27,6 +27,9 @@
   var placeholder = '{"id":"MyId432","tags":["red","shoe"],"definition":{"type":"Gallery","items":[{"type":"AkaImage","imageId":"/images/bag.front.jpg"},{"type":"AkaImage","imageId":"/images/bag.side.jpg"},{"type":"AkaImage","imageId":"/images/bag.back.jpg"}]}}';
   placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
   $("#image_collection_body").val(placeholder);
+  $("#image_collection_body").on('keydown blur', function(e) {
+    validateJsonTextarea('textarea_wrapper', 'image_collection_body');
+  });
 
   function runAPI() {
     var iid = $("#iid").val();   

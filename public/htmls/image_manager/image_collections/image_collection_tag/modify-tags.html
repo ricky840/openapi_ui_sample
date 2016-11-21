@@ -15,7 +15,7 @@
 <div class="form-group">
   <label for="">Modify an Image Collection's Tags Object</label>
   <div id="textarea_wrapper" class="form-group has-feedback">
-    <textarea id="image_collection_tags_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'image_collection_tags_body')"></textarea>
+    <textarea id="image_collection_tags_body" class="form-control" rows="10" placeholder=""></textarea>
   </div>
 </div>
 
@@ -27,6 +27,9 @@
   var placeholder = '{ "tags": [ "shoe", "red"]}';
   placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
   $("#image_collection_tags_body").val(placeholder);
+  $("#image_collection_tags_body").on('keydown blur', function(e) {
+    validateJsonTextarea('textarea_wrapper', 'image_collection_tags_body');
+  });
 
   function runAPI() {
     var iid = $("#iid").val();   

@@ -10,23 +10,47 @@
     <option value="create-policy.json">create-policy.json (Create a new policy)</option>
     <option value="update-policy.json">update-policy.json (Update a policy)</option>
     <option value="clone-policy.json">clone-policy.json (Clone an existing policy)</option>
-    <option value="create-nimbus_policy_version-{cloudletType}-1.0.json">create-nimbus_policy_version-{cloudletType}-1.0.json (Create or clone a policy version)</option>
-    <option value="update-nimbus_policy_version-{cloudletType}-1.0.json">update-nimbus_policy_version-{cloudletType}-1.0.json (Update a policy version)</option>
-    <option value="match_rule-{cloudletType}-1.0.json">match_rule-{cloudletType}-1.0.json (Create or update a match rule)</option> 
+    <option value="create-nimbus_policy_version">create-nimbus_policy_version-{cloudletType}-1.0.json (Create or clone a policy version)</option>
+    <option value="update-nimbus_policy_version">update-nimbus_policy_version-{cloudletType}-1.0.json (Update a policy version)</option>
+    <option value="match_rule">match_rule-{cloudletType}-1.0.json (Create or update a match rule)</option>
   </select>
+</div>
+
+<div id="get_cloudlet_type" class="form-group" style="display: none">
+  <label for="ctype">Cloudlet Type(code)</label>
+  <span class="help-block">Cloudlet Type which corresponds to the cloudletCode available from Cloudlets menu.</span>
+  <input id="ctype" type="text" class="form-control" placeholder="ER (EDGE REDIRECTOR)">
 </div>
 
 <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
 
+
 <script>
+  $("#sname").change(function(){
+    var sche_name = $("#sname option:selected").val();
+    if (sche_name == "create-policy.json" || sche_name == "update-policy.json" || sche_name == "clone-policy.json") {
+      $("#get_cloudlet_type").hide();
+    }
+    if (sche_name == "create-nimbus_policy_version" || sche_name == "update-nimbus_policy_version" || sche_name == "match_rule") {
+      $("#get_cloudlet_type").show();
+    }
+  });
+
   function runAPI() {
     var endpoint = "/cloudlets/api/v2/schemas/";
-    var sname = $("#sname").val();
-    if (sname) {
+    var sname = $("#sname option:selected").val();
+    if (sname == "create-nimbus_policy_version" || sname == "update-nimbus_policy_version" || sname == "match_rule") {
+      var ctype = $("#ctype").val();
+      if (ctype) {
+        endpoint += sname + "-" + ctype + "-1.0.json";
+        var return_response = sendAPIRequestGet(endpoint, "luna_token");
+      } else {
+        showNotification("Please enter cloudlet type(code)");
+      }
+    } else {
       endpoint = endpoint + sname;
       var return_response = sendAPIRequestGet(endpoint, "luna_token");
-    } else {
-      showNotification("Please Select Schema Name");
     }
   }
+
 </script>

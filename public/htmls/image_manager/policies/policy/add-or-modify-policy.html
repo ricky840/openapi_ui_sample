@@ -1,5 +1,5 @@
 <div class="form-group">
-  <label for="">List Alerts by CP Codes</label>
+  <label for="">Add or Modify a Policy</label>
   <span class="help-block">Update the policy definition for a given ID.</span>
 </div>
 
@@ -16,7 +16,7 @@
 <div class="form-group">
   <label for="">Add or Modify Policy Object</label>
   <div id="textarea_wrapper" class="form-group has-feedback">
-    <textarea id="policy_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'policy_body')"></textarea>
+    <textarea id="policy_body" class="form-control" rows="10" placeholder=""></textarea>
   </div>
 </div>
 
@@ -25,12 +25,15 @@
 
 
 <script>
-  var placeholder = '{"resolutions": {"widths": [240,120,60]}}';고
+  var placeholder = '{"resolutions": {"widths": [240,120,60]}}';
   placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
   $("#policy_body").val(placeholder);
+  $("#policy_body").on('keydown blur', function(e) {
+    validateJsonTextarea('textarea_wrapper', 'policy_body');
+  });
 
   function runAPI() {
-    var pid = $("#pid").val();   
+    var pid = $("#pid").val();
     var img_manager_token = $("#img_manager_token").val();
     var headers = {
       "Luna-Token": img_manager_token,

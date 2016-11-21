@@ -1,22 +1,25 @@
 <div class="form-group">
   <label for="policy">Create a Policy</label>
-  <span class="help-block">Create a new Cloudlet policy.If a policy already exists with the same policy name, you will receive a 409 (Conflict) status. The response will contain data for the existing policy.</span>
+  <span class="help-block">Create a new Cloudlet policy. If a policy already exists with the same policy name, you will receive a 409 (Conflict) status. The response will contain data for the existing policy.</span>
   <span class="help-block">NOTE: A new policy is automatically assigned version number 1.</span>
 </div>
 
 <div id="textarea_wrapper" class="form-group has-feedback">
-  <textarea id="create_a_policy_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'create_a_policy_body')"></textarea>
+  <textarea id="create_a_policy_body" class="form-control" rows="10" placeholder=""></textarea>
 </div>
 
-<input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper','create_a_policy_body')">
+<input class="btn btn-success" type="button" value="Validate JSON" onclick="validateJsonTextarea('textarea_wrapper','create_a_policy_body')">
 <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
 
 <script>
  var placeholder = '{"cloudletId": 99,"groupId": 1234,"name": "TestCreatePolicy1","description": "Testing the creation of a policy"}';
   placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
   $("#create_a_policy_body").val(placeholder);
+  $("#create_a_policy_body").on('keydown blur', function(e){
+    validateJsonTextarea('textarea_wrapper', 'create_a_policy_body');
+  });
 
- function runAPI() {   
+ function runAPI() {
       var endpoint = "/cloudlets/api/v2/policies";
       var body = $("#create_a_policy_body").val();
       if (IsJsonString(body)) {

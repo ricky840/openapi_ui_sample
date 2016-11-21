@@ -4,17 +4,23 @@
   <span class="help-block">NOTE: See List Cloudlets for information on how to obtain the cloudletCode.</span>
 </div>
 
-<fieldset disabled>
-  <div class="form-group">
-    <input id="policies" type="text" class="form-control" placeholder="/cloudlets/api/v2/schemas?cloudletType">
-  </div>
-</fieldset>
+<div class="form-group">
+  <label for="ctype">Cloudlet Type(code)</label>
+  <span class="help-block">Cloudlet Type which corresponds to the cloudletCode available from Cloudlets menu.</span>
+  <input id="ctype" type="text" class="form-control" placeholder="ER (EDGE REDIRECTOR)">
+</div>
 
 <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
 
 <script>
   function runAPI() {
-    var endpoint = "/cloudlets/api/v2/schemas?cloudletType";
-    var return_response = sendAPIRequestGet(endpoint, "luna_token");
+    var endpoint = "/cloudlets/api/v2/schemas?cloudletType=";
+    var ctype = $("#ctype").val();
+    if (ctype) {
+      endpoint += ctype;
+      var return_response = sendAPIRequestGet(endpoint, "luna_token");
+    } else {
+      showNotification("Please enter cloudlet type(code)");
+    }
   }
 </script>

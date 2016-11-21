@@ -16,17 +16,17 @@
 
 <script>
   function runAPI() {
-    var iid = $("#iid").val();   
+    var iid = $("#iid").val();
     var img_manager_token = $("#img_manager_token").val();
     if(iid && img_manager_token){
       var endpoint = "/imaging/v0/imagecollections/"+iid;
       var headers = {
-      "Luna-Token": img_manager_token,
-      "Content-Type": "application/json"
-    }
+        "Luna-Token": img_manager_token,
+        "Content-Type": "application/json"
+      }
       var return_response = sendAPIRequestGet(endpoint, "img_token", headers);
     } else{
       showNotification("Please enter Luna Token and Image collection ID");
-    }    
+    }
   }
 </script>

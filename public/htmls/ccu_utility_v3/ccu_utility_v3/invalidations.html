@@ -10,7 +10,7 @@
   <label for="invalidations_body">Invalidations Object</label>
   <span class="help-block">Objects that should be purged(invalidated)</span>
   <div id="textarea_wrapper" class="form-group has-feedback">
-    <textarea id="invalidations_body" class="form-control" rows="15" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'invalidations_body')"></textarea>
+    <textarea id="invalidations_body" class="form-control" rows="15" placeholder=""></textarea>
   </div>
 </div>
 
@@ -21,6 +21,9 @@
   var placeholder = '{"hostname": "ic-clean.datswatsup.com","objects": ["/graphics/picture.gif","/documents/brochure.pdf"]}';
   placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
   $("#invalidations_body").val(placeholder);
+  $("#invalidations_body").on('keydown blur', function(e) {
+    validateJsonTextarea('textarea_wrapper', 'invalidations_body');
+  });
 
   function runAPI() {
       var endpoint = "/ccu/v3/invalidate/url/";

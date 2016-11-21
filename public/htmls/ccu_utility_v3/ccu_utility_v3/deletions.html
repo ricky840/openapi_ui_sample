@@ -10,7 +10,7 @@
   <label for="deletions_body">Deletions Object</label>
   <span class="help-block">Objects that should be purged(deleted)</span>
   <div id="textarea_wrapper_delete" class="form-group has-feedback">
-    <textarea id="deletions_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper_delete', 'deletions_body')"></textarea>
+    <textarea id="deletions_body" class="form-control" rows="10" placeholder=""></textarea>
   </div>
 </div>
 
@@ -21,6 +21,9 @@
   var placeholder = '{"hostname": "ic-clean.datswatsup.com","objects": ["/graphics/picture.gif","/documents/brochure.pdf"]}';
   placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
   $("#deletions_body").val(placeholder);
+  $("#deletions_body").on('keydown blur', function(e){
+    validateJsonTextarea('textarea_wrapper_delete', 'deletions_body');
+  });
 
   function runAPI(apitype) {
     var endpoint = "/ccu/v3/delete/url/";

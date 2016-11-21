@@ -16,7 +16,7 @@
 <script>
   function runAPI() {
     var endpoint = "/imaging/v0/imagecollections";
-    var img_manager_token = $("#img_manager_token").val();    
+    var img_manager_token = $("#img_manager_token").val();
     if(img_manager_token){
        var headers = {
       "Luna-Token": img_manager_token,
@@ -26,5 +26,5 @@
     } else{
         showNotification("Please enter Luna Token");
     }
-  }   
+  }
 </script>

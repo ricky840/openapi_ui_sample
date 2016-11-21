@@ -2,7 +2,7 @@
   <label for="list_alerts_by_cpcode_body">List Alerts by CP Codes</label>
   <span class="help-block">Retrieves a subset of alerts for a logged-in Luna user. The following POST object members limit the scope of the output.</span>
   <div id="textarea_wrapper" class="form-group has-feedback">
-    <textarea id="list_alerts_by_cpcode_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'list_alerts_by_cpcode_body')"></textarea>
+    <textarea id="list_alerts_by_cpcode_body" class="form-control" rows="10" placeholder=""></textarea>
   </div>
   <input class="btn btn-success" type="button" value="Validate JSON" onclick="validateJsonTextarea('textarea_wrapper', 'list_alerts_by_cpcode_body')">
   <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI('list_alerts_by_cpcode')">
@@ -12,6 +12,9 @@
   var placeholder = '{"status": "active","cpCodes": "12345,24601"}';
   placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
   $("#list_alerts_by_cpcode_body").val(placeholder);
+  $("#list_alerts_by_cpcode_body").on('keydown blur', function(e) {
+    validateJsonTextarea('textarea_wrapper', 'list_alerts_by_cpcode_body');
+  });
 
   function runAPI() {
     var endpoint = "/alerts/v1/portal-user?status=active";

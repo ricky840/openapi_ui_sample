@@ -17,17 +17,17 @@
 
 <script>
   function runAPI() {
-    var pid = $("#pid").val();   
+    var pid = $("#pid").val();
     var img_manager_token = $("#img_manager_token").val();
     if(pid && img_manager_token){
       var endpoint = "/imaging/v0/policies/"+pid;
       var headers = {
-      "Luna-Token": img_manager_token,
-      "Content-Type": "application/json"
-    }
-      var return_response = sendAPIRequestDelete(endpoint, "img_token", headers);
+        "Luna-Token": img_manager_token,
+        "Content-Type": "application/json"
+      }
+      var return_response = sendAPIRequestDelete(endpoint, "img_token", null, headers);
     } else{
       showNotification("Please enter Luna Token and Policy ID");
-    }    
+    }
   }
 </script>

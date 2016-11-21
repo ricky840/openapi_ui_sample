@@ -3,25 +3,41 @@
   <span class="help-block">Uploads a file to attach to a case, with comments.</span>
 </div>
 
+<fieldset disabled>
 <div class="form-group">
   <label for="cid">Case ID</label>
-  <span class="help-block">Retrieves Cases details for the given CaseId. </span>
   <input id="cid" type="text" class="form-control" placeholder="F-CS-1776092 (caseID)">
 </div>
+</fieldset>
 
-<div id="textarea_wrapper" class="form-group has-feedback">
-  <textarea id="file_attachments_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'file_attachments_body')"></textarea>
+<div class="form-group">
+  <label for="cid">Request Payload</label>
+<pre>
+------WebKitFormBoundaryKeXAMngH3JpO4JB2x7
+Content-Disposition: form-data; name="comment"
+
+please check attached file for details
+------WebKitFormBoundaryKeXngH3JpO4JB2x7
+Content-Disposition: form-data; name="file"; filename="sample.txt"
+Content-Type: text/plain
+
+This is Sample file for Case file attachment.
+------WebKitFormBoundaryKeXngH3JpO4JB2x7
+</pre>
+<p>Please see <a href="https://developer.akamai.com/api/luna/cases/reference.html" target="_blank">here</a> for details.</p>
 </div>
-
+<!--
 <input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper','file_attachments_body')">
 <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
+-->
 
 <script>
- var placeholder = "";
+  /*
+  var placeholder = "";
   placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
   $("#file_attachments_body").val(placeholder);
 
- function runAPI() {   
+ function runAPI() {
       var endpoint = "/cases/v1/portal-user/case/";
       var cid = $("#cid").val();
       endpoint = endpoint + cid + "/files";
@@ -32,4 +48,5 @@
         showNotification("JSON is not in valid format");
       }
     }
+  */
 </script>

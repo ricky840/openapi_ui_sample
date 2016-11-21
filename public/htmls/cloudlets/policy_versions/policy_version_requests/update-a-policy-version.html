@@ -7,36 +7,40 @@
   <label for="pid">Policy ID</label>
   <span class="help-block">The ID of the policy.</span>
   <input id="pid" type="number" class="form-control" placeholder="18063 (policyID)">
-</div>          
+</div>
 
 <div class="form-group">
   <label for="version">Version</label>
   <span class="help-block">The version number of the policy.</span>
-  <input id="version" type="number" class="form-control" placeholder="3(version)">
+  <input id="version" type="number" class="form-control" placeholder="3 (version)">
 </div>
 
 <div id="textarea_wrapper" class="form-group has-feedback">
-  <textarea id="update_a_policy_version_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'update_a_policy_version_body')"></textarea>
+  <label for="version">Policy Version</label>
+  <textarea id="update_a_policy_version_body" class="form-control" rows="10" placeholder=""></textarea>
 </div>
 
-<input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper','update_a_policy_version_body')">
+<input class="btn btn-success" type="button" value="Validate JSON" onclick="validateJsonTextarea('textarea_wrapper','update_a_policy_version_body')">
 <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
 
 <script>
  var placeholder = '{"description": "v1 for Q1 Sales"}';
   placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
   $("#update_a_policy_version_body").val(placeholder);
+  $("#update_a_policy_version_body").on('keydown blur', function(e){
+    validateJsonTextarea('textarea_wrapper', 'update_a_policy_version_body');
+  });
 
- function runAPI() {   
+ function runAPI() {
       var endpoint = "/cloudlets/api/v2/policies/";
       var pid = $("#pid").val();
       var version = $("#version").val();
-      endpoint = endpoint + pid + "/versions/" + version;  
+      endpoint = endpoint + pid + "/versions/" + version;
       var body = $("#update_a_policy_version_body").val();
-      if (IsJsonString(body)) {
+      if (IsJsonString(body) && version && pid) {
         var return_response = sendAPIRequestPut(endpoint, "luna_token", body);
       } else {
-        showNotification("JSON is not in valid format");
+        showNotification("Please check if JSON is properly formatted and all fields are entered.");
       }
     }
 

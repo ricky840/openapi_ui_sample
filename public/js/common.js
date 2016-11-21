@@ -105,27 +105,32 @@ function seeIfTokenUploaded(tokentype) {
   }
 }
 
-function sendAPIRequestHead(endpoint, tokentype) {
+function sendAPIRequestHead(endpoint, tokentype, headers) {
+  if (headers === undefined) { headers = null; }
   endpoint = endpoint.replace(/\s+/g, '');
+
   if (seeIfTokenUploaded(tokentype)) {
     var result = $.ajax({
         type: "HEAD",
         url: "/run/" + tokentype,
         beforeSend: function(xhr) {
           xhr.setRequestHeader("Endpoint", endpoint);
+          for (var key in headers) {
+            xhr.setRequestHeader(key, headers[key]);
+          }
 					showLoadingSpinner();
         },
 				success: function(responseTxt, status, jxhr) {
           if (responseTxt) {
-            showResponse(endpoint, responseTxt);
+            showResponse("HEAD " + endpoint, responseTxt);
           } else {
-		        temp_response = '{"status":"'+status+'","msg":"Empty response body from the server."}'
-            showResponse(endpoint, temp_response);
+            temp_response = status+' (empty response body)';
+            showResponse("HEAD " + endpoint, temp_response);
           }
 				},
         error: function(xhr, status, error_msg) {
           error_msg = status + ": " + error_msg
-          showResponse(endpoint, error_msg);
+          showResponse("HEAD " + endpoint, error_msg);
         }
       }).responseText;
 
@@ -153,15 +158,15 @@ function sendAPIRequestGet(endpoint, tokentype, headers) {
         },
 				success: function(responseTxt, status, jxhr) {
           if (responseTxt) {
-            showResponse(endpoint, responseTxt);
+            showResponse("GET " + endpoint, responseTxt);
           } else {
-		        temp_response = '{"status":"'+status+'","msg":"Empty response body from the server."}'
-            showResponse(endpoint, temp_response);
+            temp_response = status+' (empty response body)';
+            showResponse("GET " + endpoint, temp_response);
           }
 				},
         error: function(xhr, status, error_msg) {
           error_msg = status + ": " + error_msg
-          showResponse(endpoint, error_msg);
+          showResponse("GET " + endpoint, error_msg);
         }
       }).responseText;
 
@@ -172,8 +177,10 @@ function sendAPIRequestGet(endpoint, tokentype, headers) {
   }
 }
 
-function sendAPIRequestDelete(endpoint, tokentype, body) {
+function sendAPIRequestDelete(endpoint, tokentype, body, headers) {
+  if (headers === undefined) { headers = null; }
   endpoint = endpoint.replace(/\s+/g, '');
+
   if (body === undefined) { body = null; }
 
   if (seeIfTokenUploaded(tokentype)) {
@@ -182,20 +189,23 @@ function sendAPIRequestDelete(endpoint, tokentype, body) {
         url: "/run/" + tokentype,
         beforeSend: function(xhr) {
           xhr.setRequestHeader("Endpoint", endpoint);
+          for (var key in headers) {
+            xhr.setRequestHeader(key, headers[key]);
+          }
 					showLoadingSpinner();
         },
         data: body,
 				success: function(responseTxt, status, jxhr) {
           if (responseTxt) {
-            showResponse(endpoint, responseTxt, body);
+            showResponse("DELETE " + endpoint, responseTxt, body);
           } else {
-		        temp_response = '{"status":"'+status+'","msg":"Empty response body from the server."}'
-            showResponse(endpoint, temp_response, body);
+		        temp_response = status+' (empty response body)';
+            showResponse("DELETE " + endpoint, temp_response, body);
           }
 				},
         error: function(xhr, status, error_msg) {
           error_msg = status + ": " + error_msg
-          showResponse(endpoint, error_msg, body);
+          showResponse("DELETE " + endpoint, error_msg, body);
         }
       }).responseText;
 
@@ -206,8 +216,10 @@ function sendAPIRequestDelete(endpoint, tokentype, body) {
   }
 }
 
-function sendAPIRequestPost(endpoint, tokentype, body) {
+function sendAPIRequestPost(endpoint, tokentype, body, headers) {
+  if (headers === undefined) { headers = null; }
   endpoint = endpoint.replace(/\s+/g, '');
+
   if (body === undefined) { body = null; }
 
   if (seeIfTokenUploaded(tokentype)) {
@@ -216,20 +228,23 @@ function sendAPIRequestPost(endpoint, tokentype, body) {
       url: "/run/" + tokentype,
       beforeSend: function(xhr) {
         xhr.setRequestHeader("Endpoint", endpoint);
+        for (var key in headers) {
+          xhr.setRequestHeader(key, headers[key]);
+        }
         showLoadingSpinner();
       },
       data: body,
       success: function(responseTxt, status, jxhr) {
         if (responseTxt) {
-          showResponse(endpoint, responseTxt, body);
+          showResponse("POST " + endpoint, responseTxt, body);
         } else {
-          temp_response = '{"status":"'+status+'","msg":"Empty response body from the server."}'
-          showResponse(endpoint, temp_response, body);
+          temp_response = status+' (empty response body)';
+          showResponse("POST " + endpoint, temp_response, body);
         }
       },
       error: function(xhr, status, error_msg) {
         error_msg = status + ": " + error_msg
-        showResponse(endpoint, error_msg, body);
+        showResponse("POST " + endpoint, error_msg, body);
       }
     }).responseText;
 
@@ -240,8 +255,10 @@ function sendAPIRequestPost(endpoint, tokentype, body) {
   }
 }
 
-function sendAPIRequestPut(endpoint, tokentype, body) {
+function sendAPIRequestPut(endpoint, tokentype, body, headers) {
+  if (headers === undefined) { headers = null; }
   endpoint = endpoint.replace(/\s+/g, '');
+
   if (body === undefined) { body = null; }
 
   if (seeIfTokenUploaded(tokentype)) {
@@ -250,20 +267,23 @@ function sendAPIRequestPut(endpoint, tokentype, body) {
       url: "/run/" + tokentype,
       beforeSend: function(xhr) {
         xhr.setRequestHeader("Endpoint", endpoint);
+        for (var key in headers) {
+          xhr.setRequestHeader(key, headers[key]);
+        }
         showLoadingSpinner();
       },
       data: body,
       success: function(responseTxt, status, jxhr) {
         if (responseTxt) {
-          showResponse(endpoint, responseTxt, body);
+          showResponse("PUT " + endpoint, responseTxt, body);
         } else {
-          temp_response = '{"status":"'+status+'","msg":"Empty response body from the server."}'
-          showResponse(endpoint, temp_response, body);
+          temp_response = status+' (empty response body)';
+          showResponse("PUT " + endpoint, temp_response, body);
         }
       },
       error: function(xhr, status, error_msg) {
         error_msg = status + ": " + error_msg
-        showResponse(endpoint, error_msg, body);
+        showResponse("PUT " + endpoint, error_msg, body);
       }
     }).responseText;
 
@@ -356,6 +376,7 @@ function showResponse(endpoint, return_response, requestbody) {
 
 function showLoadingSpinner() {
   $("#api_response").empty();
+  $("#btn_save_response").hide();
   $("#loading_spinner").show();
 	$("#api_response_wrapper").show();
 }
@@ -368,7 +389,7 @@ function saveResponse(button_id) {
       $("#"+button_id).removeClass("btn-primary");
       $("#"+button_id).addClass("btn-success");
       $("#"+button_id).fadeOut("slow", function () {
-        $("#"+button_id).html("Saved Response");
+        $("#"+button_id).html("Save Response");
         $("#"+button_id).hide();
         $("#"+button_id).removeClass("btn-success");
         $("#"+button_id).addClass("btn-primary");

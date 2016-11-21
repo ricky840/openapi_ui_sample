@@ -1,32 +1,35 @@
 <div class="form-group">
   <label for="policy">Policy Version Activation</label>
-  <span class="help-block">Activate the selected cloudlet policy version.</span>
-  <span class="help-block">NOTE: After activation completes, the Cloudlets policy will be available for use.</span>
+  <span class="help-block">Activate the selected cloudlet policy version. After activation completes, the Cloudlets policy is ready for use.</span>
 </div>
 
 <div class="form-group">
   <label for="pid">Policy ID</label>
   <span class="help-block">The ID of the policy.</span>
   <input id="pid" type="number" class="form-control" placeholder="18063 (policyID)">
-</div>          
+</div>
 
 <div class="form-group">
   <label for="version">Version</label>
   <span class="help-block">The version number of the policy.</span>
-  <input id="version" type="number" class="form-control" placeholder="3(version)">
+  <input id="version" type="number" class="form-control" placeholder="3 (version)">
 </div>
 
 <div id="textarea_wrapper" class="form-group has-feedback">
-  <textarea id="policy_version_avtivation_body" class="form-control" rows="10" placeholder="" onkeydown="validateJsonTextarea('textarea_wrapper', 'policy_version_avtivation_body')"></textarea>
+  <label for="policy_version_avtivation_body">Activation Details</label>
+  <textarea id="policy_version_avtivation_body" class="form-control" rows="10" placeholder=""></textarea>
 </div>
 
-<input class="btn btn-success" type="button" value="Validate" onclick="validateJsonTextarea('textarea_wrapper','policy_version_avtivation_body')">
+<input class="btn btn-success" type="button" value="Validate JSON" onclick="validateJsonTextarea('textarea_wrapper','policy_version_avtivation_body')">
 <input class="btn btn-primary" type="button" value="Send Request" onclick="runAPI()">
 
 <script>
- var placeholder = '{"network": "staging","additionalPropertyNames": [ "www.rc-cloudlet.com"]}';
+ var placeholder = '{"network": "staging","additionalPropertyNames": ["www.rc-cloudlet.com"]}';
   placeholder = JSON.stringify(JSON.parse(placeholder), null, 2);
   $("#policy_version_avtivation_body").val(placeholder);
+  $("#policy_version_avtivation_body").on('keydown blur', function(e){
+    validateJsonTextarea('textarea_wrapper', 'policy_version_avtivation_body');
+  });
 
  function runAPI() {   
       var endpoint = "/cloudlets/api/v2/policies/";
